@@ -13,7 +13,13 @@ import os
 
 import setuptools
 
-_dir = os.path.abspath(os.path.dirname(__file__))
+
+def _read_file(file_path):
+    with open(file_path) as f:
+        return f.read()
+
+
+_dir = os.path.abspath(os.path.join(__file__, os.pardir))
 
 setup_params = dict(
     name='pyincept',
@@ -45,7 +51,7 @@ setup_params = dict(
     author_email='avanherick@gmail.com',
     license="Apache Software License",
     description='A lightweight package for creating Python project templates.',
-    long_description=open('README.rst').read(),
+    long_description=_read_file('README.rst'),
     extras_require={},
     classifiers=(
         'License :: OSI Approved :: Apache Software License',
