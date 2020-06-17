@@ -176,3 +176,4 @@ class TestProjectBuilder(object):
         """
         file_path = os.path.join(self._PACKAGE_NAME, '__init__.py')
         self._validate_output_file_created(file_path)
+

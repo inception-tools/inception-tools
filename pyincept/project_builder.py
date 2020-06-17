@@ -52,7 +52,7 @@ class _ProjectFile(Enum):
         template_path = os.path.join(_TEMPLATE_PATH, self._template_name)
         with open(template_path) as f:
             content = f.read()
-            return Template(content)
+            return Template(content, keep_trailing_newline=True)
 
     def _save_content(
             self,
