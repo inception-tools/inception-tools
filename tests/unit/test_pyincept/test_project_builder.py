@@ -57,6 +57,17 @@ class TestProjectBuilder(object):
             'Directory should be empty: {}'.format(self._builder.project_root)
         )
 
+    def _validate_output_file_created(self, output_file_name):
+        self._builder.build()
+        expected_content = self.get_test_resource(output_file_name)
+        actual_path = os.path.join(
+            self._builder.project_root,
+            output_file_name
+        )
+        with open(actual_path) as expected_file:
+            actual_content = expected_file.read()
+        assert_that(actual_content, is_(expected_content))
+
     # Instance set up / tear down
 
     def setup(self):
@@ -114,58 +125,22 @@ class TestProjectBuilder(object):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
-        output_file_name = 'LICENSE'
-
-        self._builder.build()
-
-        expected_content = self.get_test_resource(output_file_name)
-
-        actual_path = os.path.join(
-            self._builder.project_root,
-            output_file_name
-        )
-
-        with open(actual_path) as expected_file:
-            actual_content = expected_file.read()
-
-        assert_that(actual_content, is_(expected_content))
+        self._validate_output_file_created('LICENSE')
 
     def test_build_setup_cfg(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
-        output_file_name = 'setup.cfg'
-
-        self._builder.build()
-
-        expected_content = self.get_test_resource(output_file_name)
-
-        actual_path = os.path.join(
-            self._builder.project_root,
-            output_file_name
-        )
-
-        with open(actual_path) as expected_file:
-            actual_content = expected_file.read()
-
-        assert_that(actual_content, is_(expected_content))
+        self._validate_output_file_created('setup.cfg')
 
     def test_build_setup_py(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
-        output_file_name = 'setup.py'
+        self._validate_output_file_created('setup.py')
 
-        self._builder.build()
-
-        expected_content = self.get_test_resource(output_file_name)
-
-        actual_path = os.path.join(
-            self._builder.project_root,
-            output_file_name
-        )
-
-        with open(actual_path) as expected_file:
-            actual_content = expected_file.read()
-
-        assert_that(actual_content, is_(expected_content))
+    def test_build_log_cfg(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        self._validate_output_file_created('log.cfg')
