@@ -109,6 +109,8 @@ class _ProjectFile(Enum):
 
     PIPFILE = ('Pipfile.jinja', lambda package_name: 'Pipfile',)
 
+    README_RST = ('README.rst.jinja', lambda package_name: 'README.rst',)
+
     SETUP_CFG = ('setup.cfg.jinja', lambda package_name: 'setup.cfg',)
 
     SETUP_PY = ('setup.py.jinja', lambda package_name: 'setup.py',)

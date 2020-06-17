@@ -130,6 +130,12 @@ class TestProjectBuilder(object):
         """
         self._validate_output_file_created('LICENSE')
 
+    def test_build_creates_readme_file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        self._validate_output_file_created('README.rst')
+
     def test_build_creates_setup_cfg(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
