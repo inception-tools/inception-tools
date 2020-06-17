@@ -32,7 +32,7 @@ setup_params = dict(
     },
     scripts=[],
     install_requires=(
-        click,
+        'click',
     ),
     tests_require=(
         'pyhamcrest',
