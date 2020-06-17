@@ -26,6 +26,7 @@ setup_params = dict(
     },
     scripts=[],
     install_requires=(
+        'click',
         'jinja',
     ),
     tests_require=(

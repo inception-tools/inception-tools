@@ -34,8 +34,12 @@ class _ProjectFile(Enum):
         ),
     )
     INIT_PACKAGE = (
-        '__init__package.py.jinja',
+        '__init___package.py.jinja',
         lambda package_name: os.path.join(package_name, '__init__.py'),
+    )
+    INIT_TESTS = (
+        '__init___tests.py.jinja',
+        lambda package_name: os.path.join('tests', '__init__.py'),
     )
     LICENSE = ('LICENSE.apache.jinja', lambda package_name: 'LICENSE',)
     LOG_CFG = ('log.cfg.jinja', lambda package_name: 'log.cfg',)

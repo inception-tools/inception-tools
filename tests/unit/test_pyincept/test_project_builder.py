@@ -177,3 +177,10 @@ class TestProjectBuilder(object):
         file_path = os.path.join(self._PACKAGE_NAME, '__init__.py')
         self._validate_output_file_created(file_path)
 
+    def test_build_creates_tests___init___file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        file_path = os.path.join('tests', '__init__.py')
+        self._validate_output_file_created(file_path)
+
