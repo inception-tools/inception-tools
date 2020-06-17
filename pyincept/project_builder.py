@@ -13,6 +13,7 @@
 
 __author__ = 'Andrew van Herick'
 
+import errno
 import os
 from enum import Enum
 
@@ -25,16 +26,23 @@ _TEMPLATE_PATH = os.path.abspath(
 
 
 class _ProjectFile(Enum):
-    LICENSE = ('LICENSE', 'LICENSE.apache.jinja')
-    LOG_CFG = ('log.cfg', 'log.cfg.jinja')
-    MAKEFILE = ('Makefile', 'Makefile.jinja')
-    PIPFILE = ('Pipfile', 'Pipfile.jinja')
-    SETUP_CFG = ('setup.cfg', 'setup.cfg.jinja')
-    SETUP_PY = ('setup.py', 'setup.py.jinja')
+    ENTRY_POINT = (
+        'entry_point.py.jinja',
+        lambda package_name: os.path.join(
+            package_name,
+            '{}.py'.format(package_name)
+        ),
+    )
+    LICENSE = ('LICENSE.apache.jinja', lambda package_name: 'LICENSE',)
+    LOG_CFG = ('log.cfg.jinja', lambda package_name: 'log.cfg',)
+    MAKEFILE = ('Makefile.jinja', lambda package_name: 'Makefile',)
+    PIPFILE = ('Pipfile.jinja', lambda package_name: 'Pipfile',)
+    SETUP_CFG = ('setup.cfg.jinja', lambda package_name: 'setup.cfg',)
+    SETUP_PY = ('setup.py.jinja', lambda package_name: 'setup.py',)
 
-    def __init__(self, file_name, template_name):
-        self._file_path = file_name
+    def __init__(self, template_name, file_path_function):
         self._template_name = template_name
+        self._file_path = file_path_function
 
     def _get_template(self) -> Template:
         template_path = os.path.join(_TEMPLATE_PATH, self._template_name)
@@ -42,8 +50,22 @@ class _ProjectFile(Enum):
             content = f.read()
             return Template(content)
 
-    def _save_content(self, content: str, root_path) -> None:
-        file_path = os.path.join(root_path, self._file_path)
+    def _save_content(
+            self,
+            content: str,
+            package_name: str,
+            author: str,
+            author_email: str,
+            project_root: str
+    ) -> None:
+        file_path = os.path.join(project_root, self._file_path(package_name))
+
+        try:
+            os.makedirs(os.path.dirname(file_path))
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                raise
+
         with open(file_path, 'w') as f:
             f.write(content)
 
@@ -61,7 +83,13 @@ class _ProjectFile(Enum):
             author_email=author_email,
             project_root=project_root
         )
-        self._save_content(content, project_root)
+        self._save_content(
+            content,
+            package_name=package_name,
+            author=author,
+            author_email=author_email,
+            project_root=project_root
+        )
 
 
 class ProjectBuilder(object):
@@ -102,7 +130,6 @@ class ProjectBuilder(object):
         return os.path.abspath(self._project_root)
 
     def build(self) -> None:
-        os.mkdir(self._project_root)
         for f in _ProjectFile:
             f.render_and_save(
                 package_name=self._package_name,

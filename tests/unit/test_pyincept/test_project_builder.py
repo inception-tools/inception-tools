@@ -32,7 +32,7 @@ class TestProjectBuilder(object):
     _PACKAGE_NAME = 'some_test_package_name'
     _AUTHOR = 'some_test_author'
     _AUTHOR_EMAIL = 'some_test_author_email'
-    _PROJECT_ROOT = 'some_test_project_root_dir'
+    _PROJECT_ROOT = 'some_test_project_root'
 
     ##############################
     # Class / static methods
@@ -159,3 +159,14 @@ class TestProjectBuilder(object):
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         self._validate_output_file_created('Pipfile')
+
+    def test_build_creates_entry_point_file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+
+        file_path = os.path.join(
+            self._PACKAGE_NAME,
+            '{}.py'.format(self._PACKAGE_NAME)
+        )
+        self._validate_output_file_created(file_path)
