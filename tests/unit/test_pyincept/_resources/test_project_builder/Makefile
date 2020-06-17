@@ -4,7 +4,7 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-# Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
+# Unpublished Copyright 2020 some_test_author. All Rights Reserved.
 #
 ###############################################################################
 
@@ -66,7 +66,7 @@ check:
 clean:
 	rm -f *.log
 
-checkclean:
+check-clean:
 	rm -rf $(PYTEST_CACHE_DIR)
 
 deploy-package: archive dist
@@ -99,7 +99,7 @@ init-clean:
 install:
 	python setup.py $(EGG_INFO) install
 
-maintainer-clean: archive-clean clean checkclean deploy-package-clean dist-clean
+maintainer-clean: archive-clean clean check-clean deploy-package-clean dist-clean
 	rm -rf $(EGG_DIR)
 
 uninstall:
