@@ -184,3 +184,59 @@ class TestProjectBuilder(object):
         file_path = os.path.join('tests', '__init__.py')
         self._validate_output_file_created(file_path)
 
+    def test_build_creates_unit_tests___init___file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        file_path = os.path.join('tests', 'unit', '__init__.py')
+        self._validate_output_file_created(file_path)
+
+    def test_build_creates_integration_tests___init___file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        file_path = os.path.join('tests', 'integration', '__init__.py')
+        self._validate_output_file_created(file_path)
+
+    def test_build_creates_end_to_end_tests___init___file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        file_path = os.path.join('tests', 'end_to_end', '__init__.py')
+        self._validate_output_file_created(file_path)
+
+    def test_build_creates_unit_tests_package___init___file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        file_path = os.path.join(
+            'tests',
+            'unit',
+            'some_test_package_name',
+            '__init__.py'
+        )
+        self._validate_output_file_created(file_path)
+
+    def test_build_creates_integration_tests_package___init___file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        file_path = os.path.join(
+            'tests',
+            'integration',
+            'some_test_package_name',
+            '__init__.py'
+        )
+        self._validate_output_file_created(file_path)
+
+    def test_build_creates_end_to_end_tests_package___init___file(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        file_path = os.path.join(
+            'tests',
+            'end_to_end',
+            'some_test_package_name',
+            '__init__.py'
+        )
+        self._validate_output_file_created(file_path)

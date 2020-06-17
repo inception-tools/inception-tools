@@ -33,19 +33,84 @@ class _ProjectFile(Enum):
             '{}.py'.format(package_name)
         ),
     )
+
     INIT_PACKAGE = (
         '__init___package.py.jinja',
         lambda package_name: os.path.join(package_name, '__init__.py'),
     )
+
     INIT_TESTS = (
         '__init___tests.py.jinja',
         lambda package_name: os.path.join('tests', '__init__.py'),
     )
+
+    INIT_TESTS_END_TO_END = (
+        '__init___tests_end_to_end.py.jinja',
+        lambda package_name: os.path.join(
+            'tests',
+            'end_to_end',
+            '__init__.py'
+        ),
+    )
+
+    INIT_TESTS_END_TO_END_PACKAGE = (
+        '__init___tests_end_to_end_package.py.jinja',
+        lambda package_name: os.path.join(
+            'tests',
+            'end_to_end',
+            package_name,
+            '__init__.py'
+        ),
+    )
+
+    INIT_TESTS_INTEGRATION = (
+        '__init___tests_integration.py.jinja',
+        lambda package_name: os.path.join(
+            'tests',
+            'integration',
+            '__init__.py'
+        ),
+    )
+
+    INIT_TESTS_INTEGRATION_PACKAGE = (
+        '__init___tests_integration_package.py.jinja',
+        lambda package_name: os.path.join(
+            'tests',
+            'integration',
+            package_name,
+            '__init__.py'
+        ),
+    )
+
+    INIT_TESTS_UNIT = (
+        '__init___tests_unit.py.jinja',
+        lambda package_name: os.path.join(
+            'tests',
+            'unit',
+            '__init__.py'
+        ),
+    )
+
+    INIT_TESTS_UNIT_PACKAGE = (
+        '__init___tests_unit_package.py.jinja',
+        lambda package_name: os.path.join(
+            'tests',
+            'unit',
+            package_name,
+            '__init__.py'
+        ),
+    )
+
     LICENSE = ('LICENSE.apache.jinja', lambda package_name: 'LICENSE',)
+
     LOG_CFG = ('log.cfg.jinja', lambda package_name: 'log.cfg',)
+
     MAKEFILE = ('Makefile.jinja', lambda package_name: 'Makefile',)
+
     PIPFILE = ('Pipfile.jinja', lambda package_name: 'Pipfile',)
+
     SETUP_CFG = ('setup.cfg.jinja', lambda package_name: 'setup.cfg',)
+
     SETUP_PY = ('setup.py.jinja', lambda package_name: 'setup.py',)
 
     def __init__(self, template_name, file_path_function):
