@@ -8,6 +8,9 @@ pytest = "*"
 pyhamcrest = "*"
 
 [packages]
+click = "*"
+pathvalidate = "*"
+jinja2 = "*"
 
 [requires]
 python_version = "2.7"
