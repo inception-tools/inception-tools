@@ -33,6 +33,7 @@ class TestProjectBuilder(object):
     _AUTHOR = 'some_test_author'
     _AUTHOR_EMAIL = 'some_test_author_email'
     _PROJECT_ROOT = 'some_test_project_root'
+    _YEAR = 2020
 
     ##############################
     # Class / static methods
@@ -82,7 +83,8 @@ class TestProjectBuilder(object):
             self._PACKAGE_NAME,
             self._AUTHOR,
             self._AUTHOR_EMAIL,
-            self._PROJECT_ROOT
+            self._PROJECT_ROOT,
+            self._YEAR
         )
 
         # The project root directory should not already exist.  If it does,
@@ -110,7 +112,8 @@ class TestProjectBuilder(object):
                 self._PACKAGE_NAME,
                 self._AUTHOR,
                 self._AUTHOR_EMAIL,
-                'some*path'
+                'some*path',
+                self._YEAR
             )
 
     def test_build_creates_root_directory(self):

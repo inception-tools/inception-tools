@@ -129,9 +129,7 @@ class _ProjectFile(Enum):
             self,
             content: str,
             package_name: str,
-            author: str,
-            author_email: str,
-            project_root: str
+            project_root,
     ) -> None:
         file_path = os.path.join(project_root, self._file_path(package_name))
 
@@ -149,21 +147,21 @@ class _ProjectFile(Enum):
             package_name,
             author,
             author_email,
-            project_root
+            project_root,
+            year
     ):
         t = self._get_template()
         content = t.render(
             package_name=package_name,
             author=author,
             author_email=author_email,
-            project_root=project_root
+            project_root=project_root,
+            year=year,
         )
         self._save_content(
             content,
-            package_name=package_name,
-            author=author,
-            author_email=author_email,
-            project_root=project_root
+            package_name,
+            project_root,
         )
 
 
@@ -180,6 +178,7 @@ class ProjectBuilder(object):
             author: str,
             author_email: str,
             project_root: str,
+            year: int,
     ) -> None:
         super().__init__()
         validate_filepath(project_root)
@@ -187,6 +186,7 @@ class ProjectBuilder(object):
         self._author = author
         self._author_email = author_email
         self._project_root = project_root
+        self._year = year
 
     @property
     def project_root(self) -> str:
@@ -210,5 +210,6 @@ class ProjectBuilder(object):
                 package_name=self._package_name,
                 author=self._author,
                 author_email=self._author_email,
-                project_root=self._project_root
+                project_root=self._project_root,
+                year=self._year
             )
