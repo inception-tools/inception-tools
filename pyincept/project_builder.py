@@ -33,6 +33,10 @@ class _ProjectFile(Enum):
             '{}.py'.format(package_name)
         ),
     )
+    INIT_PACKAGE = (
+        '__init__package.py.jinja',
+        lambda package_name: os.path.join(package_name, '__init__.py'),
+    )
     LICENSE = ('LICENSE.apache.jinja', lambda package_name: 'LICENSE',)
     LOG_CFG = ('log.cfg.jinja', lambda package_name: 'log.cfg',)
     MAKEFILE = ('Makefile.jinja', lambda package_name: 'Makefile',)

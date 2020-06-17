@@ -1,0 +1,21 @@
+"""
+    __init__.py
+    ~~~~~~~~~~~~~~~~~~~~~~~
+
+    The :py:mod:`{{package_name}}` package contains the root-level
+    distributable source code for the `{{package_name}}` project.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~
+
+    Unpublished Copyright 2020 {{author}}. All Rights Reserved.
+
+"""
+
+__author__ = '{{author}}'
+
+from pkg_resources import get_distribution, DistributionNotFound
+
+try:
+    __version__ = get_distribution('{{package_name}}').version
+except DistributionNotFound:
+    __version__ = 'unknown'
