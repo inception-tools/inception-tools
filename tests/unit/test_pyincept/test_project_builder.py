@@ -26,6 +26,11 @@ class TestProjectBuilder(object):
     ##############################
     # Class attributes
 
+    _PACKAGE_NAME = 'some_test_package_name'
+    _AUTHOR = 'some_test_author'
+    _AUTHOR_EMAIL = 'some_test_author_email'
+    _PROJECT_ROOT = 'some_test_project_root_dir'
+
     ##############################
     # Class / static methods
 
@@ -59,7 +64,12 @@ class TestProjectBuilder(object):
         Called before each method in this class with a name of the form
         test_*().
         """
-        self._builder = ProjectBuilder('some_test_dir')
+        self._builder = ProjectBuilder(
+            self._PACKAGE_NAME,
+            self._AUTHOR,
+            self._AUTHOR_EMAIL,
+            self._PROJECT_ROOT
+        )
 
         # The project root directory should not already exist.  If it does,
         # something unexpected has happened, so raise.
@@ -82,7 +92,12 @@ class TestProjectBuilder(object):
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         with raises(ValidationError):
-            ProjectBuilder('some*path')
+            ProjectBuilder(
+                self._PACKAGE_NAME,
+                self._AUTHOR,
+                self._AUTHOR_EMAIL,
+                'some*path'
+            )
 
     def test_build_creates_root_directory(self):
         """
@@ -100,6 +115,46 @@ class TestProjectBuilder(object):
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         output_file_name = 'LICENSE'
+
+        self._builder.build()
+
+        expected_content = self.get_test_resource(output_file_name)
+
+        actual_path = os.path.join(
+            self._builder.project_root,
+            output_file_name
+        )
+
+        with open(actual_path) as expected_file:
+            actual_content = expected_file.read()
+
+        assert_that(actual_content, is_(expected_content))
+
+    def test_build_setup_cfg(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        output_file_name = 'setup.cfg'
+
+        self._builder.build()
+
+        expected_content = self.get_test_resource(output_file_name)
+
+        actual_path = os.path.join(
+            self._builder.project_root,
+            output_file_name
+        )
+
+        with open(actual_path) as expected_file:
+            actual_content = expected_file.read()
+
+        assert_that(actual_content, is_(expected_content))
+
+    def test_build_setup_py(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        output_file_name = 'setup.py'
 
         self._builder.build()
 
