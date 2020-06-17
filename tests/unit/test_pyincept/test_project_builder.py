@@ -130,26 +130,32 @@ class TestProjectBuilder(object):
         """
         self._validate_output_file_created('LICENSE')
 
-    def test_build_setup_cfg(self):
+    def test_build_creates_setup_cfg(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         self._validate_output_file_created('setup.cfg')
 
-    def test_build_setup_py(self):
+    def test_build_creates_setup_py(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         self._validate_output_file_created('setup.py')
 
-    def test_build_log_cfg(self):
+    def test_build_creates_log_cfg(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         self._validate_output_file_created('log.cfg')
 
-    def test_build_makefile(self):
+    def test_build_creates_makefile(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         self._validate_output_file_created('Makefile')
+
+    def test_build_creates_pipfile(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        self._validate_output_file_created('Pipfile')

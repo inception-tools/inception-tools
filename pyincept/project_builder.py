@@ -28,6 +28,7 @@ class _ProjectFile(Enum):
     LICENSE = ('LICENSE', 'LICENSE.apache.jinja')
     LOG_CFG = ('log.cfg', 'log.cfg.jinja')
     MAKEFILE = ('Makefile', 'Makefile.jinja')
+    PIPFILE = ('Pipfile', 'Pipfile.jinja')
     SETUP_CFG = ('setup.cfg', 'setup.cfg.jinja')
     SETUP_PY = ('setup.py', 'setup.py.jinja')
 
