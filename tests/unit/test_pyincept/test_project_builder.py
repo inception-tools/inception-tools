@@ -1,8 +1,11 @@
 """
     test_project_builder
     ~~~~~~~~~~~~~~~~~~~~~~~
+
     Unit test cases for the :py:mod:`pyincept.project_builder` module.
+
     ~~~~~~~~~~~~~~~~~~~~~~~
+
     Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
 """
 
@@ -144,3 +147,9 @@ class TestProjectBuilder(object):
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         self._validate_output_file_created('log.cfg')
+
+    def test_build_makefile(self):
+        """
+        Unit test case for :py:method:`ProjectBuilder.build`.
+        """
+        self._validate_output_file_created('Makefile')

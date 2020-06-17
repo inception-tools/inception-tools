@@ -11,8 +11,8 @@
 ########################################
 # Build variables
 
-PROJECT_NAME=pyincept
-PACKAGE_NAME=pyincept
+PROJECT_NAME=some_test_package_name
+PACKAGE_NAME=some_test_package_name
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
