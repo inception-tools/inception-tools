@@ -103,4 +103,4 @@ maintainer-clean: archive-clean clean check-clean deploy-package-clean dist-clea
 	rm -rf $(EGG_DIR)
 
 uninstall:
-	pip uninstall $(PROJECT_NAME)
+	pip uninstall -y $(PROJECT_NAME)
