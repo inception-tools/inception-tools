@@ -27,13 +27,13 @@ setup_params = dict(
     packages=setuptools.find_packages(exclude=['tests*']),
     entry_points={
         "console_scripts": [
-            "incept = pyincept.incept:main",
+            "pyincept = pyincept.pyincept:main",
         ],
     },
     scripts=[],
     install_requires=(
         'click',
-        'jinja',
+        'jinja2',
     ),
     tests_require=(
         'pyhamcrest',
@@ -45,6 +45,7 @@ setup_params = dict(
     ),
     package_data={
         '': ['*.txt', '*.rst', '*.cfg'],
+        'pyincept': ['_resources/templates/*.jinja'],
     },
     include_package_data=True,
     author='Andrew van Herick',
