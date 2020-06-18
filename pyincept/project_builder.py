@@ -18,7 +18,6 @@ import os
 from enum import Enum
 
 from jinja2 import Template
-from pathvalidate import validate_filepath
 
 _TEMPLATE_PATH = os.path.abspath(
     os.path.join(__file__, os.pardir, '_resources', 'templates')
@@ -181,7 +180,6 @@ class ProjectBuilder(object):
             year: int,
     ) -> None:
         super().__init__()
-        validate_filepath(project_root)
         self._package_name = package_name
         self._author = author
         self._author_email = author_email

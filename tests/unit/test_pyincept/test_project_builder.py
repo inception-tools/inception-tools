@@ -103,19 +103,6 @@ class TestProjectBuilder(object):
 
     # Test cases
 
-    def test___init___validates_root_path(self):
-        """
-        Unit test case for :py:method:`ProjectBuilder.build`.
-        """
-        with raises(ValidationError):
-            ProjectBuilder(
-                self._PACKAGE_NAME,
-                self._AUTHOR,
-                self._AUTHOR_EMAIL,
-                'some*path',
-                self._YEAR
-            )
-
     def test_build_creates_root_directory(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
