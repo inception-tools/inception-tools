@@ -35,8 +35,8 @@ class TestProjectBuilder(object):
     # the expected output matches the new template changes.  Any changes in
     # output are easy to manually compare and validate before committing
     # using your IDE's source control integration. Note that this file should
-    # never be committed with a value of True, as it will make any tests run CI
-    # environment meaningless.
+    # never be committed with a value of True, as it will make any pass/fail
+    # test results meaningless.
     _OVERWRITE_EXPECTED_FILE = False
 
     _PACKAGE_NAME = 'some_test_package_name'
