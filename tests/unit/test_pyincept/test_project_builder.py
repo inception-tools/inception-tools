@@ -13,6 +13,7 @@ __author__ = 'Andrew van Herick'
 
 import os
 import shutil
+from datetime import datetime
 
 from hamcrest import assert_that, is_
 
@@ -42,7 +43,7 @@ class TestProjectBuilder(object):
     _AUTHOR = 'some_test_author'
     _AUTHOR_EMAIL = 'some_test_author_email'
     _PROJECT_ROOT = 'some_test_project_root'
-    _YEAR = 2020
+    _DATE = datetime(2020, 1, 1)
 
     ##############################
     # Class / static methods
@@ -108,7 +109,7 @@ class TestProjectBuilder(object):
             self._AUTHOR,
             self._AUTHOR_EMAIL,
             self._PROJECT_ROOT,
-            self._YEAR
+            self._DATE
         )
 
         # The project root directory should not already exist.  If it does,

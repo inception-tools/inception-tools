@@ -13,6 +13,7 @@
 
 __author__ = 'Andrew van Herick'
 
+import datetime
 import errno
 import os
 from enum import Enum
@@ -147,7 +148,7 @@ class _ProjectFile(Enum):
             author,
             author_email,
             project_root,
-            year
+            date
     ):
         t = self._get_template()
         content = t.render(
@@ -155,7 +156,7 @@ class _ProjectFile(Enum):
             author=author,
             author_email=author_email,
             project_root=project_root,
-            year=year,
+            date=date,
         )
         self._save_content(
             content,
@@ -177,14 +178,14 @@ class ProjectBuilder(object):
             author: str,
             author_email: str,
             project_root: str,
-            year: int,
+            date: datetime.date,
     ) -> None:
         super().__init__()
         self._package_name = package_name
         self._author = author
         self._author_email = author_email
         self._project_root = project_root
-        self._year = year
+        self._date = date
 
     @property
     def project_root(self) -> str:
@@ -209,5 +210,5 @@ class ProjectBuilder(object):
                 author=self._author,
                 author_email=self._author_email,
                 project_root=self._project_root,
-                year=self._year
+                date=self._date
             )

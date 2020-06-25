@@ -31,6 +31,6 @@ def main(package_name, author, author_email):
         author=author,
         author_email=author_email,
         project_root=package_name,
-        year=now.year
+        date=now
     )
     builder.build()
