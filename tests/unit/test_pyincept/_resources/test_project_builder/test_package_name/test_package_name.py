@@ -1,19 +1,19 @@
 """
-    some_test_package_name.py
+    test_package_name.py
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Main entry point commend line script for the some_test_package_name project.
+    Main entry point commend line script for the test_package_name project.
 
     Command line syntax:
 
-        some_test_package_name <message>
+        test_package_name <message>
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unpublished Copyright 2020 some_test_author. All Rights Reserved.
+    Unpublished Copyright 2020 test_author. All Rights Reserved.
 """
 
-__author__ = 'some_test_author'
+__author__ = 'test_author'
 
 from logging import getLogger
 from logging.config import fileConfig

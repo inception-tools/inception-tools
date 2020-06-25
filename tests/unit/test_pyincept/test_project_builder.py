@@ -40,10 +40,10 @@ class TestProjectBuilder(object):
     # :py:meth:`test_overwrite_expected_files_is_false`.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'some_test_package_name'
-    _AUTHOR = 'some_test_author'
-    _AUTHOR_EMAIL = 'some_test_author_email'
-    _PROJECT_ROOT = 'some_test_project_root'
+    _PACKAGE_NAME = 'test_package_name'
+    _AUTHOR = 'test_author'
+    _AUTHOR_EMAIL = 'test_author_email'
+    _PROJECT_ROOT = 'test_project_root'
     _DATE = datetime(2020, 1, 1)
 
     ##############################
@@ -251,7 +251,7 @@ class TestProjectBuilder(object):
         file_path = os.path.join(
             'tests',
             'unit',
-            'some_test_package_name',
+            'test_package_name',
             '__init__.py'
         )
         self._validate_output_file_created(file_path)
@@ -263,7 +263,7 @@ class TestProjectBuilder(object):
         file_path = os.path.join(
             'tests',
             'integration',
-            'some_test_package_name',
+            'test_package_name',
             '__init__.py'
         )
         self._validate_output_file_created(file_path)
@@ -275,7 +275,7 @@ class TestProjectBuilder(object):
         file_path = os.path.join(
             'tests',
             'end_to_end',
-            'some_test_package_name',
+            'test_package_name',
             '__init__.py'
         )
         self._validate_output_file_created(file_path)

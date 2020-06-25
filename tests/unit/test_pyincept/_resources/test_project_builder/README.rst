@@ -1,6 +1,6 @@
-======================
-some_test_package_name
-======================
+=================
+test_package_name
+=================
 
 This is the readme file for your new project.  It should include information
 like project name, goals, comparisons with other similar projects, etc.  Fill
@@ -19,9 +19,9 @@ Features:
 - Feature description 3
 
 Contributions and feedback are welcome using Github at:
-http://github.com/<github-org>/some_test_package_name
+http://github.com/<github-org>/test_package_name
 
-Note that some_test_package_name requires installation of the following packages:
+Note that test_package_name requires installation of the following packages:
 
 - package-a >= 1.2.3
 - package-b
@@ -29,7 +29,7 @@ Note that some_test_package_name requires installation of the following packages
 Installation
 ============
 
-#. `pip install some_test_package_name`
+#. `pip install test_package_name`
 #. Some additional step for installing the project.
 #. Another additional step for installing the project.
 #. etc.
@@ -53,8 +53,8 @@ Bugs & Contributions
 ====================
 
 Please submit bugs, feature requests, and code changes using GitHub at:
-http://github.com/<github-org>/some_test_package_name
+http://github.com/<github-org>/test_package_name
 
-:author: some_test_author
-:email: some_test_author_email
+:author: test_author
+:email: test_author_email
 :date: 2020-01-01
