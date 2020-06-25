@@ -128,6 +128,23 @@ class TestProjectBuilder(object):
 
     # Test cases
 
+    def test_overwrite_expected_files_is_false(self):
+        """
+        This 'test case' validates that the value of
+        `self._OVERWRITE_EXPECTED_FILE` is `False`, ensuring that the unit
+        test suite will be unable to pass if it is accidentally committed
+        with a `True` value.  See inline comments of
+        `self._OVERWRITE_EXPECTED_FILE` a more detailed explanation of how
+        that attribute is used.
+        """
+        assert_that(
+            not self._OVERWRITE_EXPECTED_FILE,
+            'The following value should always be False: '
+            'self._OVERWRITE_EXPECTED_FILE={}'.format(
+                self._OVERWRITE_EXPECTED_FILE
+            )
+        )
+
     def test_build_creates_root_directory(self):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.

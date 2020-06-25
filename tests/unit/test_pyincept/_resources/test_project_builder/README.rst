@@ -56,4 +56,4 @@ Please submit bugs, feature requests, and code changes using GitHub at:
 http://github.com/<github-org>/some_test_package_name
 
 :author: some_test_author
-:date: 2020
+:date: 2020-01-01
