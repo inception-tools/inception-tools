@@ -15,8 +15,6 @@ import os
 import shutil
 
 from hamcrest import assert_that, is_
-from pathvalidate import ValidationError
-from pytest import raises
 
 from pyincept.project_builder import ProjectBuilder
 
@@ -29,6 +27,17 @@ class TestProjectBuilder(object):
     ##############################
     # Class attributes
 
+    # This can be temporarily set to `True` in order to automatically
+    # regenerated and overwrite the expected output files for test results.
+    # This makes it easy to ensure that changes to the Jinja template files
+    # are propagated without the need to spend a bunch of time making sure
+    # the expected output matches the new template changes.  Any changes in
+    # output are easy to manually compare and validate before committing
+    # using your IDE's source control integration. Note that this file should
+    # never be committed with a value of True, as it will make any tests run CI
+    # environment meaningless.
+    _OVERWRITE_EXPECTED_FILE = False
+
     _PACKAGE_NAME = 'some_test_package_name'
     _AUTHOR = 'some_test_author'
     _AUTHOR_EMAIL = 'some_test_author_email'
@@ -39,8 +48,20 @@ class TestProjectBuilder(object):
     # Class / static methods
 
     @classmethod
-    def get_test_resource(cls, resource_name):
-        resource_path = os.path.abspath(
+    def _get_test_resource(cls, resource_name):
+        resource_path = cls._get_resource_path(resource_name)
+        with open(resource_path) as f:
+            return f.read()
+
+    @classmethod
+    def _put_test_resource(cls, resource_name, content):
+        resource_path = cls._get_resource_path(resource_name)
+        with open(resource_path, 'w') as f:
+            return f.write(content)
+
+    @classmethod
+    def _get_resource_path(cls, resource_name):
+        return os.path.abspath(
             os.path.join(
                 __file__,
                 os.pardir,
@@ -49,8 +70,6 @@ class TestProjectBuilder(object):
                 resource_name
             )
         )
-        with open(resource_path) as f:
-            return f.read()
 
     ##############################
     # Instance methods
@@ -63,13 +82,18 @@ class TestProjectBuilder(object):
 
     def _validate_output_file_created(self, output_file_name):
         self._builder.build()
-        expected_content = self.get_test_resource(output_file_name)
         actual_path = os.path.join(
             self._builder.project_root,
             output_file_name
         )
         with open(actual_path) as expected_file:
             actual_content = expected_file.read()
+
+        if self._OVERWRITE_EXPECTED_FILE:
+            self._put_test_resource(output_file_name, actual_content)
+
+        expected_content = self._get_test_resource(output_file_name)
+
         assert_that(actual_content, is_(expected_content))
 
     # Instance set up / tear down
