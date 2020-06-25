@@ -1,6 +1,6 @@
-========================================
+======================
 some_test_package_name
-========================================
+======================
 
 This is the readme file for your new project.  It should include information
 like project name, goals, comparisons with other similar projects, etc.  Fill
@@ -56,4 +56,5 @@ Please submit bugs, feature requests, and code changes using GitHub at:
 http://github.com/<github-org>/some_test_package_name
 
 :author: some_test_author
+:email: some_test_author_email
 :date: 2020-01-01

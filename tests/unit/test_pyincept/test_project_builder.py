@@ -36,7 +36,8 @@ class TestProjectBuilder(object):
     # output are easy to manually compare and validate before committing
     # using your IDE's source control integration. Note that this file should
     # never be committed with a value of True, as it will make any pass/fail
-    # test results meaningless.
+    # test results meaningless.  See also,
+    # :py:meth:`test_overwrite_expected_files_is_false`.
     _OVERWRITE_EXPECTED_FILE = False
 
     _PACKAGE_NAME = 'some_test_package_name'
