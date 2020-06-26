@@ -13,6 +13,7 @@ __author__ = 'Andrew van Herick'
 
 import os
 import shutil
+from abc import abstractmethod
 from datetime import datetime
 
 from hamcrest import assert_that, is_
@@ -20,9 +21,10 @@ from hamcrest import assert_that, is_
 from pyincept.project_builder import ProjectBuilder
 
 
-class TestProjectBuilder(object):
+class PyinceptTestBase(object):
     """
-    Unit test for class :py:class:`ProjectBuilder`.
+    Common base test class for test cases that validate the content of
+    templated files.
     """
 
     ##############################
@@ -40,92 +42,46 @@ class TestProjectBuilder(object):
     # :py:meth:`test_overwrite_expected_files_is_false`.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'test_package_name'
-    _AUTHOR = 'test_author'
-    _AUTHOR_EMAIL = 'test_author_email'
-    _PROJECT_ROOT = 'test_project_root'
-    _DATE = datetime(2020, 1, 1)
-
     ##############################
     # Class / static methods
 
     @classmethod
-    def _get_test_resource(cls, resource_name):
-        resource_path = cls._get_resource_path(resource_name)
+    @abstractmethod
+    def _get_resource_path(cls, resource_name):
+        """
+        This method returns the path of a given resource name.
+
+        :param resource_name:
+        :return:
+        """
+        raise NotImplemented('This method must be implemented by subclasses.')
+
+    @classmethod
+    def _get_file_content(cls, resource_path):
         with open(resource_path) as f:
             return f.read()
 
     @classmethod
-    def _put_test_resource(cls, resource_name, content):
-        resource_path = cls._get_resource_path(resource_name)
+    def _put_file_content(cls, resource_path, content):
         with open(resource_path, 'w') as f:
             return f.write(content)
 
     @classmethod
-    def _get_resource_path(cls, resource_name):
-        return os.path.abspath(
-            os.path.join(
-                __file__,
-                os.pardir,
-                '_resources',
-                'test_project_builder',
-                resource_name
-            )
-        )
-
-    ##############################
-    # Instance methods
-
-    def _validate_project_root_absent(self):
+    def _validate_path_doesnt_exist(cls, path_):
         assert_that(
-            not os.path.exists(self._builder.project_root),
-            'Directory should be empty: {}'.format(self._builder.project_root)
+            not os.path.exists(path_),
+            'Directory/file should be absent: {}'.format(path_)
         )
 
-    def _validate_output_file_created(self, output_file_name):
-        self._builder.build()
-        actual_path = os.path.join(
-            self._builder.project_root,
-            output_file_name
-        )
-        with open(actual_path) as expected_file:
-            actual_content = expected_file.read()
+    @classmethod
+    def _assert_matching_file_content(cls, actual_path, expected_path):
+        actual_content = cls._get_file_content(actual_path)
 
-        if self._OVERWRITE_EXPECTED_FILE:
-            self._put_test_resource(output_file_name, actual_content)
-
-        expected_content = self._get_test_resource(output_file_name)
+        if cls._OVERWRITE_EXPECTED_FILE:
+            cls._put_file_content(expected_path, actual_content)
+        expected_content = cls._get_file_content(expected_path)
 
         assert_that(actual_content, is_(expected_content))
-
-    # Instance set up / tear down
-
-    def setup(self):
-        """
-        Called before each method in this class with a name of the form
-        test_*().
-        """
-        self._builder = ProjectBuilder(
-            self._PACKAGE_NAME,
-            self._AUTHOR,
-            self._AUTHOR_EMAIL,
-            self._PROJECT_ROOT,
-            self._DATE
-        )
-
-        # The project root directory should not already exist.  If it does,
-        # something unexpected has happened, so raise.
-        self._validate_project_root_absent()
-
-    def teardown(self):
-        """
-        Called after each method in this class with a name of the form
-        test_*().
-        """
-        if os.path.exists(self._builder.project_root):
-            shutil.rmtree(self._builder.project_root)
-
-        self._validate_project_root_absent()
 
     # Test cases
 
@@ -145,6 +101,81 @@ class TestProjectBuilder(object):
                 self._OVERWRITE_EXPECTED_FILE
             )
         )
+
+
+class TestProjectBuilder(PyinceptTestBase):
+    """
+    Unit test for class :py:class:`ProjectBuilder`.
+    """
+
+    ##############################
+    # Class attributes
+
+    # See superclass declaration to understand the use of this attribute.
+    _OVERWRITE_EXPECTED_FILE = False
+
+    _PACKAGE_NAME = 'test_package_name'
+    _AUTHOR = 'test_author'
+    _AUTHOR_EMAIL = 'test_author_email'
+    _PROJECT_ROOT = 'test_project_root'
+    _DATE = datetime(2020, 1, 1)
+
+    ##############################
+    # Class / static methods
+
+    @classmethod
+    def _get_resource_path(cls, resource_name):
+        return os.path.abspath(
+            os.path.join(
+                __file__,
+                os.pardir,
+                '_resources',
+                'test_project_builder',
+                resource_name
+            )
+        )
+
+    ##############################
+    # Instance methods
+
+    @classmethod
+    def _validate_output_file_created(cls, output_file_name):
+        actual_path = os.path.join(cls._PROJECT_ROOT, output_file_name)
+        expected_path = cls._get_resource_path(output_file_name)
+        cls._assert_matching_file_content(actual_path, expected_path)
+
+    # Instance set up / tear down
+
+    def setup(self):
+        """
+        Called before each method in this class with a name of the form
+        test_*().
+        """
+        self._builder = ProjectBuilder(
+            self._PACKAGE_NAME,
+            self._AUTHOR,
+            self._AUTHOR_EMAIL,
+            self._PROJECT_ROOT,
+            self._DATE
+        )
+
+        # The project root directory should not already exist.  If it does,
+        # something unexpected has happened, so raise.
+        self._validate_path_doesnt_exist(self._PROJECT_ROOT)
+
+        self._builder.build()
+
+    def teardown(self):
+        """
+        Called after each method in this class with a name of the form
+        test_*().
+        """
+        if os.path.exists(self._PROJECT_ROOT):
+            shutil.rmtree(self._PROJECT_ROOT)
+
+        self._validate_path_doesnt_exist(self._PROJECT_ROOT)
+
+    # Test cases
 
     def test_build_creates_root_directory(self):
         """
