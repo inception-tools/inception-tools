@@ -63,11 +63,11 @@ archive-clean:
 check:
 	python setup.py pytest
 
-clean:
-	rm -f *.log
-
 check-clean:
 	rm -rf $(PYTEST_CACHE_DIR)
+
+clean:
+	rm -f *.log
 
 deploy-package: archive dist
 	rm -rf $(DIST_PACKAGE_DIR) \
