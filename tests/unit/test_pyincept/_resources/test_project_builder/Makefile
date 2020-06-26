@@ -14,6 +14,8 @@
 PROJECT_NAME=test_package_name
 PACKAGE_NAME=test_package_name
 
+INDEX_SERVER=testpypi
+
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
 TAG_BUILD=dev
@@ -45,6 +47,7 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	deploy-package-clean \
 	dist \
 	dist-clean \
+	dist-upload \
 	init \
 	init-dev \
 	init-clean \
@@ -86,6 +89,9 @@ dist:
 
 dist-clean:
 	rm -rf $(EGG_INFO_DIR) $(DIST_DIR) $(BUILD_DIR)
+
+dist-upload: dist
+	twine upload --repository $(INDEX_SERVER) dist/*
 
 init:
 	pipenv install

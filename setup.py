@@ -60,7 +60,7 @@ setup_params = dict(
         'Programming Language :: Python :: 3 :: Only',
         # Prevents upload to PyPI, because it is not one of the known
         # classifiers.
-        'Private :: Do Not Upload',
+        # 'Private :: Do Not Upload',
     ),
 )
 
