@@ -15,8 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        #         python-version: [3.5, 3.6, 3.7, 3.8]
-        python-version: [ 3.7 ]
+        python-version: [3.5, 3.6, 3.7, 3.8]
 
     steps:
       - uses: actions/checkout@v2
@@ -26,9 +25,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install pipenv
         uses: dschep/install-pipenv-action@v1
-      - name: Install dependencies
-        run: |
-          make init
+#      - name: Install dependencies
+#        run: |
+#          make init
 #       - name: Lint with flake8
 #         run: |
 #           # stop the build if there are Python syntax errors or undefined names
