@@ -25,146 +25,6 @@ _TEMPLATE_PATH = os.path.abspath(
 )
 
 
-class _ProjectFile(Enum):
-    ENTRY_POINT = (
-        'entry_point.py.jinja',
-        lambda package_name: os.path.join(
-            package_name,
-            '{}.py'.format(package_name)
-        ),
-    )
-
-    INIT_PACKAGE = (
-        '__init___package.py.jinja',
-        lambda package_name: os.path.join(package_name, '__init__.py'),
-    )
-
-    INIT_TESTS = (
-        '__init___tests.py.jinja',
-        lambda package_name: os.path.join('tests', '__init__.py'),
-    )
-
-    INIT_TESTS_END_TO_END = (
-        '__init___tests_end_to_end.py.jinja',
-        lambda package_name: os.path.join(
-            'tests',
-            'end_to_end',
-            '__init__.py'
-        ),
-    )
-
-    INIT_TESTS_END_TO_END_PACKAGE = (
-        '__init___tests_end_to_end_package.py.jinja',
-        lambda package_name: os.path.join(
-            'tests',
-            'end_to_end',
-            'test_{}'.format(package_name),
-            '__init__.py'
-        ),
-    )
-
-    INIT_TESTS_INTEGRATION = (
-        '__init___tests_integration.py.jinja',
-        lambda package_name: os.path.join(
-            'tests',
-            'integration',
-            '__init__.py'
-        ),
-    )
-
-    INIT_TESTS_INTEGRATION_PACKAGE = (
-        '__init___tests_integration_package.py.jinja',
-        lambda package_name: os.path.join(
-            'tests',
-            'integration',
-            'test_{}'.format(package_name),
-            '__init__.py'
-        ),
-    )
-
-    INIT_TESTS_UNIT = (
-        '__init___tests_unit.py.jinja',
-        lambda package_name: os.path.join(
-            'tests',
-            'unit',
-            '__init__.py'
-        ),
-    )
-
-    INIT_TESTS_UNIT_PACKAGE = (
-        '__init___tests_unit_package.py.jinja',
-        lambda package_name: os.path.join(
-            'tests',
-            'unit',
-            'test_{}'.format(package_name),
-            '__init__.py'
-        ),
-    )
-
-    LICENSE = ('LICENSE.apache.jinja', lambda package_name: 'LICENSE',)
-
-    LOG_CFG = ('log.cfg.jinja', lambda package_name: 'log.cfg',)
-
-    MAKEFILE = ('Makefile.jinja', lambda package_name: 'Makefile',)
-
-    PIPFILE = ('Pipfile.jinja', lambda package_name: 'Pipfile',)
-
-    README_RST = ('README.rst.jinja', lambda package_name: 'README.rst',)
-
-    SETUP_CFG = ('setup.cfg.jinja', lambda package_name: 'setup.cfg',)
-
-    SETUP_PY = ('setup.py.jinja', lambda package_name: 'setup.py',)
-
-    def __init__(self, template_name, file_path_function):
-        self._template_name = template_name
-        self._file_path = file_path_function
-
-    def _get_template(self) -> Template:
-        template_path = os.path.join(_TEMPLATE_PATH, self._template_name)
-        with open(template_path) as f:
-            content = f.read()
-            return Template(content, keep_trailing_newline=True)
-
-    def _save_content(
-            self,
-            content: str,
-            package_name: str,
-            project_root,
-    ) -> None:
-        file_path = os.path.join(project_root, self._file_path(package_name))
-
-        try:
-            os.makedirs(os.path.dirname(file_path))
-        except OSError as exc:
-            if exc.errno != errno.EEXIST:
-                raise
-
-        with open(file_path, 'w') as f:
-            f.write(content)
-
-    def render_and_save(
-            self,
-            package_name,
-            author,
-            author_email,
-            project_root,
-            date
-    ):
-        t = self._get_template()
-        content = t.render(
-            package_name=package_name,
-            author=author,
-            author_email=author_email,
-            project_root=project_root,
-            date=date,
-        )
-        self._save_content(
-            content,
-            package_name,
-            project_root,
-        )
-
-
 class ProjectBuilder(object):
     """
     This class is responsible for building the file directory structure for a
@@ -188,6 +48,34 @@ class ProjectBuilder(object):
         self._date = date
 
     @property
+    def package_name(self) -> str:
+        """
+        :return: the value of `package_name` given to the class initializer
+        """
+        return self._package_name
+
+    @property
+    def author(self) -> str:
+        """
+        :return: the value of `author` given to the class initializer
+        """
+        return self._author
+
+    @property
+    def author_email(self) -> str:
+        """
+        :return: the value of `author_email` given to the class initializer
+        """
+        return self._author_email
+
+    @property
+    def date(self) -> datetime.date:
+        """
+        :return: the value of `date` given to the class initializer
+        """
+        return self._date
+
+    @property
     def project_root(self) -> str:
         """
         :return: the path, as supplied to the class initializer, of the
@@ -205,10 +93,113 @@ class ProjectBuilder(object):
 
     def build(self) -> None:
         for f in _ProjectFile:
-            f.render_and_save(
-                package_name=self._package_name,
-                author=self._author,
-                author_email=self._author_email,
-                project_root=self._project_root,
-                date=self._date
-            )
+            f.render_and_save(self)
+
+
+class _ProjectFile(Enum):
+    ENTRY_POINT = (
+        'entry_point.py.jinja',
+        lambda b: os.path.join(b.package_name, '{}.py'.format(b.package_name))
+    )
+
+    INIT_PACKAGE = (
+        '__init___package.py.jinja',
+        lambda b: os.path.join(b.package_name, '__init__.py')
+    )
+
+    INIT_TESTS = (
+        '__init___tests.py.jinja',
+        lambda b: os.path.join('tests', '__init__.py')
+    )
+
+    INIT_TESTS_END_TO_END = (
+        '__init___tests_end_to_end.py.jinja',
+        lambda b: os.path.join('tests', 'end_to_end', '__init__.py')
+    )
+
+    INIT_TESTS_END_TO_END_PACKAGE = (
+        '__init___tests_end_to_end_package.py.jinja',
+        lambda b: os.path.join(
+            'tests',
+            'end_to_end',
+            'test_{}'.format(b.package_name),
+            '__init__.py'
+        )
+    )
+
+    INIT_TESTS_INTEGRATION = (
+        '__init___tests_integration.py.jinja',
+        lambda b: os.path.join('tests', 'integration', '__init__.py')
+    )
+
+    INIT_TESTS_INTEGRATION_PACKAGE = (
+        '__init___tests_integration_package.py.jinja',
+        lambda b: os.path.join(
+            'tests',
+            'integration',
+            'test_{}'.format(b.package_name),
+            '__init__.py'
+        )
+    )
+
+    INIT_TESTS_UNIT = (
+        '__init___tests_unit.py.jinja',
+        lambda b: os.path.join('tests', 'unit', '__init__.py')
+    )
+
+    INIT_TESTS_UNIT_PACKAGE = (
+        '__init___tests_unit_package.py.jinja',
+        lambda b: os.path.join(
+            'tests',
+            'unit',
+            'test_{}'.format(b.package_name),
+            '__init__.py'
+        )
+    )
+
+    LICENSE = ('LICENSE.apache.jinja', lambda b: 'LICENSE')
+
+    LOG_CFG = ('log.cfg.jinja', lambda b: 'log.cfg')
+
+    MAKEFILE = ('Makefile.jinja', lambda b: 'Makefile')
+
+    PIPFILE = ('Pipfile.jinja', lambda b: 'Pipfile')
+
+    README_RST = ('README.rst.jinja', lambda b: 'README.rst')
+
+    SETUP_CFG = ('setup.cfg.jinja', lambda b: 'setup.cfg')
+
+    SETUP_PY = ('setup.py.jinja', lambda b: 'setup.py')
+
+    def __init__(self, template_name, file_path_function) -> None:
+        self._template_name = template_name
+        self._file_path = file_path_function
+
+    def _get_template(self) -> Template:
+        template_path = os.path.join(_TEMPLATE_PATH, self._template_name)
+        with open(template_path) as f:
+            content = f.read()
+            return Template(content, keep_trailing_newline=True)
+
+    def _save_content(self, content: str, builder: ProjectBuilder) -> None:
+        path_ = os.path.join(builder.project_root, self._file_path(builder))
+
+        try:
+            os.makedirs(os.path.dirname(path_))
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                raise
+
+        with open(path_, 'w') as f:
+            f.write(content)
+
+    def render_and_save(self, builder: ProjectBuilder) -> None:
+        t = self._get_template()
+        content = t.render(
+            package_name=builder.package_name,
+            author=builder.author,
+            author_email=builder.author_email,
+            project_root=builder.project_root,
+            date=builder.date,
+        )
+        self._save_content(content, builder)
