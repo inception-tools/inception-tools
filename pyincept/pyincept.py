@@ -25,12 +25,11 @@ from pyincept.project_builder import ProjectBuilder
 @click.argument('author')
 @click.argument('author_email')
 def main(package_name, author, author_email):
-    now = datetime.now()
     builder = ProjectBuilder(
         package_name=package_name,
         author=author,
         author_email=author_email,
         project_root=package_name,
-        date=now
+        date=datetime.now()
     )
     builder.build()

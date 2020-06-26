@@ -3,14 +3,14 @@
     setup.py
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Package distribution file for the pyincept library.
+    Package distribution file for the some_package_name library.
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
+    Unpublished Copyright 1900 some_author. All Rights Reserved.
 """
 
-__author__ = 'Andrew van Herick'
+__author__ = 'some_author'
 
 import os
 
@@ -25,18 +25,20 @@ def _read_file(file_path):
 _dir = os.path.abspath(os.path.join(__file__, os.pardir))
 
 setup_params = dict(
-    name='pyincept',
-    version='0.0.1',
+    name='some_package_name',
+    version='0.0.0',
     packages=setuptools.find_packages(exclude=['tests*']),
     entry_points={
+        # If you will have command line entry points that will be installed,
+        # you can uncomment the lines below to make them available through
+        # the distribution.
         "console_scripts": [
-            "pyincept = pyincept.pyincept:main",
+            "some_package_name = some_package_name.some_package_name:main",
         ],
     },
     scripts=[],
     install_requires=(
         'click',
-        'jinja2',
     ),
     tests_require=(
         'pyhamcrest',
@@ -48,22 +50,22 @@ setup_params = dict(
     ),
     package_data={
         '': ['*.txt', '*.rst', '*.cfg'],
-        'pyincept': ['_resources/templates/*.jinja'],
     },
     include_package_data=True,
-    author='Andrew van Herick',
-    author_email='avanherick@gmail.com',
+    author='some_author',
+    author_email='some_author_email',
     license="Apache Software License",
     description='A lightweight package for creating Python project templates.',
-    long_description=_read_file('README.rst'),
+    long_description=open('README.rst').read(),
     extras_require={},
     classifiers=(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3 :: Only',
         # Prevents upload to PyPI, because it is not one of the known
-        # classifiers.
-        # 'Private :: Do Not Upload',
+        # classifiers.  This can and should be removed if you will
+        # be distributing you package to PyPI.
+        'Private :: Do Not Upload',
     ),
 )
 
