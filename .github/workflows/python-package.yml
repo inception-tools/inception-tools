@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest]
         python-version: [3.5, 3.6, 3.7, 3.8]
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
         uses: dschep/install-pipenv-action@v1
       - name: Install dependencies
         run: |
-          pipenv install --dev --skip-lock
+          pipenv install --dev --skip-lock --python ${{ matrix.python-version }}
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
