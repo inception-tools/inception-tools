@@ -34,12 +34,12 @@ class TestPyincept(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    # Something earlier than the current year.
-    _MOCK_NOW = datetime(1900, 1, 1)
-
     _PACKAGE_NAME = 'test_package_name'
     _AUTHOR = 'test_author'
     _AUTHOR_EMAIL = 'test_author_email'
+
+    # Something earlier than the current year.
+    _DATE = datetime(1900, 1, 1)
 
     ##############################
     # Class / static methods
@@ -67,7 +67,7 @@ class TestPyincept(PyinceptTestBase):
         Called before each method in this class with a name of the form
         test_*().
         """
-        mock_datetime.now.return_value = self._MOCK_NOW
+        mock_datetime.now.return_value = self._DATE
 
         # The project root directory should not already exist.  If it does,
         # something unexpected has happened, so raise.
