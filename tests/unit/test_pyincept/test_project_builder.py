@@ -32,10 +32,10 @@ class TestProjectBuilder(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'test_package_name'
-    _AUTHOR = 'test_author'
-    _AUTHOR_EMAIL = 'test_author_email'
-    _PROJECT_ROOT = 'test_project_root'
+    _PACKAGE_NAME = 'some_package_name'
+    _AUTHOR = 'some_author'
+    _AUTHOR_EMAIL = 'some_author_email'
+    _PROJECT_ROOT = 'some_project_root'
     _DATE = datetime(2020, 1, 1)
 
     ##############################
@@ -192,7 +192,7 @@ class TestProjectBuilder(PyinceptTestBase):
         file_path = os.path.join(
             'tests',
             'unit',
-            'test_package_name',
+            'test_some_package_name',
             '__init__.py'
         )
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
@@ -204,7 +204,7 @@ class TestProjectBuilder(PyinceptTestBase):
         file_path = os.path.join(
             'tests',
             'integration',
-            'test_package_name',
+            'test_some_package_name',
             '__init__.py'
         )
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
@@ -216,7 +216,7 @@ class TestProjectBuilder(PyinceptTestBase):
         file_path = os.path.join(
             'tests',
             'end_to_end',
-            'test_package_name',
+            'test_some_package_name',
             '__init__.py'
         )
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)

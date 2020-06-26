@@ -4,15 +4,15 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-# Unpublished Copyright 2020 test_author. All Rights Reserved.
+# Unpublished Copyright 2020 some_author. All Rights Reserved.
 #
 ###############################################################################
 
 ########################################
 # Build variables
 
-PROJECT_NAME=test_package_name
-PACKAGE_NAME=test_package_name
+PROJECT_NAME=some_package_name
+PACKAGE_NAME=some_package_name
 
 INDEX_SERVER=testpypi
 

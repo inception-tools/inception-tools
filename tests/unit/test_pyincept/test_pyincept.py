@@ -34,9 +34,9 @@ class TestPyincept(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'test_package_name'
-    _AUTHOR = 'test_author'
-    _AUTHOR_EMAIL = 'test_author_email'
+    _PACKAGE_NAME = 'some_package_name'
+    _AUTHOR = 'some_author'
+    _AUTHOR_EMAIL = 'some_author_email'
 
     # Something earlier than the current year.
     _DATE = datetime(1900, 1, 1)

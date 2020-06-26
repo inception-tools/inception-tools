@@ -58,7 +58,7 @@ class _ProjectFile(Enum):
         lambda package_name: os.path.join(
             'tests',
             'end_to_end',
-            package_name,
+            'test_{}'.format(package_name),
             '__init__.py'
         ),
     )
@@ -77,7 +77,7 @@ class _ProjectFile(Enum):
         lambda package_name: os.path.join(
             'tests',
             'integration',
-            package_name,
+            'test_{}'.format(package_name),
             '__init__.py'
         ),
     )
@@ -96,7 +96,7 @@ class _ProjectFile(Enum):
         lambda package_name: os.path.join(
             'tests',
             'unit',
-            package_name,
+            'test_{}'.format(package_name),
             '__init__.py'
         ),
     )

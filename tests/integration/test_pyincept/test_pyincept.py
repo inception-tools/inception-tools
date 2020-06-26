@@ -34,9 +34,9 @@ class TestPyincept(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'test_package_name'
-    _AUTHOR = 'test_author'
-    _AUTHOR_EMAIL = 'test_author_email'
+    _PACKAGE_NAME = 'some_package_name'
+    _AUTHOR = 'some_author'
+    _AUTHOR_EMAIL = 'some_author_email'
 
     # Something earlier than the current year.
     _DATE = datetime(1900, 1, 1)
@@ -194,7 +194,7 @@ class TestPyincept(PyinceptTestBase):
         file_path = os.path.join(
             'tests',
             'unit',
-            'test_package_name',
+            'test_some_package_name',
             '__init__.py'
         )
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
@@ -206,7 +206,7 @@ class TestPyincept(PyinceptTestBase):
         file_path = os.path.join(
             'tests',
             'integration',
-            'test_package_name',
+            'test_some_package_name',
             '__init__.py'
         )
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
@@ -218,7 +218,7 @@ class TestPyincept(PyinceptTestBase):
         file_path = os.path.join(
             'tests',
             'end_to_end',
-            'test_package_name',
+            'test_some_package_name',
             '__init__.py'
         )
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)

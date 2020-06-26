@@ -3,14 +3,14 @@
     setup.py
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Package distribution file for the test_package_name library.
+    Package distribution file for the some_package_name library.
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unpublished Copyright 1900 test_author. All Rights Reserved.
+    Unpublished Copyright 1900 some_author. All Rights Reserved.
 """
 
-__author__ = 'test_author'
+__author__ = 'some_author'
 
 import os
 
@@ -25,7 +25,7 @@ def _read_file(file_path):
 _dir = os.path.abspath(os.path.join(__file__, os.pardir))
 
 setup_params = dict(
-    name='test_package_name',
+    name='some_package_name',
     version='0.0.0',
     packages=setuptools.find_packages(exclude=['tests*']),
     entry_points={
@@ -33,7 +33,7 @@ setup_params = dict(
         # you can uncomment the lines below to make them available through
         # the distribution.
         "console_scripts": [
-            "test_package_name = test_package_name.test_package_name:main",
+            "some_package_name = some_package_name.some_package_name:main",
         ],
     },
     scripts=[],
@@ -52,8 +52,8 @@ setup_params = dict(
         '': ['*.txt', '*.rst', '*.cfg'],
     },
     include_package_data=True,
-    author='test_author',
-    author_email='test_author_email',
+    author='some_author',
+    author_email='some_author_email',
     license="Apache Software License",
     description='A lightweight package for creating Python project templates.',
     long_description=open('README.rst').read(),

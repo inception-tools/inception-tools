@@ -3,12 +3,12 @@
     ~~~~~~~~~~~~~~~~~~~~~~~
 
     Houses all test cases and utilities supporting unit testing of the
-    :py:mod:`test_package_name` project. This package is not intended to
+    :py:mod:`some_package_name` project. This package is not intended to
     be part of the distribution.
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unpublished Copyright 1900 test_author. All Rights Reserved.
+    Unpublished Copyright 1900 some_author. All Rights Reserved.
 """
 
-__author__ = 'test_author'
+__author__ = 'some_author'
