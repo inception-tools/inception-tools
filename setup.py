@@ -2,8 +2,11 @@
 """
     setup.py
     ~~~~~~~~~~~~~~~~~~~~~~~
-    Package distribution file for the pyincept package.
+
+    Package distribution file for the pyincept library.
+
     ~~~~~~~~~~~~~~~~~~~~~~~
+
     Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
 """
 
