@@ -56,7 +56,7 @@ setup_params = dict(
     extras_require={},
     classifiers=(
         'License :: OSI Approved :: Apache Software License',
-        'Operating System :: POSIX',
+        'Operating System :: OS Independent',
         'Programming Language :: Python :: 3 :: Only',
         # Prevents upload to PyPI, because it is not one of the known
         # classifiers.
