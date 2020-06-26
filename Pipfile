@@ -12,3 +12,6 @@ flake8 = "*"
 click = "*"
 pathvalidate = "*"
 jinja2 = "*"
+
+[requires]
+python_version = "3.8"
