@@ -18,7 +18,7 @@ Features:
 
 - Simple command-line invocation for creating shell Python projects,
   parameterized with project name, package names
-- Shell project includes a all standard project files including:
+- Shell project includes all standard project files including:
     - setup.py (configured with package name and standard dependencies)
     - Directories for unit, integration, and end-to-end tests
     - Makefile with a smattering of useful targets.
