@@ -61,7 +61,7 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 all: check install
 
 bump-version: lib-bump2version
-	bump2version $(BUMP_VERSION_OPTIONS) setup.py
+	bump2version $(BUMP_VERSION_OPTIONS)
 
 check: check-style check-tests
 
