@@ -65,7 +65,7 @@ check-style: lib-flake8
 	flake8 . --count --show-source --statistics
 
 check-tests:
-	python setup.py pytest
+	python setup.py test
 
 clean:
 	rm -f *.log
