@@ -61,9 +61,6 @@ setup_params = dict(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3 :: Only',
-        # Prevents upload to PyPI, because it is not one of the known
-        # classifiers.
-        # 'Private :: Do Not Upload',
     ),
 )
 
