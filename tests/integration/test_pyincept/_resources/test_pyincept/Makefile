@@ -81,7 +81,7 @@ init-clean:
 	pip freeze | xargs pip uninstall -y
 
 install:
-	python setup.py $(EGG_INFO) install
+	pipenv uninstall --dev
 
 maintainer-clean: archive-clean clean check-clean deploy-package-clean dist-clean
 	rm -rf $(EGG_DIR)
