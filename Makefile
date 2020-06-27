@@ -37,12 +37,11 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 
 .PHONY: \
 	all \
-	archive \
-	archive-clean \
 	check \
+	check-clean \
+	check-style \
+	check-tests \
 	clean \
-	deploy-package \
-	deploy-package-clean \
 	dist \
 	dist-clean \
 	dist-upload \
@@ -50,37 +49,26 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	init-dev \
 	init-clean \
 	install \
+	lib-flake8 \
+	lib-twine \
 	maintainer-clean \
 	uninstall
 
 all: check install
 
-archive:
-	git archive --format zip --output $(ARCHIVE_ZIP) master
-
-archive-clean:
-	rm -f $(ARCHIVE_ZIP)
-
-check:
-	python setup.py pytest
+check: check-style check-tests
 
 check-clean:
 	rm -rf $(PYTEST_CACHE_DIR)
 
+check-style: lib-flake8
+	flake8 . --count --show-source --statistics
+
+check-tests:
+	python setup.py pytest
+
 clean:
 	rm -f *.log
-
-deploy-package: archive dist
-	rm -rf $(DIST_PACKAGE_DIR) \
-	&& mkdir $(DIST_PACKAGE_DIR) \
-	&& cp ecg_monitor.cfg $(DIST_PACKAGE_DIR) \
-	&& cp log.cfg $(DIST_PACKAGE_DIR) \
-	&& cp $(DIST_DIR)/* $(DIST_PACKAGE_DIR) \
-	&& cp $(ARCHIVE_ZIP) $(DIST_PACKAGE_DIR) \
-	&& zip -r $(DIST_PACKAGE_DIR).zip $(DIST_PACKAGE_DIR)
-
-deploy-package-clean:
-	rm -rf $(DIST_PACKAGE_DIR) $(DIST_PACKAGE_DIR).zip
 
 dist:
 	python setup.py $(EGG_INFO) $(DIST_TARGETS)
@@ -88,7 +76,7 @@ dist:
 dist-clean:
 	rm -rf $(EGG_INFO_DIR) $(DIST_DIR) $(BUILD_DIR)
 
-dist-upload: dist
+dist-upload: dist lib-twine
 	twine upload $(DIST_UPLOAD_OPTIONS) $(DIST_DIR)/*
 
 init:
@@ -103,8 +91,15 @@ init-clean:
 install:
 	python setup.py $(EGG_INFO) install
 
+lib-flake8:
+	pip install --upgrade flake8
+
+lib-twine:
+	pip install --upgrade twine
+
 maintainer-clean: archive-clean clean check-clean deploy-package-clean dist-clean
 	rm -rf $(EGG_DIR)
 
 uninstall:
 	pip uninstall -y $(PROJECT_NAME)
+
