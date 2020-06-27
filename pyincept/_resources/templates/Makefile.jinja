@@ -39,12 +39,8 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 
 .PHONY: \
 	all \
-	archive \
-	archive-clean \
 	check \
 	clean \
-	deploy-package \
-	deploy-package-clean \
 	dist \
 	dist-clean \
 	dist-upload \
@@ -57,12 +53,6 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 
 all: check install
 
-archive:
-	git archive --format zip --output $(ARCHIVE_ZIP) master
-
-archive-clean:
-	rm -f $(ARCHIVE_ZIP)
-
 check:
 	python setup.py pytest
 
@@ -71,18 +61,6 @@ check-clean:
 
 clean:
 	rm -f *.log
-
-deploy-package: archive dist
-	rm -rf $(DIST_PACKAGE_DIR) \
-	&& mkdir $(DIST_PACKAGE_DIR) \
-	&& cp ecg_monitor.cfg $(DIST_PACKAGE_DIR) \
-	&& cp log.cfg $(DIST_PACKAGE_DIR) \
-	&& cp $(DIST_DIR)/* $(DIST_PACKAGE_DIR) \
-	&& cp $(ARCHIVE_ZIP) $(DIST_PACKAGE_DIR) \
-	&& zip -r $(DIST_PACKAGE_DIR).zip $(DIST_PACKAGE_DIR)
-
-deploy-package-clean:
-	rm -rf $(DIST_PACKAGE_DIR) $(DIST_PACKAGE_DIR).zip
 
 dist:
 	python setup.py $(EGG_INFO) $(DIST_TARGETS)
