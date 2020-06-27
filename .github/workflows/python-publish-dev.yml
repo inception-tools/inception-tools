@@ -39,9 +39,8 @@ jobs:
         # test PyPI server.
         echo REPO=${TWINE_REPOSITORY_URL} USERNAME=${TWINE_USERNAME}
         make maintainer-clean check dist-upload
-
     - name: Upload math result for job 1
-        uses: actions/upload-artifact@v1
-        with:
-          name: Distribution artifacts
-          path: dist/*
+      uses: actions/upload-artifact@v1
+      with:
+        name: Distribution artifacts
+        path: dist/*
