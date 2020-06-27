@@ -3,6 +3,10 @@
 
 name: Upload Python Package Development Version
 
+#on:
+#  schedule:
+#    - cron: '0 2 * * *' # run at 2 AM UTC
+
 on:
   push:
     branches: [ develop ]
@@ -26,7 +30,11 @@ jobs:
         pip install setuptools wheel twine
     - name: Build and publish
       env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
+        TWINE_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
       run: |
-        make check dist-upload TAG_BUILD=dev$GITHUB_RUN_NUMBER INDEX_SERVER=https://test.pypi.org/legacy/
+        # All of the DIST_UPLOAD_OPTIONS are set through the TWINE_*
+        # environment variables, so elliminate the default reference to the
+        # test PyPI server.
+        make maintainer-clean check dist-upload

@@ -14,20 +14,18 @@
 PROJECT_NAME=pyincept
 PACKAGE_NAME=pyincept
 
-INDEX_SERVER=testpypi
-
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
-TAG_BUILD=dev
-
-EGG_INFO=egg_info --tag-build=$(TAG_BUILD)
+EGG_INFO_OPTIONS=--tag-build=dev$$(date -u "+%Y%m%d%H%M%S")
+EGG_INFO=egg_info $(EGG_INFO_OPTIONS)
 EGG_DIR=.eggs
 EGG_INFO_DIR=$(PACKAGE_NAME).egg-info
 
+BUILD_DIR=build
+
 DIST_DIR=dist
 DIST_TARGETS=sdist bdist_wheel
-
-BUILD_DIR=build
+DIST_UPLOAD_OPTIONS=-r testpypi
 
 PYTEST_CACHE_DIR=.pytest_cache
 
@@ -91,7 +89,7 @@ dist-clean:
 	rm -rf $(EGG_INFO_DIR) $(DIST_DIR) $(BUILD_DIR)
 
 dist-upload: dist
-	twine upload --repository $(INDEX_SERVER) dist/*
+	twine upload $(DIST_UPLOAD_OPTIONS) $(DIST_DIR)/*
 
 init:
 	pipenv install
