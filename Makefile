@@ -23,6 +23,8 @@ EGG_INFO_DIR=$(PACKAGE_NAME).egg-info
 
 BUILD_DIR=build
 
+BUMP_VERSION_OPTIONS=patch
+
 DIST_DIR=dist
 DIST_TARGETS=sdist bdist_wheel
 DIST_UPLOAD_OPTIONS=-r testpypi
@@ -37,6 +39,7 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 
 .PHONY: \
 	all \
+	bump-version\
 	check \
 	check-clean \
 	check-style \
@@ -49,12 +52,16 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	init-clean \
 	init-dev \
 	install \
+	lib-bump2version \
 	lib-flake8 \
 	lib-twine \
 	maintainer-clean \
 	uninstall
 
 all: check install
+
+bump-version: lib-bump2version
+	bump2version $(BUMP_VERSION_OPTIONS) setup.py
 
 check: check-style check-tests
 
@@ -65,7 +72,7 @@ check-style: lib-flake8
 	flake8 . --count --show-source --statistics
 
 check-tests:
-	python setup.py pytest
+	python setup.py test
 
 clean:
 	rm -f *.log
@@ -90,6 +97,9 @@ init-dev:
 
 install:
 	python setup.py $(EGG_INFO) install
+
+lib-bump2version:
+	pip install --upgrade bump2version
 
 lib-flake8:
 	pip install --upgrade flake8
