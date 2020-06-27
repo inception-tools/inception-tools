@@ -51,7 +51,9 @@ class PyinceptTestBase(object):
         :param resource_name:
         :return:
         """
-        raise NotImplemented('This method must be implemented by subclasses.')
+        raise NotImplementedError(
+            'This method must be implemented by subclasses.'
+        )
 
     @classmethod
     def _get_file_content(cls, resource_path):
