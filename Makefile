@@ -46,8 +46,8 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	dist-clean \
 	dist-upload \
 	init \
-	init-dev \
 	init-clean \
+	init-dev \
 	install \
 	lib-flake8 \
 	lib-twine \
@@ -82,11 +82,11 @@ dist-upload: dist lib-twine
 init:
 	pipenv install
 
+init-clean:
+	pipenv uninstall --all
+
 init-dev:
 	pipenv install --dev
-
-init-clean:
-	pip freeze | xargs pip uninstall -y
 
 install:
 	python setup.py $(EGG_INFO) install
@@ -102,4 +102,3 @@ maintainer-clean: archive-clean clean check-clean deploy-package-clean dist-clea
 
 uninstall:
 	pip uninstall -y $(PROJECT_NAME)
-

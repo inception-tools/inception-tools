@@ -7,6 +7,7 @@ verify_ssl = true
 pytest = "*"
 pyhamcrest = "*"
 flake8 = "*"
+wheel = "*"
 twine = "*"
 
 [packages]
