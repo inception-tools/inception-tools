@@ -16,7 +16,7 @@ PACKAGE_NAME=pyincept
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
-EGG_INFO_OPTIONS=--tag-build=dev$$(date -u "+%Y%m%d%H%M%S")
+EGG_INFO_OPTIONS=--tag-build=dev
 EGG_INFO=egg_info $(EGG_INFO_OPTIONS)
 EGG_DIR=.eggs
 EGG_INFO_DIR=$(PACKAGE_NAME).egg-info

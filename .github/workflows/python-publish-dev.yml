@@ -3,15 +3,9 @@
 
 name: Upload Python Package Development Version
 
-#on:
-#  schedule:
-#    - cron: '0 2 * * *' # run at 2 AM UTC
-
 on:
-  push:
-    branches: [ develop ]
-  pull_request:
-    branches: [ develop ]
+  schedule:
+    - cron: '0 2 * * *' # run at 2 AM UTC
 
 jobs:
   deploy:
@@ -38,4 +32,4 @@ jobs:
         # environment variables, so elliminate the default reference to the
         # test PyPI server.
         echo REPO=${TWINE_REPOSITORY_URL} USERNAME=${TWINE_USERNAME}
-        make maintainer-clean check dist-upload
+        make dist-clean check dist-upload EGG_INFO_OPTIONS='--tag-date --tag-build=dev'
