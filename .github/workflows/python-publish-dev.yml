@@ -37,4 +37,5 @@ jobs:
         # All of the DIST_UPLOAD_OPTIONS are set through the TWINE_*
         # environment variables, so elliminate the default reference to the
         # test PyPI server.
+        echo REPO=${TWINE_REPOSITORY_URL}; USERNAME=${TWINE_USERNAME}
         make maintainer-clean check dist-upload
