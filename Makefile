@@ -23,7 +23,8 @@ EGG_INFO_DIR=$(PACKAGE_NAME).egg-info
 
 BUILD_DIR=build
 
-BUMP_VERSION_OPTIONS=patch
+BUMP_VERSION_PART=patch
+BUMP_VERSION_OPTIONS=--verbose
 
 DIST_DIR=dist
 DIST_TARGETS=sdist bdist_wheel
@@ -61,7 +62,7 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 all: check install
 
 bump-version: lib-bump2version
-	bump2version $(BUMP_VERSION_OPTIONS)
+	bumpversion $(BUMP_VERSION_OPTIONS) $(BUMP_VERSION_PART)
 
 check: check-style check-tests
 
