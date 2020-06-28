@@ -28,8 +28,4 @@ jobs:
         TWINE_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
       run: |
-        # All of the DIST_UPLOAD_OPTIONS are set through the TWINE_*
-        # environment variables, so elliminate the default reference to the
-        # test PyPI server.
-        echo REPO=${TWINE_REPOSITORY_URL} USERNAME=${TWINE_USERNAME}
-        make dist-clean check dist-upload EGG_INFO_OPTIONS='--tag-date --tag-build=dev'
+        make maintainer-clean check dist-upload EGG_INFO_OPTIONS='--tag-date --tag-build=dev'
