@@ -40,6 +40,7 @@ Download and install the latest version of this application from the Python
 package index (PyPI) as follows:
 
 ::
+
     pip install pyincept
 
 Note that ``pyincept`` has dependencies on the following packages:
@@ -91,7 +92,6 @@ This will create a shell project with the following structure:
             setup.py
 
 ``package_name`` (required)
-
     The package name that will used for your new project, e.g. ``pyincept``.
     This will be used to create for the name of the package, for the name of a
     stub entry point files, and in the names of test modules.    It will also
@@ -99,31 +99,27 @@ This will create a shell project with the following structure:
     event that it is omitted (see below).
 
 ``author`` (required)
-
     The name of the package author, e.g. 'Jane Doe'.  This will be used to fill
     in the ``__author__`` attribute in stub files, and in copyright
     attributions in header file comments.
 
 ``author_email`` (required)
-
     The email address of the author, e.g. 'jane.doe@pyincept.org'.  This will
     be used to fill in various locations in where a contact email is specified
     in the new project files, e.g. the `author_email` property in
     ``setup.cfg``.
 
-``[project_root]`` (optional)
-    **default: package_name**
-
+``[project_root]`` (optional) default: package_name
     The path to the directory under which your project should be installed,
     e.g. ``pyincept``.
 
-    Example `installing to a directory my_package in the current working
-    directory`::
+Example `installing to a directory my_package in the current working
+directory`::
 
-        pyincept my_package my_author my_author_email
+    pyincept my_package my_author my_author_email
 
-    Example `installing to a directory called my_project in the user's home
-    directory`::
+Example `installing to a directory called my_project in the user's home
+directory`::
 
         pyincept my_package my_author my_author_email ~/my_project
 
