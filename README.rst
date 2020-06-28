@@ -1,3 +1,4 @@
+========
 pyincept
 ========
 
@@ -120,6 +121,22 @@ This will create a shell project with the following structure:
     directory`::
 
         pyincept my_package my_author my_author_email ~/my_project
+
+Development
+===========
+
+Code style:
+
+``pyincept`` code should adhere to the `PEP 8`_ guidelines.
+
+.. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
+
+Versioning:
+
+``pyincept`` versioning uses semantic versioning and adheres to the guidelines
+specified `here`_.
+
+.. _`here`: https://semver.org/
 
 License
 =======
