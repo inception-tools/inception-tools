@@ -89,7 +89,7 @@ This will create a shell project with the following structure:
     The package name that will used for your new project, e.g. ``pyincept``.
     This will be used to create for the name of the package, for the name of a
     stub entry point files, and in the names of test modules.    It will also
-    be used as the relative path for the ``projcet_root`` argument in the
+    be used as the relative path for the ``project_root`` argument in the
     event that it is omitted (see below).
 
 ``author`` (required)
