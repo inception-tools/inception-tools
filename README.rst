@@ -1,18 +1,11 @@
 pyincept
 ========
 
+Incept a new Python project, ready to go, with a single command!
+
 A simple Python application designed to incept new Python project by creating
 a standardized project structure complete with shell directories and stub
 files, with package name, to start the project off.
-
-This project was created to fill what looked like a lack of standardized
-conventions practices for structuring Python projects, and out of the desire
-to avoid the need to manually create the same directory and file structures
-over and over again.
-
-If you come across this project and know of other project which accomplish
-similar goals, or of standards around Python project structure, would
-welcome hearing about them.  Shoot me an email at the address below.
 
 Features:
 
@@ -24,73 +17,60 @@ Features:
     - Makefile with a smattering of useful targets.
 - Sample project files, complete with a sample 'endpoint' file.
 
-Contributions and feedback are welcome using Github at:
-http://github.com/avanaherick/pyincept
+Latest Development Build:
 
-Note that `pytest` requires installation of the following packages:
-
-- click
-- pathvalidate
-- jinja2
+.. image:: https://github.com/avanherick/pyincept/workflows/Nightly%20Development%20Build/badge.svg
+  :target: https://github.com/avanherick/pyincept/tree/develop
 
 Installation
 ============
 
-#. `pip install pyincept`
-#. Invoke `pyincept` as follows
+Download and install the latest version of this application from the Python
+package index (PyPI) as follows:
 
 ::
+    pip install pyincept
 
-    `pyincept my_package 'Jane Doe Author' jane.doe@some-email.org`
+Note that ``pyincept`` has dependencies on the following packages:
 
-See 'Usage' below for additional information.
+- ``click``
+- ``jinja2``
 
-Configuration
-=============
-
-There are currently no further configuration steps necessary.  Future
-versions may enable the addition of more parameters.
-
-Documentation
-=============
-
-Since this is such a simple project, this README file is currently the only
-formal documentation.  If use of this project is not clear, or you believe
-additional more formal documentation would be beneficial, please send an
-email to the address below.
+These should be automatically installed by ``pip`` using the command-line
+above.
 
 Usage
 =====
 
-Once `pyincept` has been installed, you can create a new project shell as
+Once ``pyincept`` has been installed, you can create a new project shell as
 follows:
 
 ::
 
-    `pyincept my_package 'Jane Doe Author' jane.doe@some-email.org`
+    pyincept package_name author author email [project_root]
 
 This will create a shell project with the following structure:
 
 ::
 
     <working-dir>/
-        my_package/
-            my_package/
+        project_root/
+            package_name/
                 __init__.py
-                my_package.py
+                package_name.py
             tests/
                 __init__.py
                 end-to-end/
                     __init__.py
-                    test_my_package/
+                    test_package_name/
                         __init__.py
                 integration/
                     __init__.py
-                    test_my_package/
+                    test_package_name/
                         __init__.py
                 unit/
                     __init__.py
-                    test_my_package/
+                    test_package_name/
                         __init__.py
             LICENSE
             Makefile
@@ -99,14 +79,72 @@ This will create a shell project with the following structure:
             setup.cfg
             setup.py
 
-where many of the files are parameterize with the package name, author name,
-author email, etc.
+``package_name`` (required)
 
-Bugs & Contributions
-====================
+    The package name that will used for your new project, e.g. ``pyincept``.
+    This will be used to create for the name of the package, for the name of a
+    stub entry point files, and in the names of test modules.    It will also
+    be used as the relative path for the ``projcet_root`` argument in the
+    event that it is omitted (see below).
+
+``author`` (required)
+
+    The name of the package author, e.g. 'Jane Doe'.  This will be used to fill
+    in the ``__author__`` attribute in stub files, and in copyright
+    attributions in header file comments.
+
+``author_email`` (required)
+
+    The email address of the author, e.g. 'jane.doe@pyincept.org'.  This will
+    be used to fill in various locations in where a contact email is specified
+    in the new project files, e.g. the `author_email` property in
+    ``setup.cfg``.
+
+``[project_root]`` (optional)
+    **default: package_name**
+
+    The path to the directory under which your project should be installed,
+    e.g. ``pyincept``.
+
+    Example `installing to a directory my_package in the current working
+    directory`::
+
+        pyincept my_package my_author my_author_email
+
+    Example `installing to a directory called my_project in the user's home
+    directory`::
+
+        pyincept my_package my_author my_author_email ~/my_project
+
+License
+=======
+
+``pyincept`` is released under the Apache Software License - see the files
+``LICENSE`` for further details.
+
+Bugs, Contribution, and Feedback
+================================
+
+Contributions and feedback are welcome.
+
+This project was created to fill what looked like a lack of standardized
+conventions practices for structuring Python projects, and out of the desire
+to avoid the need to manually create the same directory and file structures
+over and over again.
+
+If you come across this project and know of other project which accomplish
+similar goals, or of standards around Python project structure, would
+welcome hearing about them.
 
 Please submit bugs, feature requests, and code changes using GitHub at:
-http://github.com/avanaherick/pyincept
+http://github.com/avanherick/pyincept
+
+Changes
+=======
+
+**v0.1.0**
+
+- Initial public version
 
 :author: Andrew van Herick
 :email: avanherick@gmail.com
