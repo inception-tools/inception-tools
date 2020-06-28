@@ -4,15 +4,15 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-# Unpublished Copyright {{date.year}} {{author}}. All Rights Reserved.
+# Unpublished Copyright 1900 some_author. All Rights Reserved.
 #
 ###############################################################################
 
 ########################################
 # Build variables
 
-PROJECT_NAME={{package_name}}
-PACKAGE_NAME={{package_name}}
+PROJECT_NAME=some_package_name
+PACKAGE_NAME=some_package_name
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.

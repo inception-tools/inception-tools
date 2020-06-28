@@ -4,30 +4,28 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-# Unpublished Copyright 2020 test_author. All Rights Reserved.
+# Unpublished Copyright 2020 some_author. All Rights Reserved.
 #
 ###############################################################################
 
 ########################################
 # Build variables
 
-PROJECT_NAME=test_package_name
-PACKAGE_NAME=test_package_name
-
-INDEX_SERVER=testpypi
+PROJECT_NAME=some_package_name
+PACKAGE_NAME=some_package_name
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
-TAG_BUILD=dev
-
-EGG_INFO=egg_info --tag-build=$(TAG_BUILD)
+EGG_INFO_OPTIONS=--tag-build=dev
+EGG_INFO=egg_info $(EGG_INFO_OPTIONS)
 EGG_DIR=.eggs
 EGG_INFO_DIR=$(PACKAGE_NAME).egg-info
 
+BUILD_DIR=build
+
 DIST_DIR=dist
 DIST_TARGETS=sdist bdist_wheel
-
-BUILD_DIR=build
+DIST_UPLOAD_OPTIONS=-r testpypi
 
 PYTEST_CACHE_DIR=.pytest_cache
 
@@ -39,50 +37,38 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 
 .PHONY: \
 	all \
-	archive \
-	archive-clean \
 	check \
+	check-clean \
+	check-style \
+	check-tests \
 	clean \
-	deploy-package \
-	deploy-package-clean \
 	dist \
 	dist-clean \
 	dist-upload \
 	init \
-	init-dev \
 	init-clean \
+	init-dev \
 	install \
+	lib-flake8 \
+	lib-twine \
 	maintainer-clean \
 	uninstall
 
 all: check install
 
-archive:
-	git archive --format zip --output $(ARCHIVE_ZIP) master
-
-archive-clean:
-	rm -f $(ARCHIVE_ZIP)
-
-check:
-	python setup.py pytest
+check: check-style check-tests
 
 check-clean:
 	rm -rf $(PYTEST_CACHE_DIR)
 
+check-style: lib-flake8
+	flake8 . --count --show-source --statistics
+
+check-tests:
+	python setup.py test
+
 clean:
 	rm -f *.log
-
-deploy-package: archive dist
-	rm -rf $(DIST_PACKAGE_DIR) \
-	&& mkdir $(DIST_PACKAGE_DIR) \
-	&& cp ecg_monitor.cfg $(DIST_PACKAGE_DIR) \
-	&& cp log.cfg $(DIST_PACKAGE_DIR) \
-	&& cp $(DIST_DIR)/* $(DIST_PACKAGE_DIR) \
-	&& cp $(ARCHIVE_ZIP) $(DIST_PACKAGE_DIR) \
-	&& zip -r $(DIST_PACKAGE_DIR).zip $(DIST_PACKAGE_DIR)
-
-deploy-package-clean:
-	rm -rf $(DIST_PACKAGE_DIR) $(DIST_PACKAGE_DIR).zip
 
 dist:
 	python setup.py $(EGG_INFO) $(DIST_TARGETS)
@@ -90,20 +76,26 @@ dist:
 dist-clean:
 	rm -rf $(EGG_INFO_DIR) $(DIST_DIR) $(BUILD_DIR)
 
-dist-upload: dist
-	twine upload --repository $(INDEX_SERVER) dist/*
+dist-upload: dist lib-twine
+	twine upload $(DIST_UPLOAD_OPTIONS) $(DIST_DIR)/*
 
 init:
 	pipenv install
 
+init-clean:
+	pipenv uninstall --all
+
 init-dev:
 	pipenv install --dev
 
-init-clean:
-	pip freeze | xargs pip uninstall -y
-
 install:
 	python setup.py $(EGG_INFO) install
+
+lib-flake8:
+	pip install --upgrade flake8
+
+lib-twine:
+	pip install --upgrade twine
 
 maintainer-clean: archive-clean clean check-clean deploy-package-clean dist-clean
 	rm -rf $(EGG_DIR)

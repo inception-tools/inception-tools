@@ -7,11 +7,12 @@ verify_ssl = true
 pytest = "*"
 pyhamcrest = "*"
 flake8 = "*"
+wheel = "*"
 twine = "*"
+bump2version = "*"
 
 [packages]
 click = "*"
-pathvalidate = "*"
 jinja2 = "*"
 
 [requires]
