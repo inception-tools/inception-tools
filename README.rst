@@ -12,11 +12,11 @@ Features:
 
 - Simple command-line invocation for creating shell Python projects,
   parameterized with project name, package names
-- Shell project includes all standard project files including:
+- Shell project includes all standard project files including\:
     - setup.py (configured with package name and standard dependencies)
     - Directories for unit, integration, and end-to-end tests
     - Makefile with a smattering of useful targets.
-- Sample project files, complete with a sample 'endpoint' file.
+- Sample project files, complete with a sample endpoint.
 
 Python Package Index:
 
@@ -127,15 +127,13 @@ Development
 ===========
 
 Code style:
-
-``pyincept`` code should adhere to the `PEP 8`_ guidelines.
+    ``pyincept`` code should adhere to the `PEP 8`_ guidelines.
 
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
 
 Versioning:
-
-``pyincept`` versioning uses semantic versioning and adheres to the guidelines
-specified `here`_.
+    ``pyincept`` versioning uses semantic versioning and adheres to the
+    guidelines specified `here`_.
 
 .. _`here`: https://semver.org/
 
