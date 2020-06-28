@@ -113,13 +113,13 @@ This will create a shell project with the following structure:
     The path to the directory under which your project should be installed,
     e.g. ``pyincept``.
 
-Example `installing to a directory my_package in the current working
-directory`::
+    Example `installing to a directory my_package in the current working
+    directory`::
 
-    pyincept my_package my_author my_author_email
+        pyincept my_package my_author my_author_email
 
-Example `installing to a directory called my_project in the user's home
-directory`::
+    Example `installing to a directory called my_project in the user's home
+    directory`::
 
         pyincept my_package my_author my_author_email ~/my_project
 
