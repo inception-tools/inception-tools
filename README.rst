@@ -126,6 +126,11 @@ This will create a shell project with the following structure:
 Development
 ===========
 
+Repository Management:
+    ``pyincept`` manages its repository using the `GitFlow`_ model.
+
+.. _`GitFlow`: https://nvie.com/posts/a-successful-git-branching-model/
+
 Code style:
     ``pyincept`` code should adhere to the `PEP 8`_ guidelines.
 
@@ -136,6 +141,12 @@ Versioning:
     guidelines specified `here`_.
 
 .. _`here`: https://semver.org/
+
+CI/CD:
+    - All builds are automated through GitHub actions.
+    - Development builds are executed against the ``develop`` branch.
+    - Beta builds are executed with each push to the ``master`` branch.
+    - Release builds are triggered by the creation of a release through GitHub.
 
 License
 =======
@@ -169,4 +180,4 @@ Changes
 
 :author: Andrew van Herick
 :email: avanherick@gmail.com
-:date: 2020-06-25
+:date: 2020-06-29
