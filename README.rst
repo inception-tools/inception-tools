@@ -123,6 +123,35 @@ This will create a shell project with the following structure:
 
         pyincept my_package my_author my_author_email ~/my_project
 
+License
+=======
+
+``pyincept`` is released under the Apache Software License - see the files
+``LICENSE`` for further details.
+
+Bugs, Contribution, and Feedback
+================================
+
+Contributions and feedback are welcome.  Contributions can be made by opening
+a pull request at the ``pyincept`` `repository`_ and tagging `@avanherick` for
+review.  Please see the `Development` section of this document for code style
+and branching guidelines.
+
+.. _`repository`: https://nvie.com/posts/a-successful-git-branching-model/
+
+This project was created to fill what looked like a lack of standardized
+conventions practices for structuring Python projects, and out of the desire
+to avoid the need to manually create the same directory and file structures
+over and over again.
+
+If you come across this project and know of other project which accomplish
+similar goals, or of documented standards around Python project structure,
+which differ from those implemented here, we would welcome hearing about them.
+
+Please submit feedback, bugs, feature requests, and code changes using GitHub
+at:
+http://github.com/avanherick/pyincept
+
 Development
 ===========
 
@@ -147,29 +176,6 @@ CI/CD:
     - Development builds are executed against the ``develop`` branch.
     - Beta builds are executed with each push to the ``master`` branch.
     - Release builds are triggered by the creation of a release through GitHub.
-
-License
-=======
-
-``pyincept`` is released under the Apache Software License - see the files
-``LICENSE`` for further details.
-
-Bugs, Contribution, and Feedback
-================================
-
-Contributions and feedback are welcome.
-
-This project was created to fill what looked like a lack of standardized
-conventions practices for structuring Python projects, and out of the desire
-to avoid the need to manually create the same directory and file structures
-over and over again.
-
-If you come across this project and know of other project which accomplish
-similar goals, or of standards around Python project structure, would
-welcome hearing about them.
-
-Please submit bugs, feature requests, and code changes using GitHub at:
-http://github.com/avanherick/pyincept
 
 Changes
 =======
