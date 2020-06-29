@@ -97,7 +97,7 @@ lib-flake8:
 lib-twine:
 	pip install --upgrade twine
 
-maintainer-clean: clean check-clean dist-clean
+maintainer-clean: clean check-clean dist-clean uninstall
 	rm -rf $(EGG_DIR)
 
 uninstall:
