@@ -17,6 +17,7 @@ from datetime import datetime
 
 from hamcrest import assert_that
 
+from pyincept.architype_parameters import ArchitypeParameters
 from pyincept.project_builder import ProjectBuilder
 from tests.pyincept_test_base import PyinceptTestBase
 
@@ -32,11 +33,13 @@ class TestProjectBuilder(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'some_package_name'
-    _AUTHOR = 'some_author'
-    _AUTHOR_EMAIL = 'some_author_email'
     _PROJECT_ROOT = 'some_project_root'
-    _DATE = datetime(2020, 1, 1)
+    _PARAMS = ArchitypeParameters(
+        'some_package_name',
+        'some_author',
+        'some_author_email',
+        datetime(2020, 1, 1)
+    )
 
     ##############################
     # Class / static methods
@@ -63,13 +66,7 @@ class TestProjectBuilder(PyinceptTestBase):
         Called before each method in this class with a name of the form
         test_*().
         """
-        self._builder = ProjectBuilder(
-            self._PACKAGE_NAME,
-            self._AUTHOR,
-            self._AUTHOR_EMAIL,
-            self._PROJECT_ROOT,
-            self._DATE
-        )
+        self._builder = ProjectBuilder(self._PROJECT_ROOT, self._PARAMS)
 
         # The project root directory should not already exist.  If it does,
         # something unexpected has happened, so raise.
@@ -145,8 +142,8 @@ class TestProjectBuilder(PyinceptTestBase):
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
         file_path = os.path.join(
-            self._PACKAGE_NAME,
-            '{}.py'.format(self._PACKAGE_NAME)
+            self._PARAMS.package_name,
+            '{}.py'.format(self._PARAMS.package_name)
         )
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
@@ -154,7 +151,7 @@ class TestProjectBuilder(PyinceptTestBase):
         """
         Unit test case for :py:method:`ProjectBuilder.build`.
         """
-        file_path = os.path.join(self._PACKAGE_NAME, '__init__.py')
+        file_path = os.path.join(self._PARAMS.package_name, '__init__.py')
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
     def test_build_creates_tests___init___file(self):
