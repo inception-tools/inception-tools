@@ -18,6 +18,7 @@ import os
 from pyincept.architype_parameters import ArchitypeParameters
 from pyincept.standard_file_renderer import StandardFileRenderer
 
+
 class ProjectBuilder(object):
     """
     This class is responsible for building the file directory structure for a
@@ -94,5 +95,3 @@ class ProjectBuilder(object):
         """
         for f in StandardFileRenderer:
             f.render_and_save(self._project_root, self._params)
-
-

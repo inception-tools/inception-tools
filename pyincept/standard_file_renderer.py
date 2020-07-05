@@ -19,7 +19,7 @@ from enum import Enum, EnumMeta
 from jinja2 import Template
 
 from pyincept.architype_parameters import ArchitypeParameters
-from pyincept.file_renderer import FileRenderer, BaseFileRenderer
+from pyincept.file_renderer import BaseFileRenderer
 
 _TEMPLATE_PATH = os.path.abspath(
     os.path.join(__file__, os.pardir, '_resources', 'templates')
