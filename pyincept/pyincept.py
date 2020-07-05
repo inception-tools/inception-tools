@@ -17,7 +17,7 @@ from datetime import datetime
 import click
 
 from pyincept.architype_parameters import ArchitypeParameters
-from pyincept.project_builder import ProjectBuilder
+from pyincept.standard_architype import StandardArchitype
 
 
 @click.command()
@@ -81,5 +81,5 @@ def main(package_name, author, author_email):
         author_email=author_email,
         date=datetime.now()
     )
-    builder = ProjectBuilder(package_name, params)
-    builder.build()
+    architype = StandardArchitype.PROJECT_ROOT
+    architype.build(root_dir=package_name, params=params)

@@ -84,12 +84,12 @@ class BaseArchitype(Architype):
     ) -> Iterable[str]:
         return tuple(r.path(root_path, params) for r in self._file_renderers)
 
-    def build(self, root_path: str, params: ArchitypeParameters) -> None:
+    def build(self, root_dir: str, params: ArchitypeParameters) -> None:
         """
         Builds the project structure using the :py:class:`FileRenderer`
         instances held by this instance.
 
-        :param root_path: the root directory of the project structure to be
+        :param root_dir: the root directory of the project structure to be
         created
 
         :param params: the :py:class:`ArchitypeParameters` to use as context
@@ -98,4 +98,4 @@ class BaseArchitype(Architype):
         :return: :py:const:`None`
         """
         for r in self._file_renderers:
-            r.render_and_save(root_path, params)
+            r.render_and_save(root_dir, params)
