@@ -16,6 +16,7 @@ __author__ = 'Andrew van Herick'
 import os
 
 from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.architype import BaseArchitype
 from pyincept.standard_file_renderer import StandardFileRenderer
 
 
@@ -26,7 +27,11 @@ class ProjectBuilder(object):
     behavior provided by the :py:func:`pyincept.incept.main` function.
     """
 
-    def __init__(self, root_dir: str, params: ArchitypeParameters) -> None:
+    def __init__(
+            self,
+            root_dir: str,
+            params: ArchitypeParameters
+    ) -> None:
         """
         Class initializer method.
 
@@ -37,6 +42,7 @@ class ProjectBuilder(object):
         content of generated files
         """
         super().__init__()
+        self._architype = BaseArchitype(tuple(StandardFileRenderer))
         self._params = params
         self._project_root = root_dir
 
