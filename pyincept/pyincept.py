@@ -16,7 +16,8 @@ from datetime import datetime
 
 import click
 
-from pyincept.project_builder import ProjectBuilder
+from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.standard_architype import StandardArchitype
 
 
 @click.command()
@@ -74,11 +75,11 @@ def main(package_name, author, author_email):
     package metadata and in the auto-generated boiler-plate text of
     README.rst file.
     """
-    builder = ProjectBuilder(
+    params = ArchitypeParameters(
         package_name=package_name,
         author=author,
         author_email=author_email,
-        project_root=package_name,
         date=datetime.now()
     )
-    builder.build()
+    architype = StandardArchitype.PROJECT_ROOT
+    architype.build(root_dir=package_name, params=params)

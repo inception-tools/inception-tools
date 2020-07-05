@@ -1,8 +1,8 @@
 """
-    test_project_builder
+    test_standard_architype
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unit test cases for the :py:mod:`pyincept.project_builder` module.
+    Unit test cases for the :py:mod:`standard_architype` module.
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -17,11 +17,12 @@ from datetime import datetime
 
 from hamcrest import assert_that
 
-from pyincept.project_builder import ProjectBuilder
+from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.standard_architype import StandardArchitype
 from tests.pyincept_test_base import PyinceptTestBase
 
 
-class TestProjectBuilder(PyinceptTestBase):
+class TestStandardArchitype(PyinceptTestBase):
     """
     Unit test for class :py:class:`ProjectBuilder`.
     """
@@ -32,11 +33,13 @@ class TestProjectBuilder(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'some_package_name'
-    _AUTHOR = 'some_author'
-    _AUTHOR_EMAIL = 'some_author_email'
     _PROJECT_ROOT = 'some_project_root'
-    _DATE = datetime(2020, 1, 1)
+    _PARAMS = ArchitypeParameters(
+        'some_package_name',
+        'some_author',
+        'some_author_email',
+        datetime(2020, 1, 1)
+    )
 
     ##############################
     # Class / static methods
@@ -48,7 +51,7 @@ class TestProjectBuilder(PyinceptTestBase):
                 __file__,
                 os.pardir,
                 '_resources',
-                'test_project_builder',
+                'test_standard_architype',
                 resource_name
             )
         )
@@ -63,19 +66,11 @@ class TestProjectBuilder(PyinceptTestBase):
         Called before each method in this class with a name of the form
         test_*().
         """
-        self._builder = ProjectBuilder(
-            self._PACKAGE_NAME,
-            self._AUTHOR,
-            self._AUTHOR_EMAIL,
-            self._PROJECT_ROOT,
-            self._DATE
-        )
-
         # The project root directory should not already exist.  If it does,
         # something unexpected has happened, so raise.
         self._validate_path_doesnt_exist(self._PROJECT_ROOT)
 
-        self._builder.build()
+        StandardArchitype.PROJECT_ROOT.build(self._PROJECT_ROOT, self._PARAMS)
 
     def teardown(self):
         """
@@ -91,7 +86,7 @@ class TestProjectBuilder(PyinceptTestBase):
 
     def test_build_creates_root_directory(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         assert_that(
             os.path.isdir(self._PROJECT_ROOT),
@@ -100,94 +95,94 @@ class TestProjectBuilder(PyinceptTestBase):
 
     def test_build_creates_license_file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         self._validate_output_file_correct(self._PROJECT_ROOT, 'LICENSE')
 
     def test_build_creates_readme_file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         self._validate_output_file_correct(self._PROJECT_ROOT, 'README.rst')
 
     def test_build_creates_setup_cfg(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         self._validate_output_file_correct(self._PROJECT_ROOT, 'setup.cfg')
 
     def test_build_creates_setup_py(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         self._validate_output_file_correct(self._PROJECT_ROOT, 'setup.py')
 
     def test_build_creates_log_cfg(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         self._validate_output_file_correct(self._PROJECT_ROOT, 'log.cfg')
 
     def test_build_creates_makefile(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         self._validate_output_file_correct(self._PROJECT_ROOT, 'Makefile')
 
     def test_build_creates_pipfile(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         self._validate_output_file_correct(self._PROJECT_ROOT, 'Pipfile')
 
     def test_build_creates_entry_point_file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join(
-            self._PACKAGE_NAME,
-            '{}.py'.format(self._PACKAGE_NAME)
+            self._PARAMS.package_name,
+            '{}.py'.format(self._PARAMS.package_name)
         )
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
     def test_build_creates_package___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
-        file_path = os.path.join(self._PACKAGE_NAME, '__init__.py')
+        file_path = os.path.join(self._PARAMS.package_name, '__init__.py')
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
     def test_build_creates_tests___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join('tests', '__init__.py')
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
     def test_build_creates_unit_tests___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join('tests', 'unit', '__init__.py')
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
     def test_build_creates_integration_tests___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join('tests', 'integration', '__init__.py')
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
     def test_build_creates_end_to_end_tests___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join('tests', 'end_to_end', '__init__.py')
         self._validate_output_file_correct(self._PROJECT_ROOT, file_path)
 
     def test_build_creates_unit_tests_package___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join(
             'tests',
@@ -199,7 +194,7 @@ class TestProjectBuilder(PyinceptTestBase):
 
     def test_build_creates_integration_tests_package___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join(
             'tests',
@@ -211,7 +206,7 @@ class TestProjectBuilder(PyinceptTestBase):
 
     def test_build_creates_end_to_end_tests_package___init___file(self):
         """
-        Unit test case for :py:method:`ProjectBuilder.build`.
+        Unit test case for :py:method:`StandardArchitype.build`.
         """
         file_path = os.path.join(
             'tests',
