@@ -170,4 +170,7 @@ class StandardArchitype(BaseArchitype, Enum, metaclass=_ABCEnumMeta):
     PROJECT_ROOT = (_ProjectRootRenderers,)
 
     def __init__(self, file_renderers: Iterable[FileRenderer]) -> None:
-        super().__init__(file_renderers)
+        # Referencing BaseArchitype directly for the sake of supporting Python
+        # 3.5, which does not seem to handle call to super() in the context of
+        # multiple inheritance as gracefully as the later versions do.
+        BaseArchitype.__init__(self, file_renderers)
