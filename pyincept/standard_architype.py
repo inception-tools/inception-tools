@@ -21,7 +21,8 @@ from jinja2 import Template
 
 from pyincept.architype import BaseArchitype
 from pyincept.architype_parameters import ArchitypeParameters
-from pyincept.file_renderer import BaseFileRenderer, FileRenderer
+from pyincept.base_file_renderer import BaseFileRenderer
+from pyincept.file_renderer import FileRenderer
 
 _TEMPLATE_PATH = os.path.abspath(
     os.path.join(__file__, os.pardir, '_resources', 'templates')
