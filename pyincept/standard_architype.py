@@ -19,10 +19,10 @@ from typing import Iterable
 
 from jinja2 import Template
 
-from pyincept.architype import BaseArchitype
+from pyincept.architype_base import ArchitypeBase
 from pyincept.architype_parameters import ArchitypeParameters
-from pyincept.base_file_renderer import BaseFileRenderer
 from pyincept.file_renderer import FileRenderer
+from pyincept.file_renderer_base import FileRendererBase
 
 _TEMPLATE_PATH = os.path.abspath(
     os.path.join(__file__, os.pardir, '_resources', 'templates')
@@ -34,7 +34,7 @@ class _ABCEnumMeta(ABCMeta, EnumMeta):
     pass
 
 
-class _ProjectRootRenderers(BaseFileRenderer, Enum, metaclass=_ABCEnumMeta):
+class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
     # Enumerates the :py:`FileRenderer` instances used by
     # :py:attr:`StandardArchitype.PROJECT_ROOT`.
 
@@ -130,7 +130,7 @@ class _ProjectRootRenderers(BaseFileRenderer, Enum, metaclass=_ABCEnumMeta):
         return self._template.render(**params._asdict())
 
 
-class StandardArchitype(BaseArchitype, Enum, metaclass=_ABCEnumMeta):
+class StandardArchitype(ArchitypeBase, Enum, metaclass=_ABCEnumMeta):
     """
     Enumerates the standard :py:class:`Architype` instances available
     across the system.
@@ -171,7 +171,7 @@ class StandardArchitype(BaseArchitype, Enum, metaclass=_ABCEnumMeta):
     PROJECT_ROOT = (_ProjectRootRenderers,)
 
     def __init__(self, file_renderers: Iterable[FileRenderer]) -> None:
-        # Referencing BaseArchitype directly for the sake of supporting Python
+        # Referencing ArchitypeBase directly for the sake of supporting Python
         # 3.5, which does not seem to handle call to super() in the context of
         # multiple inheritance as gracefully as the later versions do.
-        BaseArchitype.__init__(self, file_renderers)
+        ArchitypeBase.__init__(self, file_renderers)
