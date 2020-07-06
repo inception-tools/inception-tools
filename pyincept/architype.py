@@ -1,10 +1,11 @@
 """
-    architype
-    ~~~~~~~~~~~~~~~~~~~~~~~
-    Houses the declaration of :py:class:`architype` along with
-    supporting classes, functions, and attributes.
+architype
+~~~~~~~~~
 
-    Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
+Houses the declaration of :py:class:`architype` along with supporting
+classes, functions, and attributes.
+
+Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
@@ -31,13 +32,10 @@ class Architype(ABC):
     ) -> Iterable[str]:
         """
         The paths of every file that will be created by :py:class:`build`.
-
         :param root_path: the root directory of the project structure to be
         created
-
         :param params: the :py:class:`ArchitypeParameters` to use as context
         for the project to be built
-
         :return: :py:const:`None`
         """
         raise NotImplementedError()
@@ -47,13 +45,10 @@ class Architype(ABC):
         """
         Builds the project structure for this instance.  See the class-level
         documentation of :py:class:`Architype` for more information.
-
         :param root_path: the root directory of the project structure to be
         created
-
         :param params: the :py:class:`ArchitypeParameters` to use as context
         for the project to be built
-
         :return: :py:const:`None`
         """
         raise NotImplementedError()

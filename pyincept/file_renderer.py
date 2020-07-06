@@ -1,11 +1,11 @@
 """
-    file_renderer
-    ~~~~~~~~~~~~~~~~~~~~~~~
+file_renderer
+~~~~~~~~~~~~~~~~~~~~~~~
 
-    Houses the declaration of :py:class:`FileRenderer` along with
-    supporting classes, functions, and attributes.
+Houses the declaration of :py:class:`FileRenderer` along with supporting
+classes, functions, and attributes.
 
-    Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
+Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
@@ -25,12 +25,9 @@ class FileRenderer(ABC):
         """
         Returns the full path (possibly non-absolute) to the file that will
         be saved by :py:meth:`render_and_save`.
-
         :param root_dir: the root directory argument for
         :py:meth:`render_and_save`
-
         :param params: the parameters argument for :py:meth:`render_and_save`
-
         :return: the path
         """
         raise NotImplementedError()
@@ -40,11 +37,9 @@ class FileRenderer(ABC):
         """
         Returns the subpath, under the root directory, of the file to be
         saved by :py:meth:`render_and_save`.
-
         :param params: the :py:`ArchitypeParameter`s to use as context when
         creating the subpath, e.g., when storing files whose sub-path might be
         determined by the package name.
-
         :return: the path
         """
         raise NotImplementedError()
@@ -54,10 +49,8 @@ class FileRenderer(ABC):
         """
         Returns the content of the file to be saved by
         :py:meth:`render_and_save`.
-
         :param params: the :py:`ArchitypeParameter`s to use as context when
         building the content
-
         :return: the content of the file to be saved by
         :py:meth:`render_and_save`
         """
@@ -73,13 +66,10 @@ class FileRenderer(ABC):
         appropriated directory under the root directory.  The content of the
         file as well as the subpath under the root directory may be,
         but need-not be, determined by the parameters argument.
-
         :param root_dir: the root directory under which the file should be
         saved
-
         :param params: the parameters used to determine the saved file
         content and possibly the subpath under the root directory
-
         :return: :py:const:`None`
         """
         raise NotImplementedError()
