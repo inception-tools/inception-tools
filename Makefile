@@ -124,4 +124,4 @@ maintainer-clean: clean check-clean dist-clean uninstall
 	rm -rf $(EGG_DIR)
 
 uninstall:
-	pip uninstall -y $(PROJECT_NAME)
+	pip freeze | grep $(PROJECT_NAME) | xargs pip uninstall -y
