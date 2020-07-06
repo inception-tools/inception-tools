@@ -4,7 +4,7 @@
     Houses the declaration of :py:class:`architype` along with
     supporting classes, functions, and attributes.
     ~~~~~~~~~~~~~~~~~~~~~~~
-    Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
+    Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'

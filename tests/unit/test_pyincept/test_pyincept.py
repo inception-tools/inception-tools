@@ -6,7 +6,7 @@
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
+    Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
@@ -136,5 +136,5 @@ class TestPyincept(PyinceptTestBase):
         """
         dir_path = os.path.join(self._PACKAGE_NAME, 'setup.py')
         content = self._get_file_content(dir_path)
-        substring = 'Copyright {}'.format(self._DATE.year)
+        substring = 'Copyright (c) {}'.format(self._DATE.year)
         assert_that(content, contains_string(substring))
