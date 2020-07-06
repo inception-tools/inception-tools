@@ -57,5 +57,3 @@ class Architype(ABC):
         :return: :py:const:`None`
         """
         raise NotImplementedError()
-
-
