@@ -21,8 +21,8 @@ from jinja2 import Template
 
 from pyincept.architype import ArchitypeBase
 from pyincept.architype_parameters import ArchitypeParameters
-from pyincept.base_file_renderer import BaseFileRenderer
 from pyincept.file_renderer import FileRenderer
+from pyincept.file_renderer_base import FileRendererBase
 
 _TEMPLATE_PATH = os.path.abspath(
     os.path.join(__file__, os.pardir, '_resources', 'templates')
@@ -34,7 +34,7 @@ class _ABCEnumMeta(ABCMeta, EnumMeta):
     pass
 
 
-class _ProjectRootRenderers(BaseFileRenderer, Enum, metaclass=_ABCEnumMeta):
+class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
     # Enumerates the :py:`FileRenderer` instances used by
     # :py:attr:`StandardArchitype.PROJECT_ROOT`.
 

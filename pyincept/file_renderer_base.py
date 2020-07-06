@@ -1,8 +1,8 @@
 """
-    base_file_renderer
+    file_renderer_base
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Houses the declaration of :py:class:`BaseFileRenderer` along with
+    Houses the declaration of :py:class:`FileRendererBase` along with
     supporting classes, functions, and attributes.
 
     ~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,7 +20,7 @@ from pyincept.architype_parameters import ArchitypeParameters
 from pyincept.file_renderer import FileRenderer
 
 
-class BaseFileRenderer(FileRenderer):
+class FileRendererBase(FileRenderer):
     """
     This class provides default implementations of several of the methods in
     :py:class:`FileRender` whose results are derivable from the return
