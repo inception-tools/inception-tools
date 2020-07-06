@@ -60,7 +60,7 @@ class Architype(ABC):
         raise NotImplementedError()
 
 
-class BaseArchitype(Architype):
+class ArchitypeBase(Architype):
     """
     A base implementation of :py:class:`Architype` that provides basic
     implementations of :py:meth:`Architype.build` and
