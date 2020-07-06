@@ -11,13 +11,17 @@
 
 __author__ = 'Andrew van Herick'
 
+import logging
 import os
 import shutil
+from contextlib import closing
 from datetime import datetime
+from io import StringIO
+from logging import StreamHandler
 from unittest import mock
 
 from click.testing import CliRunner
-from hamcrest import assert_that, contains_string
+from hamcrest import assert_that, contains_string, is_, starts_with
 
 from pyincept import pyincept
 from tests.pyincept_test_base import PyinceptTestBase
@@ -73,8 +77,8 @@ class TestPyincept(PyinceptTestBase):
         # something unexpected has happened, so raise.
         self._validate_path_doesnt_exist(self._PACKAGE_NAME)
 
-        runner = CliRunner()
-        self.result = runner.invoke(
+        self._runner = CliRunner()
+        self._result = self._runner.invoke(
             pyincept.main,
             (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
@@ -138,3 +142,49 @@ class TestPyincept(PyinceptTestBase):
         content = self._get_file_content(dir_path)
         substring = 'Copyright (c) {}'.format(self._DATE.year)
         assert_that(content, contains_string(substring))
+
+    def test_main_leaves_exit_status_0_on_success(self):
+        """
+        Unit test case for :py:method:`pyincept.main`.
+        """
+        assert_that(self._result.exit_code, is_(0))
+
+    @mock.patch('pyincept.pyincept._main')
+    def test_main_leaves_exit_status_1_on_unhandled_error(self, mock__main):
+        """
+        Unit test case for :py:method:`pyincept.main`.
+        """
+        mock__main.side_effect = ValueError('Some test exception.')
+
+        result = self._runner.invoke(
+            pyincept.main,
+            (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+        )
+
+        assert_that(result.exit_code, is_(1))
+
+    @mock.patch('pyincept.pyincept._logger')
+    @mock.patch('pyincept.pyincept._main')
+    def test_main_logs_unhandled_errors(self, mock__main, mock__logger):
+        """
+        Unit test case for :py:method:`pyincept.main`.
+        """
+
+        mock__main.side_effect = ValueError('Some test exception.')
+
+        with closing(StringIO()) as sio:
+            stream_handler = StreamHandler(sio)
+            logger = logging.getLogger('test_pyincept_mock_logger')
+            logger.addHandler(stream_handler)
+            mock__logger.return_value = logger
+            self._runner.invoke(
+                pyincept.main,
+                (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            )
+
+            actual = sio.getvalue()
+
+        expected = 'Unexpected exception: package_name=some_package_name, ' \
+                   'author=some_author, author_email=some_author_email\n'
+
+        assert_that(actual, starts_with(expected))

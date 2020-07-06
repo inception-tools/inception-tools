@@ -12,12 +12,31 @@
 
 __author__ = 'Andrew van Herick'
 
+import logging
 from datetime import datetime
+from logging.config import fileConfig
 
 import click
 
 from pyincept.architype_parameters import ArchitypeParameters
 from pyincept.standard_architype import StandardArchitype
+
+fileConfig('log.cfg', disable_existing_loggers=False)
+
+
+def _logger():
+    return logging.getLogger(__file__)
+
+
+def _main(package_name, author, author_email):
+    params = ArchitypeParameters(
+        package_name=package_name,
+        author=author,
+        author_email=author_email,
+        date=datetime.now()
+    )
+    architype = StandardArchitype.PROJECT_ROOT
+    architype.build(root_dir=package_name, params=params)
 
 
 @click.command()
@@ -30,7 +49,7 @@ def main(package_name, author, author_email):
 
         pyincept my_package <author-name> <author-email>
 
-    Invoking the command line above will result in the creation of a
+    Invoking the command line above will _result in the creation of a
     directory with the following structure:
 
     \b
@@ -75,11 +94,10 @@ def main(package_name, author, author_email):
     package metadata and in the auto-generated boiler-plate text of
     README.rst file.
     """
-    params = ArchitypeParameters(
-        package_name=package_name,
-        author=author,
-        author_email=author_email,
-        date=datetime.now()
-    )
-    architype = StandardArchitype.PROJECT_ROOT
-    architype.build(root_dir=package_name, params=params)
+    try:
+        _main(package_name, author, author_email)
+    except Exception:
+        m = 'Unexpected exception: package_name={}, author={}, author_email={}'
+        msg = m.format(package_name, author, author_email)
+        _logger().exception(msg)
+        raise
