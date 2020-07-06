@@ -4,7 +4,7 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-# Unpublished Copyright 1900 some_author. All Rights Reserved.
+# Unpublished Copyright (c) 1900 some_author. All Rights Reserved.
 #
 ###############################################################################
 
