@@ -21,7 +21,7 @@ from logging import StreamHandler
 from unittest import mock
 
 from click.testing import CliRunner
-from hamcrest import assert_that, contains_string, is_
+from hamcrest import assert_that, contains_string, is_, starts_with
 
 from pyincept import pyincept
 from tests.pyincept_test_base import PyinceptTestBase
@@ -184,22 +184,7 @@ class TestPyincept(PyinceptTestBase):
 
             actual = sio.getvalue()
 
-        expected = \
-            'Unexpected exception: package_name=some_package_name, ' \
-            'author=some_author, author_email=some_author_email\n' \
-            'Traceback (most recent call last):\n' \
-            '  File "/Users/avanherick/PycharmProjects/pyincept/pyincept' \
-            '/pyincept.py", line 98, in main\n' \
-            '    _main(package_name, author, author_email)\n' \
-            '  File "/Users/avanherick/.pyenv/versions/3.8.1/lib/python3.8' \
-            '/unittest/mock.py", line 1075, in __call__\n' \
-            '    return self._mock_call(*args, **kwargs)\n' \
-            '  File "/Users/avanherick/.pyenv/versions/3.8.1/lib/python3.8' \
-            '/unittest/mock.py", line 1079, in _mock_call\n' \
-            '    return self._execute_mock_call(*args, **kwargs)\n' \
-            '  File "/Users/avanherick/.pyenv/versions/3.8.1/lib/python3.8' \
-            '/unittest/mock.py", line 1134, in _execute_mock_call\n' \
-            '    raise effect\n' \
-            'ValueError: Some test exception.\n'
+        expected = 'Unexpected exception: package_name=some_package_name, ' \
+                   'author=some_author, author_email=some_author_email\n'
 
-        assert_that(actual, is_(expected))
+        assert_that(actual, starts_with(expected))
