@@ -5,8 +5,6 @@
     Houses the declaration of :py:class:`FileRendererBase` along with
     supporting classes, functions, and attributes.
 
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
     Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
 """
 

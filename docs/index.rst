@@ -1,9 +1,11 @@
 Welcome to pyincept's documentation!
 ====================================
 
-.. automodule:: pyincept
-    :members:
-    :show-inheritance:
+This formal documentation is a work in progress.  Please be patient while we
+get it up and running.  In the meantime, the best source of documentation is
+available at the ``pyincept`` `repository homepage`_.
+
+.. _`repository homepage`: https://github.com/avanherick/pyincept/
 
 .. toctree::
    :maxdepth: 2
@@ -15,3 +17,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

@@ -1,9 +1,10 @@
 """
     file_renderer
     ~~~~~~~~~~~~~~~~~~~~~~~
+
     Houses the declaration of :py:class:`FileRenderer` along with
     supporting classes, functions, and attributes.
-    ~~~~~~~~~~~~~~~~~~~~~~~
+
     Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 

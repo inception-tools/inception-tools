@@ -5,8 +5,6 @@
     Main entry point commend line script.  See :py:func:`main` for details of
     how to invoke this script.
 
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
     Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
