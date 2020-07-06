@@ -19,7 +19,7 @@ from typing import Iterable
 
 from jinja2 import Template
 
-from pyincept.architype import ArchitypeBase
+from pyincept.architype_base import ArchitypeBase
 from pyincept.architype_parameters import ArchitypeParameters
 from pyincept.file_renderer import FileRenderer
 from pyincept.file_renderer_base import FileRendererBase
