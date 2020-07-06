@@ -137,7 +137,7 @@ a pull request at the ``pyincept`` `repository`_ and tagging `@avanherick` for
 review.  Please see the `Development` section of this document for code style
 and branching guidelines.
 
-.. _`repository`: https://nvie.com/posts/a-successful-git-branching-model/
+.. _`repository`: https://github.com/avanherick/pyincept/
 
 This project was created to fill what looked like a lack of standardized
 conventions practices for structuring Python projects, and out of the desire
