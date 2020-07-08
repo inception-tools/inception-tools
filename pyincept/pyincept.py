@@ -19,14 +19,13 @@ import click
 from pyincept.architype_parameters import ArchitypeParameters
 from pyincept.standard_architype import StandardArchitype
 
-fileConfig('log.cfg', disable_existing_loggers=False)
-
 
 def _logger():
     return logging.getLogger(__file__)
 
 
 def _main(package_name, author, author_email):
+    fileConfig('log.cfg', disable_existing_loggers=False)
     params = ArchitypeParameters(
         package_name=package_name,
         author=author,
