@@ -1,9 +1,10 @@
 """
     __init__.py
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~
+
     The :py:mod:`pyincept` package contains the root-level distributable
     source code for the `pyincept` project.
-    ~~~~~~~~~~~~~~~~~~~~~~~
+
     Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 

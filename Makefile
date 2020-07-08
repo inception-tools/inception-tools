@@ -49,6 +49,10 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	dist \
 	dist-clean \
 	dist-upload \
+	docs \
+	docs-clean \
+	docs-rst \
+	docs-rst-clean \
 	init \
 	init-clean \
 	init-dev \
@@ -90,6 +94,18 @@ dist-clean:
 dist-upload: dist lib-twine
 	twine upload $(DIST_UPLOAD_OPTIONS) $(DIST_DIR)/*
 
+docs: docs-rst
+	@$(MAKE) -C docs html
+
+docs-clean: docs-rst-clean
+	@$(MAKE) -C docs clean
+
+docs-rst:
+	sphinx-apidoc -o ./docs/_modules ./pyincept
+
+docs-rst-clean:
+	rm -rf ./docs/_modules/*
+
 init:
 	pipenv install
 
@@ -120,7 +136,7 @@ lib-flake8:
 lib-twine:
 	pip install --upgrade twine
 
-maintainer-clean: clean check-clean dist-clean uninstall
+maintainer-clean: clean check-clean dist-clean docs-clean uninstall
 	rm -rf $(EGG_DIR)
 
 uninstall:

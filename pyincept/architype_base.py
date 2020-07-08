@@ -1,12 +1,11 @@
 """
-    architype_base
-    ~~~~~~~~~~~~~~~~~~~~~~~
+architype_base
+~~~~~~~~~~~~~~
 
-    Houses the declaration of :py:class:`ArchitypeBase` along with
-    supporting classes, functions, and attributes.
+Houses the declaration of :py:class:`ArchitypeBase` along with supporting
+classes, functions, and attributes.
 
-    ~~~~~~~~~~~~~~~~~~~~~~~
-    Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
+Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
@@ -28,7 +27,6 @@ class ArchitypeBase(Architype):
     def __init__(self, file_renderers: Iterable[FileRenderer]) -> None:
         """
         Class initializer.
-
         :param file_renderers: a set of :py:class:`FileRenderer` instances
         used by :py:class:`build` to create project structure.
         """
@@ -46,13 +44,10 @@ class ArchitypeBase(Architype):
         """
         Builds the project structure using the :py:class:`FileRenderer`
         instances held by this instance.
-
         :param root_dir: the root directory of the project structure to be
         created
-
         :param params: the :py:class:`ArchitypeParameters` to use as context
         for the project to be built
-
         :return: :py:const:`None`
         """
         for r in self._file_renderers:
