@@ -1,6 +1,6 @@
 """
 file_renderer
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 Houses the declaration of :py:class:`FileRenderer` along with supporting
 classes, functions, and attributes.
@@ -37,9 +37,9 @@ class FileRenderer(ABC):
         """
         Returns the subpath, under the root directory, of the file to be
         saved by :py:meth:`render_and_save`.
-        :param params: the :py:`ArchitypeParameter`s to use as context when
-        creating the subpath, e.g., when storing files whose sub-path might be
-        determined by the package name.
+        :param params: the :py:class:`ArchitypeParameters` to use as context
+        when creating the subpath, e.g., when storing files whose sub-path
+        might be determined by the package name.
         :return: the path
         """
         raise NotImplementedError()
@@ -49,8 +49,8 @@ class FileRenderer(ABC):
         """
         Returns the content of the file to be saved by
         :py:meth:`render_and_save`.
-        :param params: the :py:`ArchitypeParameter`s to use as context when
-        building the content
+        :param params: the :py:class:`ArchitypeParameters` to use as context
+        when building the content
         :return: the content of the file to be saved by
         :py:meth:`render_and_save`
         """
