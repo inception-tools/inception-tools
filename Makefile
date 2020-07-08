@@ -98,13 +98,13 @@ docs: docs-rst
 	@$(MAKE) -C docs html
 
 docs-clean: docs-rst-clean
-	@$(MAKE) -C docs clean
+	rm -rf ./docs/_build/
 
 docs-rst:
 	sphinx-apidoc -o ./docs/_modules ./pyincept
 
 docs-rst-clean:
-	rm -rf ./docs/_modules
+	rm -rf ./docs/_modules/
 
 init:
 	pipenv install
