@@ -43,7 +43,7 @@ class TestPyincept(PyinceptTestBase):
     _AUTHOR_EMAIL = 'some_author_email'
 
     # Something earlier than the current year.
-    _DATE = datetime(1900, 1, 1)
+    _DATE = datetime(2000, 1, 1)
 
     ##############################
     # Class / static methods

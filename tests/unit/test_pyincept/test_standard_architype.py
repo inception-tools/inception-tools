@@ -38,7 +38,7 @@ class TestStandardArchitype(PyinceptTestBase):
         'some_package_name',
         'some_author',
         'some_author_email',
-        datetime(2020, 1, 1)
+        datetime(2000, 1, 1)
     )
 
     ##############################

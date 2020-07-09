@@ -4,8 +4,6 @@ standard_architype
 
 Houses the declaration of :py:class:`StandardArchitype` along with
 supporting classes, functions, and attributes.
-
-Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'

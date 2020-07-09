@@ -57,4 +57,4 @@ http://github.com/<github-org>/some_package_name
 
 :author: some_author
 :email: some_author_email
-:date: 1900-01-01
+:date: 2000-01-01

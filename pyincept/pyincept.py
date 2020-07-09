@@ -4,11 +4,12 @@ pyincept
 
 Main entry point commend line script.  See :py:func:`main` for details of
 how to invoke this script.
-
-Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
+__copyright__ = \
+    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 import logging
 from datetime import datetime

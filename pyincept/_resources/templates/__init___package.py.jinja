@@ -1,17 +1,15 @@
 """
-    __init__.py
-    ~~~~~~~~~~~~~~~~~~~~~~~
+{{package_name}}
+{{'~' * package_name|length}}
 
-    The :py:mod:`{{package_name}}` package contains the root-level
-    distributable source code for the `{{package_name}}` project.
-
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
-    Unpublished Copyright (c) {{date.year}} {{author}}. All Rights Reserved.
-
+The :py:mod:`{{package_name}}` package contains the root-level distributable
+source code for the `{{package_name}}` project.
 """
 
 __author__ = '{{author}}'
+__copyright__ = \
+    'Unpublished Copyright (c) {{date.year}} {{author}}. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 from pkg_resources import get_distribution, DistributionNotFound
 

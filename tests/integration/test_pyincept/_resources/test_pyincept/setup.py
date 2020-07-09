@@ -7,7 +7,7 @@
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unpublished Copyright (c) 1900 some_author. All Rights Reserved.
+    Unpublished Copyright (c) 2000 some_author. All Rights Reserved.
 """
 
 __author__ = 'some_author'

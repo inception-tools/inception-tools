@@ -4,11 +4,12 @@ architype_parameters
 
 Houses the declaration of :py:class:`ArchitypeParameters` along with
 supporting classes, functions, and attributes.
-
-Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
+__copyright__ = \
+    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 from collections import namedtuple
 
