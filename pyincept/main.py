@@ -1,6 +1,6 @@
 """
-pyincept
-~~~~~~~~~~~~~~~~~~~~~~~
+main
+~~~~
 
 Main entry point commend line script.  See :py:func:`main` for details of
 how to invoke this script.

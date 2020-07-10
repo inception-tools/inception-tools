@@ -1,8 +1,8 @@
 """
-    test_pyincept.py
+    test_main.py
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unit test cases for the :py:mod:`pyincept.pyincept` module.
+    Unit test cases for the :py:mod:`pyincept.main` module.
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -19,11 +19,11 @@ from unittest import mock
 from click.testing import CliRunner
 from hamcrest import assert_that
 
-from pyincept import pyincept
+from pyincept import main
 from tests.pyincept_test_base import PyinceptTestBase
 
 
-class TestPyincept(PyinceptTestBase):
+class TestMain(PyinceptTestBase):
     """
     Unit test for class :py:mod:`pyincept`.
     """
@@ -51,7 +51,7 @@ class TestPyincept(PyinceptTestBase):
                 __file__,
                 os.pardir,
                 '_resources',
-                'test_pyincept',
+                'test_main',
                 resource_name
             )
         )
@@ -61,7 +61,7 @@ class TestPyincept(PyinceptTestBase):
 
     # Instance set up / tear down
 
-    @mock.patch('pyincept.pyincept.datetime')
+    @mock.patch('pyincept.main.datetime')
     def setup(self, mock_datetime):
         """
         Called before each method in this class with a name of the form
@@ -75,7 +75,7 @@ class TestPyincept(PyinceptTestBase):
 
         runner = CliRunner()
         self.result = runner.invoke(
-            pyincept.main,
+            main.main,
             (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
 
@@ -146,10 +146,7 @@ class TestPyincept(PyinceptTestBase):
         """
         Unit test case for :py:method:`pyincept.main`.
         """
-        file_path = os.path.join(
-            self._PACKAGE_NAME,
-            '{}.py'.format(self._PACKAGE_NAME)
-        )
+        file_path = os.path.join(self._PACKAGE_NAME, 'main.py')
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
 
     def test_main_creates_package___init___file(self):
