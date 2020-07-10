@@ -2,6 +2,12 @@
 pyincept
 ========
 
+.. image:: https://github.com/avanherick/pyincept/workflows/Release%20Build/badge.svg
+  :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Release+Build%22
+
+.. image:: https://github.com/avanherick/pyincept/workflows/Development%20Build/badge.svg
+  :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Development+Build%22
+
 Incept a new Python project, ready to go, with a single command!
 
 A simple Python application designed to incept new Python project by creating
@@ -20,18 +26,11 @@ Features:
 
 Python Package Index:
 
-.. image:: https://github.com/avanherick/pyincept/workflows/Release%20Build/badge.svg
-  :target: https://test.pypi.org/project/pyincept/
+https://pypi.org/project/pyincept/
 
-Nightly development build:
+GitHub Repository:
 
-.. image:: https://github.com/avanherick/pyincept/workflows/Development%20Build/badge.svg
-  :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Development+Build%22
-
-Latest development code:
-
-.. image:: https://github.com/avanherick/pyincept/workflows/Development%20test%20suite/badge.svg
-  :target: https://github.com/avanherick/pyincept/tree/develop
+https://github.com/avanherick/pyincept
 
 Installation
 ============
