@@ -1,15 +1,14 @@
 """
     test_architype_base
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~
 
     Unit test cases for the :py:mod:`architype_base` module.
-
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
-    Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
+__copyright__ = \
+    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 import os
 import shutil

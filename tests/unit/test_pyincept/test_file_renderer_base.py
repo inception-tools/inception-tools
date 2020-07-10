@@ -3,13 +3,12 @@
     ~~~~~~~~~~~~~~~~~~~~~~~
 
     Unit test cases for the :py:mod:`file_renderer_base` module.
-
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
-    Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
+__copyright__ = \
+    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 import os
 import shutil

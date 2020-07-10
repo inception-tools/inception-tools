@@ -1,16 +1,16 @@
 """
     pyincept_test_base
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     Houses the declaration of :py:class:`PyinceptTestBase` along with
     supporting classes, functions, and attributes.
-
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
-    Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
+__copyright__ = \
+    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
+
 
 import os
 from abc import abstractmethod

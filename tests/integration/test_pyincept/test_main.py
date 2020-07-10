@@ -1,15 +1,14 @@
 """
-    test_main.py
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    test_main
+    ~~~~~~~~~
 
     Unit test cases for the :py:mod:`pyincept.main` module.
-
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
-    Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
+__copyright__ = \
+    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 import os
 import shutil
