@@ -123,7 +123,7 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
         return self._subpath(params)
 
     def render(self, params):
-        return self._template.render(**params._asdict())
+        return self._template.render(**params.as_dict())
 
 
 class StandardArchitype(ArchitypeBase, Enum, metaclass=_ABCEnumMeta):
