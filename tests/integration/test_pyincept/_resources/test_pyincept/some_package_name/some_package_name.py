@@ -19,7 +19,6 @@ from logging.config import fileConfig
 
 import click
 
-
 @click.command()
 @click.argument('message')
 def main(message):
