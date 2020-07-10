@@ -21,8 +21,8 @@ class ArchitypeParameters(
     )
 ):
     """
-    A container class that responsible for grouping the parameters used to create a
-    project directory structure from an :py:class:`Architype`.
+    A container class that responsible for grouping the parameters used to
+    create a project directory structure from an :py:class:`Architype`.
 
     Instances of this class are immutable.
     """
