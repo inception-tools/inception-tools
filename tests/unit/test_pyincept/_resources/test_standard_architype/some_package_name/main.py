@@ -1,6 +1,6 @@
 """
-some_package_name
-~~~~~~~~~~~~~~~~~
+main
+~~~~
 
 Main entry point commend line script for the some_package_name project.
 

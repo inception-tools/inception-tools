@@ -139,10 +139,7 @@ class TestStandardArchitype(PyinceptTestBase):
         """
         Unit test case for :py:method:`StandardArchitype.build`.
         """
-        file_path = os.path.join(
-            self._PARAMS.package_name,
-            '{}.py'.format(self._PARAMS.package_name)
-        )
+        file_path = os.path.join(self._PARAMS.package_name, 'main.py')
         self._validate_output_file_correct(self._ROOT_DIR, file_path)
 
     def test_build_creates_package___init___file(self):

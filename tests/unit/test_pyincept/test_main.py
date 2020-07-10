@@ -1,8 +1,8 @@
 """
-    test_pyincept.py
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    test_main.py
+    ~~~~~~~~~~~~
 
-    Unit test cases for the :py:mod:`pyincept.pyincept` module.
+    Unit test cases for the :py:mod:`pyincept.main` module.
 
     ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -23,11 +23,11 @@ from unittest import mock
 from click.testing import CliRunner
 from hamcrest import assert_that, contains_string, is_, starts_with
 
-from pyincept import pyincept
+from pyincept import main
 from tests.pyincept_test_base import PyinceptTestBase
 
 
-class TestPyincept(PyinceptTestBase):
+class TestMain(PyinceptTestBase):
     """
     Unit test for class :py:mod:`pyincept`.
     """
@@ -65,7 +65,7 @@ class TestPyincept(PyinceptTestBase):
 
     # Instance set up / tear down
 
-    @mock.patch('pyincept.pyincept.datetime')
+    @mock.patch('pyincept.main.datetime')
     def setup(self, mock_datetime):
         """
         Called before each method in this class with a name of the form
@@ -79,7 +79,7 @@ class TestPyincept(PyinceptTestBase):
 
         self._runner = CliRunner()
         self._result = self._runner.invoke(
-            pyincept.main,
+            main.main,
             (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
 
@@ -149,7 +149,7 @@ class TestPyincept(PyinceptTestBase):
         """
         assert_that(self._result.exit_code, is_(0))
 
-    @mock.patch('pyincept.pyincept._main')
+    @mock.patch('pyincept.main._main')
     def test_main_leaves_exit_status_1_on_unhandled_error(self, mock__main):
         """
         Unit test case for :py:method:`pyincept.main`.
@@ -157,14 +157,14 @@ class TestPyincept(PyinceptTestBase):
         mock__main.side_effect = ValueError('Some test exception.')
 
         result = self._runner.invoke(
-            pyincept.main,
+            main.main,
             (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
 
         assert_that(result.exit_code, is_(1))
 
-    @mock.patch('pyincept.pyincept._logger')
-    @mock.patch('pyincept.pyincept._main')
+    @mock.patch('pyincept.main._logger')
+    @mock.patch('pyincept.main._main')
     def test_main_logs_unhandled_errors(self, mock__main, mock__logger):
         """
         Unit test case for :py:method:`pyincept.main`.
@@ -178,7 +178,7 @@ class TestPyincept(PyinceptTestBase):
             logger.addHandler(stream_handler)
             mock__logger.return_value = logger
             self._runner.invoke(
-                pyincept.main,
+                main.main,
                 (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
             )
 

@@ -34,11 +34,6 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
     # Enumerates the :py:`FileRenderer` instances used by
     # :py:attr:`StandardArchitype.PROJECT_ROOT`.
 
-    ENTRY_POINT = (
-        'entry_point.py.jinja',
-        lambda b: os.path.join(b.package_name, '{}.py'.format(b.package_name))
-    )
-
     INIT_PACKAGE = (
         '__init___package.py.jinja',
         lambda b: os.path.join(b.package_name, '__init__.py')
@@ -97,6 +92,8 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
     LICENSE = ('LICENSE.apache.jinja', lambda b: 'LICENSE')
 
     LOG_CFG = ('log.cfg.jinja', lambda b: 'log.cfg')
+
+    MAIN = ('main.py.jinja', lambda b: os.path.join(b.package_name, 'main.py'))
 
     MAKEFILE = ('Makefile.jinja', lambda b: 'Makefile')
 
