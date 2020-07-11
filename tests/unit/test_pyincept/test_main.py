@@ -41,6 +41,8 @@ class TestMain(PyinceptTestBase):
     _AUTHOR = 'some_author'
     _AUTHOR_EMAIL = 'some_author_email'
 
+    _EXCEPTION = ValueError('Some test exception.')
+
     # Something earlier than the current year.
     _DATE = datetime(2000, 1, 1)
 
@@ -106,7 +108,7 @@ class TestMain(PyinceptTestBase):
         """
         Unit test case for :py:method:`main.build`.
         """
-        mock__main.side_effect = ValueError('Some test exception.')
+        mock__main.side_effect = self._EXCEPTION
 
         result = self._runner.invoke(
             main.build,
@@ -175,7 +177,7 @@ class TestMain(PyinceptTestBase):
         """
         Unit test case for :py:method:`main.build`.
         """
-        mock__main.side_effect = ValueError('Some test exception.')
+        mock__main.side_effect = self._EXCEPTION
 
         result = self._runner.invoke(
             main.build,
@@ -190,8 +192,7 @@ class TestMain(PyinceptTestBase):
         """
         Unit test case for :py:method:`main.build`.
         """
-
-        mock__main.side_effect = ValueError('Some test exception.')
+        mock__main.side_effect = self._EXCEPTION
 
         with closing(StringIO()) as sio:
             stream_handler = StreamHandler(sio)
