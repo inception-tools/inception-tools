@@ -11,6 +11,23 @@ pyincept
 .. image:: https://github.com/avanherick/pyincept/workflows/Development%20Test%20Suite/badge.svg
   :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Development+Test+Suite%22
 
+Under Construction
+===========================
+
+Hello and welcome to the PyIncept project!
+
+This project is currently under construction.  Please be patient and check
+back periodically to see progress. In the meantime, you can see where the
+project is headed by checking out the documentation (also in progress) below.
+
+The goal of this project is to create, foster, and disseminate solid
+conventions for Python project structure through the propagation and reuse
+of project architypes, developed and submitted by the community, which can
+be used as templates for automatically setting up new Python projects.
+
+Documentation
+===========================
+
 Incept a new Python project, ready to go, with a single command!
 
 A simple Python application designed to incept new Python project by creating
