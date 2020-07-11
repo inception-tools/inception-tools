@@ -1,6 +1,6 @@
 """
 architype_parameters
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 Houses the declaration of :py:class:`ArchitypeParameters` along with
 supporting classes, functions, and attributes.
@@ -31,6 +31,6 @@ class ArchitypeParameters(
         """
         Returns a dictionary representation of this instance, wherein each
         named attribute is a key in the dictionary returned.
-        :return: the dictionary representing instance
+        :return: the dictionary representing this instance
         """
         return self._asdict()
