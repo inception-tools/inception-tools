@@ -12,7 +12,7 @@ pyincept
   :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Development+Test+Suite%22
 
 Under Construction
-===========================
+==================
 
 Hello and welcome to the PyIncept project!
 
@@ -26,7 +26,7 @@ of project architypes, developed and submitted by the community, which can
 be used as templates for automatically setting up new Python projects.
 
 Documentation
-===========================
+=============
 
 Incept a new Python project, ready to go, with a single command!
 
