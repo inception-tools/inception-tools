@@ -22,10 +22,18 @@ import click
 
 @click.command()
 @click.argument('message')
-def main(message):
+def log_test(message):
     fileConfig('log.cfg', disable_existing_loggers=False)
     getLogger(__file__).debug('Logged with DEBUG: {}'.format(message))
     getLogger(__file__).info('Logged with INFO: {}'.format(message))
     getLogger(__file__).warning('Logged with WARNING: {}'.format(message))
     getLogger(__file__).error('Logged with ERROR: {}'.format(message))
     getLogger(__file__).critical('Logged with CRITICAL: {}'.format(message))
+
+
+@click.group()
+def cli():
+    pass
+
+
+cli.add_command(log_test)

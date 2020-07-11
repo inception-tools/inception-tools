@@ -4,7 +4,7 @@ test = pytest
 [metadata]
 name = {{package_name}}
 version = 0.0.0
-url = https://github.com/<organization>/{{package_name}}/
+url = https://github.com/{{github_org}}/{{package_name}}/
 author = {{author}}
 author_email = {{author_email}}
 description = Insert your project description here.
@@ -37,11 +37,10 @@ setup_requires=
 
 [options.entry_points]
 console_scripts =
-    pyincept = pyincept.pyincept:main
+    {{package_name}} = {{package_name}}.main:cli
 
 [options.package_data]
-* = *.txt, '*.rst, *.cfg
-pyincept = _resources/templates/*.jinja
+* = *.txt, *.rst, *.cfg
 
 [options.packages.find]
 exclude = tests*

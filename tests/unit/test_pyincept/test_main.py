@@ -145,16 +145,16 @@ class TestMain(PyinceptTestBase):
         """
         dir_path = os.path.join(self._PACKAGE_NAME, 'setup.py')
         content = self._get_file_content(dir_path)
-        substring = "author='{}'".format(self._AUTHOR)
+        substring = "__author__ = '{}'".format(self._AUTHOR)
         assert_that(content, contains_string(substring))
 
     def test_main_maps_author_email(self):
         """
         Unit test case for :py:method:`main.build`.
         """
-        dir_path = os.path.join(self._PACKAGE_NAME, 'setup.py')
+        dir_path = os.path.join(self._PACKAGE_NAME, 'setup.cfg')
         content = self._get_file_content(dir_path)
-        substring = "author_email='{}'".format(self._AUTHOR_EMAIL)
+        substring = "author_email = {}".format(self._AUTHOR_EMAIL)
         assert_that(content, contains_string(substring))
 
     def test_main_maps_date(self):
