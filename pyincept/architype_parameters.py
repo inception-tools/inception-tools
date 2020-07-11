@@ -29,7 +29,8 @@ class ArchitypeParameters(
 
     def as_dict(self) -> dict:
         """
-        :return: a dictionary representation of this instance, wherein each
-        named attribute is a key in the dictionary returned
+        Returns a dictionary representation of this instance, wherein each
+        named attribute is a key in the dictionary returned.
+        :return: the dictionary representing instance
         """
         return self._asdict()

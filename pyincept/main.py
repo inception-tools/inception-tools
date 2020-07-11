@@ -1,6 +1,6 @@
 """
 build
-~~~~
+~~~~~
 
 Main entry point commend line script.  See :py:func:`cli` for details of
 how to invoke this script.
