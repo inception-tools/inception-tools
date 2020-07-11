@@ -1,8 +1,8 @@
 """
-main
+build
 ~~~~
 
-Main entry point commend line script.  See :py:func:`main` for details of
+Main entry point commend line script.  See :py:func:`cli` for details of
 how to invoke this script.
 """
 
@@ -41,11 +41,12 @@ def _main(package_name, author, author_email):
 @click.argument('package_name')
 @click.argument('author')
 @click.argument('author_email')
-def main(package_name, author, author_email):
+def build(package_name, author, author_email):
     """
-     Main entry point commend line script.  Command line syntax:
+     Builds a new project structure with the given package name.  Command line
+     syntax:
 
-        pyincept my_package <author-name> <author-email>
+        pyincept build <package-name> <author-name> <author-email>
 
     Invoking the command line above will _result in the creation of a
     directory with the following structure:
@@ -99,3 +100,24 @@ def main(package_name, author, author_email):
         msg = m.format(package_name, author, author_email)
         _logger().exception(msg)
         raise
+
+
+@click.group()
+def cli():
+    """
+    Main command-line application for the pyincept package.  This
+    application can be used to access various commands listed below.  For
+    example to build a new project called 'my_package', use the following
+    command:
+
+        pyincept build <package-name> <author-name> <author-email>
+
+    For additional help using any command, use the help for the command as
+    follows
+
+        pyincept <command> --help
+    """
+    pass
+
+
+cli.add_command(build)
