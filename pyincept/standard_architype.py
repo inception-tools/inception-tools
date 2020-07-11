@@ -20,8 +20,14 @@ from pyincept.architype_parameters import ArchitypeParameters
 from pyincept.file_renderer import FileRenderer
 from pyincept.file_renderer_base import FileRendererBase
 
-_TEMPLATE_PATH = os.path.abspath(
-    os.path.join(__file__, os.pardir, 'data', 'architypes')
+_ARCHITYPE_DIR = os.path.abspath(
+    os.path.join(
+        __file__,
+        os.pardir,
+        'data',
+        'archetypes',
+        'pyincept-architype-standard'
+    )
 )
 
 
@@ -107,7 +113,7 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
 
     @classmethod
     def _get_template(cls, template_name) -> Template:
-        template_path = os.path.join(_TEMPLATE_PATH, template_name)
+        template_path = os.path.join(_ARCHITYPE_DIR, template_name)
         with open(template_path) as f:
             content = f.read()
             return Template(content, keep_trailing_newline=True)
