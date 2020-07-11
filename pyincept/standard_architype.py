@@ -21,7 +21,7 @@ from pyincept.file_renderer import FileRenderer
 from pyincept.file_renderer_base import FileRendererBase
 
 _TEMPLATE_PATH = os.path.abspath(
-    os.path.join(__file__, os.pardir, 'data', 'templates')
+    os.path.join(__file__, os.pardir, 'data', 'architypes')
 )
 
 
