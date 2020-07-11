@@ -94,6 +94,28 @@ class TestMain(PyinceptTestBase):
 
     # Test cases
 
+    def test_main_emits_nothing_on_successful_execution(self):
+        """
+        Unit test case for :py:method:`pyincept.main`.
+        """
+        assert_that(self._result.stdout_bytes, is_(b''))
+        assert_that(self._result.stderr_bytes, is_(None))
+
+    @mock.patch('pyincept.main._main')
+    def test_main_emits_nothing_for_unhandled_exception(self, mock__main):
+        """
+        Unit test case for :py:method:`pyincept.main`.
+        """
+        mock__main.side_effect = ValueError('Some test exception.')
+
+        result = self._runner.invoke(
+            main.main,
+            (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+        )
+
+        assert_that(result.stdout_bytes, is_(b''))
+        assert_that(result.stderr_bytes, is_(None))
+
     def test_main_maps_project_root(self):
         """
         Unit test case for :py:method:`pyincept.main`.
