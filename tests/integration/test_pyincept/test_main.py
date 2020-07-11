@@ -74,8 +74,8 @@ class TestMain(PyinceptTestBase):
 
         runner = CliRunner()
         self.result = runner.invoke(
-            main.main,
-            (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            main.cli,
+            ('build', self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
 
     def teardown(self):
@@ -92,7 +92,7 @@ class TestMain(PyinceptTestBase):
 
     def test_main_creates_root_directory(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         assert_that(
             os.path.isdir(self._PACKAGE_NAME),
@@ -101,91 +101,91 @@ class TestMain(PyinceptTestBase):
 
     def test_main_creates_license_file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         self._validate_output_file_correct(self._PACKAGE_NAME, 'LICENSE')
 
     def test_main_creates_readme_file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         self._validate_output_file_correct(self._PACKAGE_NAME, 'README.rst')
 
     def test_main_creates_setup_cfg(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         self._validate_output_file_correct(self._PACKAGE_NAME, 'setup.cfg')
 
     def test_main_creates_setup_py(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         self._validate_output_file_correct(self._PACKAGE_NAME, 'setup.py')
 
     def test_main_creates_log_cfg(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         self._validate_output_file_correct(self._PACKAGE_NAME, 'log.cfg')
 
     def test_main_creates_makefile(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`pyincept.main.build`.
         """
         self._validate_output_file_correct(self._PACKAGE_NAME, 'Makefile')
 
     def test_main_creates_pipfile(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         self._validate_output_file_correct(self._PACKAGE_NAME, 'Pipfile')
 
     def test_main_creates_entry_point_file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join(self._PACKAGE_NAME, 'main.py')
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
 
     def test_main_creates_package___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join(self._PACKAGE_NAME, '__init__.py')
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
 
     def test_main_creates_tests___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join('tests', '__init__.py')
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
 
     def test_main_creates_unit_tests___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join('tests', 'unit', '__init__.py')
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
 
     def test_main_creates_integration_tests___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join('tests', 'integration', '__init__.py')
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
 
     def test_main_creates_end_to_end_tests___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join('tests', 'end_to_end', '__init__.py')
         self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
 
     def test_main_creates_unit_tests_package___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join(
             'tests',
@@ -197,7 +197,7 @@ class TestMain(PyinceptTestBase):
 
     def test_main_creates_integration_tests_package___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join(
             'tests',
@@ -209,7 +209,7 @@ class TestMain(PyinceptTestBase):
 
     def test_main_creates_end_to_end_tests_package___init___file(self):
         """
-        Unit test case for :py:method:`pyincept.main`.
+        Unit test case for :py:method:`main.build`.
         """
         file_path = os.path.join(
             'tests',
