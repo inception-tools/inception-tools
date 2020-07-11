@@ -62,6 +62,7 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	install \
 	lib-bump2version \
 	lib-flake8 \
+	lib-sphinx \
 	lib-twine \
 	maintainer-clean \
 	uninstall
@@ -98,9 +99,9 @@ docs: docs-rst
 	@$(MAKE) -C docs html
 
 docs-clean: docs-rst-clean
-	@$(MAKE) -C docs clean
+	rm -rf ./docs/_build/*
 
-docs-rst:
+docs-rst: lib-sphinx
 	sphinx-apidoc -o ./docs/_modules ./pyincept
 
 docs-rst-clean:
@@ -132,6 +133,9 @@ lib-bump2version:
 
 lib-flake8:
 	pip install --upgrade flake8
+
+lib-sphinx:
+	pip install --upgrade sphinx
 
 lib-twine:
 	pip install --upgrade twine
