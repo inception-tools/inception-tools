@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8]
 
     steps:
       - uses: actions/checkout@v2
@@ -24,15 +24,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install pipenv
-        uses: dschep/install-pipenv-action@v1
       - name: Install dependencies
         run: |
-          pipenv install --dev --skip-lock --python ${{ matrix.python-version }}
-      - name: Lint with flake8
+          python -m pip install --upgrade pip
+          pip install --upgrade setuptools
+      - name: Run quality checks
         run: |
-          # stop the build if there are Python syntax errors or undefined names
-          pipenv run flake8 . --count --show-source --statistics
-      - name: Test with pytest
-        run: |
-          pipenv run pytest -v tests
+          make maintainer-clean check
