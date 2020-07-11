@@ -49,7 +49,7 @@ class TestStandardArchitype(PyinceptTestBase):
             os.path.join(
                 __file__,
                 os.pardir,
-                '_resources',
+                'data',
                 'test_standard_architype',
                 resource_name
             )
