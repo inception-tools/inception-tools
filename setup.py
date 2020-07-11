@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 """
     setup.py
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~
 
     Package distribution file for the pyincept library.
-
-    ~~~~~~~~~~~~~~~~~~~~~~~
-
-    Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 """
 
 __author__ = 'Andrew van Herick'
+__copyright__ = \
+    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 import os
 
