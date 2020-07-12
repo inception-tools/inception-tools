@@ -27,8 +27,8 @@ class TemplateRenderer(FileRendererBase):
 
     PATH_SEP = '/'
     """
-    The path separator to use to write ``subpath`` templates.  This 
-    separator will be converted to the OS-specific path separator 
+    The path separator to use to write ``subpath`` templates. This
+    separator will be converted to the OS-specific path separator
     automatically by :py:meth:`subpath`.
     """
 
