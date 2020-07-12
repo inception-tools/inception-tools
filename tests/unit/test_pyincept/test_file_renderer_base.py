@@ -16,7 +16,7 @@ from datetime import datetime
 
 from hamcrest import assert_that, is_
 
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.file_renderer_base import FileRendererBase
 from tests.pyincept_test_base import PyinceptTestBase
 
@@ -28,10 +28,10 @@ class _MockFileRenderer(FileRendererBase):
         self.subpath_value = subpath
         self.render_value = render_content
 
-    def subpath(self, params: ArchitypeParameters) -> str:
+    def subpath(self, params: ArchetypeParameters) -> str:
         return self.subpath_value
 
-    def render(self, params: ArchitypeParameters) -> str:
+    def render(self, params: ArchetypeParameters) -> str:
         return self.render_value
 
 
@@ -44,7 +44,7 @@ class TestFileRendererBase(object):
     # Class attributes
 
     _PROJECT_ROOT = 'some_project_root'
-    _PARAMS = ArchitypeParameters(
+    _PARAMS = ArchetypeParameters(
         'some_package_name',
         'some_author',
         'some_author_email',

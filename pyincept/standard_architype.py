@@ -1,8 +1,8 @@
 """
-standard_architype
+standard_archetype
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`StandardArchitype` along with
+Houses the declaration of :py:class:`StandardArchetype` along with
 supporting classes, functions, and attributes.
 """
 
@@ -15,8 +15,8 @@ from typing import Iterable
 
 from jinja2 import Template
 
-from pyincept.architype_base import ArchitypeBase
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype_base import ArchetypeBase
+from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.file_renderer import FileRenderer
 from pyincept.file_renderer_base import FileRendererBase
 
@@ -26,7 +26,7 @@ _ARCHITYPE_DIR = os.path.abspath(
         os.pardir,
         'data',
         'archetypes',
-        'pyincept-architype-standard'
+        'pyincept-archetype-standard'
     )
 )
 
@@ -38,7 +38,7 @@ class _ABCEnumMeta(ABCMeta, EnumMeta):
 
 class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
     # Enumerates the :py:`FileRenderer` instances used by
-    # :py:attr:`StandardArchitype.PROJECT_ROOT`.
+    # :py:attr:`StandardArchetype.PROJECT_ROOT`.
 
     INIT_PACKAGE = (
         '__init___package.py.jinja',
@@ -122,20 +122,20 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
         self._template = self._get_template(template_name)
         self._subpath = subpath_function
 
-    def subpath(self, params: ArchitypeParameters) -> str:
+    def subpath(self, params: ArchetypeParameters) -> str:
         return self._subpath(params)
 
     def render(self, params):
         return self._template.render(**params.as_dict())
 
 
-class StandardArchitype(ArchitypeBase, Enum, metaclass=_ABCEnumMeta):
+class StandardArchetype(ArchetypeBase, Enum, metaclass=_ABCEnumMeta):
     """
-    Enumerates the standard :py:class:`Architype` instances available
+    Enumerates the standard :py:class:`Archetype` instances available
     across the system.
     """
 
-    #: The :py:meth:`build` method of this :py:class:`Architype` will create a
+    #: The :py:meth:`build` method of this :py:class:`Archetype` will create a
     # directory/file tree with the following structure:
     #:
     #: ::
@@ -170,7 +170,7 @@ class StandardArchitype(ArchitypeBase, Enum, metaclass=_ABCEnumMeta):
     PROJECT_ROOT = (_ProjectRootRenderers,)
 
     def __init__(self, file_renderers: Iterable[FileRenderer]) -> None:
-        # Referencing ArchitypeBase directly for the sake of supporting Python
+        # Referencing ArchetypeBase directly for the sake of supporting Python
         # 3.5, which does not seem to handle call to super() in the context of
         # multiple inheritance as gracefully as the later versions do.
-        ArchitypeBase.__init__(self, file_renderers)
+        ArchetypeBase.__init__(self, file_renderers)

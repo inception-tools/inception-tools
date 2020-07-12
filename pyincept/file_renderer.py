@@ -11,9 +11,9 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype_parameters import ArchetypeParameters
 
 
 class FileRenderer(ABC):
@@ -22,7 +22,7 @@ class FileRenderer(ABC):
     by this project should be rendered and saved.
     """
 
-    def path(self, root_dir: str, params: ArchitypeParameters) -> str:
+    def path(self, root_dir: str, params: ArchetypeParameters) -> str:
         """
         Returns the full path (possibly non-absolute) to the file that will
         be saved by :py:meth:`render_and_save`.
@@ -34,11 +34,11 @@ class FileRenderer(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    def subpath(self, params: ArchitypeParameters) -> str:
+    def subpath(self, params: ArchetypeParameters) -> str:
         """
         Returns the subpath, under the root directory, of the file to be
         saved by :py:meth:`render_and_save`.
-        :param params: the :py:class:`ArchitypeParameters` to use as context
+        :param params: the :py:class:`ArchetypeParameters` to use as context
         when creating the subpath, e.g., when storing files whose sub-path
         might be determined by the package name.
         :return: the path
@@ -46,11 +46,11 @@ class FileRenderer(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    def render(self, params: ArchitypeParameters) -> str:
+    def render(self, params: ArchetypeParameters) -> str:
         """
         Returns the content of the file to be saved by
         :py:meth:`render_and_save`.
-        :param params: the :py:class:`ArchitypeParameters` to use as context
+        :param params: the :py:class:`ArchetypeParameters` to use as context
         when building the content
         :return: the content of the file to be saved by
         :py:meth:`render_and_save`
@@ -60,7 +60,7 @@ class FileRenderer(ABC):
     def render_and_save(
             self,
             root_dir: str,
-            params: ArchitypeParameters
+            params: ArchetypeParameters
     ) -> None:
         """
         Renders and saves the content of the file and saves it the

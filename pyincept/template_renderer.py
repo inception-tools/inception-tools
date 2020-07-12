@@ -15,7 +15,7 @@ import os
 
 from jinja2 import Template
 
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.file_renderer_base import FileRendererBase
 
 
@@ -45,11 +45,11 @@ class TemplateRenderer(FileRendererBase):
         self._subpath = subpath
         self._prototype = prototype
 
-    def subpath(self, params: ArchitypeParameters) -> str:
+    def subpath(self, params: ArchetypeParameters) -> str:
         """
         Creates the subpath using the ``subpath``
         :py:class:`jinja2.Template` used to initialize this instance,
-        using the named :py:class:`ArchitypeParameters` to replace any
+        using the named :py:class:`ArchetypeParameters` to replace any
         template variables.  The path, once rendered, is split using
         :py:attr:`PATH_SEP` and rejoined using the OS-specific path separator.
         """
@@ -57,11 +57,11 @@ class TemplateRenderer(FileRendererBase):
         subpath_split = subpath_raw.split(self.PATH_SEP)
         return os.path.join(*subpath_split)
 
-    def render(self, params: ArchitypeParameters) -> str:
+    def render(self, params: ArchetypeParameters) -> str:
         """
         Renders the file content using the ``subpath``
         :py:class:`jinja2.Template` used to initialize this instance,
-        using the named :py:class:`ArchitypeParameters` to replace any
+        using the named :py:class:`ArchetypeParameters` to replace any
         template variables.
         """
         return self._prototype.render(**params.as_dict())

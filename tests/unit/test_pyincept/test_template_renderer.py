@@ -16,7 +16,7 @@ import os
 from hamcrest import assert_that, is_
 from jinja2 import Template
 
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.template_renderer import TemplateRenderer
 
 
@@ -28,7 +28,7 @@ class TestTemplateRenderer(object):
     ##############################
     # Class attributes
 
-    _PARAMS = ArchitypeParameters(
+    _PARAMS = ArchetypeParameters(
         'some_package_name',
         'some_author',
         'some_author_email',

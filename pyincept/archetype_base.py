@@ -1,8 +1,8 @@
 """
-architype_base
+archetype_base
 ~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`ArchitypeBase` along with supporting
+Houses the declaration of :py:class:`ArchetypeBase` along with supporting
 classes, functions, and attributes.
 """
 
@@ -13,16 +13,16 @@ __license__ = 'Apache Software License 2.0'
 
 from typing import Iterable
 
-from pyincept.architype import Architype
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype import Archetype
+from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.file_renderer import FileRenderer
 
 
-class ArchitypeBase(Architype):
+class ArchetypeBase(Archetype):
     """
-    A base implementation of :py:class:`Architype` that provides basic
-    implementations of :py:meth:`Architype.build` and
-    :py:meth:`Architype.output_files`.
+    A base implementation of :py:class:`Archetype` that provides basic
+    implementations of :py:meth:`Archetype.build` and
+    :py:meth:`Archetype.output_files`.
     """
 
     def __init__(self, file_renderers: Iterable[FileRenderer]) -> None:
@@ -37,17 +37,17 @@ class ArchitypeBase(Architype):
     def output_files(
             self,
             root_path: str,
-            params: ArchitypeParameters
+            params: ArchetypeParameters
     ) -> Iterable[str]:
         return tuple(r.path(root_path, params) for r in self._file_renderers)
 
-    def build(self, root_dir: str, params: ArchitypeParameters) -> None:
+    def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         """
         Builds the project structure using the :py:class:`FileRenderer`
         instances held by this instance.
         :param root_dir: the root directory of the project structure to be
         created
-        :param params: the :py:class:`ArchitypeParameters` to use as context
+        :param params: the :py:class:`ArchetypeParameters` to use as context
         for the project to be built
         :return: :py:const:`None`
         """

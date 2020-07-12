@@ -1,8 +1,8 @@
 """
-    test_architype_base
+    test_archetype_base
     ~~~~~~~~~~~~~~~~~~~
 
-    Unit test cases for the :py:mod:`architype_base` module.
+    Unit test cases for the :py:mod:`archetype_base` module.
 """
 
 __author__ = 'Andrew van Herick'
@@ -16,8 +16,8 @@ from datetime import datetime
 
 from hamcrest import assert_that, is_
 
-from pyincept.architype_base import ArchitypeBase
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype_base import ArchetypeBase
+from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.file_renderer_base import FileRendererBase
 from tests.pyincept_test_base import PyinceptTestBase
 
@@ -29,23 +29,23 @@ class _MockFileRenderer(FileRendererBase):
         self.subpath_value = subpath
         self.render_value = render_content
 
-    def subpath(self, params: ArchitypeParameters) -> str:
+    def subpath(self, params: ArchetypeParameters) -> str:
         return self.subpath_value
 
-    def render(self, params: ArchitypeParameters) -> str:
+    def render(self, params: ArchetypeParameters) -> str:
         return self.render_value
 
 
-class TestArchitypeBase(object):
+class TestArchetypeBase(object):
     """
-    Unit test for class :py:class:`ArchitypeBase`.
+    Unit test for class :py:class:`ArchetypeBase`.
     """
 
     ##############################
     # Class attributes
 
     _ROOT_DIR = 'some_root_dir'
-    _PARAMS = ArchitypeParameters(
+    _PARAMS = ArchetypeParameters(
         'some_package_name',
         'some_author',
         'some_author_email',
@@ -64,7 +64,7 @@ class TestArchitypeBase(object):
         """
         PyinceptTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
-        self._architype = ArchitypeBase(
+        self._archetype = ArchetypeBase(
             (
                 _MockFileRenderer('some_subpath', 'some_content'),
                 _MockFileRenderer('some_other_subpath', 'some_other_content')
@@ -85,9 +85,9 @@ class TestArchitypeBase(object):
 
     def test_build(self):
         """
-        Unit test case for :py:method:`ArchitypeBase.build`.
+        Unit test case for :py:method:`ArchetypeBase.build`.
         """
-        self._architype.build(self._ROOT_DIR, self._PARAMS)
+        self._archetype.build(self._ROOT_DIR, self._PARAMS)
 
         paths = (
             os.path.join('some_root_dir', 'some_subpath'),
@@ -101,9 +101,9 @@ class TestArchitypeBase(object):
 
     def test_output_files(self):
         """
-        Unit test case for :py:method:`ArchitypeBase.build`.
+        Unit test case for :py:method:`ArchetypeBase.build`.
         """
-        actual = self._architype.output_files(self._ROOT_DIR, self._PARAMS)
+        actual = self._archetype.output_files(self._ROOT_DIR, self._PARAMS)
         expected = (
             os.path.join('some_root_dir', 'some_subpath'),
             os.path.join('some_root_dir', 'some_other_subpath'),

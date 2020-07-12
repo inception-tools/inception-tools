@@ -1,8 +1,8 @@
 """
-architype_parameters
+archetype_parameters
 ~~~~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`ArchitypeParameters` along with
+Houses the declaration of :py:class:`ArchetypeParameters` along with
 supporting classes, functions, and attributes.
 """
 
@@ -14,16 +14,16 @@ __license__ = 'Apache Software License 2.0'
 from collections import namedtuple
 
 
-class ArchitypeParameters(
+class ArchetypeParameters(
     namedtuple(
-        'ArchitypeParametersBase',
+        'ArchetypeParametersBase',
         ('package_name', 'author', 'author_email', 'date')
     )
 ):
     """
     A container class that responsible for grouping the parameters used to
     create a project directory structure from an
-    :py:class:`architype.Archetype`.
+    :py:class:`archetype.Archetype`.
 
     Instances of this class are immutable.
 
