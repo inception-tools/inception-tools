@@ -31,7 +31,7 @@ class FileRenderer(ABC):
         :param params: the parameters argument for :py:meth:`render_and_save`
         :return: the path
         """
-        raise NotImplementedError()
+        raise NotImplementedError('Method to be implemented by subclasses')
 
     @abstractmethod
     def subpath(self, params: ArchetypeParameters) -> str:
@@ -43,7 +43,7 @@ class FileRenderer(ABC):
         might be determined by the package name.
         :return: the path
         """
-        raise NotImplementedError()
+        raise NotImplementedError('Method to be implemented by subclasses')
 
     @abstractmethod
     def render(self, params: ArchetypeParameters) -> str:
@@ -55,7 +55,7 @@ class FileRenderer(ABC):
         :return: the content of the file to be saved by
         :py:meth:`render_and_save`
         """
-        raise NotImplementedError()
+        raise NotImplementedError('Method to be implemented by subclasses')
 
     def render_and_save(
             self,
@@ -73,4 +73,4 @@ class FileRenderer(ABC):
         content and possibly the subpath under the root directory
         :return: :py:const:`None`
         """
-        raise NotImplementedError()
+        raise NotImplementedError('Method to be implemented by subclasses')

@@ -39,7 +39,7 @@ class Archetype(ABC):
         for the project to be built
         :return: :py:const:`None`
         """
-        raise NotImplementedError()
+        raise NotImplementedError('Method to be implemented by subclasses')
 
     @abstractmethod
     def build(self, root_path: str, params: ArchetypeParameters) -> None:
@@ -52,4 +52,4 @@ class Archetype(ABC):
         for the project to be built
         :return: :py:const:`None`
         """
-        raise NotImplementedError()
+        raise NotImplementedError('Method to be implemented by subclasses')
