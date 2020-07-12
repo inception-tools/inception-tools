@@ -22,9 +22,15 @@ class ArchitypeParameters(
 ):
     """
     A container class that responsible for grouping the parameters used to
-    create a project directory structure from an :py:class:`Architype`.
+    create a project directory structure from an
+    :py:class:`architype.Archetype`.
 
     Instances of this class are immutable.
+
+    :ivar str package_name: the name of the package to be created
+    :ivar str author: the package author name
+    :ivar str author_email: the author's email address
+    :ivar str date: the inception date of the project
     """
 
     def as_dict(self) -> dict:
