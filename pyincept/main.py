@@ -16,9 +16,9 @@ from datetime import datetime
 from logging.config import fileConfig
 
 import click
-from pyincept.standard_archetype import StandardArchetype
 
 from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.standard_archetype import StandardArchetype
 
 
 def _logger():
@@ -117,7 +117,7 @@ def cli():
 
         pyincept <command> --help
     """
-    pass
+    # Nothing to do.
 
 
 cli.add_command(build)
