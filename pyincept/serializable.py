@@ -22,6 +22,13 @@ from io import StringIO, TextIOBase
 TEXT_IO_TYPE = Union[TextIOBase, StringIO]
 
 
+class SerializationError(Exception):
+    """
+    A common exception type for subclasses of :py:class:`Serializable` may
+    raise to indicate an error.
+    """
+
+
 class Serializable(ABC):
     """
     Defines the common interface by which objects are serialized and
@@ -38,6 +45,8 @@ class Serializable(ABC):
         Deserializes a new ``cls`` instance from a text-based input stream.
         :param file_obj: the file-like object
         :return: a new instance of type ``cls``
+        :raises SerializationError: if a problem occurs during execution of
+        this method
         """
         raise NotImplementedError('Method to be implemented by subclasses')
 
@@ -47,6 +56,8 @@ class Serializable(ABC):
         Deserializes a new ``cls`` instance from a ``str``.
         :param s: the ``str``
         :return: a new instance of type ``cls``
+        :raises SerializationError: if a problem occurs during execution of
+        this method
         """
         with closing(StringIO(s)) as f:
             return cls.from_text_io(f)
@@ -59,6 +70,8 @@ class Serializable(ABC):
         """
         Serializes this instance to a text-based output stream.
         :param file_obj: the input stream
+        :raises SerializationError: if a problem occurs during execution of
+        this method
         """
         raise NotImplementedError('Method to be implemented by subclasses')
 
@@ -66,6 +79,8 @@ class Serializable(ABC):
         """
         Serializes this instance to a ``str``.
         :return: the ``str``
+        :raises SerializationError: if a problem occurs during execution of
+        this method
         """
         with closing(StringIO()) as f:
             self.to_text_io(f)

@@ -19,14 +19,20 @@ import json
 from abc import ABC, abstractmethod
 from typing import Union
 
-from pyincept.serializable import Serializable
+from pyincept.serializable import Serializable, SerializationError
 
 JSON_OBJ_TYPE = Union[dict, list, str, int, float, bool]
 """
-The type definition for the ``fp`` argument in 
-:py:meth:`JsonSerializable.from_json` and 
-:py:meth:`JsonSerializable.to_json`. 
+The type definition for the ``fp`` argument in
+:py:meth:`JsonSerializable.from_json` and
+:py:meth:`JsonSerializable.to_json`.
 """
+
+
+class JsonSerializationError(SerializationError):
+    """
+    A common exception raised by subclasses of :py:class:`JsonSerializable`.
+    """
 
 
 class JsonSerializable(Serializable, ABC):
@@ -68,6 +74,8 @@ class JsonSerializable(Serializable, ABC):
         Unmarshals a new ``cls`` instance from JSON-like Python object.
         :param json_obj: the JSON-like Python object
         :return: the new ``cls`` instance
+        :raises SerializationError: if a problem occurs during execution of
+        this method
         .. seealso:: modules :py:class:`JsonSerializable`
         """
         raise NotImplementedError('Method to be implemented by subclasses')
@@ -89,6 +97,8 @@ class JsonSerializable(Serializable, ABC):
         """
         Marshals a new ``cls`` instance to JSON-like Python object.
         :return: the JSON-like Python object
+        :raises SerializationError: if a problem occurs during execution of
+        this method
         .. seealso:: modules :py:class:`JsonSerializable`
         """
         raise NotImplementedError('Method to be implemented by subclasses')
