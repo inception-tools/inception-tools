@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """
 serializable
 ~~~~~~~~~~~~
@@ -13,11 +11,10 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-from typing import Union
-
 from abc import ABC, abstractmethod
 from contextlib import closing
 from io import StringIO, TextIOBase
+from typing import Union
 
 from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
@@ -42,7 +39,7 @@ class Serializable(ABC):
 
     @classmethod
     @abstractmethod
-    def from_text_io(cls, file_obj: TEXT_IO_TYPE) -> Serializable:
+    def from_text_io(cls, file_obj: TEXT_IO_TYPE):
         """
         Deserializes a new ``cls`` instance from a text-based input stream.
         :param file_obj: the file-like object

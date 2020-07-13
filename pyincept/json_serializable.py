@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """
 json_serializable
 ~~~~~~~~~~~~~~~~~
@@ -13,10 +11,9 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-from io import TextIOBase
-
 import json
 from abc import ABC, abstractmethod
+from io import TextIOBase
 from typing import Union
 
 from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
@@ -58,7 +55,7 @@ class JsonSerializable(Serializable, ABC):
     # Static / class methods
 
     @classmethod
-    def from_text_io(cls, fp: TextIOBase) -> JsonSerializable:
+    def from_text_io(cls, fp: TextIOBase):
         """
         Deserializes a JSON-formatted text-based input stream by first
         converting it to a JSON-like Python object using the :py:mod:`json`
@@ -70,7 +67,7 @@ class JsonSerializable(Serializable, ABC):
 
     @classmethod
     @abstractmethod
-    def from_json(cls, json_obj: JSON_OBJ_TYPE) -> JsonSerializable:
+    def from_json(cls, json_obj: JSON_OBJ_TYPE):
         """
         Unmarshals a new ``cls`` instance from JSON-like Python object.
         :param json_obj: the JSON-like Python object

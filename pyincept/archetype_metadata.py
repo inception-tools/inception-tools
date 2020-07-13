@@ -1,7 +1,3 @@
-from __future__ import annotations
-
-from jsonschema import validate, ValidationError
-
 """
 archetype_metadata
 ~~~~~~~~~~~~~~~~~~
@@ -16,6 +12,8 @@ __copyright__ = \
 __license__ = 'Apache Software License 2.0'
 
 from collections import namedtuple
+
+from jsonschema import validate, ValidationError
 
 from pyincept.json_serializable import (
     JSON_OBJ_TYPE, JsonSerializable,
@@ -69,7 +67,7 @@ class ArchetypeMetadata(
             raise to_raise from e
 
     @classmethod
-    def from_json(cls, json_obj: JSON_OBJ_TYPE) -> ArchetypeMetadata:
+    def from_json(cls, json_obj: JSON_OBJ_TYPE):
         cls._validate_json(json_obj)
 
         if isinstance(json_obj, dict):
