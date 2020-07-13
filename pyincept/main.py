@@ -117,7 +117,8 @@ def cli():
 
         pyincept <command> --help
     """
-    # Nothing to do.
+    # Nothing to do.  This function provides a shell for grouping commands for
+    # the main command-line entry point.
 
 
 cli.add_command(build)
