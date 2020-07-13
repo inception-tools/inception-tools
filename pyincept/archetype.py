@@ -15,6 +15,7 @@ from abc import ABC, abstractmethod
 from typing import Iterable
 
 from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
 
 class Archetype(ABC):
@@ -39,7 +40,7 @@ class Archetype(ABC):
         for the project to be built
         :return: :py:const:`None`
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @abstractmethod
     def build(self, root_path: str, params: ArchetypeParameters) -> None:
@@ -52,4 +53,4 @@ class Archetype(ABC):
         for the project to be built
         :return: :py:const:`None`
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR

@@ -14,6 +14,7 @@ __license__ = 'Apache Software License 2.0'
 from abc import ABC, abstractmethod
 
 from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
 
 class FileRenderer(ABC):
@@ -31,7 +32,7 @@ class FileRenderer(ABC):
         :param params: the parameters argument for :py:meth:`render_and_save`
         :return: the path
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @abstractmethod
     def subpath(self, params: ArchetypeParameters) -> str:
@@ -43,7 +44,7 @@ class FileRenderer(ABC):
         might be determined by the package name.
         :return: the path
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @abstractmethod
     def render(self, params: ArchetypeParameters) -> str:
@@ -55,7 +56,7 @@ class FileRenderer(ABC):
         :return: the content of the file to be saved by
         :py:meth:`render_and_save`
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     def render_and_save(
             self,
@@ -73,4 +74,4 @@ class FileRenderer(ABC):
         content and possibly the subpath under the root directory
         :return: :py:const:`None`
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR

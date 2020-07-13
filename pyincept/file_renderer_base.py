@@ -16,6 +16,7 @@ import os
 from abc import abstractmethod
 
 from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 from pyincept.file_renderer import FileRenderer
 
 
@@ -49,7 +50,7 @@ class FileRendererBase(FileRenderer):
         might be determined by the package name.
         :return: the path
         """
-        raise NotImplementedError()
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @abstractmethod
     def render(self, params: ArchetypeParameters) -> str:
@@ -62,7 +63,7 @@ class FileRendererBase(FileRenderer):
         :return: the content of the file to be saved by
         :py:meth:`render_and_save`
         """
-        raise NotImplementedError()
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     def render_and_save(
             self,

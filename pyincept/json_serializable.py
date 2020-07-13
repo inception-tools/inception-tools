@@ -19,6 +19,7 @@ import json
 from abc import ABC, abstractmethod
 from typing import Union
 
+from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 from pyincept.serializable import Serializable, SerializationError
 
 JSON_OBJ_TYPE = Union[dict, list, str, int, float, bool]
@@ -78,7 +79,7 @@ class JsonSerializable(Serializable, ABC):
         this method
         .. seealso:: modules :py:class:`JsonSerializable`
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     ##############################
     # Static / class methods
@@ -101,4 +102,4 @@ class JsonSerializable(Serializable, ABC):
         this method
         .. seealso:: modules :py:class:`JsonSerializable`
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR

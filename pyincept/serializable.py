@@ -19,6 +19,8 @@ from abc import ABC, abstractmethod
 from contextlib import closing
 from io import StringIO, TextIOBase
 
+from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
+
 TEXT_IO_TYPE = Union[TextIOBase, StringIO]
 
 
@@ -48,7 +50,7 @@ class Serializable(ABC):
         :raises SerializationError: if a problem occurs during execution of
         this method
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @classmethod
     def from_string(cls, s):
@@ -73,7 +75,7 @@ class Serializable(ABC):
         :raises SerializationError: if a problem occurs during execution of
         this method
         """
-        raise NotImplementedError('Method to be implemented by subclasses')
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     def to_string(self) -> str:
         """

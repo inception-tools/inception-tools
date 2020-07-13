@@ -11,11 +11,12 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-
 import os
 from abc import abstractmethod
 
 from hamcrest import assert_that, is_
+
+from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
 
 class PyinceptTestBase(object):
@@ -51,9 +52,7 @@ class PyinceptTestBase(object):
         :param resource_name:
         :return:
         """
-        raise NotImplementedError(
-            'This method must be implemented by subclasses.'
-        )
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @classmethod
     def _get_file_content(cls, resource_path):
