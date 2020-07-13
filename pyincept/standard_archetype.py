@@ -36,23 +36,27 @@ class _ABCEnumMeta(ABCMeta, EnumMeta):
     pass
 
 
+_INIT_FILE_NAME = '__init__.py'
+_TEST_PACKAGE_FORMAT = 'test_{}'
+
+
 class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
     # Enumerates the :py:`FileRenderer` instances used by
     # :py:attr:`StandardArchetype.PROJECT_ROOT`.
 
     INIT_PACKAGE = (
         '__init___package.py.jinja',
-        lambda b: os.path.join(b.package_name, '__init__.py')
+        lambda b: os.path.join(b.package_name, _INIT_FILE_NAME)
     )
 
     INIT_TESTS = (
         '__init___tests.py.jinja',
-        lambda b: os.path.join('tests', '__init__.py')
+        lambda b: os.path.join('tests', _INIT_FILE_NAME)
     )
 
     INIT_TESTS_END_TO_END = (
         '__init___tests_end_to_end.py.jinja',
-        lambda b: os.path.join('tests', 'end_to_end', '__init__.py')
+        lambda b: os.path.join('tests', 'end_to_end', _INIT_FILE_NAME)
     )
 
     INIT_TESTS_END_TO_END_PACKAGE = (
@@ -60,14 +64,14 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
         lambda b: os.path.join(
             'tests',
             'end_to_end',
-            'test_{}'.format(b.package_name),
-            '__init__.py'
+            _TEST_PACKAGE_FORMAT.format(b.package_name),
+            _INIT_FILE_NAME
         )
     )
 
     INIT_TESTS_INTEGRATION = (
         '__init___tests_integration.py.jinja',
-        lambda b: os.path.join('tests', 'integration', '__init__.py')
+        lambda b: os.path.join('tests', 'integration', _INIT_FILE_NAME)
     )
 
     INIT_TESTS_INTEGRATION_PACKAGE = (
@@ -75,14 +79,14 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
         lambda b: os.path.join(
             'tests',
             'integration',
-            'test_{}'.format(b.package_name),
-            '__init__.py'
+            _TEST_PACKAGE_FORMAT.format(b.package_name),
+            _INIT_FILE_NAME
         )
     )
 
     INIT_TESTS_UNIT = (
         '__init___tests_unit.py.jinja',
-        lambda b: os.path.join('tests', 'unit', '__init__.py')
+        lambda b: os.path.join('tests', 'unit', _INIT_FILE_NAME)
     )
 
     INIT_TESTS_UNIT_PACKAGE = (
@@ -90,8 +94,8 @@ class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
         lambda b: os.path.join(
             'tests',
             'unit',
-            'test_{}'.format(b.package_name),
-            '__init__.py'
+            _TEST_PACKAGE_FORMAT.format(b.package_name),
+            _INIT_FILE_NAME
         )
     )
 
