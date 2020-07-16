@@ -41,6 +41,9 @@ class ArchetypeMetadata(
     :ivar str version_id: the architype version identifier
     """
 
+    # Make instances of this class immutable
+    __slots__ = ()
+
     JSON_SCHEMA = {
         'type': 'object',
         'properties': {
