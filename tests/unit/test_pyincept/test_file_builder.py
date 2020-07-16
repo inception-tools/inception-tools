@@ -12,7 +12,6 @@ __license__ = 'Apache Software License 2.0'
 
 import os
 import shutil
-from datetime import datetime
 
 from hamcrest import assert_that, is_
 
@@ -43,13 +42,8 @@ class TestFileRenderer(object):
     ##############################
     # Class attributes
 
-    _PROJECT_ROOT = 'some_project_root'
-    _PARAMS = ArchetypeParameters(
-        'some_package_name',
-        'some_author',
-        'some_author_email',
-        datetime(2000, 1, 1)
-    )
+    _ROOT_DIR = PyinceptTestBase._ROOT_DIR
+    _PARAMS = PyinceptTestBase._PARAMS
 
     ##############################
     # Instance methods
@@ -61,7 +55,7 @@ class TestFileRenderer(object):
         Called before each method in this class with a name of the form
         test_*().
         """
-        PyinceptTestBase._validate_path_doesnt_exist(self._PROJECT_ROOT)
+        PyinceptTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
         self._builder = _MockFileBuilder('some_subpath', 'some_content')
 
@@ -70,10 +64,10 @@ class TestFileRenderer(object):
         Called after each method in this class with a name of the form
         test_*().
         """
-        if os.path.exists(self._PROJECT_ROOT):
-            shutil.rmtree(self._PROJECT_ROOT)
+        if os.path.exists(self._ROOT_DIR):
+            shutil.rmtree(self._ROOT_DIR)
 
-        PyinceptTestBase._validate_path_doesnt_exist(self._PROJECT_ROOT)
+        PyinceptTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
     # Test cases
 
@@ -81,17 +75,17 @@ class TestFileRenderer(object):
         """
         Unit test case for :py:method:`FileBuilder.path`.
         """
-        actual = self._builder.path(self._PROJECT_ROOT, self._PARAMS)
-        expected = os.path.join('some_project_root', 'some_subpath')
+        actual = self._builder.path(self._ROOT_DIR, self._PARAMS)
+        expected = os.path.join('some_root_dir', 'some_subpath')
         assert_that(actual, is_(expected))
 
     def test_build(self):
         """
         Unit test case for :py:method:`FileBuilder.build`.
         """
-        self._builder.build(self._PROJECT_ROOT, self._PARAMS)
+        self._builder.build(self._ROOT_DIR, self._PARAMS)
 
-        with open(os.path.join('some_project_root', 'some_subpath')) as f:
+        with open(os.path.join('some_root_dir', 'some_subpath')) as f:
             actual = f.read()
 
         expected = 'some_content'

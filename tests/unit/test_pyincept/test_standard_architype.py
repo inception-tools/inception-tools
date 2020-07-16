@@ -12,12 +12,10 @@ __license__ = 'Apache Software License 2.0'
 
 import os
 import shutil
-from datetime import datetime
 
 from hamcrest import assert_that
-from pyincept.standard_archetype import StandardArchetype
 
-from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.standard_archetype import StandardArchetype
 from tests.pyincept_test_base import PyinceptTestBase
 
 
@@ -32,13 +30,8 @@ class TestStandardArchetype(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ROOT_DIR = 'some_root_dir'
-    _PARAMS = ArchetypeParameters(
-        'some_package_name',
-        'some_author',
-        'some_author_email',
-        datetime(2000, 1, 1)
-    )
+    _ROOT_DIR = PyinceptTestBase._ROOT_DIR
+    _PARAMS = PyinceptTestBase._PARAMS
 
     ##############################
     # Class / static methods

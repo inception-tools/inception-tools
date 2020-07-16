@@ -10,14 +10,13 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-import datetime
 import os
 
 from hamcrest import assert_that, is_
 from jinja2 import Template
 
-from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.template_directory_builder import TemplateDirectoryBuilder
+from tests.pyincept_test_base import PyinceptTestBase
 
 
 class TestTemplateDirectoryBuilder(object):
@@ -28,12 +27,7 @@ class TestTemplateDirectoryBuilder(object):
     ##############################
     # Class attributes
 
-    _PARAMS = ArchetypeParameters(
-        'some_package_name',
-        'some_author',
-        'some_author_email',
-        datetime.date(2000, 1, 1)
-    )
+    _PARAMS = PyinceptTestBase._PARAMS
 
     _SUBPATH = Template(
         '{{package_name}}/{{author}}/{{author_email}}/{{date.year}}/'

@@ -12,7 +12,6 @@ __license__ = 'Apache Software License 2.0'
 
 import os
 import shutil
-from datetime import datetime
 
 from hamcrest import assert_that, is_
 
@@ -44,13 +43,8 @@ class TestArchetypeBase(object):
     ##############################
     # Class attributes
 
-    _ROOT_DIR = 'some_root_dir'
-    _PARAMS = ArchetypeParameters(
-        'some_package_name',
-        'some_author',
-        'some_author_email',
-        datetime(2000, 1, 1)
-    )
+    _ROOT_DIR = PyinceptTestBase._ROOT_DIR
+    _PARAMS = PyinceptTestBase._PARAMS
 
     ##############################
     # Instance methods
