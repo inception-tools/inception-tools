@@ -63,7 +63,7 @@ class TestFileRenderer(object):
         """
         PyinceptTestBase._validate_path_doesnt_exist(self._PROJECT_ROOT)
 
-        self._file_builder = _MockFileBuilder('some_subpath', 'some_content')
+        self._builder = _MockFileBuilder('some_subpath', 'some_content')
 
     def teardown(self):
         """
@@ -81,7 +81,7 @@ class TestFileRenderer(object):
         """
         Unit test case for :py:method:`FileBuilder.path`.
         """
-        actual = self._file_builder.path(self._PROJECT_ROOT, self._PARAMS)
+        actual = self._builder.path(self._PROJECT_ROOT, self._PARAMS)
         expected = os.path.join('some_project_root', 'some_subpath')
         assert_that(actual, is_(expected))
 
@@ -89,7 +89,7 @@ class TestFileRenderer(object):
         """
         Unit test case for :py:method:`FileBuilder.build`.
         """
-        self._file_builder.build(self._PROJECT_ROOT, self._PARAMS)
+        self._builder.build(self._PROJECT_ROOT, self._PARAMS)
 
         with open(os.path.join('some_project_root', 'some_subpath')) as f:
             actual = f.read()
