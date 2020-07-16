@@ -85,11 +85,11 @@ class TestFileRendererBase(object):
         expected = os.path.join('some_project_root', 'some_subpath')
         assert_that(actual, is_(expected))
 
-    def test_render_and_save(self):
+    def test_build(self):
         """
-        Unit test case for :py:method:`FileRendererBase.render_and_save`.
+        Unit test case for :py:method:`FileRendererBase.build`.
         """
-        self._file_renderer.render_and_save(self._PROJECT_ROOT, self._PARAMS)
+        self._file_renderer.build(self._PROJECT_ROOT, self._PARAMS)
 
         with open(os.path.join('some_project_root', 'some_subpath')) as f:
             actual = f.read()

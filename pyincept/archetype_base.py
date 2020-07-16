@@ -52,4 +52,4 @@ class ArchetypeBase(Archetype):
         :return: :py:const:`None`
         """
         for r in self._file_renderers:
-            r.render_and_save(root_dir, params)
+            r.build(root_dir, params)

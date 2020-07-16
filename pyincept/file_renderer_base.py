@@ -31,10 +31,10 @@ class FileRendererBase(FileRenderer):
     def path(self, root_dir: str, params: ArchetypeParameters) -> str:
         """
         Uses the implementation of :py:meth:`subpath` to determine the
-        absolute path to the file saved by :py:meth:`render_and_save`.
+        absolute path to the file saved by :py:meth:`build`.
         :param root_dir: the root directory argument for
-        :py:meth:`render_and_save`
-        :param params: the parameters argument for :py:meth:`render_and_save`
+        :py:meth:`build`
+        :param params: the parameters argument for :py:meth:`build`
         :return: the path
         """
         return self._path(root_dir, params)
@@ -44,7 +44,7 @@ class FileRendererBase(FileRenderer):
         """
         Subclasses are required to implement this method.  Implementations
         of this method should return the subpath, under the root directory,
-        of the file to be saved by :py:meth:`render_and_save`.
+        of the file to be saved by :py:meth:`build`.
         :param params: the :py:class `ArchetypeParameters` to use as context
         when creating the subpath, e.g., when storing files whose sub-path
         might be determined by the package name.
@@ -57,15 +57,15 @@ class FileRendererBase(FileRenderer):
         """
         Subclasses are required to implement this method.  Implementations
         of this method should return the content of the file to be saved by
-        :py:meth:`render_and_save`.
+        :py:meth:`build`.
         :param params: the :py:class:`ArchetypeParameters` to use as context
         when building the content
         :return: the content of the file to be saved by
-        :py:meth:`render_and_save`
+        :py:meth:`build`
         """
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
-    def render_and_save(
+    def build(
             self,
             root_dir: str,
             params: ArchetypeParameters
