@@ -2,16 +2,16 @@
 main
 ~~~~
 
-Main entry point commend line script for the {{package_name}} project.
+Main entry point commend line script for the some_package_name project.
 
 Command line syntax:
 
-    {{package_name}} <message>
+    some_package_name <message>
 """
 
-__author__ = '{{author}}'
+__author__ = 'some_author'
 __copyright__ = \
-    'Unpublished Copyright (c) {{date.year}} {{author}}. All Rights Reserved.'
+    'Unpublished Copyright (c) 2000 some_author. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
 from logging import getLogger
@@ -33,6 +33,8 @@ def log_test(message):
 
 @click.group()
 def cli():
+    # Nothing to do.  This function provides a shell for grouping commands for
+    # the main command-line entry point.
     pass
 
 

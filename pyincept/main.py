@@ -17,8 +17,8 @@ from logging.config import fileConfig
 
 import click
 
-from pyincept.architype_parameters import ArchitypeParameters
-from pyincept.standard_architype import StandardArchitype
+from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.standard_archetype import StandardArchetype
 
 
 def _logger():
@@ -27,14 +27,14 @@ def _logger():
 
 def _main(package_name, author, author_email):
     fileConfig('log.cfg', disable_existing_loggers=False)
-    params = ArchitypeParameters(
+    params = ArchetypeParameters(
         package_name=package_name,
         author=author,
         author_email=author_email,
         date=datetime.now()
     )
-    architype = StandardArchitype.PROJECT_ROOT
-    architype.build(root_dir=package_name, params=params)
+    archetype = StandardArchetype.PROJECT_ROOT
+    archetype.build(root_dir=package_name, params=params)
 
 
 @click.command()
@@ -117,7 +117,8 @@ def cli():
 
         pyincept <command> --help
     """
-    pass
+    # Nothing to do.  This function provides a shell for grouping commands for
+    # the main command-line entry point.
 
 
 cli.add_command(build)

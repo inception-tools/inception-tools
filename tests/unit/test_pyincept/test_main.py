@@ -55,7 +55,7 @@ class TestMain(PyinceptTestBase):
             os.path.join(
                 __file__,
                 os.pardir,
-                '_resources',
+                'data',
                 'test_pyincept',
                 resource_name
             )

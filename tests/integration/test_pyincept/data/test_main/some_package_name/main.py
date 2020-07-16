@@ -33,6 +33,8 @@ def log_test(message):
 
 @click.group()
 def cli():
+    # Nothing to do.  This function provides a shell for grouping commands for
+    # the main command-line entry point.
     pass
 
 

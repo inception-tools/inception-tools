@@ -11,11 +11,14 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-
+import datetime
 import os
 from abc import abstractmethod
 
 from hamcrest import assert_that, is_
+
+from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
 
 class PyinceptTestBase(object):
@@ -39,6 +42,15 @@ class PyinceptTestBase(object):
     # :py:meth:`test_overwrite_expected_files_is_false`.
     _OVERWRITE_EXPECTED_FILE = False
 
+    _ROOT_DIR = 'some_root_dir'
+
+    _PARAMS = ArchetypeParameters(
+        'some_package_name',
+        'some_author',
+        'some_author_email',
+        datetime.date(2000, 1, 1)
+    )
+
     ##############################
     # Class / static methods
 
@@ -51,9 +63,7 @@ class PyinceptTestBase(object):
         :param resource_name:
         :return:
         """
-        raise NotImplementedError(
-            'This method must be implemented by subclasses.'
-        )
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @classmethod
     def _get_file_content(cls, resource_path):

@@ -1,8 +1,8 @@
 """
-    test_architype_parameters
+    test_archetype_parameters
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Unit test cases for the :py:mod:`architype_parameters` module.
+    Unit test cases for the :py:mod:`archetype_parameters` module.
 """
 
 __author__ = 'Andrew van Herick'
@@ -15,12 +15,12 @@ import datetime
 
 from hamcrest import assert_that, is_
 
-from pyincept.architype_parameters import ArchitypeParameters
+from pyincept.archetype_parameters import ArchetypeParameters
 
 
-class TestArchitypeParameters(object):
+class TestArchetypeParameters(object):
     """
-    Unit test for class :py:class:`ArchitypeParameters`.
+    Unit test for class :py:class:`ArchetypeParameters`.
     """
 
     _PACKAGE_NAME = 'some_package'
@@ -28,7 +28,7 @@ class TestArchitypeParameters(object):
     _AUTHOR_EMAIL = 'some_author'
     _DATE = datetime.date(2000, 1, 1)
 
-    _PARAMS = ArchitypeParameters(
+    _PARAMS = ArchetypeParameters(
         _PACKAGE_NAME,
         _AUTHOR,
         _AUTHOR_EMAIL,
@@ -39,7 +39,7 @@ class TestArchitypeParameters(object):
 
     def test_package_name(self):
         """
-        Unit test case for :py:method:`ArchitypeParameters.package_name`.
+        Unit test case for :py:method:`ArchetypeParameters.package_name`.
         """
         actual = self._PACKAGE_NAME
         expected = self._PARAMS.package_name
@@ -47,7 +47,7 @@ class TestArchitypeParameters(object):
 
     def test_author(self):
         """
-        Unit test case for :py:method:`ArchitypeParameters.author`.
+        Unit test case for :py:method:`ArchetypeParameters.author`.
         """
         actual = self._AUTHOR
         expected = self._PARAMS.author
@@ -55,7 +55,7 @@ class TestArchitypeParameters(object):
 
     def test_author_email(self):
         """
-        Unit test case for :py:method:`ArchitypeParameters.author_email`.
+        Unit test case for :py:method:`ArchetypeParameters.author_email`.
         """
         actual = self._AUTHOR_EMAIL
         expected = self._PARAMS.author_email
@@ -63,7 +63,7 @@ class TestArchitypeParameters(object):
 
     def test_date(self):
         """
-        Unit test case for :py:method:`ArchitypeParameters.date`.
+        Unit test case for :py:method:`ArchetypeParameters.date`.
         """
         actual = self._DATE
         expected = self._PARAMS.date

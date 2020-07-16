@@ -22,7 +22,7 @@ project is headed by checking out the documentation (also in progress) below.
 
 The goal of this project is to create, foster, and disseminate solid
 conventions for Python project structure through the propagation and reuse
-of project architypes, developed and submitted by the community, which can
+of project archetypes, developed and submitted by the community, which can
 be used as templates for automatically setting up new Python projects.
 
 Documentation

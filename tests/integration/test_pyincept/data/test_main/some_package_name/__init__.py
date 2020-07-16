@@ -11,7 +11,7 @@ __copyright__ = \
     'Unpublished Copyright (c) 2000 some_author. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-from pkg_resources import get_distribution, DistributionNotFound
+from pkg_resources import DistributionNotFound, get_distribution
 
 try:
     __version__ = get_distribution('some_package_name').version
