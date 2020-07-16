@@ -18,11 +18,11 @@ from hamcrest import assert_that, is_
 
 from pyincept.archetype_base import ArchetypeBase
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer import FileRenderer
+from pyincept.file_builder import FileBuilder
 from tests.pyincept_test_base import PyinceptTestBase
 
 
-class _MockFileRenderer(FileRenderer):
+class _MockFileBuilder(FileBuilder):
 
     def __init__(self, subpath, render_content) -> None:
         super().__init__()
@@ -66,8 +66,8 @@ class TestArchetypeBase(object):
 
         self._archetype = ArchetypeBase(
             (
-                _MockFileRenderer('some_subpath', 'some_content'),
-                _MockFileRenderer('some_other_subpath', 'some_other_content')
+                _MockFileBuilder('some_subpath', 'some_content'),
+                _MockFileBuilder('some_other_subpath', 'some_other_content')
             )
         )
 

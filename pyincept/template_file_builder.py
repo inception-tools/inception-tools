@@ -1,8 +1,8 @@
 """
-template_renderer
+template_file_builder
 ~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`TemplateRenderer` along with
+Houses the declaration of :py:class:`TemplateFileBuilder` along with
 supporting classes, functions, and attributes.
 """
 
@@ -16,10 +16,10 @@ import os
 from jinja2 import Template
 
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer import FileRenderer
+from pyincept.file_builder import FileBuilder
 
 
-class TemplateRenderer(FileRenderer):
+class TemplateFileBuilder(FileBuilder):
     """
     This class uses :py:class:jinja2.Template` instances to create both the
     subpath and content of a file.
@@ -34,7 +34,7 @@ class TemplateRenderer(FileRenderer):
 
     def __init__(self, subpath: Template, prototype: Template) -> None:
         """
-        Initializes a new :py:class:`TemplateRenderer` instance.
+        Initializes a new :py:class:`TemplateFileBuilder` instance.
         :param subpath: the template used to produce the return value of
         :py:meth:`subpath`
         :param prototype: the template used to produce the return value of

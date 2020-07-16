@@ -1,8 +1,8 @@
 """
-test_template_renderer
+test_template_file_builder
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Unit test cases for the :py:mod:`template_renderer` module.
+Unit test cases for the :py:mod:`template_file_builder` module.
 """
 
 __author__ = 'Andrew van Herick'
@@ -17,12 +17,12 @@ from hamcrest import assert_that, is_
 from jinja2 import Template
 
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.template_renderer import TemplateRenderer
+from pyincept.template_file_builder import TemplateFileBuilder
 
 
-class TestTemplateRenderer(object):
+class TestTemplateFileBuilder(object):
     """
-    Unit test for :py:class:`TemplateRenderer`.
+    Unit test for :py:class:`TemplateFileBuilder`.
     """
 
     ##############################
@@ -50,7 +50,7 @@ class TestTemplateRenderer(object):
         keep_trailing_newline=True
     )
 
-    _RENDERER = TemplateRenderer(_SUBPATH, _PROTOTYPE)
+    _RENDERER = TemplateFileBuilder(_SUBPATH, _PROTOTYPE)
 
     ##############################
     # Instance methods
@@ -59,7 +59,7 @@ class TestTemplateRenderer(object):
 
     def test_subpath(self):
         """
-        Unit test case for :py:method:`TemplateRenderer.subpath`.
+        Unit test case for :py:method:`TemplateFileBuilder.subpath`.
         """
         actual = self._RENDERER.subpath(self._PARAMS)
         expected = os.path.join(
@@ -73,7 +73,7 @@ class TestTemplateRenderer(object):
 
     def test_render(self):
         """
-        Unit test case for :py:method:`TemplateRenderer.render`.
+        Unit test case for :py:method:`TemplateFileBuilder.render`.
         """
         actual = self._RENDERER.render(self._PARAMS)
         expected = \

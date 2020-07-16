@@ -17,7 +17,7 @@ from jinja2 import Template
 
 from pyincept.archetype_base import ArchetypeBase
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer import FileRenderer
+from pyincept.file_builder import FileBuilder
 
 _ARCHITYPE_DIR = os.path.abspath(
     os.path.join(
@@ -39,8 +39,8 @@ _INIT_FILE_NAME = '__init__.py'
 _TEST_PACKAGE_FORMAT = 'test_{}'
 
 
-class _ProjectRootRenderers(FileRenderer, Enum, metaclass=_ABCEnumMeta):
-    # Enumerates the :py:`FileRenderer` instances used by
+class _ProjectRootRenderers(FileBuilder, Enum, metaclass=_ABCEnumMeta):
+    # Enumerates the :py:`FileBuilder` instances used by
     # :py:attr:`StandardArchetype.PROJECT_ROOT`.
 
     INIT_PACKAGE = (
@@ -172,8 +172,8 @@ class StandardArchetype(ArchetypeBase, Enum, metaclass=_ABCEnumMeta):
     # `package_name` attribute of the params argument.
     PROJECT_ROOT = (_ProjectRootRenderers,)
 
-    def __init__(self, file_renderers: Iterable[FileRenderer]) -> None:
+    def __init__(self, file_builders: Iterable[FileBuilder]) -> None:
         # Referencing ArchetypeBase directly for the sake of supporting Python
         # 3.5, which does not seem to handle call to super() in the context of
         # multiple inheritance as gracefully as the later versions do.
-        ArchetypeBase.__init__(self, file_renderers)
+        ArchetypeBase.__init__(self, file_builders)

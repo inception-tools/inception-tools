@@ -15,7 +15,7 @@ from typing import Iterable
 
 from pyincept.archetype import Archetype
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer import FileRenderer
+from pyincept.file_builder import FileBuilder
 
 
 class ArchetypeBase(Archetype):
@@ -25,25 +25,25 @@ class ArchetypeBase(Archetype):
     :py:meth:`Archetype.output_files`.
     """
 
-    def __init__(self, file_renderers: Iterable[FileRenderer]) -> None:
+    def __init__(self, file_builders: Iterable[FileBuilder]) -> None:
         """
         Class initializer.
-        :param file_renderers: a set of :py:class:`FileRenderer` instances
+        :param file_builders: a set of :py:class:`FileBuilder` instances
         used by :py:class:`build` to create project structure.
         """
         super().__init__()
-        self._file_renderers = file_renderers
+        self._file_builders = file_builders
 
     def output_files(
             self,
             root_path: str,
             params: ArchetypeParameters
     ) -> Iterable[str]:
-        return tuple(r.path(root_path, params) for r in self._file_renderers)
+        return tuple(r.path(root_path, params) for r in self._file_builders)
 
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         """
-        Builds the project structure using the :py:class:`FileRenderer`
+        Builds the project structure using the :py:class:`FileBuilder`
         instances held by this instance.
         :param root_dir: the root directory of the project structure to be
         created
@@ -51,5 +51,5 @@ class ArchetypeBase(Archetype):
         for the project to be built
         :return: :py:const:`None`
         """
-        for r in self._file_renderers:
+        for r in self._file_builders:
             r.build(root_dir, params)

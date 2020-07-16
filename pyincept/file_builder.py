@@ -1,8 +1,8 @@
 """
-file_renderer
+file_builder
 ~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`FileRenderer` along with supporting
+Houses the declaration of :py:class:`FileBuilder` along with supporting
 classes, functions, and attributes.
 """
 
@@ -20,7 +20,7 @@ from pyincept.archetype_resource_builder import ArchetypeResourceBuilder
 from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
 
-class FileRenderer(ArchetypeResourceBuilder, ABC):
+class FileBuilder(ArchetypeResourceBuilder, ABC):
     """
     This abstract base provides a common interface for building files for an
     an :py:class:`pyincept.Archetype`.  It provides 'template-method'

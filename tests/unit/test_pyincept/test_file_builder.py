@@ -1,8 +1,8 @@
 """
-    test_file_renderer
-    ~~~~~~~~~~~~~~~~~~
+    test_file_builder
+    ~~~~~~~~~~~~~~~~~
 
-    Unit test cases for the :py:mod:`file_renderer` module.
+    Unit test cases for the :py:mod:`file_builder` module.
 """
 
 __author__ = 'Andrew van Herick'
@@ -17,11 +17,11 @@ from datetime import datetime
 from hamcrest import assert_that, is_
 
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer import FileRenderer
+from pyincept.file_builder import FileBuilder
 from tests.pyincept_test_base import PyinceptTestBase
 
 
-class _MockFileRenderer(FileRenderer):
+class _MockFileBuilder(FileBuilder):
 
     def __init__(self, subpath, render_content) -> None:
         super().__init__()
@@ -37,7 +37,7 @@ class _MockFileRenderer(FileRenderer):
 
 class TestFileRenderer(object):
     """
-    Unit test for class :py:class:`FileRenderer`.
+    Unit test for class :py:class:`FileBuilder`.
     """
 
     ##############################
@@ -63,7 +63,7 @@ class TestFileRenderer(object):
         """
         PyinceptTestBase._validate_path_doesnt_exist(self._PROJECT_ROOT)
 
-        self._file_renderer = _MockFileRenderer('some_subpath', 'some_content')
+        self._file_builder = _MockFileBuilder('some_subpath', 'some_content')
 
     def teardown(self):
         """
@@ -79,17 +79,17 @@ class TestFileRenderer(object):
 
     def test_path(self):
         """
-        Unit test case for :py:method:`FileRenderer.path`.
+        Unit test case for :py:method:`FileBuilder.path`.
         """
-        actual = self._file_renderer.path(self._PROJECT_ROOT, self._PARAMS)
+        actual = self._file_builder.path(self._PROJECT_ROOT, self._PARAMS)
         expected = os.path.join('some_project_root', 'some_subpath')
         assert_that(actual, is_(expected))
 
     def test_build(self):
         """
-        Unit test case for :py:method:`FileRenderer.build`.
+        Unit test case for :py:method:`FileBuilder.build`.
         """
-        self._file_renderer.build(self._PROJECT_ROOT, self._PARAMS)
+        self._file_builder.build(self._PROJECT_ROOT, self._PARAMS)
 
         with open(os.path.join('some_project_root', 'some_subpath')) as f:
             actual = f.read()
