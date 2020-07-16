@@ -13,21 +13,80 @@ from abc import ABCMeta
 from enum import Enum, EnumMeta
 from typing import Iterable
 
-from jinja2 import Template
-
+from pyincept.archetype import Archetype
 from pyincept.archetype_base import ArchetypeBase
+from pyincept.archetype_descriptor import ArchetypeDescriptor
+from pyincept.archetype_metadata import ArchetypeMetadata
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_builder import FileBuilder
+from pyincept.template_directory_builder import TemplateDirectoryBuilder
+from pyincept.template_file_builder import TemplateFileBuilder
 
-_ARCHITYPE_DIR = os.path.abspath(
+ARCHITYPE_DIR = os.path.abspath(
     os.path.join(
         __file__,
         os.pardir,
         'data',
-        'archetypes',
-        'pyincept-archetype-standard'
+        'archetypes'
     )
 )
+
+
+class StandardArchetype(ArchetypeBase):
+    """
+    Enumerates the standard :py:class:`Archetype` instances available
+    across the system.
+    """
+
+    _METADATA_FILE_NAME = 'archetype-metadata.json'
+    _DESCRIPTOR_FILE_NAME = 'archetype-descriptor.json'
+
+    def __init__(self, metadata, resource_builders) -> None:
+        super().__init__(resource_builders)
+        self._metadata = metadata
+
+    @classmethod
+    def _get_resource_builders(cls, dir_path, descriptor):
+        result = []
+        for f in descriptor.files:
+            f_path = os.path.join(dir_path, f.prototype)
+            with open(f_path) as fin:
+                prototype_content = fin.read()
+            fb = TemplateFileBuilder.from_strings(f.subpath, prototype_content)
+            result.append(fb)
+        for d in descriptor.directories:
+            dd = TemplateDirectoryBuilder.from_string(d.subpath)
+            result.append(dd)
+        return tuple(result)
+
+    @classmethod
+    def from_directory(cls, dir_path: str) -> Archetype:
+        """
+        Factory method for creating a new :py:class:`Archetype` instance
+        from an directory assumed to contain an
+        :py:class:`ArchetypeMetadata` JSON file,
+        a :py:class:`ArchetypeDescriptor` file, and any prototypes
+        referenced through the descriptor.
+
+        :param dir_path: the path to the directory containing the
+        :py:class:`Archetype` files
+        :return: the :py:class:`Archetype` instance
+        """
+        with open(cls._metadata_path(dir_path)) as metadata_f:
+            metadata = ArchetypeMetadata.from_text_io(metadata_f)
+
+        with open(cls._descriptor_path(dir_path)) as descriptor_f:
+            descriptor = ArchetypeDescriptor.from_text_io(descriptor_f)
+
+        resource_builders = cls._get_resource_builders(dir_path, descriptor)
+        return cls(metadata, resource_builders)
+
+    @classmethod
+    def _metadata_path(cls, dir_path):
+        return os.path.join(dir_path, cls._METADATA_FILE_NAME)
+
+    @classmethod
+    def _descriptor_path(cls, dir_path):
+        return os.path.join(dir_path, cls._DESCRIPTOR_FILE_NAME)
 
 
 class _ABCEnumMeta(ABCMeta, EnumMeta):
@@ -35,104 +94,7 @@ class _ABCEnumMeta(ABCMeta, EnumMeta):
     pass
 
 
-_INIT_FILE_NAME = '__init__.py'
-_TEST_PACKAGE_FORMAT = 'test_{}'
-
-
-class _ProjectRootRenderers(FileBuilder, Enum, metaclass=_ABCEnumMeta):
-    # Enumerates the :py:`FileBuilder` instances used by
-    # :py:attr:`StandardArchetype.PROJECT_ROOT`.
-
-    INIT_PACKAGE = (
-        '__init___package.py.jinja',
-        lambda b: os.path.join(b.package_name, _INIT_FILE_NAME)
-    )
-
-    INIT_TESTS = (
-        '__init___tests.py.jinja',
-        lambda b: os.path.join('tests', _INIT_FILE_NAME)
-    )
-
-    INIT_TESTS_END_TO_END = (
-        '__init___tests_end_to_end.py.jinja',
-        lambda b: os.path.join('tests', 'end_to_end', _INIT_FILE_NAME)
-    )
-
-    INIT_TESTS_END_TO_END_PACKAGE = (
-        '__init___tests_end_to_end_package.py.jinja',
-        lambda b: os.path.join(
-            'tests',
-            'end_to_end',
-            _TEST_PACKAGE_FORMAT.format(b.package_name),
-            _INIT_FILE_NAME
-        )
-    )
-
-    INIT_TESTS_INTEGRATION = (
-        '__init___tests_integration.py.jinja',
-        lambda b: os.path.join('tests', 'integration', _INIT_FILE_NAME)
-    )
-
-    INIT_TESTS_INTEGRATION_PACKAGE = (
-        '__init___tests_integration_package.py.jinja',
-        lambda b: os.path.join(
-            'tests',
-            'integration',
-            _TEST_PACKAGE_FORMAT.format(b.package_name),
-            _INIT_FILE_NAME
-        )
-    )
-
-    INIT_TESTS_UNIT = (
-        '__init___tests_unit.py.jinja',
-        lambda b: os.path.join('tests', 'unit', _INIT_FILE_NAME)
-    )
-
-    INIT_TESTS_UNIT_PACKAGE = (
-        '__init___tests_unit_package.py.jinja',
-        lambda b: os.path.join(
-            'tests',
-            'unit',
-            _TEST_PACKAGE_FORMAT.format(b.package_name),
-            _INIT_FILE_NAME
-        )
-    )
-
-    LICENSE = ('LICENSE.apache.jinja', lambda b: 'LICENSE')
-
-    LOG_CFG = ('log.cfg.jinja', lambda b: 'log.cfg')
-
-    MAIN = ('main.py.jinja', lambda b: os.path.join(b.package_name, 'main.py'))
-
-    MAKEFILE = ('Makefile.jinja', lambda b: 'Makefile')
-
-    PIPFILE = ('Pipfile.jinja', lambda b: 'Pipfile')
-
-    README_RST = ('README.rst.jinja', lambda b: 'README.rst')
-
-    SETUP_CFG = ('setup.cfg.jinja', lambda b: 'setup.cfg')
-
-    SETUP_PY = ('setup.py.jinja', lambda b: 'setup.py')
-
-    @classmethod
-    def _get_template(cls, template_name) -> Template:
-        template_path = os.path.join(_ARCHITYPE_DIR, template_name)
-        with open(template_path) as f:
-            content = f.read()
-            return Template(content, keep_trailing_newline=True)
-
-    def __init__(self, template_name, subpath_function) -> None:
-        self._template = self._get_template(template_name)
-        self._subpath = subpath_function
-
-    def subpath(self, params: ArchetypeParameters) -> str:
-        return self._subpath(params)
-
-    def render(self, params):
-        return self._template.render(**params.as_dict())
-
-
-class StandardArchetype(ArchetypeBase, Enum, metaclass=_ABCEnumMeta):
+class DefaultArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     """
     Enumerates the standard :py:class:`Archetype` instances available
     across the system.
@@ -170,10 +132,21 @@ class StandardArchetype(ArchetypeBase, Enum, metaclass=_ABCEnumMeta):
     #:
     #: where 'root_dir' is the `root_dir argument and 'my_package' is the
     # `package_name` attribute of the params argument.
-    PROJECT_ROOT = (_ProjectRootRenderers,)
+    PROJECT_ROOT = ('pyincept-archetype-standard',)
 
-    def __init__(self, resource_builders: Iterable[FileBuilder]) -> None:
+    def __init__(self, architype_resource_id) -> None:
         # Referencing ArchetypeBase directly for the sake of supporting Python
         # 3.5, which does not seem to handle call to super() in the context of
         # multiple inheritance as gracefully as the later versions do.
-        ArchetypeBase.__init__(self, resource_builders)
+        dir_path = os.path.join(ARCHITYPE_DIR, architype_resource_id)
+        self._delegate = StandardArchetype.from_directory(dir_path)
+
+    def output_files(
+            self,
+            root_path: str,
+            params: ArchetypeParameters
+    ) -> Iterable[str]:
+        return self._delegate.output_files(root_path, params)
+
+    def build(self, root_dir: str, params: ArchetypeParameters) -> None:
+        return self._delegate.build(root_dir, params)

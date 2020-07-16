@@ -15,7 +15,9 @@ import shutil
 
 from hamcrest import assert_that
 
-from pyincept.standard_archetype import StandardArchetype
+from pyincept.standard_archetype import (
+    ARCHITYPE_DIR, DefaultArchetype,
+)
 from tests.pyincept_test_base import PyinceptTestBase
 
 
@@ -62,7 +64,12 @@ class TestStandardArchetype(PyinceptTestBase):
         # something unexpected has happened, so raise.
         self._validate_path_doesnt_exist(self._ROOT_DIR)
 
-        StandardArchetype.PROJECT_ROOT.build(self._ROOT_DIR, self._PARAMS)
+        archetype_dir = os.path.join(
+            ARCHITYPE_DIR,
+            'pyincept-archetype-standard'
+        )
+
+        DefaultArchetype.PROJECT_ROOT.build(self._ROOT_DIR, self._PARAMS)
 
     def teardown(self):
         """

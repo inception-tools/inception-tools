@@ -43,11 +43,11 @@ class Archetype(ABC):
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @abstractmethod
-    def build(self, root_path: str, params: ArchetypeParameters) -> None:
+    def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         """
         Builds the project structure for this instance.  See the class-level
         documentation of :py:class:`Archetype` for more information.
-        :param root_path: the root directory of the project structure to be
+        :param root_dir: the root directory of the project structure to be
         created
         :param params: the :py:class:`ArchetypeParameters` to use as context
         for the project to be built

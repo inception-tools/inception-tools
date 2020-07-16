@@ -18,7 +18,7 @@ from logging.config import fileConfig
 import click
 
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.standard_archetype import StandardArchetype
+from pyincept.standard_archetype import DefaultArchetype
 
 
 def _logger():
@@ -33,7 +33,7 @@ def _main(package_name, author, author_email):
         author_email=author_email,
         date=datetime.now()
     )
-    archetype = StandardArchetype.PROJECT_ROOT
+    archetype = DefaultArchetype.PROJECT_ROOT
     archetype.build(root_dir=package_name, params=params)
 
 

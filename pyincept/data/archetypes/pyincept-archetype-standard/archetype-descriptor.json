@@ -5,18 +5,6 @@
     },
     {
       "subpath": "scripts"
-    },
-    {
-      "subpath": "{{package_name}}"
-    },
-    {
-      "subpath": "tests/end_to_end/test_{{package_name}}"
-    },
-    {
-      "subpath": "tests/integration/test_{{package_name}}"
-    },
-    {
-      "subpath": "tests/unit/test_{{package_name}}"
     }
   ],
   "files": [
@@ -53,8 +41,8 @@
       "prototype": "__init___package.py.jinja"
     },
     {
-      "subpath": "{{package_name}}/{{package_name}}.py",
-      "prototype": "entry_point.py.jinja"
+      "subpath": "{{package_name}}/main.py",
+      "prototype": "main.py.jinja"
     },
     {
       "subpath": "tests/__init__.py",
