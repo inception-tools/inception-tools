@@ -1,8 +1,8 @@
 """
-    test_file_renderer_base
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    test_file_renderer
+    ~~~~~~~~~~~~~~~~~~
 
-    Unit test cases for the :py:mod:`file_renderer_base` module.
+    Unit test cases for the :py:mod:`file_renderer` module.
 """
 
 __author__ = 'Andrew van Herick'
@@ -17,11 +17,11 @@ from datetime import datetime
 from hamcrest import assert_that, is_
 
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer_base import FileRendererBase
+from pyincept.file_renderer import FileRenderer
 from tests.pyincept_test_base import PyinceptTestBase
 
 
-class _MockFileRenderer(FileRendererBase):
+class _MockFileRenderer(FileRenderer):
 
     def __init__(self, subpath, render_content) -> None:
         super().__init__()
@@ -35,9 +35,9 @@ class _MockFileRenderer(FileRendererBase):
         return self.render_value
 
 
-class TestFileRendererBase(object):
+class TestFileRenderer(object):
     """
-    Unit test for class :py:class:`FileRendererBase`.
+    Unit test for class :py:class:`FileRenderer`.
     """
 
     ##############################
@@ -79,7 +79,7 @@ class TestFileRendererBase(object):
 
     def test_path(self):
         """
-        Unit test case for :py:method:`FileRendererBase.path`.
+        Unit test case for :py:method:`FileRenderer.path`.
         """
         actual = self._file_renderer.path(self._PROJECT_ROOT, self._PARAMS)
         expected = os.path.join('some_project_root', 'some_subpath')
@@ -87,7 +87,7 @@ class TestFileRendererBase(object):
 
     def test_build(self):
         """
-        Unit test case for :py:method:`FileRendererBase.build`.
+        Unit test case for :py:method:`FileRenderer.build`.
         """
         self._file_renderer.build(self._PROJECT_ROOT, self._PARAMS)
 

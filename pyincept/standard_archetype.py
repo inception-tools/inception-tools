@@ -18,7 +18,6 @@ from jinja2 import Template
 from pyincept.archetype_base import ArchetypeBase
 from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.file_renderer import FileRenderer
-from pyincept.file_renderer_base import FileRendererBase
 
 _ARCHITYPE_DIR = os.path.abspath(
     os.path.join(
@@ -40,7 +39,7 @@ _INIT_FILE_NAME = '__init__.py'
 _TEST_PACKAGE_FORMAT = 'test_{}'
 
 
-class _ProjectRootRenderers(FileRendererBase, Enum, metaclass=_ABCEnumMeta):
+class _ProjectRootRenderers(FileRenderer, Enum, metaclass=_ABCEnumMeta):
     # Enumerates the :py:`FileRenderer` instances used by
     # :py:attr:`StandardArchetype.PROJECT_ROOT`.
 

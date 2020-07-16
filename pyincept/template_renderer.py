@@ -16,10 +16,10 @@ import os
 from jinja2 import Template
 
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer_base import FileRendererBase
+from pyincept.file_renderer import FileRenderer
 
 
-class TemplateRenderer(FileRendererBase):
+class TemplateRenderer(FileRenderer):
     """
     This class uses :py:class:jinja2.Template` instances to create both the
     subpath and content of a file.

@@ -18,11 +18,11 @@ from hamcrest import assert_that, is_
 
 from pyincept.archetype_base import ArchetypeBase
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.file_renderer_base import FileRendererBase
+from pyincept.file_renderer import FileRenderer
 from tests.pyincept_test_base import PyinceptTestBase
 
 
-class _MockFileRenderer(FileRendererBase):
+class _MockFileRenderer(FileRenderer):
 
     def __init__(self, subpath, render_content) -> None:
         super().__init__()
