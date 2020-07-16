@@ -33,6 +33,21 @@ class TemplateDirectoryBuilder(DirectoryBuilder):
     automatically by :py:meth:`subpath`.
     """
 
+    @classmethod
+    def from_string(cls, subpath):
+        """
+        Factory method that builds a new :py:class:`TemplateDirectoryBuilder`
+        instance from a :py:class:`jinja2.Template` source ``string``,
+        which will be used to create the return value of :py:meth:`subpath`
+        from the ``params`` argument.
+        :param subpath: the subpath template string
+        :return: the new instance
+        :rtype: TemplateDirectoryBuilder
+        .. seealso:: :py:meth:`__init__`
+        """
+        t = Template(subpath)
+        return cls(t)
+
     def __init__(self, template: Template) -> None:
         """
         Initializes a new :py:class:`TemplateDirectoryBuilder` instance.

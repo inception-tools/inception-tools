@@ -29,9 +29,9 @@ class TestTemplateDirectoryBuilder(object):
 
     _PARAMS = PyinceptTestBase._PARAMS
 
-    _SUBPATH = Template(
+    _SUBPATH_SOURCE = \
         '{{package_name}}/{{author}}/{{author_email}}/{{date.year}}/'
-    )
+    _SUBPATH = Template(_SUBPATH_SOURCE)
 
     _BUILDER = TemplateDirectoryBuilder(_SUBPATH)
 
@@ -39,6 +39,20 @@ class TestTemplateDirectoryBuilder(object):
     # Instance methods
 
     # Test cases
+
+    def test_from_string(self):
+        """
+        Unit test case for
+        :py:method:`TemplateDirectoryBuilder.from_string`.
+        """
+        actual = TemplateDirectoryBuilder.from_string(
+            self._SUBPATH_SOURCE
+        )
+        expected = self._BUILDER
+        assert_that(
+            actual.subpath(self._PARAMS),
+            is_(expected.subpath(self._PARAMS))
+        )
 
     def test_subpath(self):
         """

@@ -29,17 +29,16 @@ class TestTemplateFileBuilder(object):
 
     _PARAMS = PyinceptTestBase._PARAMS
 
-    _SUBPATH = Template(
+    _SUBPATH_SOURCE = \
         '{{package_name}}/{{author}}/{{author_email}}/{{date.year}}/'
-    )
+    _SUBPATH = Template(_SUBPATH_SOURCE)
 
-    _PROTOTYPE = Template(
-        'package_name={{package_name}},\n'
-        'author={{author}},\n'
-        'author_email={{author_email}},\n'
-        'year={{date.year}},\n',
-        keep_trailing_newline=True
-    )
+    _PROTOTYPE_SOURCE = \
+        'package_name={{package_name}},\n' \
+        'author={{author}},\n' \
+        'author_email={{author_email}},\n' \
+        'year={{date.year}},\n'
+    _PROTOTYPE = Template(_PROTOTYPE_SOURCE, keep_trailing_newline=True)
 
     _BUILDER = TemplateFileBuilder(_SUBPATH, _PROTOTYPE)
 
@@ -47,6 +46,25 @@ class TestTemplateFileBuilder(object):
     # Instance methods
 
     # Test cases
+
+    def test_from_strings(self):
+        """
+        Unit test case for
+        :py:method:`TemplateFileBuilder.from_strings`.
+        """
+        actual = TemplateFileBuilder.from_strings(
+            self._SUBPATH_SOURCE,
+            self._PROTOTYPE_SOURCE
+        )
+        expected = self._BUILDER
+        assert_that(
+            actual.subpath(self._PARAMS),
+            is_(expected.subpath(self._PARAMS))
+        )
+        assert_that(
+            actual.render(self._PARAMS),
+            is_(expected.render(self._PARAMS))
+        )
 
     def test_subpath(self):
         """

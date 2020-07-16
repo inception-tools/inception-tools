@@ -32,6 +32,23 @@ class TemplateFileBuilder(FileBuilder):
     automatically by :py:meth:`subpath`.
     """
 
+    @classmethod
+    def from_strings(cls, subpath, prototype):
+        """
+        Factory method that builds a new :py:class:`TemplateDirectoryBuilder`
+        instance from :py:class:`jinja2.Template` source ``string``s,
+        which will be used to create the return value of :py:meth:`subpath`
+        and :py:meth:`render` from the ``params`` argument.
+        :param subpath: the subpath template string
+        :param prototype: the prototype template string
+        :return: the new instance
+        :rtype: TemplateFileBuilder
+        .. seealso:: :py:meth:`__init__`
+        """
+        s = Template(subpath)
+        p = Template(prototype, keep_trailing_newline=True)
+        return cls(s, p)
+
     def __init__(self, subpath: Template, prototype: Template) -> None:
         """
         Initializes a new :py:class:`TemplateFileBuilder` instance.
