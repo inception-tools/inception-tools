@@ -1,6 +1,6 @@
 """
 standard_archetype
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 Houses the declaration of :py:class:`TemplateArchetype` along with
 supporting classes, functions, and attributes.
@@ -35,7 +35,7 @@ class _ABCEnumMeta(ABCMeta, EnumMeta):
     pass
 
 
-class DefaultArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
+class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     """
     Enumerates the standard :py:class:`Archetype` instances available
     across the system.

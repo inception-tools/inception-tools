@@ -41,14 +41,14 @@ class TemplateArchetype(ArchetypeBase):
 
     METADATA_FILE_NAME = 'archetype-metadata.json'
     """
-    The name of the JSON file containing :py:class:`ArchitypeMetadata`.  
+    The name of the JSON file containing :py:class:`ArchitypeMetadata`.
     This file is used to determine what the canonical name of the architype.
     """
 
     DESCRIPTOR_FILE_NAME = 'archetype-descriptor.json'
     """
-    The name of the JSON file containing :py:class:`ArchitypeDescriptor` 
-    data. This file contains all of the information for mapping template 
+    The name of the JSON file containing :py:class:`ArchitypeDescriptor`
+    data. This file contains all of the information for mapping template
     files to sub-paths within the projects created by ``pyincept``.
     """
 
