@@ -36,10 +36,7 @@ class TestTemplateFileBuilder(object):
     )
 
     _SUBPATH = Template(
-        '{{package_name}}/'
-        '{{author}}/'
-        '{{author_email}}/'
-        '{{date.year}}/'
+        '{{package_name}}/{{author}}/{{author_email}}/{{date.year}}/'
     )
 
     _PROTOTYPE = Template(
@@ -50,7 +47,7 @@ class TestTemplateFileBuilder(object):
         keep_trailing_newline=True
     )
 
-    _RENDERER = TemplateFileBuilder(_SUBPATH, _PROTOTYPE)
+    _BUILDER = TemplateFileBuilder(_SUBPATH, _PROTOTYPE)
 
     ##############################
     # Instance methods
@@ -61,7 +58,7 @@ class TestTemplateFileBuilder(object):
         """
         Unit test case for :py:method:`TemplateFileBuilder.subpath`.
         """
-        actual = self._RENDERER.subpath(self._PARAMS)
+        actual = self._BUILDER.subpath(self._PARAMS)
         expected = os.path.join(
             self._PARAMS.package_name,
             self._PARAMS.author,
@@ -75,7 +72,7 @@ class TestTemplateFileBuilder(object):
         """
         Unit test case for :py:method:`TemplateFileBuilder.render`.
         """
-        actual = self._RENDERER.render(self._PARAMS)
+        actual = self._BUILDER.render(self._PARAMS)
         expected = \
             'package_name=some_package_name,\n' \
             'author=some_author,\n' \
