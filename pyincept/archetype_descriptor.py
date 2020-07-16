@@ -113,18 +113,26 @@ class ArchetypeDescriptor(
         """
         cls._validate_json(json_obj)
 
-        d_json = json_obj[_JsonKey.DIRECTORIES]
-        dir_descriptors = tuple(
-            DirectoryDescriptor(j[_JsonKey.SUBPATH]) for j in d_json
-        )
+        if isinstance(json_obj, dict):
 
-        f_json = json_obj[_JsonKey.FILES]
-        file_descriptors = tuple(
-            FileDescriptor(j[_JsonKey.SUBPATH], j[_JsonKey.PROTOTYPE])
-            for j in f_json
-        )
+            d_json = json_obj[_JsonKey.DIRECTORIES]
+            dir_descriptors = tuple(
+                DirectoryDescriptor(j[_JsonKey.SUBPATH]) for j in d_json
+            )
 
-        return cls(file_descriptors, dir_descriptors)
+            f_json = json_obj[_JsonKey.FILES]
+            file_descriptors = tuple(
+                FileDescriptor(j[_JsonKey.SUBPATH], j[_JsonKey.PROTOTYPE])
+                for j in f_json
+            )
+
+            return cls(file_descriptors, dir_descriptors)
+
+        raise RuntimeError(
+            'Expected an object of type \'dict\' but received: {!r}'.format(
+                json_obj
+            )
+        )
 
     @classmethod
     def _validate_json(cls, json_obj: JSON_OBJ_TYPE):
