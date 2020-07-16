@@ -68,6 +68,16 @@ class ArchetypeMetadata(
 
     @classmethod
     def from_json(cls, json_obj: JSON_OBJ_TYPE):
+        """
+        Creates a new :py:class:`ArchetypeMetadata` from a JSON-like
+        Python object of the form:
+
+        {
+            'group_id': <group-id-string>,
+            'archetype_id': <archetype-id-string>,
+            'version_id': <version-id-string>,
+        }
+        """
         cls._validate_json(json_obj)
 
         if isinstance(json_obj, dict):
@@ -84,6 +94,15 @@ class ArchetypeMetadata(
         )
 
     def to_json(self) -> dict:
+        """
+        Returns a JSON-like Python object of the form:
+
+        {
+            'group_id': <group-id-string>,
+            'archetype_id': <archetype-id-string>,
+            'version_id': <version-id-string>,
+        }
+        """
         json_obj = self._asdict()
         self._validate_json(json_obj)
         return json_obj
