@@ -42,11 +42,11 @@ class ArchetypeMetadata(
     """
 
     JSON_SCHEMA = {
-        "type": "object",
-        "properties": {
-            "group_id": {"type": "string"},
-            "archetype_id": {"type": "string"},
-            "version_id": {"type": "string"},
+        'type': 'object',
+        'properties': {
+            'group_id': {'type': 'string'},
+            'archetype_id': {'type': 'string'},
+            'version_id': {'type': 'string'},
         },
     }
     """
