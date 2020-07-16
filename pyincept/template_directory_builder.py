@@ -34,7 +34,7 @@ class TemplateDirectoryBuilder(DirectoryBuilder):
     """
 
     @classmethod
-    def from_string(cls, subpath):
+    def from_string(cls, subpath) -> DirectoryBuilder:
         """
         Factory method that builds a new :py:class:`TemplateDirectoryBuilder`
         instance from a :py:class:`jinja2.Template` source ``string``,
@@ -42,7 +42,6 @@ class TemplateDirectoryBuilder(DirectoryBuilder):
         from the ``params`` argument.
         :param subpath: the subpath template string
         :return: the new instance
-        :rtype: TemplateDirectoryBuilder
         .. seealso:: :py:meth:`__init__`
         """
         t = Template(subpath)
