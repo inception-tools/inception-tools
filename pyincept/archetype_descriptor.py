@@ -86,28 +86,30 @@ class ArchetypeDescriptor(
         Creates a new :py:class:`ArchetypeDescriptor` from a JSON-like
         Python object of the form:
 
-        {
-            'directories': [
-                {
-                    'subpath': <subpath-jinja2-template-string>
-                },
-                ...
-                {
-                    'subpath': <subpath-jinja2-template-string>
-                }
-            ],
-            'files': [
-                {
-                    'subpath': <subpath-jinja2-template-string>,
-                    'prototype': <subpath-jinja2-template-string>
-                },
-                ...
-                {
-                    'subpath': <subpath-jinja2-template-string>,
-                    'prototype': <subpath-jinja2-template-string>
-                }
-            ]
-        }
+        .. code-block::
+
+            {
+                'directories': [
+                    {
+                        'subpath': <subpath-jinja2-template-string>
+                    },
+                    ...
+                    {
+                        'subpath': <subpath-jinja2-template-string>
+                    }
+                ],
+                'files': [
+                    {
+                        'subpath': <subpath-jinja2-template-string>,
+                        'prototype': <subpath-jinja2-template-string>
+                    },
+                    ...
+                    {
+                        'subpath': <subpath-jinja2-template-string>,
+                        'prototype': <subpath-jinja2-template-string>
+                    }
+                ]
+            }
         """
         cls._validate_json(json_obj)
 
@@ -138,28 +140,30 @@ class ArchetypeDescriptor(
         """
         Returns a JSON-like Python object of the form:
 
-        {
-            'directories': [
-                {
-                    'subpath': <subpath-jinja2-template-string>
-                },
-                ...
-                {
-                    'subpath': <subpath-jinja2-template-string>
-                }
-            ],
-            'files': [
-                {
-                    'subpath': <subpath-jinja2-template-string>,
-                    'prototype': <subpath-jinja2-template-string>
-                },
-                ...
-                {
-                    'subpath': <subpath-jinja2-template-string>,
-                    'prototype': <subpath-jinja2-template-string>
-                }
-            ]
-        }
+        .. code-block::
+
+            {
+                'directories': [
+                    {
+                        'subpath': <subpath-jinja2-template-string>
+                    },
+                    ...
+                    {
+                        'subpath': <subpath-jinja2-template-string>
+                    }
+                ],
+                'files': [
+                    {
+                        'subpath': <subpath-jinja2-template-string>,
+                        'prototype': <subpath-jinja2-template-string>
+                    },
+                    ...
+                    {
+                        'subpath': <subpath-jinja2-template-string>,
+                        'prototype': <subpath-jinja2-template-string>
+                    }
+                ]
+            }
         """
         return {
             _JsonKey.DIRECTORIES: [d._asdict() for d in self.directories],

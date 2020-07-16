@@ -39,7 +39,6 @@ class ArchetypeResourceBuilder(ABC):
         content of the resource as well as the subpath under the root
         directory may be, but need-not be, determined by the parameters
         argument.
-
         :param root_dir: the root directory under which the resource
         should be stored
         :param params: the parameters used to determine the resource's

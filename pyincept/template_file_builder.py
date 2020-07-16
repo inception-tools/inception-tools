@@ -1,6 +1,6 @@
 """
 template_file_builder
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Houses the declaration of :py:class:`TemplateFileBuilder` along with
 supporting classes, functions, and attributes.
