@@ -11,6 +11,8 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
+import os
+
 from jinja2 import Template
 
 from pyincept.archetype_parameters import ArchetypeParameters
@@ -22,6 +24,13 @@ class TemplateDirectoryBuilder(DirectoryBuilder):
     An implementation of :py:class:`pyincept.DirectoryBuilder` which uses a
     :py:class:`jinja2.Template` to create the subpath for the directory to
     be built.
+    """
+
+    PATH_SEP = '/'
+    """
+    The path separator to use to write ``subpath`` templates. This
+    separator will be converted to the OS-specific path separator
+    automatically by :py:meth:`subpath`.
     """
 
     def __init__(self, template: Template) -> None:
@@ -37,4 +46,6 @@ class TemplateDirectoryBuilder(DirectoryBuilder):
         Renders the template held by using ``params`` dictionary
         representation.
         """
-        return self._template.render(params.as_dict())
+        subpath_raw = self._template.render(**params.as_dict())
+        subpath_split = subpath_raw.split(self.PATH_SEP)
+        return os.path.join(*subpath_split)
