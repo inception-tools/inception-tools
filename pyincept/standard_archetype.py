@@ -172,8 +172,8 @@ class StandardArchetype(ArchetypeBase, Enum, metaclass=_ABCEnumMeta):
     # `package_name` attribute of the params argument.
     PROJECT_ROOT = (_ProjectRootRenderers,)
 
-    def __init__(self, file_builders: Iterable[FileBuilder]) -> None:
+    def __init__(self, resource_builders: Iterable[FileBuilder]) -> None:
         # Referencing ArchetypeBase directly for the sake of supporting Python
         # 3.5, which does not seem to handle call to super() in the context of
         # multiple inheritance as gracefully as the later versions do.
-        ArchetypeBase.__init__(self, file_builders)
+        ArchetypeBase.__init__(self, resource_builders)
