@@ -41,7 +41,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     across the system.
     """
 
-    APPLICATION = ('pyincept-archetype-application',)
+    APPLICATION = ('pyincept-archetype-application-1.0',)
     """
     The :py:meth:`build` method of this :py:class:`Archetype` will create a
     directory/file tree with the following structure:
