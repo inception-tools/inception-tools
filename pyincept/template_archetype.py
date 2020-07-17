@@ -33,10 +33,10 @@ class TemplateArchetype(ArchetypeBase):
     descriptor.
     Variables available to the template are the fields of
     :py:class:`ArchetypeParameters`.  Each field of :py:class:`Architype`
-    parameters is available as an unscoped variable.  For example to
-    reference the fields :py:attr:`ArchitypeParameters.author`, you would
-    simple use the variable name 'author' directly using double curly
-    braces: {{author}}.
+    parameters is available as an unscoped variable.  For example,
+    to reference the fields :py:attr:`ArchitypeParameters.author`, you would
+    simple use the variable name 'author' directly using double curly braces
+    like so: ``{{author}}``.
     """
 
     METADATA_FILE_NAME = 'archetype-metadata.json'
