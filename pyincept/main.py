@@ -33,7 +33,7 @@ def _main(package_name, author, author_email):
         author_email=author_email,
         date=datetime.now()
     )
-    archetype = StandardArchetype.PROJECT_ROOT
+    archetype = StandardArchetype.APPLICATION
     archetype.build(root_dir=package_name, params=params)
 
 

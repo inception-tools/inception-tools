@@ -64,7 +64,7 @@ class TestStandardArchetype(PyinceptTestBase):
         # something unexpected has happened, so raise.
         self._validate_path_doesnt_exist(self._ROOT_DIR)
 
-        StandardArchetype.PROJECT_ROOT.build(self._ROOT_DIR, self._PARAMS)
+        StandardArchetype.APPLICATION.build(self._ROOT_DIR, self._PARAMS)
 
     def teardown(self):
         """

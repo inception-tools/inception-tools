@@ -73,7 +73,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     #:
     #: where 'root_dir' is the `root_dir argument and 'my_package' is the
     # `package_name` attribute of the params argument.
-    PROJECT_ROOT = ('pyincept-archetype-standard',)
+    APPLICATION = ('pyincept-archetype-application',)
 
     def __init__(self, architype_resource_id) -> None:
         # Referencing ArchetypeBase directly for the sake of supporting Python
