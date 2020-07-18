@@ -11,7 +11,6 @@ __copyright__ = \
 __license__ = 'Apache Software License 2.0'
 
 import os
-import shutil
 
 from hamcrest import assert_that
 
@@ -57,21 +56,8 @@ class TestStandardArchetype(PyinceptTestBase):
         Called before each method in this class with a name of the form
         test_*().
         """
-        # The project root directory should not already exist.  If it does,
-        # something unexpected has happened, so raise.
-        self._validate_path_doesnt_exist(self._ROOT_DIR)
-
+        super(TestStandardArchetype, self).setup()
         StandardArchetype.APPLICATION.build(self._ROOT_DIR, self._PARAMS)
-
-    def teardown(self):
-        """
-        Called after each method in this class with a name of the form
-        test_*().
-        """
-        if os.path.exists(self._ROOT_DIR):
-            shutil.rmtree(self._ROOT_DIR)
-
-        self._validate_path_doesnt_exist(self._ROOT_DIR)
 
     # Test cases
 
