@@ -12,7 +12,6 @@ __license__ = 'Apache Software License 2.0'
 
 import logging
 import os
-import shutil
 from contextlib import closing
 from io import StringIO
 from logging import StreamHandler
@@ -35,6 +34,8 @@ class TestMain(PyinceptTestBase):
 
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
+
+    _ROOT_DIR = PyinceptTestBase._PACKAGE_NAME
 
     _EXCEPTION = ValueError('Some test exception.')
 
@@ -64,27 +65,15 @@ class TestMain(PyinceptTestBase):
         Called before each method in this class with a name of the form
         test_*().
         """
-        mock_datetime.now.return_value = self._DATE
+        super(TestMain, self).setup()
 
-        # The project root directory should not already exist.  If it does,
-        # something unexpected has happened, so raise.
-        self._validate_path_doesnt_exist(self._PACKAGE_NAME)
+        mock_datetime.now.return_value = self._DATE
 
         self._runner = CliRunner()
         self._result = self._runner.invoke(
             main.build,
             (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
-
-    def teardown(self):
-        """
-        Called after each method in this class with a name of the form
-        test_*().
-        """
-        if os.path.exists(self._PACKAGE_NAME):
-            shutil.rmtree(self._PACKAGE_NAME)
-
-        self._validate_path_doesnt_exist(self._PACKAGE_NAME)
 
     # Test cases
 
