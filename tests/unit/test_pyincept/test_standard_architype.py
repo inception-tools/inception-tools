@@ -12,12 +12,10 @@ __license__ = 'Apache Software License 2.0'
 
 import os
 
-from hamcrest import assert_that
-
 from pyincept.standard_archetype import (
     StandardArchetype,
 )
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.pyincept_test_base import _TestOutput, PyinceptTestBase
 
 
 class TestStandardArchetype(PyinceptTestBase):
@@ -31,20 +29,55 @@ class TestStandardArchetype(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
+    _TEST_RESOURCE_PATH = os.path.abspath(
+        os.path.join(
+            __file__,
+            os.pardir,
+            'data',
+            'test_standard_archetype',
+        )
+    )
+
+    _EXPECTED_OUTPUT = (
+        _TestOutput('scripts', None),
+        _TestOutput('docs', None),
+        _TestOutput('LICENSE', os.path.join(_TEST_RESOURCE_PATH, 'LICENSE')),
+        _TestOutput(
+            'README.rst',
+            os.path.join(_TEST_RESOURCE_PATH, 'README.rst')
+        ),
+        _TestOutput(
+            'setup.cfg',
+            os.path.join(_TEST_RESOURCE_PATH, 'setup.cfg')
+        ),
+        _TestOutput('setup.py', os.path.join(_TEST_RESOURCE_PATH, 'setup.py')),
+        _TestOutput('log.cfg', os.path.join(_TEST_RESOURCE_PATH, 'log.cfg')),
+        _TestOutput('Makefile', os.path.join(_TEST_RESOURCE_PATH, 'Makefile')),
+        _TestOutput('Pipfile', os.path.join(_TEST_RESOURCE_PATH, 'Pipfile')),
+        _TestOutput(
+            os.path.join(PyinceptTestBase._PACKAGE_NAME, 'main.py'),
+            os.path.join(
+                _TEST_RESOURCE_PATH,
+                PyinceptTestBase._PACKAGE_NAME,
+                'main.py'
+            )
+        ),
+        _TestOutput(
+            os.path.join(PyinceptTestBase._PACKAGE_NAME, '__init__.py'),
+            os.path.join(
+                _TEST_RESOURCE_PATH,
+                PyinceptTestBase._PACKAGE_NAME,
+                '__init__.py'
+            )
+        ),
+    )
+
     ##############################
     # Class / static methods
 
     @classmethod
     def _get_resource_path(cls, resource_name):
-        return os.path.abspath(
-            os.path.join(
-                __file__,
-                os.pardir,
-                'data',
-                'test_standard_archetype',
-                resource_name
-            )
-        )
+        return os.path.join(cls._TEST_RESOURCE_PATH, resource_name)
 
     ##############################
     # Instance methods
@@ -61,70 +94,12 @@ class TestStandardArchetype(PyinceptTestBase):
 
     # Test cases
 
-    def test_build_creates_root_directory(self):
+    def test_build(self):
         """
         Unit test case for :py:method:`TemplateArchetype.build`.
         """
-        assert_that(
-            os.path.isdir(self._ROOT_DIR),
-            'Directory not found: {}'.format(self._ROOT_DIR)
-        )
-
-    def test_build_creates_license_file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'LICENSE')
-
-    def test_build_creates_readme_file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'README.rst')
-
-    def test_build_creates_setup_cfg(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'setup.cfg')
-
-    def test_build_creates_setup_py(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'setup.py')
-
-    def test_build_creates_log_cfg(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'log.cfg')
-
-    def test_build_creates_makefile(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'Makefile')
-
-    def test_build_creates_pipfile(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'Pipfile')
-
-    def test_build_creates_entry_point_file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join(self._PARAMS.package_name, 'main.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
-
-    def test_build_creates_package___init___file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join(self._PARAMS.package_name, '__init__.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
+        StandardArchetype.APPLICATION.build(self._ROOT_DIR, self._PARAMS)
+        self._validate_archetype_output(self._ROOT_DIR, self._EXPECTED_OUTPUT)
 
     def test_build_creates_tests___init___file(self):
         """
