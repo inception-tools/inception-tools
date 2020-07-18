@@ -32,9 +32,6 @@ class TestStandardArchetype(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ROOT_DIR = PyinceptTestBase._ROOT_DIR
-    _PARAMS = PyinceptTestBase._PARAMS
-
     ##############################
     # Class / static methods
 

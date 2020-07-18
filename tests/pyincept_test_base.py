@@ -44,12 +44,12 @@ class PyinceptTestBase(object):
 
     _ROOT_DIR = 'some_root_dir'
 
-    _PARAMS = ArchetypeParameters(
-        'some_package_name',
-        'some_author',
-        'some_author_email',
-        datetime.date(2000, 1, 1)
-    )
+    _PACKAGE_NAME = 'some_package_name'
+    _AUTHOR = 'some_author'
+    _AUTHOR_EMAIL = 'some_author_email'
+    _DATE = datetime.date(2000, 1, 1)
+
+    _PARAMS = ArchetypeParameters(_PACKAGE_NAME, _AUTHOR, _AUTHOR_EMAIL, _DATE)
 
     ##############################
     # Class / static methods

@@ -14,7 +14,6 @@ import logging
 import os
 import shutil
 from contextlib import closing
-from datetime import datetime
 from io import StringIO
 from logging import StreamHandler
 from unittest import mock
@@ -37,14 +36,7 @@ class TestMain(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'some_package_name'
-    _AUTHOR = 'some_author'
-    _AUTHOR_EMAIL = 'some_author_email'
-
     _EXCEPTION = ValueError('Some test exception.')
-
-    # Something earlier than the current year.
-    _DATE = datetime(2000, 1, 1)
 
     ##############################
     # Class / static methods
