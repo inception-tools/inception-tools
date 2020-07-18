@@ -11,14 +11,41 @@ __copyright__ = \
     'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
+#  Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
+#
+
 import datetime
 import os
+import shutil
 from abc import abstractmethod
+from typing import Union
 
 from hamcrest import assert_that, is_
 
 from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
+from tests.file_matcher import exists, is_dir, is_file, not_exists
+
+
+class _TestOutput(object):
+    """
+    A container for grouping information used to validate individual output
+    files.
+
+    Attributes:
+    * ``subpath`` - subpath under the root directory where the file should
+    exist
+    * ``is_file`` - ``True`` if the subpath represents a file, ``False``
+    if it represents a directory
+    """
+
+    def __init__(
+            self,
+            subpath: str,
+            expected_output_path: Union[str, None]
+    ) -> None:
+        self.subpath = subpath
+        self.expected_output_path = expected_output_path
 
 
 class PyinceptTestBase(object):
@@ -97,6 +124,49 @@ class PyinceptTestBase(object):
         actual_path = os.path.join(project_root, relative_path)
         expected_path = cls._get_resource_path(relative_path)
         cls._assert_matching_file_content(actual_path, expected_path)
+
+    ##############################
+    # Instance methods
+
+    def _validate_archetype_output(self, actual_root_dir, expected_output):
+        for test_output in expected_output:
+            actual_path = os.path.join(actual_root_dir, test_output.subpath)
+            assert_that(actual_path, exists())
+
+            if test_output.expected_output_path is not None:
+                assert_that(actual_path, is_file())
+                actual_content = self._get_file_content(actual_path)
+
+                expected_path = test_output.expected_output_path
+                if self._OVERWRITE_EXPECTED_FILE:
+                    self._put_file_content(expected_path, actual_content)
+                assert_that(expected_path, is_file())
+                expected_content = self._get_file_content(expected_path)
+
+                assert_that(actual_content, is_(expected_content))
+            else:
+                assert_that(actual_path, is_dir())
+
+    # Instance set up / tear down
+
+    def setup(self):
+        """
+        Called before each method in this class with a name of the form
+        test_*().
+        """
+        # The project root directory should not already exist.  If it does,
+        # something unexpected has happened, so raise.
+        assert_that(self._ROOT_DIR, not_exists())
+
+    def teardown(self):
+        """
+        Called after each method in this class with a name of the form
+        test_*().
+        """
+        if os.path.exists(self._ROOT_DIR):
+            shutil.rmtree(self._ROOT_DIR)
+
+        assert_that(self._ROOT_DIR, not_exists())
 
     # Test cases
 

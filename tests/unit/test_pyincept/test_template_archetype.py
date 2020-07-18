@@ -11,14 +11,14 @@ __copyright__ = \
 __license__ = 'Apache Software License 2.0'
 
 import os
-from typing import Tuple
 
-from pyincept.archetype import Archetype
+from hamcrest import assert_that, is_
+
 from pyincept.template_archetype import TemplateArchetype
-from tests.archetype_test_base import _TestOutput, ArchetypeTestBase
+from tests.pyincept_test_base import _TestOutput, PyinceptTestBase
 
 
-class TestTemplateArchetype(ArchetypeTestBase):
+class TestTemplateArchetype(PyinceptTestBase):
     """
     Unit test cases for :py:class:`TemplateArchetype`.
     """
@@ -40,27 +40,45 @@ class TestTemplateArchetype(ArchetypeTestBase):
         )
     )
 
+    _EXPECTED_OUTPUT = (
+        _TestOutput('tests', None),
+        _TestOutput(
+            'some_package_name.py',
+            os.path.join(_TEST_RESOURCE_PATH, 'some_package_name.py')
+        ),
+    )
+
     ##############################
     # Class / static methods
 
-    @classmethod
-    def _get_resource_path(cls, *subpath):
-        pass
+    def setup(self):
+        """
+        Called before each method in this class with a name of the form
+        test_*().
+        """
+        super(TestTemplateArchetype, self).setup()
+        dir_path = os.path.join(self._TEST_RESOURCE_PATH, self._ARCHETYPE_NAME)
+        self._archetype = TemplateArchetype(dir_path)
 
     ##############################
     # Instance methods
 
-    @property
-    def _archetype(self) -> Archetype:
-        dir_path = os.path.join(self._TEST_RESOURCE_PATH, self._ARCHETYPE_NAME)
-        return TemplateArchetype(dir_path)
+    # Test cases
 
-    @property
-    def _expected_output(self) -> Tuple:
-        return (
-            _TestOutput('tests', None),
-            _TestOutput(
-                'some_package_name.py',
-                os.path.join(self._TEST_RESOURCE_PATH, 'some_package_name.py')
-            ),
+    def test_output_files(self):
+        """
+        Unit test case for :py:method:`TemplateArchetype.output_files`.
+        """
+        actual = self._archetype.output_files(self._ROOT_DIR, self._PARAMS)
+        expected = tuple(
+            os.path.join(self._ROOT_DIR, p.subpath)
+            for p in self._EXPECTED_OUTPUT
         )
+        assert_that(sorted(actual), is_(sorted(expected)))
+
+    def test_build(self):
+        """
+        Unit test case for :py:method:`TemplateArchetype.build`.
+        """
+        self._archetype.build(self._ROOT_DIR, self._PARAMS)
+        self._validate_archetype_output(self._ROOT_DIR, self._EXPECTED_OUTPUT)
