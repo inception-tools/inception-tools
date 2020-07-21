@@ -2,7 +2,7 @@
     pyincept_test_base
     ~~~~~~~~~~~~~~~~~~
 
-    Houses the declaration of :py:class:`PyinceptTestBase` along with
+    Houses the declaration of :py:class:`ArchetypeOutputTestBase` along with
     supporting classes, functions, and attributes.
 """
 
@@ -27,10 +27,10 @@ from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 from tests.file_matcher import exists, is_dir, is_file, not_exists
 
 
-class _TestOutput(object):
+class _ArchetypeTestOutput(object):
     """
-    A container for grouping information used to validate individual output
-    files.
+    A container for grouping information used to validate individual
+    archetype output files.
 
     Attributes:
     * ``subpath`` - subpath under the root directory where the file should
@@ -48,7 +48,7 @@ class _TestOutput(object):
         self.expected_output_path = expected_output_path
 
 
-class PyinceptTestBase(object):
+class ArchetypeOutputTestBase(object):
     """
     Common base test class for test cases that validate the content of
     template files.

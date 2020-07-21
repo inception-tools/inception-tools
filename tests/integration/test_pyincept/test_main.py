@@ -17,10 +17,10 @@ from click.testing import CliRunner
 from hamcrest import assert_that
 
 from pyincept import main
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.archetype_output_test_base import ArchetypeOutputTestBase
 
 
-class TestMain(PyinceptTestBase):
+class TestMain(ArchetypeOutputTestBase):
     """
     Unit test for class :py:mod:`pyincept`.
     """
@@ -31,7 +31,7 @@ class TestMain(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ROOT_DIR = PyinceptTestBase._PACKAGE_NAME
+    _ROOT_DIR = ArchetypeOutputTestBase._PACKAGE_NAME
 
     ##############################
     # Class / static methods

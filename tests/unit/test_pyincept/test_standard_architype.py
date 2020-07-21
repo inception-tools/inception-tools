@@ -17,10 +17,25 @@ from hamcrest import assert_that, is_
 from pyincept.standard_archetype import (
     StandardArchetype,
 )
-from tests.pyincept_test_base import _TestOutput, PyinceptTestBase
+from tests.archetype_output_test_base import (
+    _ArchetypeTestOutput,
+    ArchetypeOutputTestBase,
+)
+
+import os
+
+from hamcrest import assert_that, is_
+
+from pyincept.standard_archetype import (
+    StandardArchetype,
+)
+from tests.archetype_output_test_base import (
+    _ArchetypeTestOutput,
+    ArchetypeOutputTestBase,
+)
 
 
-class TestStandardArchetype(PyinceptTestBase):
+class TestStandardArchetype(ArchetypeOutputTestBase):
     """
     Unit test for class :py:class:`ProjectBuilder`.
     """
@@ -40,7 +55,7 @@ class TestStandardArchetype(PyinceptTestBase):
         )
     )
 
-    _PACKAGE_NAME = PyinceptTestBase._PACKAGE_NAME
+    _PACKAGE_NAME = ArchetypeOutputTestBase._PACKAGE_NAME
 
     _EXPECTED_DIRS = ('scripts', 'docs')
 
@@ -65,9 +80,10 @@ class TestStandardArchetype(PyinceptTestBase):
 
     @classmethod
     def _expected_output(cls):
-        expected_dirs = tuple(_TestOutput(s, None) for s in cls._EXPECTED_DIRS)
+        expected_dirs = tuple(
+            _ArchetypeTestOutput(s, None) for s in cls._EXPECTED_DIRS)
         expected_files = tuple(
-            _TestOutput(
+            _ArchetypeTestOutput(
                 os.path.join(*s),
                 os.path.join(cls._TEST_RESOURCE_PATH, *s)
             )

@@ -15,10 +15,23 @@ import os
 from hamcrest import assert_that, is_
 
 from pyincept.template_archetype import TemplateArchetype
-from tests.pyincept_test_base import _TestOutput, PyinceptTestBase
+from tests.archetype_output_test_base import (
+    _ArchetypeTestOutput,
+    ArchetypeOutputTestBase,
+)
+
+import os
+
+from hamcrest import assert_that, is_
+
+from pyincept.template_archetype import TemplateArchetype
+from tests.archetype_output_test_base import (
+    _ArchetypeTestOutput,
+    ArchetypeOutputTestBase,
+)
 
 
-class TestTemplateArchetype(PyinceptTestBase):
+class TestTemplateArchetype(ArchetypeOutputTestBase):
     """
     Unit test cases for :py:class:`TemplateArchetype`.
     """
@@ -41,8 +54,8 @@ class TestTemplateArchetype(PyinceptTestBase):
     )
 
     _EXPECTED_OUTPUT = (
-        _TestOutput('tests', None),
-        _TestOutput(
+        _ArchetypeTestOutput('tests', None),
+        _ArchetypeTestOutput(
             'some_package_name.py',
             os.path.join(_TEST_RESOURCE_PATH, 'some_package_name.py')
         ),
