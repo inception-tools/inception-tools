@@ -2,14 +2,14 @@
 pyincept
 ========
 
-.. image:: https://github.com/avanherick/pyincept/workflows/Release%20Build/badge.svg
-  :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Release+Build%22
+.. image:: https://github.com/pyincept/pyincept/workflows/Release%20Build/badge.svg
+  :target: https://github.com/pyincept/pyincept/actions?query=workflow%3A%22Release+Build%22
 
-.. image:: https://github.com/avanherick/pyincept/workflows/Nightly%20Development%20Build/badge.svg
-  :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Nightly+Development+Build%22
+.. image:: https://github.com/pyincept/pyincept/workflows/Nightly%20Development%20Build/badge.svg
+  :target: https://github.com/pyincept/pyincept/actions?query=workflow%3A%22Nightly+Development+Build%22
 
-.. image:: https://github.com/avanherick/pyincept/workflows/Development%20Test%20Suite/badge.svg
-  :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Development+Test+Suite%22
+.. image:: https://github.com/pyincept/pyincept/workflows/Development%20Test%20Suite/badge.svg
+  :target: https://github.com/pyincept/pyincept/actions?query=workflow%3A%22Development+Test+Suite%22
 
 Under Construction
 ==================
@@ -50,7 +50,7 @@ https://pypi.org/project/pyincept/
 
 GitHub Repository:
 
-https://github.com/avanherick/pyincept
+https://github.com/pyincept/pyincept
 
 Installation
 ============
@@ -156,7 +156,7 @@ a pull request at the ``pyincept`` `repository`_ and tagging `@avanherick` for
 review.  Please see the `Development` section of this document for code style
 and branching guidelines.
 
-.. _`repository`: https://github.com/avanherick/pyincept/
+.. _`repository`: https://github.com/pyincept/pyincept/
 
 This project was created to fill what looked like a lack of standardized
 conventions practices for structuring Python projects, and out of the desire
@@ -169,7 +169,7 @@ which differ from those implemented here, we would welcome hearing about them.
 
 Please submit feedback, bugs, feature requests, and code changes using GitHub
 at:
-http://github.com/avanherick/pyincept
+http://github.com/pyincept/pyincept
 
 Development
 ===========
