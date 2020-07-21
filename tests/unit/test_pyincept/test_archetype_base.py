@@ -97,7 +97,7 @@ class TestArchetypeBase(object):
         """
         Unit test case for :py:method:`ArchetypeBase.build`.
         """
-        actual = self._archetype.output_files(self._ROOT_DIR, self._PARAMS)
+        actual = self._archetype.file_paths(self._ROOT_DIR, self._PARAMS)
         expected = (
             os.path.join('some_root_dir', 'some_subpath'),
             os.path.join('some_root_dir', 'some_other_subpath'),

@@ -22,18 +22,6 @@ from tests.archetype_output_test_base import (
     ArchetypeOutputTestBase,
 )
 
-import os
-
-from hamcrest import assert_that, is_
-
-from pyincept.standard_archetype import (
-    StandardArchetype,
-)
-from tests.archetype_output_test_base import (
-    _ArchetypeTestOutput,
-    ArchetypeOutputTestBase,
-)
-
 
 class TestStandardArchetype(ArchetypeOutputTestBase):
     """
@@ -94,13 +82,13 @@ class TestStandardArchetype(ArchetypeOutputTestBase):
     def test_output_files(self):
         """
         Unit test case for :py:method:`StandardArchetype.APPLICATION
-        .output_files`.
+        .file_paths`.
         """
         expected = (
             os.path.join(self._ROOT_DIR, j.subpath)
             for j in self._expected_output()
         )
-        actual = StandardArchetype.APPLICATION.output_files(
+        actual = StandardArchetype.APPLICATION.file_paths(
             self._ROOT_DIR,
             self._PARAMS
         )

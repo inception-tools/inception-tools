@@ -27,7 +27,7 @@ class Archetype(ABC):
     """
 
     @abstractmethod
-    def output_files(
+    def file_paths(
             self,
             root_path: str,
             params: ArchetypeParameters

@@ -20,16 +20,6 @@ from tests.archetype_output_test_base import (
     ArchetypeOutputTestBase,
 )
 
-import os
-
-from hamcrest import assert_that, is_
-
-from pyincept.template_archetype import TemplateArchetype
-from tests.archetype_output_test_base import (
-    _ArchetypeTestOutput,
-    ArchetypeOutputTestBase,
-)
-
 
 class TestTemplateArchetype(ArchetypeOutputTestBase):
     """
@@ -80,9 +70,9 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
 
     def test_output_files(self):
         """
-        Unit test case for :py:method:`TemplateArchetype.output_files`.
+        Unit test case for :py:method:`TemplateArchetype.file_paths`.
         """
-        actual = self._archetype.output_files(self._ROOT_DIR, self._PARAMS)
+        actual = self._archetype.file_paths(self._ROOT_DIR, self._PARAMS)
         expected = tuple(
             os.path.join(self._ROOT_DIR, p.subpath)
             for p in self._EXPECTED_OUTPUT

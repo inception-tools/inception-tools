@@ -84,12 +84,12 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
         dir_path = os.path.join(ARCHITYPE_DIR, architype_resource_id)
         self._delegate = TemplateArchetype(dir_path)
 
-    def output_files(
+    def file_paths(
             self,
             root_path: str,
             params: ArchetypeParameters
     ) -> Iterable[str]:
-        return self._delegate.output_files(root_path, params)
+        return self._delegate.file_paths(root_path, params)
 
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         return self._delegate.build(root_dir, params)

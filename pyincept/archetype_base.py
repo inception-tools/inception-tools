@@ -22,7 +22,7 @@ class ArchetypeBase(Archetype):
     """
     A base implementation of :py:class:`Archetype` that provides basic
     implementations of :py:meth:`Archetype.build` and
-    :py:meth:`Archetype.output_files`.
+    :py:meth:`Archetype.file_paths`.
     """
 
     def __init__(self, resource_builders: Iterable[FileBuilder]) -> None:
@@ -35,7 +35,7 @@ class ArchetypeBase(Archetype):
         super().__init__()
         self._file_builders = resource_builders
 
-    def output_files(
+    def file_paths(
             self,
             root_path: str,
             params: ArchetypeParameters
