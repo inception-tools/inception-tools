@@ -17,13 +17,11 @@ __license__ = 'Apache Software License 2.0'
 import datetime
 import os
 import shutil
-from abc import abstractmethod
 from collections import namedtuple
 
 from hamcrest import assert_that, is_
 
 from pyincept.archetype_parameters import ArchetypeParameters
-from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 from tests.file_matcher import exists, is_dir, is_file, not_exists
 
 _OutputFile = namedtuple('_OutputFile', ('subpath', 'expected_content_path'))
@@ -64,17 +62,6 @@ class ArchetypeOutputTestBase(object):
     # Class / static methods
 
     @classmethod
-    @abstractmethod
-    def _get_resource_path(cls, resource_name):
-        """
-        This method returns the path of a given resource name.
-
-        :param resource_name:
-        :return:
-        """
-        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
-
-    @classmethod
     def _get_file_content(cls, resource_path):
         with open(resource_path) as f:
             return f.read()
@@ -100,12 +87,6 @@ class ArchetypeOutputTestBase(object):
         expected_content = cls._get_file_content(expected_path)
 
         assert_that(actual_content, is_(expected_content))
-
-    @classmethod
-    def _validate_output_file_correct(cls, project_root, relative_path):
-        actual_path = os.path.join(project_root, relative_path)
-        expected_path = cls._get_resource_path(relative_path)
-        cls._assert_matching_file_content(actual_path, expected_path)
 
     ##############################
     # Instance methods

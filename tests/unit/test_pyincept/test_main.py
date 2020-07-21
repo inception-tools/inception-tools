@@ -40,21 +40,6 @@ class TestMain(ArchetypeOutputTestBase):
     _EXCEPTION = ValueError('Some test exception.')
 
     ##############################
-    # Class / static methods
-
-    @classmethod
-    def _get_resource_path(cls, resource_name):
-        return os.path.abspath(
-            os.path.join(
-                __file__,
-                os.pardir,
-                'data',
-                'test_pyincept',
-                resource_name
-            )
-        )
-
-    ##############################
     # Instance methods
 
     # Instance set up / tear down
