@@ -18,7 +18,7 @@ from pyincept.standard_archetype import (
     StandardArchetype,
 )
 from tests.archetype_output_test_base import (
-    _ArchetypeTestOutput,
+    _OutputDir, _OutputFile,
     ArchetypeOutputTestBase,
 )
 
@@ -67,28 +67,44 @@ class TestStandardArchetype(ArchetypeOutputTestBase):
     )
 
     @classmethod
-    def _expected_output(cls):
-        expected_dirs = tuple(
-            _ArchetypeTestOutput(s, None) for s in cls._EXPECTED_DIRS)
-        expected_files = tuple(
-            _ArchetypeTestOutput(
+    def _expected_files(cls):
+        return tuple(
+            _OutputFile(
                 os.path.join(*s),
                 os.path.join(cls._TEST_RESOURCE_PATH, *s)
             )
             for s in cls._EXPECTED_FILES
         )
-        return expected_dirs + expected_files
 
-    def test_output_files(self):
+    @classmethod
+    def _expected_dirs(cls):
+        return tuple(_OutputDir(s) for s in cls._EXPECTED_DIRS)
+
+    def test_file_paths(self):
         """
         Unit test case for :py:method:`StandardArchetype.APPLICATION
         .file_paths`.
         """
         expected = (
             os.path.join(self._ROOT_DIR, j.subpath)
-            for j in self._expected_output()
+            for j in self._expected_files()
         )
         actual = StandardArchetype.APPLICATION.file_paths(
+            self._ROOT_DIR,
+            self._PARAMS
+        )
+        assert_that(sorted(actual), is_(sorted(expected)))
+
+    def test_dir_paths(self):
+        """
+        Unit test case for :py:method:`StandardArchetype.APPLICATION
+        .file_paths`.
+        """
+        expected = (
+            os.path.join(self._ROOT_DIR, j.subpath)
+            for j in self._expected_dirs()
+        )
+        actual = StandardArchetype.APPLICATION.dir_paths(
             self._ROOT_DIR,
             self._PARAMS
         )
@@ -99,7 +115,5 @@ class TestStandardArchetype(ArchetypeOutputTestBase):
         Unit test case for :py:method:`StandardArchetype.APPLICATION.build`.
         """
         StandardArchetype.APPLICATION.build(self._ROOT_DIR, self._PARAMS)
-        self._validate_archetype_output(
-            self._ROOT_DIR,
-            self._expected_output()
-        )
+        self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
+        self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())

@@ -16,7 +16,7 @@ from hamcrest import assert_that, is_
 
 from pyincept.template_archetype import TemplateArchetype
 from tests.archetype_output_test_base import (
-    _ArchetypeTestOutput,
+    _OutputFile,
     ArchetypeOutputTestBase,
 )
 
@@ -43,9 +43,12 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
         )
     )
 
-    _EXPECTED_OUTPUT = (
-        _ArchetypeTestOutput('tests', None),
-        _ArchetypeTestOutput(
+    _OUTPUT_DIRS = (
+        _OutputFile('tests', None),
+    )
+
+    _OUTPUT_FILES = (
+        _OutputFile(
             'some_package_name.py',
             os.path.join(_TEST_RESOURCE_PATH, 'some_package_name.py')
         ),
@@ -68,14 +71,25 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
 
     # Test cases
 
-    def test_output_files(self):
+    def test_file_paths(self):
         """
         Unit test case for :py:method:`TemplateArchetype.file_paths`.
         """
         actual = self._archetype.file_paths(self._ROOT_DIR, self._PARAMS)
         expected = tuple(
             os.path.join(self._ROOT_DIR, p.subpath)
-            for p in self._EXPECTED_OUTPUT
+            for p in self._OUTPUT_FILES
+        )
+        assert_that(sorted(actual), is_(sorted(expected)))
+
+    def test_dir_paths(self):
+        """
+        Unit test case for :py:method:`TemplateArchetype.dir_paths`.
+        """
+        actual = self._archetype.dir_paths(self._ROOT_DIR, self._PARAMS)
+        expected = tuple(
+            os.path.join(self._ROOT_DIR, p.subpath)
+            for p in self._OUTPUT_DIRS
         )
         assert_that(sorted(actual), is_(sorted(expected)))
 
@@ -84,4 +98,5 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
         Unit test case for :py:method:`TemplateArchetype.build`.
         """
         self._archetype.build(self._ROOT_DIR, self._PARAMS)
-        self._validate_archetype_output(self._ROOT_DIR, self._EXPECTED_OUTPUT)
+        self._validate_archetype_files(self._ROOT_DIR, self._OUTPUT_FILES)
+        self._validate_archetype_dirs(self._ROOT_DIR, self._OUTPUT_DIRS)

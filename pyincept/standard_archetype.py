@@ -91,5 +91,12 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     ) -> Iterable[str]:
         return self._delegate.file_paths(root_path, params)
 
+    def dir_paths(
+            self,
+            root_path: str,
+            params: ArchetypeParameters
+    ) -> Iterable[str]:
+        return self._delegate.dir_paths(root_path, params)
+
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         return self._delegate.build(root_dir, params)

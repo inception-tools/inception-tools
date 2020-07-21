@@ -15,6 +15,7 @@ from typing import Iterable
 
 from pyincept.archetype import Archetype
 from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.directory_builder import DirectoryBuilder
 from pyincept.file_builder import FileBuilder
 
 
@@ -25,15 +26,20 @@ class ArchetypeBase(Archetype):
     :py:meth:`Archetype.file_paths`.
     """
 
-    def __init__(self, resource_builders: Iterable[FileBuilder]) -> None:
+    def __init__(
+            self,
+            file_builders: Iterable[FileBuilder],
+            dir_builders: Iterable[DirectoryBuilder]
+    ) -> None:
         """
         Class initializer.
-        :param resource_builders: a set of
+        :param file_builders: a set of
         :py:class:`pyincept.ArchetypeResourceBuilder` instances used by
         :py:class:`build` to create the project structure.
         """
         super().__init__()
-        self._file_builders = resource_builders
+        self._file_builders = file_builders
+        self._dir_builders = dir_builders
 
     def file_paths(
             self,
@@ -41,6 +47,13 @@ class ArchetypeBase(Archetype):
             params: ArchetypeParameters
     ) -> Iterable[str]:
         return tuple(r.path(root_path, params) for r in self._file_builders)
+
+    def dir_paths(
+            self,
+            root_path: str,
+            params: ArchetypeParameters
+    ) -> Iterable[str]:
+        return tuple(r.path(root_path, params) for r in self._dir_builders)
 
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         """
@@ -53,4 +66,6 @@ class ArchetypeBase(Archetype):
         :return: :py:const:`None`
         """
         for r in self._file_builders:
+            r.build(root_dir, params)
+        for r in self._dir_builders:
             r.build(root_dir, params)

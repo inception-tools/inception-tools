@@ -18,7 +18,7 @@ import datetime
 import os
 import shutil
 from abc import abstractmethod
-from typing import Union
+from collections import namedtuple
 
 from hamcrest import assert_that, is_
 
@@ -26,26 +26,8 @@ from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 from tests.file_matcher import exists, is_dir, is_file, not_exists
 
-
-class _ArchetypeTestOutput(object):
-    """
-    A container for grouping information used to validate individual
-    archetype output files.
-
-    Attributes:
-    * ``subpath`` - subpath under the root directory where the file should
-    exist
-    * ``is_file`` - ``True`` if the subpath represents a file, ``False``
-    if it represents a directory
-    """
-
-    def __init__(
-            self,
-            subpath: str,
-            expected_output_path: Union[str, None]
-    ) -> None:
-        self.subpath = subpath
-        self.expected_output_path = expected_output_path
+_OutputFile = namedtuple('_OutputFile', ('subpath', 'expected_content_path'))
+_OutputDir = namedtuple('_OutputDir', ('subpath',))
 
 
 class ArchetypeOutputTestBase(object):
@@ -128,24 +110,27 @@ class ArchetypeOutputTestBase(object):
     ##############################
     # Instance methods
 
-    def _validate_archetype_output(self, actual_root_dir, expected_output):
-        for test_output in expected_output:
-            actual_path = os.path.join(actual_root_dir, test_output.subpath)
+    def _validate_archetype_files(self, root_dir, output_files):
+        for test_output in output_files:
+            actual_path = os.path.join(root_dir, test_output.subpath)
             assert_that(actual_path, exists())
+            assert_that(actual_path, is_file())
 
-            if test_output.expected_output_path is not None:
-                assert_that(actual_path, is_file())
-                actual_content = self._get_file_content(actual_path)
+            actual_content = self._get_file_content(actual_path)
 
-                expected_path = test_output.expected_output_path
-                if self._OVERWRITE_EXPECTED_FILE:
-                    self._put_file_content(expected_path, actual_content)
-                assert_that(expected_path, is_file())
-                expected_content = self._get_file_content(expected_path)
+            expected_path = test_output.expected_content_path
+            if self._OVERWRITE_EXPECTED_FILE:
+                self._put_file_content(expected_path, actual_content)
+            assert_that(expected_path, is_file())
+            expected_content = self._get_file_content(expected_path)
 
-                assert_that(actual_content, is_(expected_content))
-            else:
-                assert_that(actual_path, is_dir())
+            assert_that(actual_content, is_(expected_content))
+
+    def _validate_archetype_dirs(self, root_dir, output_dirs):
+        for test_output in output_dirs:
+            actual_path = os.path.join(root_dir, test_output.subpath)
+            assert_that(actual_path, exists())
+            assert_that(actual_path, is_dir())
 
     # Instance set up / tear down
 
