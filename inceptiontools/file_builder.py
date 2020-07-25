@@ -24,7 +24,7 @@ class FileBuilder(ArchetypeResourceBuilder, ABC):
     """
     This abstract base provides a common interface for building files for an
     an :py:class:`inceptiontools.Archetype`.  It provides 'template-method'
-    implementations of the methods, :py:meth:`path` and:py:method:`build`
+    implementations of the methods, :py:meth:`path` and:py:method:`incept`
     which rely on subclass implementations to determine a subpath under the
     project root directory, as well as how to render file content,
     both from a :py:class:`inceptiontools.ArchetypeParameters`.
@@ -36,10 +36,10 @@ class FileBuilder(ArchetypeResourceBuilder, ABC):
     def path(self, root_dir: str, params: ArchetypeParameters) -> str:
         """
         Uses the implementation of :py:meth:`subpath` to determine the
-        absolute path to the file saved by :py:meth:`build`.
+        absolute path to the file saved by :py:meth:`incept`.
         :param root_dir: the root directory argument for
-        :py:meth:`build`
-        :param params: the parameters argument for :py:meth:`build`
+        :py:meth:`incept`
+        :param params: the parameters argument for :py:meth:`incept`
         :return: the path
         """
         return self._path(root_dir, params)
@@ -74,7 +74,7 @@ class FileBuilder(ArchetypeResourceBuilder, ABC):
         """
         Subclasses are required to implement this method.  Implementations
         of this method should return the subpath, under the root directory,
-        of the file to be saved by :py:meth:`build`.
+        of the file to be saved by :py:meth:`incept`.
         :param params: the :py:class `ArchetypeParameters` to use as context
         when creating the subpath, e.g., when storing files whose sub-path
         might be determined by the package name.
@@ -87,10 +87,10 @@ class FileBuilder(ArchetypeResourceBuilder, ABC):
         """
         Subclasses are required to implement this method.  Implementations
         of this method should return the content of the file to be saved by
-        :py:meth:`build`.
+        :py:meth:`incept`.
         :param params: the :py:class:`ArchetypeParameters` to use as context
         when building the content
         :return: the content of the file to be saved by
-        :py:meth:`build`
+        :py:meth:`incept`
         """
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR

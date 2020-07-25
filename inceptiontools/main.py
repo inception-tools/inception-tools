@@ -1,5 +1,5 @@
 """
-build
+incept
 ~~~~~
 
 Main entry point commend line script.  See :py:func:`cli` for details of
@@ -25,7 +25,7 @@ def _logger():
     return logging.getLogger(__file__)
 
 
-def _main(package_name, author, author_email):
+def _incept(package_name, author, author_email):
     fileConfig('log.cfg', disable_existing_loggers=False)
     params = ArchetypeParameters(
         package_name=package_name,
@@ -41,12 +41,12 @@ def _main(package_name, author, author_email):
 @click.argument('package_name')
 @click.argument('author')
 @click.argument('author_email')
-def build(package_name, author, author_email):
+def incept(package_name, author, author_email):
     """
      Builds a new project structure with the given package name.  Command line
      syntax:
 
-        inceptiontools build <package-name> <author-name> <author-email>
+        inceptiontools incept <package-name> <author-name> <author-email>
 
     Invoking the command line above will _result in the creation of a
     directory with the following structure:
@@ -94,7 +94,7 @@ def build(package_name, author, author_email):
     README.rst file.
     """
     try:
-        _main(package_name, author, author_email)
+        _incept(package_name, author, author_email)
     except Exception:
         m = 'Unexpected exception: package_name={}, author={}, author_email={}'
         msg = m.format(package_name, author, author_email)
@@ -107,10 +107,10 @@ def cli():
     """
     Main command-line application for the inceptiontools package.  This
     application can be used to access various commands listed below.  For
-    example to build a new project called 'my_package', use the following
+    example to incept a new project called 'my_package', use the following
     command:
 
-        inceptiontools build <package-name> <author-name> <author-email>
+        inceptiontools incept <package-name> <author-name> <author-email>
 
     For additional help using any command, use the help for the command as
     follows
@@ -121,4 +121,4 @@ def cli():
     # the main command-line entry point.
 
 
-cli.add_command(build)
+cli.add_command(incept)

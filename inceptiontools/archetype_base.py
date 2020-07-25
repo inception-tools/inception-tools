@@ -22,7 +22,7 @@ from inceptiontools.file_builder import FileBuilder
 class ArchetypeBase(Archetype):
     """
     A base implementation of :py:class:`Archetype` that provides basic
-    implementations of :py:meth:`Archetype.build` and
+    implementations of :py:meth:`Archetype.incept` and
     :py:meth:`Archetype.file_paths`.
     """
 
@@ -35,7 +35,7 @@ class ArchetypeBase(Archetype):
         Class initializer.
         :param file_builders: a set of
         :py:class:`inceptiontools.ArchetypeResourceBuilder` instances used by
-        :py:class:`build` to create the project structure.
+        :py:class:`incept` to create the project structure.
         """
         super().__init__()
         self._file_builders = file_builders

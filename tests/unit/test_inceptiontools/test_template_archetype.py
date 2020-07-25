@@ -95,7 +95,7 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
 
     def test_build(self):
         """
-        Unit test case for :py:method:`TemplateArchetype.build`.
+        Unit test case for :py:method:`TemplateArchetype.incept`.
         """
         self._archetype.build(self._ROOT_DIR, self._PARAMS)
         self._validate_archetype_files(self._ROOT_DIR, self._OUTPUT_FILES)

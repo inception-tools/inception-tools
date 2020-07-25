@@ -22,9 +22,9 @@ from tests.archetype_output_test_base import (
 )
 
 
-class TestMain(ArchetypeOutputTestBase):
+class TestIncept(ArchetypeOutputTestBase):
     """
-    Unit test for class :py:mod:`inceptiontools`.
+    Unit test for the function :py:func:`inceptiontools.main.incept`.
     """
 
     ##############################
@@ -89,14 +89,14 @@ class TestMain(ArchetypeOutputTestBase):
     # Test cases
 
     @mock.patch('inceptiontools.main.datetime')
-    def test_main_builds_standard_archetype(self, mock_datetime):
+    def test_incept_builds_standard_archetype(self, mock_datetime):
         """
-        Unit test case for :py:method:`StandardArchetype.APPLICATION.build`.
+        Unit test case for :py:func:`inceptiontools.main.incept`.
         """
         mock_datetime.now.return_value = self._DATE
         CliRunner().invoke(
             main.cli,
-            ('build', self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            ('incept', self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
         self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
         self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())

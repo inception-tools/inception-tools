@@ -14,12 +14,12 @@ PACKAGE_NAME=inceptiontools
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
-EGG_INFO_OPTIONS=--tag-build=dev
+EGG_INFO_OPTIONS=--tag-incept=dev
 EGG_INFO=egg_info $(EGG_INFO_OPTIONS)
 EGG_DIR=.eggs
 EGG_INFO_DIR=$(PACKAGE_NAME).egg-info
 
-BUILD_DIR=build
+BUILD_DIR=incept
 
 BUMP_VERSION_PART=patch
 BUMP_VERSION_OPTIONS=--verbose

@@ -76,7 +76,7 @@ class TestDirectoryBuilder(object):
 
     def test_build(self):
         """
-        Unit test case for :py:method:`DirectoryBuilder.build`.
+        Unit test case for :py:method:`DirectoryBuilder.incept`.
         """
         expected = os.path.join('some_root_dir', 'some_subpath')
 

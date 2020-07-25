@@ -112,7 +112,7 @@ class TestStandardArchetype(ArchetypeOutputTestBase):
 
     def test_build(self):
         """
-        Unit test case for :py:method:`StandardArchetype.APPLICATION.build`.
+        Unit test case for :py:method:`StandardArchetype.APPLICATION.incept`.
         """
         StandardArchetype.APPLICATION.build(self._ROOT_DIR, self._PARAMS)
         self._validate_archetype_files(self._ROOT_DIR, self._expected_files())

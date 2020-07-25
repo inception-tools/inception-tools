@@ -33,7 +33,7 @@ class Archetype(ABC):
             params: ArchetypeParameters
     ) -> Iterable[str]:
         """
-        The paths of every file that will be created by :py:class:`build`.
+        The paths of every file that will be created by :py:class:`incept`.
         :param root_path: the root directory of the project structure to be
         created
         :param params: the :py:class:`ArchetypeParameters` to use as context
@@ -50,7 +50,7 @@ class Archetype(ABC):
     ) -> Iterable[str]:
         """
         The paths of every directory that will be explicitly created by
-        :py:class:`build`.
+        :py:class:`incept`.
         :param root_path: the root directory of the project structure to be
         created
         :param params: the :py:class:`ArchetypeParameters` to use as context
