@@ -17,7 +17,7 @@ from hamcrest import assert_that, is_
 
 from pyincept.archetype_parameters import ArchetypeParameters
 from pyincept.file_builder import FileBuilder
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.archetype_output_test_base import ArchetypeOutputTestBase
 
 
 class _MockFileBuilder(FileBuilder):
@@ -42,8 +42,8 @@ class TestFileRenderer(object):
     ##############################
     # Class attributes
 
-    _ROOT_DIR = PyinceptTestBase._ROOT_DIR
-    _PARAMS = PyinceptTestBase._PARAMS
+    _ROOT_DIR = ArchetypeOutputTestBase._ROOT_DIR
+    _PARAMS = ArchetypeOutputTestBase._PARAMS
 
     ##############################
     # Instance methods
@@ -55,7 +55,7 @@ class TestFileRenderer(object):
         Called before each method in this class with a name of the form
         test_*().
         """
-        PyinceptTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
+        ArchetypeOutputTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
         self._builder = _MockFileBuilder('some_subpath', 'some_content')
 
@@ -67,7 +67,7 @@ class TestFileRenderer(object):
         if os.path.exists(self._ROOT_DIR):
             shutil.rmtree(self._ROOT_DIR)
 
-        PyinceptTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
+        ArchetypeOutputTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
     # Test cases
 

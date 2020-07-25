@@ -27,7 +27,7 @@ class Archetype(ABC):
     """
 
     @abstractmethod
-    def output_files(
+    def file_paths(
             self,
             root_path: str,
             params: ArchetypeParameters
@@ -43,10 +43,32 @@ class Archetype(ABC):
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @abstractmethod
+    def dir_paths(
+            self,
+            root_path: str,
+            params: ArchetypeParameters
+    ) -> Iterable[str]:
+        """
+        The paths of every directory that will be explicitly created by
+        :py:class:`build`.
+        :param root_path: the root directory of the project structure to be
+        created
+        :param params: the :py:class:`ArchetypeParameters` to use as context
+        for the project to be built
+        :return: :py:const:`None`
+        .. note::
+           Intermediary directories in the paths listed by
+           :py:meth:`file_paths` may also be create even though they are not
+           listed under this method.
+        """
+        raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
+
+    @abstractmethod
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         """
         Builds the project structure for this instance.  See the class-level
         documentation of :py:class:`Archetype` for more information.
+
         :param root_dir: the root directory of the project structure to be
         created
         :param params: the :py:class:`ArchetypeParameters` to use as context

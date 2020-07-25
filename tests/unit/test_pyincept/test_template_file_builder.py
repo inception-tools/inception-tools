@@ -16,7 +16,7 @@ from hamcrest import assert_that, is_
 from jinja2 import Template
 
 from pyincept.template_file_builder import TemplateFileBuilder
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.archetype_output_test_base import ArchetypeOutputTestBase
 
 
 class TestTemplateFileBuilder(object):
@@ -27,7 +27,7 @@ class TestTemplateFileBuilder(object):
     ##############################
     # Class attributes
 
-    _PARAMS = PyinceptTestBase._PARAMS
+    _PARAMS = ArchetypeOutputTestBase._PARAMS
 
     _SUBPATH_SOURCE = \
         '{{package_name}}/{{author}}/{{author_email}}/{{date.year}}/'

@@ -1,0 +1,13 @@
+{
+  "directories": [
+    {
+      "subpath": "tests"
+    }
+  ],
+  "files": [
+    {
+      "subpath": "{{package_name}}.py",
+      "prototype": "package.py.jinja"
+    }
+  ]
+}

@@ -17,8 +17,10 @@ from hamcrest import assert_that, is_
 
 from pyincept.archetype_base import ArchetypeBase
 from pyincept.archetype_parameters import ArchetypeParameters
+from pyincept.directory_builder import DirectoryBuilder
 from pyincept.file_builder import FileBuilder
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.archetype_output_test_base import ArchetypeOutputTestBase
+from tests.file_matcher import exists, is_dir, is_file
 
 
 class _MockFileBuilder(FileBuilder):
@@ -35,6 +37,16 @@ class _MockFileBuilder(FileBuilder):
         return self.render_value
 
 
+class _MockDirBuilder(DirectoryBuilder):
+
+    def __init__(self, subpath) -> None:
+        super().__init__()
+        self.subpath_value = subpath
+
+    def subpath(self, params: ArchetypeParameters) -> str:
+        return self.subpath_value
+
+
 class TestArchetypeBase(object):
     """
     Unit test for class :py:class:`ArchetypeBase`.
@@ -43,8 +55,8 @@ class TestArchetypeBase(object):
     ##############################
     # Class attributes
 
-    _ROOT_DIR = PyinceptTestBase._ROOT_DIR
-    _PARAMS = PyinceptTestBase._PARAMS
+    _ROOT_DIR = ArchetypeOutputTestBase._ROOT_DIR
+    _PARAMS = ArchetypeOutputTestBase._PARAMS
 
     ##############################
     # Instance methods
@@ -56,13 +68,18 @@ class TestArchetypeBase(object):
         Called before each method in this class with a name of the form
         test_*().
         """
-        PyinceptTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
+        ArchetypeOutputTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
         self._archetype = ArchetypeBase(
             (
-                _MockFileBuilder('some_subpath', 'some_content'),
-                _MockFileBuilder('some_other_subpath', 'some_other_content')
+                _MockFileBuilder('some_file', 'some_content'),
+                _MockFileBuilder('some_other_file', 'some_other_content')
+            ),
+            (
+                _MockDirBuilder('some_dir'),
+                _MockDirBuilder('some_other_dir'),
             )
+
         )
 
     def teardown(self):
@@ -73,33 +90,60 @@ class TestArchetypeBase(object):
         if os.path.exists(self._ROOT_DIR):
             shutil.rmtree(self._ROOT_DIR)
 
-        PyinceptTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
+        ArchetypeOutputTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
     # Test cases
 
-    def test_build(self):
+    def test_build_creates_files(self):
         """
         Unit test case for :py:method:`ArchetypeBase.build`.
         """
         self._archetype.build(self._ROOT_DIR, self._PARAMS)
 
-        paths = (
-            os.path.join('some_root_dir', 'some_subpath'),
-            os.path.join('some_root_dir', 'some_other_subpath')
+        file_paths = (
+            os.path.join('some_root_dir', 'some_file'),
+            os.path.join('some_root_dir', 'some_other_file')
         )
         contents = ('some_content', 'some_other_content')
-        for path, expected in zip(paths, contents):
+        for path, expected in zip(file_paths, contents):
+            assert_that(path, exists())
+            assert_that(path, is_file())
             with open(path) as f:
                 actual = f.read()
             assert_that(actual, is_(expected))
 
-    def test_output_files(self):
+    def test_build_creates_directories(self):
         """
         Unit test case for :py:method:`ArchetypeBase.build`.
         """
-        actual = self._archetype.output_files(self._ROOT_DIR, self._PARAMS)
+        self._archetype.build(self._ROOT_DIR, self._PARAMS)
+
+        file_paths = (
+            os.path.join('some_root_dir', 'some_dir'),
+            os.path.join('some_root_dir', 'some_other_dir')
+        )
+        for path in file_paths:
+            assert_that(path, exists())
+            assert_that(path, is_dir())
+
+    def test_file_paths(self):
+        """
+        Unit test case for :py:method:`ArchetypeBase.file_paths`.
+        """
+        actual = self._archetype.file_paths(self._ROOT_DIR, self._PARAMS)
         expected = (
-            os.path.join('some_root_dir', 'some_subpath'),
-            os.path.join('some_root_dir', 'some_other_subpath'),
+            os.path.join('some_root_dir', 'some_file'),
+            os.path.join('some_root_dir', 'some_other_file'),
+        )
+        assert_that(actual, is_(expected))
+
+    def test_dir_paths(self):
+        """
+        Unit test case for :py:method:`ArchetypeBase.dir_paths`.
+        """
+        actual = self._archetype.dir_paths(self._ROOT_DIR, self._PARAMS)
+        expected = (
+            os.path.join('some_root_dir', 'some_dir'),
+            os.path.join('some_root_dir', 'some_other_dir'),
         )
         assert_that(actual, is_(expected))

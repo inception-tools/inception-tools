@@ -33,10 +33,10 @@ class TemplateArchetype(ArchetypeBase):
     descriptor.
     Variables available to the template are the fields of
     :py:class:`ArchetypeParameters`.  Each field of :py:class:`Architype`
-    parameters is available as an unscoped variable.  For example to
-    reference the fields :py:attr:`ArchitypeParameters.author`, you would
-    simple use the variable name 'author' directly using double curly
-    braces: {{author}}.
+    parameters is available as an unscoped variable.  For example,
+    to reference the fields :py:attr:`ArchitypeParameters.author`, you would
+    simple use the variable name 'author' directly using double curly braces
+    like so: ``{{author}}``.
     """
 
     METADATA_FILE_NAME = 'archetype-metadata.json'
@@ -73,23 +73,31 @@ class TemplateArchetype(ArchetypeBase):
             descriptor = ArchetypeDescriptor.from_text_io(descriptor_f)
         self._descriptor = descriptor
 
-        resource_builders = self._get_resource_builders(dir_path, descriptor)
+        file_builders = self._get_file_builders(dir_path, descriptor)
+        dir_builders = self._get_directory_builders(dir_path, descriptor)
 
-        super().__init__(resource_builders)
+        super().__init__(file_builders, dir_builders)
 
     @classmethod
-    def _get_resource_builders(cls, dir_path, descriptor):
+    def _get_file_builders(cls, dir_path, descriptor):
 
-        result = []
+        file_builders = []
         for f in descriptor.files:
             f_path = os.path.join(dir_path, f.prototype)
             with open(f_path) as fin:
                 prototype_content = fin.read()
             fb = TemplateFileBuilder.from_strings(f.subpath, prototype_content)
-            result.append(fb)
+            file_builders.append(fb)
+
+        return tuple(file_builders)
+
+    @classmethod
+    def _get_directory_builders(cls, dir_path, descriptor):
+        result = []
         for d in descriptor.directories:
             dd = TemplateDirectoryBuilder.from_string(d.subpath)
             result.append(dd)
+
         return tuple(result)
 
     @classmethod

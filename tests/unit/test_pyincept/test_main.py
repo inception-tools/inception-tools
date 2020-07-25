@@ -12,9 +12,7 @@ __license__ = 'Apache Software License 2.0'
 
 import logging
 import os
-import shutil
 from contextlib import closing
-from datetime import datetime
 from io import StringIO
 from logging import StreamHandler
 from unittest import mock
@@ -23,10 +21,10 @@ from click.testing import CliRunner
 from hamcrest import assert_that, contains_string, is_, starts_with
 
 from pyincept import main
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.archetype_output_test_base import ArchetypeOutputTestBase
 
 
-class TestMain(PyinceptTestBase):
+class TestMain(ArchetypeOutputTestBase):
     """
     Unit test for class :py:mod:`pyincept`.
     """
@@ -37,29 +35,9 @@ class TestMain(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'some_package_name'
-    _AUTHOR = 'some_author'
-    _AUTHOR_EMAIL = 'some_author_email'
+    _ROOT_DIR = ArchetypeOutputTestBase._PACKAGE_NAME
 
     _EXCEPTION = ValueError('Some test exception.')
-
-    # Something earlier than the current year.
-    _DATE = datetime(2000, 1, 1)
-
-    ##############################
-    # Class / static methods
-
-    @classmethod
-    def _get_resource_path(cls, resource_name):
-        return os.path.abspath(
-            os.path.join(
-                __file__,
-                os.pardir,
-                'data',
-                'test_pyincept',
-                resource_name
-            )
-        )
 
     ##############################
     # Instance methods
@@ -72,27 +50,15 @@ class TestMain(PyinceptTestBase):
         Called before each method in this class with a name of the form
         test_*().
         """
-        mock_datetime.now.return_value = self._DATE
+        super(TestMain, self).setup()
 
-        # The project root directory should not already exist.  If it does,
-        # something unexpected has happened, so raise.
-        self._validate_path_doesnt_exist(self._PACKAGE_NAME)
+        mock_datetime.now.return_value = self._DATE
 
         self._runner = CliRunner()
         self._result = self._runner.invoke(
             main.build,
             (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
-
-    def teardown(self):
-        """
-        Called after each method in this class with a name of the form
-        test_*().
-        """
-        if os.path.exists(self._PACKAGE_NAME):
-            shutil.rmtree(self._PACKAGE_NAME)
-
-        self._validate_path_doesnt_exist(self._PACKAGE_NAME)
 
     # Test cases
 

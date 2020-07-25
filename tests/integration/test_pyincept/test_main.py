@@ -11,18 +11,18 @@ __copyright__ = \
 __license__ = 'Apache Software License 2.0'
 
 import os
-import shutil
-from datetime import datetime
 from unittest import mock
 
 from click.testing import CliRunner
-from hamcrest import assert_that
 
 from pyincept import main
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.archetype_output_test_base import (
+    _OutputDir, _OutputFile,
+    ArchetypeOutputTestBase,
+)
 
 
-class TestMain(PyinceptTestBase):
+class TestMain(ArchetypeOutputTestBase):
     """
     Unit test for class :py:mod:`pyincept`.
     """
@@ -33,188 +33,70 @@ class TestMain(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _PACKAGE_NAME = 'some_package_name'
-    _AUTHOR = 'some_author'
-    _AUTHOR_EMAIL = 'some_author_email'
+    _PACKAGE_NAME = ArchetypeOutputTestBase._PACKAGE_NAME
+    _ROOT_DIR = _PACKAGE_NAME
 
-    # Something earlier than the current year.
-    _DATE = datetime(2000, 1, 1)
+    _TEST_RESOURCE_PATH = os.path.abspath(
+        os.path.join(
+            __file__,
+            os.pardir,
+            'data',
+            'test_main',
+        )
+    )
+
+    _EXPECTED_DIRS = ('scripts', 'docs')
+
+    _EXPECTED_FILES = (
+        ('LICENSE',),
+        ('README.rst',),
+        ('setup.cfg',),
+        ('setup.py',),
+        ('log.cfg',),
+        ('Makefile',),
+        ('Pipfile',),
+        (_PACKAGE_NAME, '__init__.py'),
+        (_PACKAGE_NAME, 'main.py'),
+        ('tests', '__init__.py'),
+        ('tests', 'end_to_end', '__init__.py'),
+        ('tests', 'integration', '__init__.py'),
+        ('tests', 'unit', '__init__.py'),
+        ('tests', 'end_to_end', 'test_' + _PACKAGE_NAME, '__init__.py'),
+        ('tests', 'integration', 'test_' + _PACKAGE_NAME, '__init__.py'),
+        ('tests', 'unit', 'test_' + _PACKAGE_NAME, '__init__.py'),
+    )
 
     ##############################
     # Class / static methods
 
     @classmethod
-    def _get_resource_path(cls, resource_name):
-        return os.path.abspath(
-            os.path.join(
-                __file__,
-                os.pardir,
-                'data',
-                'test_main',
-                resource_name
+    def _expected_files(cls):
+        return tuple(
+            _OutputFile(
+                os.path.join(*s),
+                os.path.join(cls._TEST_RESOURCE_PATH, *s)
             )
+            for s in cls._EXPECTED_FILES
         )
+
+    @classmethod
+    def _expected_dirs(cls):
+        return tuple(_OutputDir(s) for s in cls._EXPECTED_DIRS)
 
     ##############################
     # Instance methods
 
-    # Instance set up / tear down
+    # Test cases
 
     @mock.patch('pyincept.main.datetime')
-    def setup(self, mock_datetime):
+    def test_main_builds_standard_archetype(self, mock_datetime):
         """
-        Called before each method in this class with a name of the form
-        test_*().
+        Unit test case for :py:method:`StandardArchetype.APPLICATION.build`.
         """
         mock_datetime.now.return_value = self._DATE
-
-        # The project root directory should not already exist.  If it does,
-        # something unexpected has happened, so raise.
-        self._validate_path_doesnt_exist(self._PACKAGE_NAME)
-
-        runner = CliRunner()
-        self.result = runner.invoke(
+        CliRunner().invoke(
             main.cli,
             ('build', self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
-
-    def teardown(self):
-        """
-        Called after each method in this class with a name of the form
-        test_*().
-        """
-        if os.path.exists(self._PACKAGE_NAME):
-            shutil.rmtree(self._PACKAGE_NAME)
-
-        self._validate_path_doesnt_exist(self._PACKAGE_NAME)
-
-    # Test cases
-
-    def test_main_creates_root_directory(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        assert_that(
-            os.path.isdir(self._PACKAGE_NAME),
-            'Directory not found: {}'.format(self._PACKAGE_NAME)
-        )
-
-    def test_main_creates_license_file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        self._validate_output_file_correct(self._PACKAGE_NAME, 'LICENSE')
-
-    def test_main_creates_readme_file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        self._validate_output_file_correct(self._PACKAGE_NAME, 'README.rst')
-
-    def test_main_creates_setup_cfg(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        self._validate_output_file_correct(self._PACKAGE_NAME, 'setup.cfg')
-
-    def test_main_creates_setup_py(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        self._validate_output_file_correct(self._PACKAGE_NAME, 'setup.py')
-
-    def test_main_creates_log_cfg(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        self._validate_output_file_correct(self._PACKAGE_NAME, 'log.cfg')
-
-    def test_main_creates_makefile(self):
-        """
-        Unit test case for :py:method:`pyincept.main.build`.
-        """
-        self._validate_output_file_correct(self._PACKAGE_NAME, 'Makefile')
-
-    def test_main_creates_pipfile(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        self._validate_output_file_correct(self._PACKAGE_NAME, 'Pipfile')
-
-    def test_main_creates_entry_point_file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join(self._PACKAGE_NAME, 'main.py')
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_package___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join(self._PACKAGE_NAME, '__init__.py')
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_tests___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join('tests', '__init__.py')
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_unit_tests___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join('tests', 'unit', '__init__.py')
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_integration_tests___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join('tests', 'integration', '__init__.py')
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_end_to_end_tests___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join('tests', 'end_to_end', '__init__.py')
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_unit_tests_package___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join(
-            'tests',
-            'unit',
-            'test_some_package_name',
-            '__init__.py'
-        )
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_integration_tests_package___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join(
-            'tests',
-            'integration',
-            'test_some_package_name',
-            '__init__.py'
-        )
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
-
-    def test_main_creates_end_to_end_tests_package___init___file(self):
-        """
-        Unit test case for :py:method:`main.build`.
-        """
-        file_path = os.path.join(
-            'tests',
-            'end_to_end',
-            'test_some_package_name',
-            '__init__.py'
-        )
-        self._validate_output_file_correct(self._PACKAGE_NAME, file_path)
+        self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
+        self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())

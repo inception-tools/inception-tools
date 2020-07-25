@@ -41,39 +41,41 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     across the system.
     """
 
-    #: The :py:meth:`build` method of this :py:class:`Archetype` will create a
-    # directory/file tree with the following structure:
-    #:
-    #: ::
-    #:
-    #:     root_dir/
-    #:         my_package/
-    #:             __init__.py
-    #:             my_package.py
-    #:         tests/
-    #:             __init__.py
-    #:             end-to-end/
-    #:                 __init__.py
-    #:                 test_my_package/
-    #:                     __init__.py
-    #:             integration/
-    #:                 __init__.py
-    #:                 test_my_package/
-    #:                     __init__.py
-    #:             unit/
-    #:                 __init__.py
-    #:                 test_my_package/
-    #:                     __init__.py
-    #:         LICENSE
-    #:         Makefile
-    #:         Pipfile
-    #:         README.rst
-    #:         setup.cfg
-    #:         setup.py
-    #:
-    #: where 'root_dir' is the `root_dir argument and 'my_package' is the
-    # `package_name` attribute of the params argument.
-    PROJECT_ROOT = ('pyincept-archetype-standard',)
+    APPLICATION = ('pyincept-archetype-application-1.0',)
+    """
+    The :py:meth:`build` method of this :py:class:`Archetype` will create a
+    directory/file tree with the following structure:
+
+    ::
+
+        root_dir/
+            my_package/
+                __init__.py
+                my_package.py
+            tests/
+                __init__.py
+                end-to-end/
+                    __init__.py
+                    test_my_package/
+                        __init__.py
+                integration/
+                    __init__.py
+                    test_my_package/
+                        __init__.py
+                unit/
+                    __init__.py
+                    test_my_package/
+                        __init__.py
+            LICENSE
+            Makefile
+            Pipfile
+            README.rst
+            setup.cfg
+            setup.py
+
+    where 'root_dir' is the `root_dir argument and 'my_package' is the
+    `package_name` attribute of the params argument.
+    """
 
     def __init__(self, architype_resource_id) -> None:
         # Referencing ArchetypeBase directly for the sake of supporting Python
@@ -82,12 +84,19 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
         dir_path = os.path.join(ARCHITYPE_DIR, architype_resource_id)
         self._delegate = TemplateArchetype(dir_path)
 
-    def output_files(
+    def file_paths(
             self,
             root_path: str,
             params: ArchetypeParameters
     ) -> Iterable[str]:
-        return self._delegate.output_files(root_path, params)
+        return self._delegate.file_paths(root_path, params)
+
+    def dir_paths(
+            self,
+            root_path: str,
+            params: ArchetypeParameters
+    ) -> Iterable[str]:
+        return self._delegate.dir_paths(root_path, params)
 
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         return self._delegate.build(root_dir, params)

@@ -11,17 +11,19 @@ __copyright__ = \
 __license__ = 'Apache Software License 2.0'
 
 import os
-import shutil
 
-from hamcrest import assert_that
+from hamcrest import assert_that, is_
 
 from pyincept.standard_archetype import (
     StandardArchetype,
 )
-from tests.pyincept_test_base import PyinceptTestBase
+from tests.archetype_output_test_base import (
+    _OutputDir, _OutputFile,
+    ArchetypeOutputTestBase,
+)
 
 
-class TestStandardArchetype(PyinceptTestBase):
+class TestStandardArchetype(ArchetypeOutputTestBase):
     """
     Unit test for class :py:class:`ProjectBuilder`.
     """
@@ -32,177 +34,86 @@ class TestStandardArchetype(PyinceptTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ROOT_DIR = PyinceptTestBase._ROOT_DIR
-    _PARAMS = PyinceptTestBase._PARAMS
+    _TEST_RESOURCE_PATH = os.path.abspath(
+        os.path.join(
+            __file__,
+            os.pardir,
+            'data',
+            'test_standard_archetype',
+        )
+    )
 
-    ##############################
-    # Class / static methods
+    _PACKAGE_NAME = ArchetypeOutputTestBase._PACKAGE_NAME
+
+    _EXPECTED_DIRS = ('scripts', 'docs')
+
+    _EXPECTED_FILES = (
+        ('LICENSE',),
+        ('README.rst',),
+        ('setup.cfg',),
+        ('setup.py',),
+        ('log.cfg',),
+        ('Makefile',),
+        ('Pipfile',),
+        (_PACKAGE_NAME, '__init__.py'),
+        (_PACKAGE_NAME, 'main.py'),
+        ('tests', '__init__.py'),
+        ('tests', 'end_to_end', '__init__.py'),
+        ('tests', 'integration', '__init__.py'),
+        ('tests', 'unit', '__init__.py'),
+        ('tests', 'end_to_end', 'test_' + _PACKAGE_NAME, '__init__.py'),
+        ('tests', 'integration', 'test_' + _PACKAGE_NAME, '__init__.py'),
+        ('tests', 'unit', 'test_' + _PACKAGE_NAME, '__init__.py'),
+    )
 
     @classmethod
-    def _get_resource_path(cls, resource_name):
-        return os.path.abspath(
-            os.path.join(
-                __file__,
-                os.pardir,
-                'data',
-                'test_standard_archetype',
-                resource_name
+    def _expected_files(cls):
+        return tuple(
+            _OutputFile(
+                os.path.join(*s),
+                os.path.join(cls._TEST_RESOURCE_PATH, *s)
             )
+            for s in cls._EXPECTED_FILES
         )
 
-    ##############################
-    # Instance methods
+    @classmethod
+    def _expected_dirs(cls):
+        return tuple(_OutputDir(s) for s in cls._EXPECTED_DIRS)
 
-    # Instance set up / tear down
-
-    def setup(self):
+    def test_file_paths(self):
         """
-        Called before each method in this class with a name of the form
-        test_*().
+        Unit test case for :py:method:`StandardArchetype.APPLICATION
+        .file_paths`.
         """
-        # The project root directory should not already exist.  If it does,
-        # something unexpected has happened, so raise.
-        self._validate_path_doesnt_exist(self._ROOT_DIR)
-
-        StandardArchetype.PROJECT_ROOT.build(self._ROOT_DIR, self._PARAMS)
-
-    def teardown(self):
-        """
-        Called after each method in this class with a name of the form
-        test_*().
-        """
-        if os.path.exists(self._ROOT_DIR):
-            shutil.rmtree(self._ROOT_DIR)
-
-        self._validate_path_doesnt_exist(self._ROOT_DIR)
-
-    # Test cases
-
-    def test_build_creates_root_directory(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        assert_that(
-            os.path.isdir(self._ROOT_DIR),
-            'Directory not found: {}'.format(self._ROOT_DIR)
+        expected = (
+            os.path.join(self._ROOT_DIR, j.subpath)
+            for j in self._expected_files()
         )
-
-    def test_build_creates_license_file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'LICENSE')
-
-    def test_build_creates_readme_file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'README.rst')
-
-    def test_build_creates_setup_cfg(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'setup.cfg')
-
-    def test_build_creates_setup_py(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'setup.py')
-
-    def test_build_creates_log_cfg(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'log.cfg')
-
-    def test_build_creates_makefile(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'Makefile')
-
-    def test_build_creates_pipfile(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        self._validate_output_file_correct(self._ROOT_DIR, 'Pipfile')
-
-    def test_build_creates_entry_point_file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join(self._PARAMS.package_name, 'main.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
-
-    def test_build_creates_package___init___file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join(self._PARAMS.package_name, '__init__.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
-
-    def test_build_creates_tests___init___file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join('tests', '__init__.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
-
-    def test_build_creates_unit_tests___init___file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join('tests', 'unit', '__init__.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
-
-    def test_build_creates_integration_tests___init___file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join('tests', 'integration', '__init__.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
-
-    def test_build_creates_end_to_end_tests___init___file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join('tests', 'end_to_end', '__init__.py')
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
-
-    def test_build_creates_unit_tests_package___init___file(self):
-        """
-        Unit test case for :py:method:`TemplateArchetype.build`.
-        """
-        file_path = os.path.join(
-            'tests',
-            'unit',
-            'test_some_package_name',
-            '__init__.py'
+        actual = StandardArchetype.APPLICATION.file_paths(
+            self._ROOT_DIR,
+            self._PARAMS
         )
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
+        assert_that(sorted(actual), is_(sorted(expected)))
 
-    def test_build_creates_integration_tests_package___init___file(self):
+    def test_dir_paths(self):
         """
-        Unit test case for :py:method:`TemplateArchetype.build`.
+        Unit test case for :py:method:`StandardArchetype.APPLICATION
+        .file_paths`.
         """
-        file_path = os.path.join(
-            'tests',
-            'integration',
-            'test_some_package_name',
-            '__init__.py'
+        expected = (
+            os.path.join(self._ROOT_DIR, j.subpath)
+            for j in self._expected_dirs()
         )
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
+        actual = StandardArchetype.APPLICATION.dir_paths(
+            self._ROOT_DIR,
+            self._PARAMS
+        )
+        assert_that(sorted(actual), is_(sorted(expected)))
 
-    def test_build_creates_end_to_end_tests_package___init___file(self):
+    def test_build(self):
         """
-        Unit test case for :py:method:`TemplateArchetype.build`.
+        Unit test case for :py:method:`StandardArchetype.APPLICATION.build`.
         """
-        file_path = os.path.join(
-            'tests',
-            'end_to_end',
-            'test_some_package_name',
-            '__init__.py'
-        )
-        self._validate_output_file_correct(self._ROOT_DIR, file_path)
+        StandardArchetype.APPLICATION.build(self._ROOT_DIR, self._PARAMS)
+        self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
+        self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())
