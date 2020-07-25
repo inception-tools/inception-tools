@@ -10,10 +10,12 @@ flake8 = "*"
 wheel = "*"
 twine = "*"
 bump2version = "*"
+sphinx = "*"
 
 [packages]
 click = "*"
 jinja2 = "*"
+jsonschema = "*"
 
 [requires]
 python_version = "3.8"

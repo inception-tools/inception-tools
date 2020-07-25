@@ -1,6 +1,32 @@
-========
-pyincept
-========
+===============
+inception-tools
+===============
+
+.. image:: https://github.com/inception-tools/inception-tools/workflows/Release%20Build/badge.svg
+  :target: https://github.com/inception-tools/inception-tools/actions?query=workflow%3A%22Release+Build%22
+
+.. image:: https://github.com/inception-tools/inception-tools/workflows/Nightly%20Development%20Build/badge.svg
+  :target: https://github.com/inception-tools/inception-tools/actions?query=workflow%3A%22Nightly+Development+Build%22
+
+.. image:: https://github.com/inception-tools/inception-tools/workflows/Development%20Test%20Suite/badge.svg
+  :target: https://github.com/inception-tools/inception-tools/actions?query=workflow%3A%22Development+Test+Suite%22
+
+Under Construction
+==================
+
+Hello and welcome to the Python Inception Tools project!
+
+This project is currently under construction.  Please be patient and check
+back periodically to see progress. In the meantime, you can see where the
+project is headed by checking out the documentation (also in progress) below.
+
+The goal of this project is to create, foster, and disseminate solid
+conventions for Python project structure through the propagation and reuse
+of project archetypes, developed and submitted by the community, which can
+be used as templates for automatically setting up new Python projects.
+
+Documentation
+=============
 
 Incept a new Python project, ready to go, with a single command!
 
@@ -12,26 +38,19 @@ Features:
 
 - Simple command-line invocation for creating shell Python projects,
   parameterized with project name, package names
-- Shell project includes all standard project files including:
+- Shell project includes all standard project files including\:
     - setup.py (configured with package name and standard dependencies)
     - Directories for unit, integration, and end-to-end tests
     - Makefile with a smattering of useful targets.
-- Sample project files, complete with a sample 'endpoint' file.
+- Sample project files, complete with a sample endpoint.
 
 Python Package Index:
 
-.. image:: https://github.com/avanherick/pyincept/workflows/Release%20Build/badge.svg
-  :target: https://test.pypi.org/project/pyincept/
+https://pypi.org/project/inceptiontools/
 
-Nightly development build:
+GitHub Repository:
 
-.. image:: https://github.com/avanherick/pyincept/workflows/Development%20Build/badge.svg
-  :target: https://github.com/avanherick/pyincept/actions?query=workflow%3A%22Development+Build%22
-
-Latest development code:
-
-.. image:: https://github.com/avanherick/pyincept/workflows/Development%20test%20suite/badge.svg
-  :target: https://github.com/avanherick/pyincept/tree/develop
+https://github.com/inception-tools/inception-tools
 
 Installation
 ============
@@ -41,9 +60,9 @@ package index (PyPI) as follows:
 
 ::
 
-    pip install pyincept
+    pip install inceptiontools
 
-Note that ``pyincept`` has dependencies on the following packages:
+Note that ``inceptiontools`` has dependencies on the following packages:
 
 - ``click``
 - ``jinja2``
@@ -54,12 +73,12 @@ above.
 Usage
 =====
 
-Once ``pyincept`` has been installed, you can create a new project shell as
+Once ``inceptiontools`` has been installed, you can create a new project shell as
 follows:
 
 ::
 
-    pyincept package_name author author email [project_root]
+    inceptiontools package_name author author email [project_root]
 
 This will create a shell project with the following structure:
 
@@ -92,7 +111,7 @@ This will create a shell project with the following structure:
             setup.py
 
 ``package_name`` (required)
-    The package name that will used for your new project, e.g. ``pyincept``.
+    The package name that will used for your new project, e.g. ``inceptiontools``.
     This will be used to create for the name of the package, for the name of a
     stub entry point files, and in the names of test modules.    It will also
     be used as the relative path for the ``project_root`` argument in the
@@ -104,51 +123,40 @@ This will create a shell project with the following structure:
     attributions in header file comments.
 
 ``author_email`` (required)
-    The email address of the author, e.g. 'jane.doe@pyincept.org'.  This will
+    The email address of the author, e.g. 'jane.doe@inceptiontools.org'.  This will
     be used to fill in various locations in where a contact email is specified
     in the new project files, e.g. the `author_email` property in
     ``setup.cfg``.
 
 ``[project_root]`` (optional) default: package_name
     The path to the directory under which your project should be installed,
-    e.g. ``pyincept``.
+    e.g. ``inceptiontools``.
 
     Example `installing to a directory my_package in the current working
     directory`::
 
-        pyincept my_package my_author my_author_email
+        inceptiontools my_package my_author my_author_email
 
     Example `installing to a directory called my_project in the user's home
     directory`::
 
-        pyincept my_package my_author my_author_email ~/my_project
-
-Development
-===========
-
-Code style:
-
-``pyincept`` code should adhere to the `PEP 8`_ guidelines.
-
-.. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
-
-Versioning:
-
-``pyincept`` versioning uses semantic versioning and adheres to the guidelines
-specified `here`_.
-
-.. _`here`: https://semver.org/
+        inceptiontools my_package my_author my_author_email ~/my_project
 
 License
 =======
 
-``pyincept`` is released under the Apache Software License - see the files
+``inceptiontools`` is released under the Apache Software License - see the files
 ``LICENSE`` for further details.
 
 Bugs, Contribution, and Feedback
 ================================
 
-Contributions and feedback are welcome.
+Contributions and feedback are welcome.  Contributions can be made by opening
+a pull request at the ``inceptiontools`` `repository`_ and tagging `@avanherick` for
+review.  Please see the `Development` section of this document for code style
+and branching guidelines.
+
+.. _`repository`: https://github.com/inception-tools/inception-tools/
 
 This project was created to fill what looked like a lack of standardized
 conventions practices for structuring Python projects, and out of the desire
@@ -156,11 +164,37 @@ to avoid the need to manually create the same directory and file structures
 over and over again.
 
 If you come across this project and know of other project which accomplish
-similar goals, or of standards around Python project structure, would
-welcome hearing about them.
+similar goals, or of documented standards around Python project structure,
+which differ from those implemented here, we would welcome hearing about them.
 
-Please submit bugs, feature requests, and code changes using GitHub at:
-http://github.com/avanherick/pyincept
+Please submit feedback, bugs, feature requests, and code changes using GitHub
+at:
+http://github.com/inception-tools/inception-tools
+
+Development
+===========
+
+Repository Management:
+    ``inceptiontools`` manages its repository using the `GitFlow`_ model.
+
+.. _`GitFlow`: https://nvie.com/posts/a-successful-git-branching-model/
+
+Code style:
+    ``inceptiontools`` code should adhere to the `PEP 8`_ guidelines.
+
+.. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
+
+Versioning:
+    ``inceptiontools`` versioning uses semantic versioning and adheres to the
+    guidelines specified `here`_.
+
+.. _`here`: https://semver.org/
+
+CI/CD:
+    - All builds are automated through GitHub actions.
+    - Development builds are executed against the ``develop`` branch.
+    - Beta builds are executed with each push to the ``master`` branch.
+    - Release builds are triggered by the creation of a release through GitHub.
 
 Changes
 =======
@@ -171,4 +205,4 @@ Changes
 
 :author: Andrew van Herick
 :email: avanherick@gmail.com
-:date: 2020-06-25
+:date: 2020-06-29

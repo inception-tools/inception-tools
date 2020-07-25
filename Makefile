@@ -2,17 +2,15 @@
 #
 # Makefile
 #
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-# Unpublished Copyright 2020 Andrew van Herick. All Rights Reserved.
+# Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 #
 ###############################################################################
 
 ########################################
 # Build variables
 
-PROJECT_NAME=pyincept
-PACKAGE_NAME=pyincept
+PROJECT_NAME=inceptiontools
+PACKAGE_NAME=inceptiontools
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
@@ -49,12 +47,20 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	dist \
 	dist-clean \
 	dist-upload \
+	docs \
+	docs-clean \
+	docs-rst \
+	docs-rst-clean \
 	init \
 	init-clean \
 	init-dev \
+	init-dev-35 \
+	init-dev-36 \
+	init-dev-37 \
 	install \
 	lib-bump2version \
 	lib-flake8 \
+	lib-sphinx \
 	lib-twine \
 	maintainer-clean \
 	uninstall
@@ -87,6 +93,18 @@ dist-clean:
 dist-upload: dist lib-twine
 	twine upload $(DIST_UPLOAD_OPTIONS) $(DIST_DIR)/*
 
+docs: docs-rst
+	@$(MAKE) -C docs html
+
+docs-clean: docs-rst-clean
+	rm -rf ./docs/_build/*
+
+docs-rst: lib-sphinx
+	sphinx-apidoc -o ./docs/_modules ./inceptiontools
+
+docs-rst-clean:
+	rm -rf ./docs/_modules/*
+
 init:
 	pipenv install
 
@@ -95,6 +113,15 @@ init-clean:
 
 init-dev:
 	pipenv install --dev
+
+init-dev-35:
+	pipenv install --dev --skip-lock --python 3.5
+
+init-dev-36:
+	pipenv install --dev --skip-lock --python 3.6
+
+init-dev-37:
+	pipenv install --dev --skip-lock --python 3.7
 
 install:
 	python setup.py $(EGG_INFO) install
@@ -105,10 +132,13 @@ lib-bump2version:
 lib-flake8:
 	pip install --upgrade flake8
 
+lib-sphinx:
+	pip install --upgrade sphinx
+
 lib-twine:
 	pip install --upgrade twine
 
-maintainer-clean: clean check-clean dist-clean
+maintainer-clean: clean check-clean dist-clean docs-clean
 	rm -rf $(EGG_DIR)
 
 uninstall:
