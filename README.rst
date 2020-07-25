@@ -14,7 +14,7 @@ inception-tools
 Under Construction
 ==================
 
-Hello and welcome to the PyIncept project!
+Hello and welcome to the Python Inception Tools project!
 
 This project is currently under construction.  Please be patient and check
 back periodically to see progress. In the meantime, you can see where the
