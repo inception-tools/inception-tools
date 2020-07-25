@@ -96,7 +96,7 @@ class TestArchetypeBase(object):
 
     def test_build_creates_files(self):
         """
-        Unit test case for :py:method:`ArchetypeBase.incept`.
+        Unit test case for :py:method:`ArchetypeBase.build`.
         """
         self._archetype.build(self._ROOT_DIR, self._PARAMS)
 
@@ -114,7 +114,7 @@ class TestArchetypeBase(object):
 
     def test_build_creates_directories(self):
         """
-        Unit test case for :py:method:`ArchetypeBase.incept`.
+        Unit test case for :py:method:`ArchetypeBase.build`.
         """
         self._archetype.build(self._ROOT_DIR, self._PARAMS)
 

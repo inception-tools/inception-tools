@@ -46,7 +46,7 @@ def incept(package_name, author, author_email):
      Builds a new project structure with the given package name.  Command line
      syntax:
 
-        inceptiontools incept <package-name> <author-name> <author-email>
+        it incept <package-name> <author-name> <author-email>
 
     Invoking the command line above will _result in the creation of a
     directory with the following structure:

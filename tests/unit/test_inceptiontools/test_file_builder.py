@@ -81,7 +81,7 @@ class TestFileRenderer(object):
 
     def test_build(self):
         """
-        Unit test case for :py:method:`FileBuilder.incept`.
+        Unit test case for :py:method:`FileBuilder.build`.
         """
         self._builder.build(self._ROOT_DIR, self._PARAMS)
 

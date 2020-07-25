@@ -26,9 +26,9 @@ class ArchetypeResourceBuilder(ABC):
     def path(self, root_dir: str, params: ArchetypeParameters) -> str:
         """
         Returns the full path (possibly non-absolute) to the resource that will
-        be created by :py:meth:`incept`.
-        :param root_dir: the root directory argument for :py:meth:`incept`
-        :param params: the parameters argument for :py:meth:`incept`
+        be created by :py:meth:`build`.
+        :param root_dir: the root directory argument for :py:meth:`build`
+        :param params: the parameters argument for :py:meth:`build`
         :return: the path
         """
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
