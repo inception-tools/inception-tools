@@ -1,10 +1,10 @@
 """
-    integration
-    ~~~~~~~~~~~
+integration
+~~~~~~~~~~~
 
-    Houses all test cases and utilities supporting integration testing of the
-    :py:mod:`pyincept` project. This package is not intended to be part of
-    the distribution.
+Houses all test cases and utilities supporting integration testing of the
+:py:mod:`inceptiontools` package. This package is not intended to be part of
+the distribution.
 """
 
 __author__ = 'Andrew van Herick'

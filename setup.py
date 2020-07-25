@@ -3,7 +3,7 @@
     setup.py
     ~~~~~~~~
 
-    Package distribution file for the pyincept library.
+    Package distribution file for the inceptiontools library.
 """
 
 __author__ = 'Andrew van Herick'

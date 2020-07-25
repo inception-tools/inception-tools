@@ -1,5 +1,5 @@
 ========
-pyincept
+inceptiontools
 ========
 
 .. image:: https://github.com/inception-tools/inception-tools/workflows/Release%20Build/badge.svg
@@ -46,11 +46,11 @@ Features:
 
 Python Package Index:
 
-https://pypi.org/project/pyincept/
+https://pypi.org/project/inceptiontools/
 
 GitHub Repository:
 
-https://github.com/pyincept/pyincept
+https://github.com/inceptiontools/inceptiontools
 
 Installation
 ============
@@ -60,9 +60,9 @@ package index (PyPI) as follows:
 
 ::
 
-    pip install pyincept
+    pip install inceptiontools
 
-Note that ``pyincept`` has dependencies on the following packages:
+Note that ``inceptiontools`` has dependencies on the following packages:
 
 - ``click``
 - ``jinja2``
@@ -73,12 +73,12 @@ above.
 Usage
 =====
 
-Once ``pyincept`` has been installed, you can create a new project shell as
+Once ``inceptiontools`` has been installed, you can create a new project shell as
 follows:
 
 ::
 
-    pyincept package_name author author email [project_root]
+    inceptiontools package_name author author email [project_root]
 
 This will create a shell project with the following structure:
 
@@ -111,7 +111,7 @@ This will create a shell project with the following structure:
             setup.py
 
 ``package_name`` (required)
-    The package name that will used for your new project, e.g. ``pyincept``.
+    The package name that will used for your new project, e.g. ``inceptiontools``.
     This will be used to create for the name of the package, for the name of a
     stub entry point files, and in the names of test modules.    It will also
     be used as the relative path for the ``project_root`` argument in the
@@ -123,36 +123,36 @@ This will create a shell project with the following structure:
     attributions in header file comments.
 
 ``author_email`` (required)
-    The email address of the author, e.g. 'jane.doe@pyincept.org'.  This will
+    The email address of the author, e.g. 'jane.doe@inceptiontools.org'.  This will
     be used to fill in various locations in where a contact email is specified
     in the new project files, e.g. the `author_email` property in
     ``setup.cfg``.
 
 ``[project_root]`` (optional) default: package_name
     The path to the directory under which your project should be installed,
-    e.g. ``pyincept``.
+    e.g. ``inceptiontools``.
 
     Example `installing to a directory my_package in the current working
     directory`::
 
-        pyincept my_package my_author my_author_email
+        inceptiontools my_package my_author my_author_email
 
     Example `installing to a directory called my_project in the user's home
     directory`::
 
-        pyincept my_package my_author my_author_email ~/my_project
+        inceptiontools my_package my_author my_author_email ~/my_project
 
 License
 =======
 
-``pyincept`` is released under the Apache Software License - see the files
+``inceptiontools`` is released under the Apache Software License - see the files
 ``LICENSE`` for further details.
 
 Bugs, Contribution, and Feedback
 ================================
 
 Contributions and feedback are welcome.  Contributions can be made by opening
-a pull request at the ``pyincept`` `repository`_ and tagging `@avanherick` for
+a pull request at the ``inceptiontools`` `repository`_ and tagging `@avanherick` for
 review.  Please see the `Development` section of this document for code style
 and branching guidelines.
 
@@ -169,23 +169,23 @@ which differ from those implemented here, we would welcome hearing about them.
 
 Please submit feedback, bugs, feature requests, and code changes using GitHub
 at:
-http://github.com/pyincept/pyincept
+http://github.com/inceptiontools/inceptiontools
 
 Development
 ===========
 
 Repository Management:
-    ``pyincept`` manages its repository using the `GitFlow`_ model.
+    ``inceptiontools`` manages its repository using the `GitFlow`_ model.
 
 .. _`GitFlow`: https://nvie.com/posts/a-successful-git-branching-model/
 
 Code style:
-    ``pyincept`` code should adhere to the `PEP 8`_ guidelines.
+    ``inceptiontools`` code should adhere to the `PEP 8`_ guidelines.
 
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
 
 Versioning:
-    ``pyincept`` versioning uses semantic versioning and adheres to the
+    ``inceptiontools`` versioning uses semantic versioning and adheres to the
     guidelines specified `here`_.
 
 .. _`here`: https://semver.org/

@@ -9,8 +9,8 @@
 ########################################
 # Build variables
 
-PROJECT_NAME=pyincept
-PACKAGE_NAME=pyincept
+PROJECT_NAME=inceptiontools
+PACKAGE_NAME=inceptiontools
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
@@ -100,7 +100,7 @@ docs-clean: docs-rst-clean
 	rm -rf ./docs/_build/*
 
 docs-rst: lib-sphinx
-	sphinx-apidoc -o ./docs/_modules ./pyincept
+	sphinx-apidoc -o ./docs/_modules ./inceptiontools
 
 docs-rst-clean:
 	rm -rf ./docs/_modules/*
