@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('..'))
 print(sys.path)
 # -- Project information -----------------------------------------------------
 
-project = 'pyincept'
+project = 'inceptiontools'
 copyright = '2020, Andrew van Herick'
 author = 'Andrew van Herick'
 

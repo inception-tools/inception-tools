@@ -1,5 +1,5 @@
 """
-    pyincept_test_base
+    inceptiontools_test_base
     ~~~~~~~~~~~~~~~~~~
 
     Houses the declaration of :py:class:`ArchetypeOutputTestBase` along with
@@ -21,7 +21,7 @@ from collections import namedtuple
 
 from hamcrest import assert_that, is_
 
-from pyincept.archetype_parameters import ArchetypeParameters
+from inceptiontools.archetype_parameters import ArchetypeParameters
 from tests.file_matcher import exists, is_dir, is_file, not_exists
 
 _OutputFile = namedtuple('_OutputFile', ('subpath', 'expected_content_path'))
