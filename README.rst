@@ -2,14 +2,14 @@
 pyincept
 ========
 
-.. image:: https://github.com/pyincept/pyincept/workflows/Release%20Build/badge.svg
-  :target: https://github.com/pyincept/pyincept/actions?query=workflow%3A%22Release+Build%22
+.. image:: https://github.com/inception-tools/inception-tools/workflows/Release%20Build/badge.svg
+  :target: https://github.com/inception-tools/inception-tools/actions?query=workflow%3A%22Release+Build%22
 
-.. image:: https://github.com/pyincept/pyincept/workflows/Nightly%20Development%20Build/badge.svg
-  :target: https://github.com/pyincept/pyincept/actions?query=workflow%3A%22Nightly+Development+Build%22
+.. image:: https://github.com/inception-tools/inception-tools/workflows/Nightly%20Development%20Build/badge.svg
+  :target: https://github.com/inception-tools/inception-tools/actions?query=workflow%3A%22Nightly+Development+Build%22
 
-.. image:: https://github.com/pyincept/pyincept/workflows/Development%20Test%20Suite/badge.svg
-  :target: https://github.com/pyincept/pyincept/actions?query=workflow%3A%22Development+Test+Suite%22
+.. image:: https://github.com/inception-tools/inception-tools/workflows/Development%20Test%20Suite/badge.svg
+  :target: https://github.com/inception-tools/inception-tools/actions?query=workflow%3A%22Development+Test+Suite%22
 
 Under Construction
 ==================
@@ -156,7 +156,7 @@ a pull request at the ``pyincept`` `repository`_ and tagging `@avanherick` for
 review.  Please see the `Development` section of this document for code style
 and branching guidelines.
 
-.. _`repository`: https://github.com/pyincept/pyincept/
+.. _`repository`: https://github.com/inception-tools/inception-tools/
 
 This project was created to fill what looked like a lack of standardized
 conventions practices for structuring Python projects, and out of the desire
