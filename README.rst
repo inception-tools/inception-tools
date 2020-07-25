@@ -1,6 +1,6 @@
-========
-inceptiontools
-========
+===============
+inception-tools
+===============
 
 .. image:: https://github.com/inception-tools/inception-tools/workflows/Release%20Build/badge.svg
   :target: https://github.com/inception-tools/inception-tools/actions?query=workflow%3A%22Release+Build%22
@@ -50,7 +50,7 @@ https://pypi.org/project/inceptiontools/
 
 GitHub Repository:
 
-https://github.com/inceptiontools/inceptiontools
+https://github.com/inception-tools/inception-tools
 
 Installation
 ============
@@ -169,7 +169,7 @@ which differ from those implemented here, we would welcome hearing about them.
 
 Please submit feedback, bugs, feature requests, and code changes using GitHub
 at:
-http://github.com/inceptiontools/inceptiontools
+http://github.com/inception-tools/inception-tools
 
 Development
 ===========
