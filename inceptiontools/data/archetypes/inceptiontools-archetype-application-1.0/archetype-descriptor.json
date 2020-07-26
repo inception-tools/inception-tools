@@ -53,24 +53,12 @@
       "prototype": "tests/end_to_end/__init__.py.jinja"
     },
     {
-      "subpath": "tests/end_to_end/test_{{package_name}}/__init__.py",
-      "prototype": "tests/end_to_end/test_package/__init__.py.jinja"
-    },
-    {
       "subpath": "tests/integration/__init__.py",
       "prototype": "tests/integration/__init__.py.jinja"
     },
     {
-      "subpath": "tests/integration/test_{{package_name}}/__init__.py",
-      "prototype": "tests/integration/test_package/__init__.py.jinja"
-    },
-    {
       "subpath": "tests/unit/__init__.py",
       "prototype": "tests/unit/__init__.py.jinja"
-    },
-    {
-      "subpath": "tests/unit/test_{{package_name}}/__init__.py",
-      "prototype": "tests/unit/test_package/__init__.py.jinja"
     }
   ]
 }

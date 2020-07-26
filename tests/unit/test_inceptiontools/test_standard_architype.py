@@ -61,9 +61,6 @@ class TestStandardArchetype(ArchetypeOutputTestBase):
         ('tests', 'end_to_end', '__init__.py'),
         ('tests', 'integration', '__init__.py'),
         ('tests', 'unit', '__init__.py'),
-        ('tests', 'end_to_end', 'test_' + _PACKAGE_NAME, '__init__.py'),
-        ('tests', 'integration', 'test_' + _PACKAGE_NAME, '__init__.py'),
-        ('tests', 'unit', 'test_' + _PACKAGE_NAME, '__init__.py'),
     )
 
     @classmethod
