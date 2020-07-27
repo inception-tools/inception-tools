@@ -23,45 +23,17 @@ from tests.archetype_output_test_base import (
 )
 
 
-class TestStandardArchetype(ArchetypeOutputTestBase):
+class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
     """
-    Unit test for class :py:class:`ProjectBuilder`.
+    Base class of unit test classes for :py:class:`StandardArchetype`.  Each
+    enumerated value of :py:class:`StandardArchetype` should have a
+    corresponding test class using this as the base.
     """
 
-    ##############################
-    # Class attributes
-
-    # See superclass declaration to understand the use of this attribute.
-    _OVERWRITE_EXPECTED_FILE = False
-
-    _TEST_RESOURCE_PATH = os.path.abspath(
-        os.path.join(
-            __file__,
-            os.pardir,
-            'data',
-            'test_standard_archetype',
-        )
-    )
-
-    _PACKAGE_NAME = ArchetypeOutputTestBase._PACKAGE_NAME
-
-    _EXPECTED_DIRS = ('scripts', 'docs')
-
-    _EXPECTED_FILES = (
-        ('LICENSE',),
-        ('README.rst',),
-        ('setup.cfg',),
-        ('setup.py',),
-        ('log.cfg',),
-        ('Makefile',),
-        ('Pipfile',),
-        (_PACKAGE_NAME, '__init__.py'),
-        (_PACKAGE_NAME, 'main.py'),
-        ('tests', '__init__.py'),
-        ('tests', 'end_to_end', '__init__.py'),
-        ('tests', 'integration', '__init__.py'),
-        ('tests', 'unit', '__init__.py'),
-    )
+    _TEST_RESOURCE_PATH = None
+    _ARCHETYPE = None
+    _EXPECTED_DIRS = None
+    _EXPECTED_FILES = None
 
     @classmethod
     def _expected_files(cls):
@@ -101,7 +73,7 @@ class TestStandardArchetype(ArchetypeOutputTestBase):
             os.path.join(self._ROOT_DIR, j.subpath)
             for j in self._expected_dirs()
         )
-        actual = StandardArchetype.APPLICATION.dir_paths(
+        actual = self._ARCHETYPE.dir_paths(
             self._ROOT_DIR,
             self._PARAMS
         )
@@ -111,6 +83,129 @@ class TestStandardArchetype(ArchetypeOutputTestBase):
         """
         Unit test case for :py:method:`StandardArchetype.APPLICATION.build`.
         """
-        StandardArchetype.APPLICATION.build(self._ROOT_DIR, self._PARAMS)
+        self._ARCHETYPE.build(self._ROOT_DIR, self._PARAMS)
         self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
         self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())
+
+
+class TestStandardArchetypeApplication(_StandardArchetypeTestBase):
+    """
+    Unit test for class :py:class:`ProjectBuilder`.
+    """
+
+    ##############################
+    # Class attributes
+
+    # See superclass declaration to understand the use of this attribute.
+    _OVERWRITE_EXPECTED_FILE = False
+
+    _ARCHETYPE = StandardArchetype.APPLICATION
+
+    _TEST_RESOURCE_PATH = os.path.abspath(
+        os.path.join(
+            __file__,
+            os.pardir,
+            'data',
+            'test_standard_archetype',
+            'inceptiontools-archetype-application-1.0'
+        )
+    )
+
+    _EXPECTED_DIRS = ('scripts', 'docs')
+    _EXPECTED_FILES = (
+        ('LICENSE',),
+        ('README.rst',),
+        ('setup.cfg',),
+        ('setup.py',),
+        ('log.cfg',),
+        ('Makefile',),
+        ('Pipfile',),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, '__init__.py'),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, 'main.py'),
+        ('tests', '__init__.py'),
+        ('tests', 'end_to_end', '__init__.py'),
+        ('tests', 'integration', '__init__.py'),
+        ('tests', 'unit', '__init__.py'),
+    )
+
+
+class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
+    """
+    Unit test for class :py:class:`ProjectBuilder`.
+    """
+
+    ##############################
+    # Class attributes
+
+    # See superclass declaration to understand the use of this attribute.
+    _OVERWRITE_EXPECTED_FILE = False
+
+    _ARCHETYPE = StandardArchetype.LIBRARY
+
+    _TEST_RESOURCE_PATH = os.path.abspath(
+        os.path.join(
+            __file__,
+            os.pardir,
+            'data',
+            'test_standard_archetype',
+            'inceptiontools-archetype-library-1.0'
+        )
+    )
+
+    _EXPECTED_DIRS = ('scripts', 'docs')
+    _EXPECTED_FILES = (
+        ('LICENSE',),
+        ('README.rst',),
+        ('setup.cfg',),
+        ('setup.py',),
+        ('log.cfg',),
+        ('Makefile',),
+        ('Pipfile',),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, '__init__.py'),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, 'main.py'),
+        ('tests', '__init__.py'),
+        ('tests', 'end_to_end', '__init__.py'),
+        ('tests', 'integration', '__init__.py'),
+        ('tests', 'unit', '__init__.py'),
+    )
+
+
+class TestStandardArchetypeSimple(_StandardArchetypeTestBase):
+    """
+    Unit test for class :py:class:`ProjectBuilder`.
+    """
+
+    ##############################
+    # Class attributes
+
+    # See superclass declaration to understand the use of this attribute.
+    _OVERWRITE_EXPECTED_FILE = False
+
+    _ARCHETYPE = StandardArchetype.SIMPLE
+
+    _TEST_RESOURCE_PATH = os.path.abspath(
+        os.path.join(
+            __file__,
+            os.pardir,
+            'data',
+            'test_standard_archetype',
+            'inceptiontools-archetype-simple-1.0'
+        )
+    )
+
+    _EXPECTED_DIRS = ('scripts', 'docs')
+    _EXPECTED_FILES = (
+        ('LICENSE',),
+        ('README.rst',),
+        ('setup.cfg',),
+        ('setup.py',),
+        ('log.cfg',),
+        ('Makefile',),
+        ('Pipfile',),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, '__init__.py'),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, 'main.py'),
+        ('tests', '__init__.py'),
+        ('tests', 'end_to_end', '__init__.py'),
+        ('tests', 'integration', '__init__.py'),
+        ('tests', 'unit', '__init__.py'),
+    )
