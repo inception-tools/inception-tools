@@ -93,11 +93,11 @@ Usage
 =====
 
 Once Inception Tools has been installed, you can create a new project shell
-as follows:
+as follows\:
 
 ::
 
-it incept package_name [project_root]
+    it incept package_name [project_root]
 
 This will create a new project (using the standard ``application``
 archetype) under the directory ``project_root`` using additional parameters
