@@ -2,11 +2,8 @@
 {{package_name}}
 ~~~~
 
-Main entry point commend line script for the {{package_name}} project.
-
-Command line syntax:
-
-    {{package_name}} <message>
+Houses the declarations of classes and functions supporting the
+:py:mod:`{{package_name}}` package.
 """
 
 __author__ = '{{author}}'
@@ -14,28 +11,42 @@ __copyright__ = \
     'Unpublished Copyright (c) {{date.year}} {{author}}. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
-from logging import getLogger
-from logging.config import fileConfig
-
-import click
+import os
+import sys
 
 
-@click.command()
-@click.argument('message')
-def log_test(message):
-    fileConfig('log.cfg', disable_existing_loggers=False)
-    getLogger(__file__).debug('Logged with DEBUG: {}'.format(message))
-    getLogger(__file__).info('Logged with INFO: {}'.format(message))
-    getLogger(__file__).warning('Logged with WARNING: {}'.format(message))
-    getLogger(__file__).error('Logged with ERROR: {}'.format(message))
-    getLogger(__file__).critical('Logged with CRITICAL: {}'.format(message))
+class MessagePrinter(object):
+    """
+    A simple example class that prints a message to different output streams.
+    """
+
+    def __init__(self, message) -> None:
+        """
+        Initializes a new :py:class:`HelloWorld` instance.
+        """
+        super().__init__()
+        self._message = message
+
+    def to_file(self, file):
+        """
+        Prints the message held by this instance to a file-like object.
+        """
+        file.write(self._message)
+
+    def to_stdout(self):
+        """
+        Prints the message held by this instance to `stdout`.
+        """
+        self.to_file(sys.stdout)
+
+    def to_stderr(self):
+        """
+        Prints the message held by this instance to `stderr`.
+        """
+        self.to_file(sys.stderr)
 
 
-@click.group()
-def cli():
-    # Nothing to do.  This function provides a shell for grouping commands for
-    # the main command-line entry point.
-    pass
-
-
-cli.add_command(log_test)
+if __name__ == '__main__':
+    message_printer = MessagePrinter('Hello world!' + os.linesep)
+    message_printer.to_stdout()
+    message_printer.to_stderr()
