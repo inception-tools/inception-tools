@@ -57,12 +57,15 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	init-dev-35 \
 	init-dev-36 \
 	init-dev-37 \
+	init-dev-38 \
+	init-dev-39 \
 	install \
 	lib-bump2version \
 	lib-flake8 \
 	lib-sphinx \
 	lib-twine \
 	maintainer-clean \
+	pretty \
 	uninstall
 
 all: check install
@@ -106,7 +109,7 @@ docs-rst-clean:
 	rm -rf ./docs/_modules/*
 
 init:
-	pipenv install
+	pipenv install -d
 
 init-clean:
 	pipenv uninstall --all
@@ -123,8 +126,17 @@ init-dev-36:
 init-dev-37:
 	pipenv install --dev --skip-lock --python 3.7
 
+init-dev-38:
+	pipenv install --dev --skip-lock --python 3.8
+
+init-dev-39:
+	pipenv install --dev --skip-lock --python 3.9
+
 install:
 	python setup.py $(EGG_INFO) install
+
+lib-black:
+	pip install --upgrade black
 
 lib-bump2version:
 	pip install --upgrade bump2version
@@ -140,6 +152,9 @@ lib-twine:
 
 maintainer-clean: clean check-clean dist-clean docs-clean
 	rm -rf $(EGG_DIR)
+
+pretty:
+	black inceptiontools tests
 
 uninstall:
 	pip uninstall -y $(PROJECT_NAME)
