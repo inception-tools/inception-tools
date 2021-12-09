@@ -2,14 +2,12 @@
 directory_builder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`DirectoryBuilder` along with
-supporting classes, functions, and attributes.
-"""
+Houses the declaration of :py:class:`DirectoryBuilder` along with supporting classes,
+functions, and attributes. """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import errno
 import os
@@ -23,10 +21,10 @@ from inceptiontools.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 class DirectoryBuilder(ArchetypeResourceBuilder, ABC):
     """
     An :py:class:`inceptiontools.ArchetypeResourceBuilder` implementation which
-    builds an empty directory at it's :py:meth:`path`.  This class provides
-    a 'template-method' implementation of :py:meth:`path` and
-    :py:meth`build`, which delegate responsibility for determining the
-    subpath under ``root_dir`` to a method called :py:class:`subpath`.
+    builds an empty directory at it's :py:meth:`path`.  This class provides a
+    'template-method' implementation of :py:meth:`path` and :py:meth`build`,
+    which delegate responsibility for determining the subpath under ``root_dir`` to a
+    method called :py:class:`subpath`.
     """
 
     def _path(self, root_dir: str, params: ArchetypeParameters):
@@ -60,9 +58,9 @@ class DirectoryBuilder(ArchetypeResourceBuilder, ABC):
     @abstractmethod
     def subpath(self, params: ArchetypeParameters) -> str:
         """
-        Subclasses are required to implement this method.  Implementations
-        of this method should return the subpath, under the root directory,
-        of the directory to be created by :py:meth:`build`.
+        Subclasses are required to implement this method.  Implementations of this
+        method should return the subpath, under the root directory, of the directory
+        to be created by :py:meth:`build`.
         :param params: the :py:class `ArchetypeParameters` to use as context
         when creating the subpath, e.g., when creating directories whose
         sub-path might be determined by the package name.

@@ -5,10 +5,9 @@
     Unit test cases for the :py:mod:`standard_archetype` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 
@@ -18,7 +17,8 @@ from inceptiontools.standard_archetype import (
     StandardArchetype,
 )
 from tests.archetype_output_test_base import (
-    _OutputDir, _OutputFile,
+    _OutputDir,
+    _OutputFile,
     ArchetypeOutputTestBase,
 )
 
@@ -38,10 +38,7 @@ class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
     @classmethod
     def _expected_files(cls):
         return tuple(
-            _OutputFile(
-                os.path.join(*s),
-                os.path.join(cls._TEST_RESOURCE_PATH, *s)
-            )
+            _OutputFile(os.path.join(*s), os.path.join(cls._TEST_RESOURCE_PATH, *s))
             for s in cls._EXPECTED_FILES
         )
 
@@ -55,13 +52,9 @@ class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
         .file_paths`.
         """
         expected = (
-            os.path.join(self._ROOT_DIR, j.subpath)
-            for j in self._expected_files()
+            os.path.join(self._ROOT_DIR, j.subpath) for j in self._expected_files()
         )
-        actual = self._ARCHETYPE.file_paths(
-            self._ROOT_DIR,
-            self._PARAMS
-        )
+        actual = self._ARCHETYPE.file_paths(self._ROOT_DIR, self._PARAMS)
         assert_that(sorted(actual), is_(sorted(expected)))
 
     def test_dir_paths(self):
@@ -70,13 +63,9 @@ class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
         .file_paths`.
         """
         expected = (
-            os.path.join(self._ROOT_DIR, j.subpath)
-            for j in self._expected_dirs()
+            os.path.join(self._ROOT_DIR, j.subpath) for j in self._expected_dirs()
         )
-        actual = self._ARCHETYPE.dir_paths(
-            self._ROOT_DIR,
-            self._PARAMS
-        )
+        actual = self._ARCHETYPE.dir_paths(self._ROOT_DIR, self._PARAMS)
         assert_that(sorted(actual), is_(sorted(expected)))
 
     def test_build(self):
@@ -105,27 +94,27 @@ class TestStandardArchetypeApplication(_StandardArchetypeTestBase):
         os.path.join(
             __file__,
             os.pardir,
-            'data',
-            'test_standard_archetype',
-            'inceptiontools-archetype-application-1.0'
+            "data",
+            "test_standard_archetype",
+            "inceptiontools-archetype-application-1.0",
         )
     )
 
-    _EXPECTED_DIRS = ('scripts', 'docs')
+    _EXPECTED_DIRS = ("scripts", "docs")
     _EXPECTED_FILES = (
-        ('LICENSE',),
-        ('README.rst',),
-        ('setup.cfg',),
-        ('setup.py',),
-        ('log.cfg',),
-        ('Makefile',),
-        ('Pipfile',),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, '__init__.py'),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, 'main.py'),
-        ('tests', '__init__.py'),
-        ('tests', 'end_to_end', '__init__.py'),
-        ('tests', 'integration', '__init__.py'),
-        ('tests', 'unit', '__init__.py'),
+        ("LICENSE",),
+        ("README.rst",),
+        ("setup.cfg",),
+        ("setup.py",),
+        ("log.cfg",),
+        ("Makefile",),
+        ("Pipfile",),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, "main.py"),
+        ("tests", "__init__.py"),
+        ("tests", "end_to_end", "__init__.py"),
+        ("tests", "integration", "__init__.py"),
+        ("tests", "unit", "__init__.py"),
     )
 
 
@@ -146,30 +135,30 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
         os.path.join(
             __file__,
             os.pardir,
-            'data',
-            'test_standard_archetype',
-            'inceptiontools-archetype-library-1.0'
+            "data",
+            "test_standard_archetype",
+            "inceptiontools-archetype-library-1.0",
         )
     )
 
-    _EXPECTED_DIRS = ('scripts', 'docs')
+    _EXPECTED_DIRS = ("scripts", "docs")
     _EXPECTED_FILES = (
-        ('LICENSE',),
-        ('README.rst',),
-        ('setup.cfg',),
-        ('setup.py',),
-        ('log.cfg',),
-        ('Makefile',),
-        ('Pipfile',),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, '__init__.py'),
+        ("LICENSE",),
+        ("README.rst",),
+        ("setup.cfg",),
+        ("setup.py",),
+        ("log.cfg",),
+        ("Makefile",),
+        ("Pipfile",),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
         (
             ArchetypeOutputTestBase._PACKAGE_NAME,
-            '{}.py'.format(ArchetypeOutputTestBase._PACKAGE_NAME)
+            "{}.py".format(ArchetypeOutputTestBase._PACKAGE_NAME),
         ),
-        ('tests', '__init__.py'),
-        ('tests', 'end_to_end', '__init__.py'),
-        ('tests', 'integration', '__init__.py'),
-        ('tests', 'unit', '__init__.py'),
+        ("tests", "__init__.py"),
+        ("tests", "end_to_end", "__init__.py"),
+        ("tests", "integration", "__init__.py"),
+        ("tests", "unit", "__init__.py"),
     )
 
 
@@ -190,25 +179,25 @@ class TestStandardArchetypeSimple(_StandardArchetypeTestBase):
         os.path.join(
             __file__,
             os.pardir,
-            'data',
-            'test_standard_archetype',
-            'inceptiontools-archetype-simple-1.0'
+            "data",
+            "test_standard_archetype",
+            "inceptiontools-archetype-simple-1.0",
         )
     )
 
-    _EXPECTED_DIRS = ('scripts', 'docs')
+    _EXPECTED_DIRS = ("scripts", "docs")
     _EXPECTED_FILES = (
-        ('LICENSE',),
-        ('README.rst',),
-        ('setup.cfg',),
-        ('setup.py',),
-        ('log.cfg',),
-        ('Makefile',),
-        ('Pipfile',),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, '__init__.py'),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, 'main.py'),
-        ('tests', '__init__.py'),
-        ('tests', 'end_to_end', '__init__.py'),
-        ('tests', 'integration', '__init__.py'),
-        ('tests', 'unit', '__init__.py'),
+        ("LICENSE",),
+        ("README.rst",),
+        ("setup.cfg",),
+        ("setup.py",),
+        ("log.cfg",),
+        ("Makefile",),
+        ("Pipfile",),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, "main.py"),
+        ("tests", "__init__.py"),
+        ("tests", "end_to_end", "__init__.py"),
+        ("tests", "integration", "__init__.py"),
+        ("tests", "unit", "__init__.py"),
     )

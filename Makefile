@@ -153,7 +153,7 @@ lib-twine:
 maintainer-clean: clean check-clean dist-clean docs-clean
 	rm -rf $(EGG_DIR)
 
-pretty:
+pretty: lib-black
 	black inceptiontools tests
 
 uninstall:

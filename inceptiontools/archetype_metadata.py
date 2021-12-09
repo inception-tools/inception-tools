@@ -2,54 +2,55 @@
 archetype_metadata
 ~~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`ArchetypeMetadata` along with
-supporting classes, functions, and attributes.
-"""
+Houses the declaration of :py:class:`ArchetypeMetadata` along with supporting
+classes, functions, and attributes. """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from collections import namedtuple
 
 from jsonschema import validate, ValidationError
 
 from inceptiontools.json_serializable import (
-    JSON_OBJ_TYPE, JsonSerializable,
+    JSON_OBJ_TYPE,
+    JsonSerializable,
     JsonSerializationError,
 )
 
 
 class ArchetypeMetadata(
     namedtuple(
-        'ArchetypeMetadataBase',
-        ('group_id', 'archetype_id', 'version_id',),
+        "ArchetypeMetadataBase",
+        (
+            "group_id",
+            "archetype_id",
+            "version_id",
+        ),
     ),
-    JsonSerializable
+    JsonSerializable,
 ):
     """
-    Instances of this class encapsulate and group metadata that pertains to
-    an :py:class:`archetype.Archetype`.  :py:class:`Archetype` instances are
-    uniquely identified by the combination of a group identifier (e.g.,
-    'inceptiontools'), which determines a name space, an architype identifier (
-    e.g., standard), and a version identifier ( e.g., '1.2.3').  The
-    combination of architype and version identifier is assumed to be unique
-    within the name space of the group identifier.
-    :ivar str group_id: the group identifier
-    :ivar str archetype_id: the architype identifier
-    :ivar str version_id: the architype version identifier
+    Instances of this class encapsulate and group metadata that pertains to an
+    :py:class:`archetype.Archetype`.  :py:class:`Archetype` instances are uniquely
+    identified by the combination of a group identifier (e.g., 'inceptiontools'),
+    which determines a name space, an architype identifier ( e.g., standard),
+    and a version identifier ( e.g., '1.2.3').  The combination of architype and
+    version identifier is assumed to be unique within the name space of the group
+    identifier. :ivar str group_id: the group identifier :ivar str archetype_id: the
+    architype identifier :ivar str version_id: the architype version identifier
     """
 
     # Make instances of this class immutable
     __slots__ = ()
 
     JSON_SCHEMA = {
-        'type': 'object',
-        'properties': {
-            'group_id': {'type': 'string'},
-            'archetype_id': {'type': 'string'},
-            'version_id': {'type': 'string'},
+        "type": "object",
+        "properties": {
+            "group_id": {"type": "string"},
+            "archetype_id": {"type": "string"},
+            "version_id": {"type": "string"},
         },
     }
     """
@@ -65,15 +66,15 @@ class ArchetypeMetadata(
             validate(json_obj, cls.JSON_SCHEMA)
         except ValidationError as e:
             to_raise = JsonSerializationError(
-                'Invalid JSON format: {}'.format(json_obj)
+                "Invalid JSON format: {}".format(json_obj)
             )
             raise to_raise from e
 
     @classmethod
     def from_json(cls, json_obj: JSON_OBJ_TYPE):
         """
-        Creates a new :py:class:`ArchetypeMetadata` from a JSON-like
-        Python object of the form:
+        Creates a new :py:class:`ArchetypeMetadata` from a JSON-like Python object of
+        the form:
 
         .. code-block::
 
@@ -87,15 +88,13 @@ class ArchetypeMetadata(
 
         if isinstance(json_obj, dict):
             return ArchetypeMetadata(
-                group_id=json_obj['group_id'],
-                archetype_id=json_obj['archetype_id'],
-                version_id=json_obj['version_id'],
+                group_id=json_obj["group_id"],
+                archetype_id=json_obj["archetype_id"],
+                version_id=json_obj["version_id"],
             )
 
         raise RuntimeError(
-            'Expected an object of type \'dict\' but received: {!r}'.format(
-                json_obj
-            )
+            "Expected an object of type 'dict' but received: {!r}".format(json_obj)
         )
 
     def to_json(self) -> dict:

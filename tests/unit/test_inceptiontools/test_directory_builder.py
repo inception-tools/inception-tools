@@ -5,10 +5,9 @@ test_directory_builder
 Unit test cases for the :py:mod:`directory_builder` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 import shutil
@@ -21,7 +20,6 @@ from tests.archetype_output_test_base import ArchetypeOutputTestBase
 
 
 class _MockDirectoryBuilder(DirectoryBuilder):
-
     def __init__(self, s: str) -> None:
         self.s = s
 
@@ -52,7 +50,7 @@ class TestDirectoryBuilder(object):
         """
         ArchetypeOutputTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
-        self._builder = _MockDirectoryBuilder('some_subpath')
+        self._builder = _MockDirectoryBuilder("some_subpath")
 
     def teardown(self):
         """
@@ -71,14 +69,14 @@ class TestDirectoryBuilder(object):
         Unit test case for :py:method:`DirectoryBuilder.path`.
         """
         actual = self._builder.path(self._ROOT_DIR, self._PARAMS)
-        expected = os.path.join('some_root_dir', 'some_subpath')
+        expected = os.path.join("some_root_dir", "some_subpath")
         assert_that(actual, is_(expected))
 
     def test_build(self):
         """
         Unit test case for :py:method:`DirectoryBuilder.build`.
         """
-        expected = os.path.join('some_root_dir', 'some_subpath')
+        expected = os.path.join("some_root_dir", "some_subpath")
 
         assert_that(not os.path.exists(expected))
         self._builder.build(self._ROOT_DIR, self._PARAMS)

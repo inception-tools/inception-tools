@@ -5,10 +5,9 @@ test_archetype_metadata
 Unit test cases for the :py:mod:`archetype_metadata` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from hamcrest import assert_that, is_
 from pytest import raises
@@ -26,15 +25,13 @@ class TestArchetypeMetadata(object):
     # Class attributes
 
     _JSON_OBJ = {
-        'group_id': 'some_group_id',
-        'archetype_id': 'some_archetype_id',
-        'version_id': 'some_version_id'
+        "group_id": "some_group_id",
+        "archetype_id": "some_archetype_id",
+        "version_id": "some_version_id",
     }
 
     _ARCHETYPE_METADATA = ArchetypeMetadata(
-        'some_group_id',
-        'some_archetype_id',
-        'some_version_id'
+        "some_group_id", "some_archetype_id", "some_version_id"
     )
 
     ##############################
@@ -47,7 +44,7 @@ class TestArchetypeMetadata(object):
         Unit test case for :py:method:`ArchetypeMetadata.from_json`.
         """
         json_obj = dict(self._JSON_OBJ)
-        json_obj['archetype_id'] = 5
+        json_obj["archetype_id"] = 5
         with raises(JsonSerializationError):
             ArchetypeMetadata.from_json(json_obj)
 
@@ -56,7 +53,7 @@ class TestArchetypeMetadata(object):
         Unit test case for :py:method:`ArchetypeMetadata.from_json`.
         """
         json_obj = dict(self._JSON_OBJ)
-        json_obj['foo'] = 'bar'
+        json_obj["foo"] = "bar"
         actual = ArchetypeMetadata.from_json(json_obj)
         expected = self._ARCHETYPE_METADATA
         assert_that(actual, is_(expected))

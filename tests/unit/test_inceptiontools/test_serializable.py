@@ -5,10 +5,9 @@ test_serializable
 Unit test cases for the :py:mod:`serializable` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from io import TextIOBase
 
@@ -18,7 +17,6 @@ from inceptiontools.serializable import Serializable
 
 
 class _MockSerializable(Serializable):
-
     def __init__(self, s: str) -> None:
         super().__init__()
         self.s = s
@@ -40,7 +38,7 @@ class TestSerializable(object):
     ##############################
     # Class attributes
 
-    _SERIALIZABLE = _MockSerializable('some test content')
+    _SERIALIZABLE = _MockSerializable("some test content")
 
     ##############################
     # Instance methods

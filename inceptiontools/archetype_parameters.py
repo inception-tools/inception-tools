@@ -2,28 +2,24 @@
 archetype_parameters
 ~~~~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`ArchetypeParameters` along with
-supporting classes, functions, and attributes.
-"""
+Houses the declaration of :py:class:`ArchetypeParameters` along with supporting
+classes, functions, and attributes. """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from collections import namedtuple
 
 
 class ArchetypeParameters(
     namedtuple(
-        'ArchetypeParametersBase',
-        ('package_name', 'author', 'author_email', 'date')
+        "ArchetypeParametersBase", ("package_name", "author", "author_email", "date")
     )
 ):
     """
-    A container class that responsible for grouping the parameters used to
-    create a project directory structure from an
-    :py:class:`archetype.Archetype`.
+    A container class that responsible for grouping the parameters used to create a
+    project directory structure from an :py:class:`archetype.Archetype`.
 
     Instances of this class are immutable.
 
@@ -35,8 +31,8 @@ class ArchetypeParameters(
 
     def as_dict(self) -> dict:
         """
-        Returns a dictionary representation of this instance, wherein each
-        named attribute is a key in the dictionary returned.
+        Returns a dictionary representation of this instance, wherein each named
+        attribute is a key in the dictionary returned.
         :return: the dictionary representing this instance
         """
         return self._asdict()

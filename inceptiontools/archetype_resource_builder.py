@@ -6,10 +6,9 @@ Houses the declaration of :py:class:`ArchetypeResourceBuilder` along with
 supporting classes, functions, and attributes.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from abc import ABC
 
@@ -25,8 +24,8 @@ class ArchetypeResourceBuilder(ABC):
 
     def path(self, root_dir: str, params: ArchetypeParameters) -> str:
         """
-        Returns the full path (possibly non-absolute) to the resource that will
-        be created by :py:meth:`build`.
+        Returns the full path (possibly non-absolute) to the resource that will be
+        created by :py:meth:`build`.
         :param root_dir: the root directory argument for :py:meth:`build`
         :param params: the parameters argument for :py:meth:`build`
         :return: the path
@@ -35,10 +34,9 @@ class ArchetypeResourceBuilder(ABC):
 
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         """
-        Builds the resource and stores it under the root directory.  The
-        content of the resource as well as the subpath under the root
-        directory may be, but need-not be, determined by the parameters
-        argument.
+        Builds the resource and stores it under the root directory.  The content of
+        the resource as well as the subpath under the root directory may be,
+        but need-not be, determined by the parameters argument.
         :param root_dir: the root directory under which the resource
         should be stored
         :param params: the parameters used to determine the resource's

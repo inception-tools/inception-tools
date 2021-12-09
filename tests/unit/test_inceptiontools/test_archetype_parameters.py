@@ -5,10 +5,9 @@
     Unit test cases for the :py:mod:`archetype_parameters` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 
 import datetime
@@ -23,17 +22,12 @@ class TestArchetypeParameters(object):
     Unit test for class :py:class:`ArchetypeParameters`.
     """
 
-    _PACKAGE_NAME = 'some_package'
-    _AUTHOR = 'some_author'
-    _AUTHOR_EMAIL = 'some_author'
+    _PACKAGE_NAME = "some_package"
+    _AUTHOR = "some_author"
+    _AUTHOR_EMAIL = "some_author"
     _DATE = datetime.date(2000, 1, 1)
 
-    _PARAMS = ArchetypeParameters(
-        _PACKAGE_NAME,
-        _AUTHOR,
-        _AUTHOR_EMAIL,
-        _DATE
-    )
+    _PARAMS = ArchetypeParameters(_PACKAGE_NAME, _AUTHOR, _AUTHOR_EMAIL, _DATE)
 
     # Test cases
 
