@@ -6,9 +6,10 @@ Houses the declarations of classes and functions supporting the
 :py:mod:`some_package_name` package.
 """
 
-__author__ = "some_author"
-__copyright__ = "Unpublished Copyright (c) 2000 some_author. All Rights Reserved."
-__license__ = "Apache Software License 2.0"
+__author__ = 'some_author'
+__copyright__ = \
+    'Unpublished Copyright (c) 2000 some_author. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
 
 import os
 import sys
@@ -45,7 +46,7 @@ class MessagePrinter(object):
         self.to_file(sys.stderr)
 
 
-if __name__ == "__main__":
-    message_printer = MessagePrinter("Hello world!" + os.linesep)
+if __name__ == '__main__':
+    message_printer = MessagePrinter('Hello world!' + os.linesep)
     message_printer.to_stdout()
     message_printer.to_stderr()
