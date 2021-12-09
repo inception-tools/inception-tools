@@ -1,0 +1,64 @@
+{
+  "directories": [
+    {
+      "subpath": "docs"
+    },
+    {
+      "subpath": "scripts"
+    }
+  ],
+  "files": [
+    {
+      "subpath": "LICENSE",
+      "prototype": "LICENSE.jinja"
+    },
+    {
+      "subpath": "log.cfg",
+      "prototype": "log.cfg.jinja"
+    },
+    {
+      "subpath": "Makefile",
+      "prototype": "Makefile.jinja"
+    },
+    {
+      "subpath": "Pipfile",
+      "prototype": "Pipfile.jinja"
+    },
+    {
+      "subpath": "README.rst",
+      "prototype": "README.rst.jinja"
+    },
+    {
+      "subpath": "setup.cfg",
+      "prototype": "setup.cfg.jinja"
+    },
+    {
+      "subpath": "setup.py",
+      "prototype": "setup.py.jinja"
+    },
+    {
+      "subpath": "{{package_name}}/__init__.py",
+      "prototype": "package/__init__.py.jinja"
+    },
+    {
+      "subpath": "{{package_name}}/{{package_name}}.py",
+      "prototype": "package/package.py.jinja"
+    },
+    {
+      "subpath": "tests/__init__.py",
+      "prototype": "tests/__init__.py.jinja"
+    },
+    {
+      "subpath": "tests/end_to_end/__init__.py",
+      "prototype": "tests/end_to_end/__init__.py.jinja"
+    },
+    {
+      "subpath": "tests/integration/__init__.py",
+      "prototype": "tests/integration/__init__.py.jinja"
+    },
+    {
+      "subpath": "tests/unit/__init__.py",
+      "prototype": "tests/unit/__init__.py.jinja"
+    }
+  ]
+}

@@ -6,10 +6,9 @@
     supporting classes, functions, and attributes.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 #  Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
 #
@@ -24,8 +23,8 @@ from hamcrest import assert_that, is_
 from inceptiontools.archetype_parameters import ArchetypeParameters
 from tests.file_matcher import exists, is_dir, is_file, not_exists
 
-_OutputFile = namedtuple('_OutputFile', ('subpath', 'expected_content_path'))
-_OutputDir = namedtuple('_OutputDir', ('subpath',))
+_OutputFile = namedtuple("_OutputFile", ("subpath", "expected_content_path"))
+_OutputDir = namedtuple("_OutputDir", ("subpath",))
 
 
 class ArchetypeOutputTestBase(object):
@@ -49,11 +48,11 @@ class ArchetypeOutputTestBase(object):
     # :py:meth:`test_overwrite_expected_files_is_false`.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ROOT_DIR = 'some_root_dir'
+    _ROOT_DIR = "some_root_dir"
 
-    _PACKAGE_NAME = 'some_package_name'
-    _AUTHOR = 'some_author'
-    _AUTHOR_EMAIL = 'some_author_email'
+    _PACKAGE_NAME = "some_package_name"
+    _AUTHOR = "some_author"
+    _AUTHOR_EMAIL = "some_author_email"
     _DATE = datetime.date(2000, 1, 1)
 
     _PARAMS = ArchetypeParameters(_PACKAGE_NAME, _AUTHOR, _AUTHOR_EMAIL, _DATE)
@@ -68,14 +67,14 @@ class ArchetypeOutputTestBase(object):
 
     @classmethod
     def _put_file_content(cls, resource_path, content):
-        with open(resource_path, 'w') as f:
+        with open(resource_path, "w") as f:
             return f.write(content)
 
     @classmethod
     def _validate_path_doesnt_exist(cls, path_):
         assert_that(
             not os.path.exists(path_),
-            'Directory/file should be absent: {}'.format(path_)
+            "Directory/file should be absent: {}".format(path_),
         )
 
     @classmethod
@@ -94,7 +93,10 @@ class ArchetypeOutputTestBase(object):
     def _validate_archetype_files(self, root_dir, output_files):
         for test_output in output_files:
             actual_path = os.path.join(root_dir, test_output.subpath)
-            assert_that(actual_path, exists())
+            try:
+                assert_that(actual_path, exists())
+            except AssertionError:
+                raise
             assert_that(actual_path, is_file())
 
             actual_content = self._get_file_content(actual_path)
@@ -147,8 +149,6 @@ class ArchetypeOutputTestBase(object):
         """
         assert_that(
             not self._OVERWRITE_EXPECTED_FILE,
-            'The following value should always be False: '
-            'self._OVERWRITE_EXPECTED_FILE={}'.format(
-                self._OVERWRITE_EXPECTED_FILE
-            )
+            "The following value should always be False: "
+            "self._OVERWRITE_EXPECTED_FILE={}".format(self._OVERWRITE_EXPECTED_FILE),
         )

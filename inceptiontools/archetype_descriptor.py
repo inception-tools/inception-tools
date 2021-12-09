@@ -2,14 +2,12 @@
 archetype_descriptor
 ~~~~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`ArchetypeDescriptor` along with
-supporting classes, functions, and attributes.
-"""
+Houses the declaration of :py:class:`ArchetypeDescriptor` along with supporting
+classes, functions, and attributes. """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from collections import namedtuple
 
@@ -23,19 +21,18 @@ from inceptiontools.json_serializable import (
 
 
 class _JsonKey(object):
-    DIRECTORIES = 'directories'
-    FILES = 'files'
-    PROTOTYPE = 'prototype'
-    SUBPATH = 'subpath'
+    DIRECTORIES = "directories"
+    FILES = "files"
+    PROTOTYPE = "prototype"
+    SUBPATH = "subpath"
 
 
-DirectoryDescriptor = namedtuple('DirectoryDescriptor', ('subpath',))
-FileDescriptor = namedtuple('FileDescriptor', ('subpath', 'prototype'))
+DirectoryDescriptor = namedtuple("DirectoryDescriptor", ("subpath",))
+FileDescriptor = namedtuple("FileDescriptor", ("subpath", "prototype"))
 
 
 class ArchetypeDescriptor(
-    namedtuple('_ArchetypeDescriptorBase', ('files', 'directories')),
-    JsonSerializable
+    namedtuple("_ArchetypeDescriptorBase", ("files", "directories")), JsonSerializable
 ):
     """
     Describes the files and directories which should be created by an
@@ -46,32 +43,29 @@ class ArchetypeDescriptor(
     __slots__ = ()
 
     JSON_SCHEMA = {
-        'type': 'object',
-        'properties': {
-            'directories': {
-                'type': 'array',
-                'items': {'$ref': '#/definitions/directory'}
+        "type": "object",
+        "properties": {
+            "directories": {
+                "type": "array",
+                "items": {"$ref": "#/definitions/directory"},
             },
-            'files': {
-                'type': 'array',
-                'items': {'$ref': '#/definitions/file'}
+            "files": {"type": "array", "items": {"$ref": "#/definitions/file"}},
+        },
+        "definitions": {
+            "directory": {
+                "type": "object",
+                "properties": {
+                    "subpath": {"type": "string"},
+                },
+            },
+            "file": {
+                "type": "object",
+                "properties": {
+                    "subpath": {"type": "string"},
+                    "prototype": {"type": "string"},
+                },
             },
         },
-        'definitions': {
-            'directory': {
-                'type': 'object',
-                'properties': {
-                    'subpath': {'type': 'string'},
-                }
-            },
-            'file': {
-                'type': 'object',
-                'properties': {
-                    'subpath': {'type': 'string'},
-                    'prototype': {'type': 'string'}
-                }
-            }
-        }
     }
     """
     The Python `JSON schema`_ that :py:meth:`serialize_json` and
@@ -83,8 +77,8 @@ class ArchetypeDescriptor(
     @classmethod
     def from_json(cls, json_obj: JSON_OBJ_TYPE):
         """
-        Creates a new :py:class:`ArchetypeDescriptor` from a JSON-like
-        Python object of the form:
+        Creates a new :py:class:`ArchetypeDescriptor` from a JSON-like Python object
+        of the form:
 
         .. code-block::
 
@@ -129,9 +123,7 @@ class ArchetypeDescriptor(
             return cls(file_descriptors, dir_descriptors)
 
         raise RuntimeError(
-            'Expected an object of type \'dict\' but received: {!r}'.format(
-                json_obj
-            )
+            "Expected an object of type 'dict' but received: {!r}".format(json_obj)
         )
 
     @classmethod
@@ -140,7 +132,7 @@ class ArchetypeDescriptor(
             validate(json_obj, cls.JSON_SCHEMA)
         except ValidationError as e:
             to_raise = JsonSerializationError(
-                'Invalid JSON format: {}'.format(json_obj)
+                "Invalid JSON format: {}".format(json_obj)
             )
             raise to_raise from e
 

@@ -2,14 +2,12 @@
 serializable
 ~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`Serializable` along with
-supporting classes, functions, and attributes.
-"""
+Houses the declaration of :py:class:`Serializable` along with supporting classes,
+functions, and attributes. """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from abc import ABC, abstractmethod
 from contextlib import closing
@@ -23,15 +21,15 @@ TEXT_IO_TYPE = Union[TextIOBase, StringIO]
 
 class SerializationError(Exception):
     """
-    A common exception type for subclasses of :py:class:`Serializable` may
-    raise to indicate an error.
+    A common exception type for subclasses of :py:class:`Serializable` may raise to
+    indicate an error.
     """
 
 
 class Serializable(ABC):
     """
-    Defines the common interface by which objects are serialized and
-    deserialized within the :py:mod:`inceptiontools` package.
+    Defines the common interface by which objects are serialized and deserialized
+    within the :py:mod:`inceptiontools` package.
     """
 
     ##############################
@@ -44,8 +42,7 @@ class Serializable(ABC):
         Deserializes a new ``cls`` instance from a text-based input stream.
         :param file_obj: the file-like object
         :return: a new instance of type ``cls``
-        :raises SerializationError: if a problem occurs during execution of
-        this method
+        :raises SerializationError: if a problem occurs during execution of this method
         """
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
@@ -55,8 +52,7 @@ class Serializable(ABC):
         Deserializes a new ``cls`` instance from a ``str``.
         :param s: the ``str``
         :return: a new instance of type ``cls``
-        :raises SerializationError: if a problem occurs during execution of
-        this method
+        :raises SerializationError: if a problem occurs during execution of this method
         """
         with closing(StringIO(s)) as f:
             return cls.from_text_io(f)
@@ -69,8 +65,7 @@ class Serializable(ABC):
         """
         Serializes this instance to a text-based output stream.
         :param file_obj: the input stream
-        :raises SerializationError: if a problem occurs during execution of
-        this method
+        :raises SerializationError: if a problem occurs during execution of this method
         """
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
@@ -78,8 +73,7 @@ class Serializable(ABC):
         """
         Serializes this instance to a ``str``.
         :return: the ``str``
-        :raises SerializationError: if a problem occurs during execution of
-        this method
+        :raises SerializationError: if a problem occurs during execution of this method
         """
         with closing(StringIO()) as f:
             self.to_text_io(f)

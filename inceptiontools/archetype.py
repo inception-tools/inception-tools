@@ -2,14 +2,12 @@
 archetype
 ~~~~~~~~~
 
-Houses the declaration of :py:class:`archetype` along with supporting
-classes, functions, and attributes.
-"""
+Houses the declaration of :py:class:`archetype` along with supporting classes,
+functions, and attributes. """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from abc import ABC, abstractmethod
 from typing import Iterable
@@ -20,21 +18,17 @@ from inceptiontools.constants import UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
 class Archetype(ABC):
     """
-    Instances of this class provide a canonical template project structure
-    and are capable of building particular project structures under a
-    specified root directory using a set of parameters to determine the
-    specifics of directory structure and file paths and content.
+    Instances of this class provide a canonical template project structure and are
+    capable of building particular project structures under a specified root
+    directory using a set of parameters to determine the specifics of directory
+    structure and file paths and content.
     """
 
     @abstractmethod
-    def file_paths(
-            self,
-            root_path: str,
-            params: ArchetypeParameters
-    ) -> Iterable[str]:
+    def file_paths(self, root_path: str, params: ArchetypeParameters) -> Iterable[str]:
         """
-        The paths of every file that will be created by
-        :py:meth:`Archetype.build`.
+        The paths of every file that will be created by :py:meth:`Archetype.build`.
+
         :param root_path: the root directory of the project structure to be
         created
         :param params: the :py:class:`ArchetypeParameters` to use as context
@@ -44,14 +38,11 @@ class Archetype(ABC):
         raise UNIMPLEMENTED_ABSTRACT_METHOD_ERROR
 
     @abstractmethod
-    def dir_paths(
-            self,
-            root_path: str,
-            params: ArchetypeParameters
-    ) -> Iterable[str]:
+    def dir_paths(self, root_path: str, params: ArchetypeParameters) -> Iterable[str]:
         """
         The paths of every directory that will be explicitly created by
         :py:meth:`Archetype.build`.
+
         :param root_path: the root directory of the project structure to be
         created
         :param params: the :py:class:`ArchetypeParameters` to use as context

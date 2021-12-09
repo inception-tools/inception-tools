@@ -6,10 +6,9 @@ Houses the declaration of :py:class:`TemplateFileBuilder` along with
 supporting classes, functions, and attributes.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 
@@ -21,24 +20,23 @@ from inceptiontools.file_builder import FileBuilder
 
 class TemplateFileBuilder(FileBuilder):
     """
-    This class uses :py:class:jinja2.Template` instances to create both the
-    subpath and content of a file.
+    This class uses :py:class:jinja2.Template` instances to create both the subpath
+    and content of a file.
     """
 
-    PATH_SEP = '/'
+    PATH_SEP = "/"
     """
-    The path separator to use to write ``subpath`` templates. This
-    separator will be converted to the OS-specific path separator
-    automatically by :py:meth:`subpath`.
+    The path separator to use to write ``subpath`` templates. This separator will be
+    converted to the OS-specific path separator automatically by :py:meth:`subpath`.
     """
 
     @classmethod
     def from_strings(cls, subpath, prototype) -> FileBuilder:
         """
         Factory method that builds a new :py:class:`TemplateDirectoryBuilder`
-        instance from :py:class:`jinja2.Template` source ``string``s,
-        which will be used to create the return value of :py:meth:`subpath`
-        and :py:meth:`render` from the ``params`` argument.
+        instance from :py:class:`jinja2.Template` source ``string``s, which will be
+        used to create the return value of :py:meth:`subpath` and :py:meth:`render`
+        from the ``params`` argument.
         :param subpath: the subpath template string
         :param prototype: the prototype template string
         :return: the new instance
@@ -63,10 +61,9 @@ class TemplateFileBuilder(FileBuilder):
 
     def subpath(self, params: ArchetypeParameters) -> str:
         """
-        Creates the subpath using the ``subpath``
-        :py:class:`jinja2.Template` used to initialize this instance,
-        using the named :py:class:`ArchetypeParameters` to replace any
-        template variables.  The path, once rendered, is split using
+        Creates the subpath using the ``subpath`` :py:class:`jinja2.Template` used to
+        initialize this instance, using the named :py:class:`ArchetypeParameters` to
+        replace any template variables.  The path, once rendered, is split using
         :py:attr:`PATH_SEP` and rejoined using the OS-specific path separator.
         """
         subpath_raw = self._subpath.render(**params.as_dict())
@@ -75,9 +72,8 @@ class TemplateFileBuilder(FileBuilder):
 
     def render(self, params: ArchetypeParameters) -> str:
         """
-        Renders the file content using the ``subpath``
-        :py:class:`jinja2.Template` used to initialize this instance,
-        using the named :py:class:`ArchetypeParameters` to replace any
-        template variables.
+        Renders the file content using the ``subpath`` :py:class:`jinja2.Template`
+        used to initialize this instance, using the named
+        :py:class:`ArchetypeParameters` to replace any template variables.
         """
         return self._prototype.render(**params.as_dict())

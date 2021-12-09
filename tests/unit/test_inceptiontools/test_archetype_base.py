@@ -5,10 +5,9 @@
     Unit test cases for the :py:mod:`archetype_base` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 import shutil
@@ -24,7 +23,6 @@ from tests.file_matcher import exists, is_dir, is_file
 
 
 class _MockFileBuilder(FileBuilder):
-
     def __init__(self, subpath, render_content) -> None:
         super().__init__()
         self.subpath_value = subpath
@@ -38,7 +36,6 @@ class _MockFileBuilder(FileBuilder):
 
 
 class _MockDirBuilder(DirectoryBuilder):
-
     def __init__(self, subpath) -> None:
         super().__init__()
         self.subpath_value = subpath
@@ -72,14 +69,13 @@ class TestArchetypeBase(object):
 
         self._archetype = ArchetypeBase(
             (
-                _MockFileBuilder('some_file', 'some_content'),
-                _MockFileBuilder('some_other_file', 'some_other_content')
+                _MockFileBuilder("some_file", "some_content"),
+                _MockFileBuilder("some_other_file", "some_other_content"),
             ),
             (
-                _MockDirBuilder('some_dir'),
-                _MockDirBuilder('some_other_dir'),
-            )
-
+                _MockDirBuilder("some_dir"),
+                _MockDirBuilder("some_other_dir"),
+            ),
         )
 
     def teardown(self):
@@ -101,10 +97,10 @@ class TestArchetypeBase(object):
         self._archetype.build(self._ROOT_DIR, self._PARAMS)
 
         file_paths = (
-            os.path.join('some_root_dir', 'some_file'),
-            os.path.join('some_root_dir', 'some_other_file')
+            os.path.join("some_root_dir", "some_file"),
+            os.path.join("some_root_dir", "some_other_file"),
         )
-        contents = ('some_content', 'some_other_content')
+        contents = ("some_content", "some_other_content")
         for path, expected in zip(file_paths, contents):
             assert_that(path, exists())
             assert_that(path, is_file())
@@ -119,8 +115,8 @@ class TestArchetypeBase(object):
         self._archetype.build(self._ROOT_DIR, self._PARAMS)
 
         file_paths = (
-            os.path.join('some_root_dir', 'some_dir'),
-            os.path.join('some_root_dir', 'some_other_dir')
+            os.path.join("some_root_dir", "some_dir"),
+            os.path.join("some_root_dir", "some_other_dir"),
         )
         for path in file_paths:
             assert_that(path, exists())
@@ -132,8 +128,8 @@ class TestArchetypeBase(object):
         """
         actual = self._archetype.file_paths(self._ROOT_DIR, self._PARAMS)
         expected = (
-            os.path.join('some_root_dir', 'some_file'),
-            os.path.join('some_root_dir', 'some_other_file'),
+            os.path.join("some_root_dir", "some_file"),
+            os.path.join("some_root_dir", "some_other_file"),
         )
         assert_that(actual, is_(expected))
 
@@ -143,7 +139,7 @@ class TestArchetypeBase(object):
         """
         actual = self._archetype.dir_paths(self._ROOT_DIR, self._PARAMS)
         expected = (
-            os.path.join('some_root_dir', 'some_dir'),
-            os.path.join('some_root_dir', 'some_other_dir'),
+            os.path.join("some_root_dir", "some_dir"),
+            os.path.join("some_root_dir", "some_other_dir"),
         )
         assert_that(actual, is_(expected))

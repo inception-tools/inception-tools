@@ -5,10 +5,9 @@ test_template_archetype
 Unit test cases for the :py:mod:`template_archetype` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 
@@ -32,25 +31,18 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ARCHETYPE_NAME = 'inceptiontools-archetype-test_template_archetype-1.0'
+    _ARCHETYPE_NAME = "inceptiontools-archetype-test_template_archetype-1.0"
 
     _TEST_RESOURCE_PATH = os.path.abspath(
-        os.path.join(
-            __file__,
-            os.pardir,
-            'data',
-            'test_template_archetype'
-        )
+        os.path.join(__file__, os.pardir, "data", "test_template_archetype")
     )
 
-    _OUTPUT_DIRS = (
-        _OutputFile('tests', None),
-    )
+    _OUTPUT_DIRS = (_OutputFile("tests", None),)
 
     _OUTPUT_FILES = (
         _OutputFile(
-            'some_package_name.py',
-            os.path.join(_TEST_RESOURCE_PATH, 'some_package_name.py')
+            "some_package_name.py",
+            os.path.join(_TEST_RESOURCE_PATH, "some_package_name.py"),
         ),
     )
 
@@ -77,8 +69,7 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
         """
         actual = self._archetype.file_paths(self._ROOT_DIR, self._PARAMS)
         expected = tuple(
-            os.path.join(self._ROOT_DIR, p.subpath)
-            for p in self._OUTPUT_FILES
+            os.path.join(self._ROOT_DIR, p.subpath) for p in self._OUTPUT_FILES
         )
         assert_that(sorted(actual), is_(sorted(expected)))
 
@@ -88,8 +79,7 @@ class TestTemplateArchetype(ArchetypeOutputTestBase):
         """
         actual = self._archetype.dir_paths(self._ROOT_DIR, self._PARAMS)
         expected = tuple(
-            os.path.join(self._ROOT_DIR, p.subpath)
-            for p in self._OUTPUT_DIRS
+            os.path.join(self._ROOT_DIR, p.subpath) for p in self._OUTPUT_DIRS
         )
         assert_that(sorted(actual), is_(sorted(expected)))
 

@@ -5,10 +5,9 @@ test_json_serializable
 Unit test cases for the :py:mod:`json_serializable` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 from contextlib import closing
 from io import StringIO
@@ -19,7 +18,6 @@ from inceptiontools.json_serializable import JSON_OBJ_TYPE, JsonSerializable
 
 
 class _MockJsonSerializable(JsonSerializable):
-
     def __init__(self, json_obj) -> None:
         super().__init__()
         self.json_obj = json_obj
@@ -41,7 +39,7 @@ class TestJsonSerializable(object):
     # Class attributes
 
     _JSON_STR = '{"foo": "bar", "baz": "qux"}'
-    _SERIALIZABLE = _MockJsonSerializable({'foo': 'bar', 'baz': 'qux'})
+    _SERIALIZABLE = _MockJsonSerializable({"foo": "bar", "baz": "qux"})
 
     ##############################
     # Instance methods

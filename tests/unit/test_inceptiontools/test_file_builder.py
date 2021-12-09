@@ -5,10 +5,9 @@
     Unit test cases for the :py:mod:`file_builder` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 import shutil
@@ -21,7 +20,6 @@ from tests.archetype_output_test_base import ArchetypeOutputTestBase
 
 
 class _MockFileBuilder(FileBuilder):
-
     def __init__(self, subpath, render_content) -> None:
         super().__init__()
         self.subpath_value = subpath
@@ -57,7 +55,7 @@ class TestFileRenderer(object):
         """
         ArchetypeOutputTestBase._validate_path_doesnt_exist(self._ROOT_DIR)
 
-        self._builder = _MockFileBuilder('some_subpath', 'some_content')
+        self._builder = _MockFileBuilder("some_subpath", "some_content")
 
     def teardown(self):
         """
@@ -76,7 +74,7 @@ class TestFileRenderer(object):
         Unit test case for :py:method:`FileBuilder.path`.
         """
         actual = self._builder.path(self._ROOT_DIR, self._PARAMS)
-        expected = os.path.join('some_root_dir', 'some_subpath')
+        expected = os.path.join("some_root_dir", "some_subpath")
         assert_that(actual, is_(expected))
 
     def test_build(self):
@@ -85,9 +83,9 @@ class TestFileRenderer(object):
         """
         self._builder.build(self._ROOT_DIR, self._PARAMS)
 
-        with open(os.path.join('some_root_dir', 'some_subpath')) as f:
+        with open(os.path.join("some_root_dir", "some_subpath")) as f:
             actual = f.read()
 
-        expected = 'some_content'
+        expected = "some_content"
 
         assert_that(actual, is_(expected))

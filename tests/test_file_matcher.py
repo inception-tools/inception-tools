@@ -5,10 +5,9 @@ test_matchers
 Unit test cases for the :py:mod:`matchers` module.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 
@@ -17,13 +16,18 @@ from hamcrest.core.string_description import StringDescription
 from pytest import raises
 
 from tests.file_matcher import (
-    exists, is_file, is_not_file, IsDir, IsFile,
-    not_exists, PathExists,
+    exists,
+    is_file,
+    is_not_file,
+    IsDir,
+    IsFile,
+    not_exists,
+    PathExists,
 )
 
 _REAL_FILE = __file__
 _REAL_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
-_FAKE_PATH = 'some_fake_path'
+_FAKE_PATH = "some_fake_path"
 
 
 class TestPathExists(object):
