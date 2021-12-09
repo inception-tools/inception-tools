@@ -58,7 +58,7 @@ class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
             os.path.join(self._ROOT_DIR, j.subpath)
             for j in self._expected_files()
         )
-        actual = StandardArchetype.APPLICATION.file_paths(
+        actual = self._ARCHETYPE.file_paths(
             self._ROOT_DIR,
             self._PARAMS
         )
@@ -162,7 +162,10 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
         ('Makefile',),
         ('Pipfile',),
         (ArchetypeOutputTestBase._PACKAGE_NAME, '__init__.py'),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, 'main.py'),
+        (
+            ArchetypeOutputTestBase._PACKAGE_NAME,
+            '{}.py'.format(ArchetypeOutputTestBase._PACKAGE_NAME)
+        ),
         ('tests', '__init__.py'),
         ('tests', 'end_to_end', '__init__.py'),
         ('tests', 'integration', '__init__.py'),

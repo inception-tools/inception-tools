@@ -94,7 +94,10 @@ class ArchetypeOutputTestBase(object):
     def _validate_archetype_files(self, root_dir, output_files):
         for test_output in output_files:
             actual_path = os.path.join(root_dir, test_output.subpath)
-            assert_that(actual_path, exists())
+            try:
+                assert_that(actual_path, exists())
+            except AssertionError:
+                raise
             assert_that(actual_path, is_file())
 
             actual_content = self._get_file_content(actual_path)
