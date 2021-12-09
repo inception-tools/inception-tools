@@ -13,6 +13,6 @@ UNIMPLEMENTED_ABSTRACT_METHOD_ERROR = NotImplementedError(
     "Method to be implemented by subclasses."
 )
 """
-The error raised by unimplemented abstract methods declared in :py:class:`ABC` 
-subclasses. 
+The error raised by unimplemented abstract methods declared in :py:class:`ABC`
+subclasses.
 """

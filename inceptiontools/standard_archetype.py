@@ -35,8 +35,8 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
 
     APPLICATION = ("inceptiontools-archetype-application-1.0",)
     """
-    The :py:meth:`build` method of this :py:class:`Archetype` will create a 
-    directory/file tree with the following structure: 
+    The :py:meth:`build` method of this :py:class:`Archetype` will create a
+    directory/file tree with the following structure:
 
     ::
 
@@ -59,14 +59,14 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
             setup.cfg
             setup.py
 
-    where 'root_dir' is the `root_dir argument and 'my_package' is the `package_name` 
+    where 'root_dir' is the `root_dir argument and 'my_package' is the `package_name`
     attribute of the params argument.
     """
 
     LIBRARY = ("inceptiontools-archetype-library-1.0",)
     """
-    The :py:meth:`build` method of this :py:class:`Archetype` will create a 
-    directory/file tree with the following structure: 
+    The :py:meth:`build` method of this :py:class:`Archetype` will create a
+    directory/file tree with the following structure:
 
     ::
 
@@ -89,14 +89,14 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
             setup.cfg
             setup.py
 
-    where 'root_dir' is the `root_dir argument and 'my_package' is the `package_name` 
-    attribute of the params argument. 
+    where 'root_dir' is the `root_dir argument and 'my_package' is the `package_name`
+    attribute of the params argument.
     """
 
     SIMPLE = ("inceptiontools-archetype-simple-1.0",)
     """
-    The :py:meth:`build` method of this :py:class:`Archetype` will create a 
-    directory/file tree with the following structure: 
+    The :py:meth:`build` method of this :py:class:`Archetype` will create a
+    directory/file tree with the following structure:
 
     ::
 
@@ -111,8 +111,8 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
             setup.cfg
             setup.py
 
-    where 'root_dir' is the `root_dir argument and 'my_package' is the `package_name` 
-    attribute of the params argument. 
+    where 'root_dir' is the `root_dir argument and 'my_package' is the `package_name`
+    attribute of the params argument.
     """
 
     def __init__(self, archetype_resource_id) -> None:

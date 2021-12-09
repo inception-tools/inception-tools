@@ -78,8 +78,9 @@ check: check-style check-tests
 check-clean:
 	rm -rf $(PYTEST_CACHE_DIR)
 
+# 88 characters is black's default line length
 check-style: lib-flake8
-	flake8 . --count --show-source --statistics
+	flake8 . --count --show-source --statistics  --max-line-length=88
 
 check-tests:
 	python setup.py test
