@@ -43,8 +43,10 @@ class TestIncept(ArchetypeOutputTestBase):
 
     # Instance set up / tear down
 
+    # TODO: Something changed here. Two arguments are now requires where before, only
+    #  one was.  Need to understand why this is and come up with a better pattern.
     @mock.patch("inceptiontools.main.datetime")
-    def setup(self, mock_datetime):
+    def setup(self, _, mock_datetime):
         """
         Called before each method in this class with a name of the form
         test_*().
