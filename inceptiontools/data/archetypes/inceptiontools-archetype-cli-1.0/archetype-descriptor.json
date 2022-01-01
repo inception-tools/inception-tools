@@ -41,8 +41,8 @@
       "prototype": "package/__init__.py.jinja"
     },
     {
-      "subpath": "{{package_name}}/main.py",
-      "prototype": "package/main.py.jinja"
+      "subpath": "{{package_name}}/cli.py",
+      "prototype": "package/cli.py.jinja"
     },
     {
       "subpath": "tests/__init__.py",

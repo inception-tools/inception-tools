@@ -48,7 +48,7 @@ class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
 
     def test_file_paths(self):
         """
-        Unit test case for :py:method:`StandardArchetype.APPLICATION
+        Unit test case for :py:method:`StandardArchetype.CLI
         .file_paths`.
         """
         expected = (
@@ -59,7 +59,7 @@ class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
 
     def test_dir_paths(self):
         """
-        Unit test case for :py:method:`StandardArchetype.APPLICATION
+        Unit test case for :py:method:`StandardArchetype.CLI
         .file_paths`.
         """
         expected = (
@@ -70,16 +70,16 @@ class _StandardArchetypeTestBase(ArchetypeOutputTestBase):
 
     def test_build(self):
         """
-        Unit test case for :py:method:`StandardArchetype.APPLICATION.build`.
+        Unit test case for :py:method:`StandardArchetype.CLI.build`.
         """
         self._ARCHETYPE.build(self._ROOT_DIR, self._PARAMS)
         self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
         self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())
 
 
-class TestStandardArchetypeApplication(_StandardArchetypeTestBase):
+class TestStandardArchetypeCli(_StandardArchetypeTestBase):
     """
-    Unit test for class :py:class:`ProjectBuilder`.
+    Unit test for class :py:const:`StandardArchetype.CLI`.
     """
 
     ##############################
@@ -88,7 +88,7 @@ class TestStandardArchetypeApplication(_StandardArchetypeTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ARCHETYPE = StandardArchetype.APPLICATION
+    _ARCHETYPE = StandardArchetype.CLI
 
     _TEST_RESOURCE_PATH = os.path.abspath(
         os.path.join(
@@ -96,7 +96,7 @@ class TestStandardArchetypeApplication(_StandardArchetypeTestBase):
             os.pardir,
             "data",
             "test_standard_archetype",
-            "inceptiontools-archetype-application-1.0",
+            "inceptiontools-archetype-cli-1.0",
         )
     )
 
@@ -110,7 +110,7 @@ class TestStandardArchetypeApplication(_StandardArchetypeTestBase):
         ("Makefile",),
         ("Pipfile",),
         (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, "main.py"),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, "cli.py"),
         ("tests", "__init__.py"),
         ("tests", "end_to_end", "__init__.py"),
         ("tests", "integration", "__init__.py"),
@@ -120,7 +120,7 @@ class TestStandardArchetypeApplication(_StandardArchetypeTestBase):
 
 class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
     """
-    Unit test for class :py:class:`ProjectBuilder`.
+    Unit test for class :py:const:`StandardArchetype.LIB`.
     """
 
     ##############################
@@ -129,7 +129,7 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ARCHETYPE = StandardArchetype.LIBRARY
+    _ARCHETYPE = StandardArchetype.LIB
 
     _TEST_RESOURCE_PATH = os.path.abspath(
         os.path.join(
@@ -137,7 +137,7 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
             os.pardir,
             "data",
             "test_standard_archetype",
-            "inceptiontools-archetype-library-1.0",
+            "inceptiontools-archetype-lib-1.0",
         )
     )
 
@@ -164,7 +164,7 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
 
 class TestStandardArchetypeSimple(_StandardArchetypeTestBase):
     """
-    Unit test for class :py:class:`ProjectBuilder`.
+    Unit test for class :py:const:`StandardArchetype.SIMPLE`.
     """
 
     ##############################
@@ -195,7 +195,7 @@ class TestStandardArchetypeSimple(_StandardArchetypeTestBase):
         ("Makefile",),
         ("Pipfile",),
         (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, "main.py"),
+        (ArchetypeOutputTestBase._PACKAGE_NAME, "cli.py"),
         ("tests", "__init__.py"),
         ("tests", "end_to_end", "__init__.py"),
         ("tests", "integration", "__init__.py"),

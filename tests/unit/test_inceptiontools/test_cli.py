@@ -1,8 +1,8 @@
 """
-    test_main
+    test_cli
     ~~~~~~~~~
 
-    Unit test cases for the :py:mod:`inceptiontools.main` module.
+    Unit test cases for the :py:mod:`inceptiontools.cli` module.
 """
 
 __author__ = "Andrew van Herick"
@@ -19,13 +19,13 @@ from unittest import mock
 from click.testing import CliRunner
 from hamcrest import assert_that, contains_string, is_, starts_with
 
-from inceptiontools import main
+from inceptiontools import cli
 from tests.archetype_output_test_base import ArchetypeOutputTestBase
 
 
 class TestIncept(ArchetypeOutputTestBase):
     """
-    Unit test for the function :py:func:`inceptiontools.main.incept`.
+    Unit test for the function :py:func:`inceptiontools.cli.incept`.
     """
 
     ##############################
@@ -45,7 +45,7 @@ class TestIncept(ArchetypeOutputTestBase):
 
     # TODO: Something changed here. Two arguments are now requires where before, only
     #  one was.  Need to understand why this is and come up with a better pattern.
-    @mock.patch("inceptiontools.main.datetime")
+    @mock.patch("inceptiontools.cli.datetime")
     def setup(self, _, mock_datetime):
         """
         Called before each method in this class with a name of the form
@@ -57,27 +57,27 @@ class TestIncept(ArchetypeOutputTestBase):
 
         self._runner = CliRunner()
         self._result = self._runner.invoke(
-            main.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
 
     # Test cases
 
     def test_incept_emits_nothing_on_successful_execution(self):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         assert_that(self._result.stdout_bytes, is_(b""))
         assert_that(self._result.stderr_bytes, is_(None))
 
-    @mock.patch("inceptiontools.main._incept")
-    def test_incept_emits_nothing_for_unhandled_exception(self, mock__main):
+    @mock.patch("inceptiontools.cli._incept")
+    def test_incept_emits_nothing_for_unhandled_exception(self, mock__cli):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
-        mock__main.side_effect = self._EXCEPTION
+        mock__cli.side_effect = self._EXCEPTION
 
         result = self._runner.invoke(
-            main.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
 
         assert_that(result.stdout_bytes, is_(b""))
@@ -85,14 +85,14 @@ class TestIncept(ArchetypeOutputTestBase):
 
     def test_incept_maps_project_root(self):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         dir_path = self._PACKAGE_NAME
         assert_that(os.path.isdir(dir_path), f"Directory not found: {dir_path}")
 
     def test_incept_maps_package_name(self):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
         content = self._get_file_content(dir_path)
@@ -101,7 +101,7 @@ class TestIncept(ArchetypeOutputTestBase):
 
     def test_incept_maps_author_name(self):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
         content = self._get_file_content(dir_path)
@@ -110,7 +110,7 @@ class TestIncept(ArchetypeOutputTestBase):
 
     def test_incept_maps_author_email(self):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.cfg")
         content = self._get_file_content(dir_path)
@@ -119,7 +119,7 @@ class TestIncept(ArchetypeOutputTestBase):
 
     def test_incept_maps_date(self):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
         content = self._get_file_content(dir_path)
@@ -128,30 +128,30 @@ class TestIncept(ArchetypeOutputTestBase):
 
     def test_incept_leaves_exit_status_0_on_success(self):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         assert_that(self._result.exit_code, is_(0))
 
-    @mock.patch("inceptiontools.main._incept")
-    def test_incept_leaves_exit_status_1_on_unhandled_error(self, mock__main):
+    @mock.patch("inceptiontools.cli._incept")
+    def test_incept_leaves_exit_status_1_on_unhandled_error(self, mock__cli):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
-        mock__main.side_effect = self._EXCEPTION
+        mock__cli.side_effect = self._EXCEPTION
 
         result = self._runner.invoke(
-            main.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
 
         assert_that(result.exit_code, is_(1))
 
-    @mock.patch("inceptiontools.main._logger")
-    @mock.patch("inceptiontools.main._incept")
-    def test_incept_logs_unhandled_errors(self, mock__main, mock__logger):
+    @mock.patch("inceptiontools.cli._logger")
+    @mock.patch("inceptiontools.cli._incept")
+    def test_incept_logs_unhandled_errors(self, mock__cli, mock__logger):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
-        mock__main.side_effect = self._EXCEPTION
+        mock__cli.side_effect = self._EXCEPTION
 
         with closing(StringIO()) as sio:
             stream_handler = StreamHandler(sio)
@@ -159,7 +159,7 @@ class TestIncept(ArchetypeOutputTestBase):
             logger.addHandler(stream_handler)
             mock__logger.return_value = logger
             self._runner.invoke(
-                main.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+                cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
             )
 
             actual = sio.getvalue()

@@ -31,7 +31,7 @@ def _incept(package_name, author, author_email):
         author_email=author_email,
         date=datetime.now(),
     )
-    archetype = StandardArchetype.APPLICATION
+    archetype = StandardArchetype.CLI
     archetype.build(root_dir=package_name, params=params)
 
 

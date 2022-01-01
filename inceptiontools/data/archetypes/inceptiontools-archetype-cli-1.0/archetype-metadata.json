@@ -1,5 +1,5 @@
 {
   "group_id": "inceptiontools",
-  "archetype_id": "application",
+  "archetype_id": "cli",
   "version_id": "1.0"
 }
