@@ -88,7 +88,7 @@ class TestIncept(ArchetypeOutputTestBase):
         Unit test case for :py:func:`inceptiontools.main.incept`.
         """
         dir_path = self._PACKAGE_NAME
-        assert_that(os.path.isdir(dir_path), "Directory not found: {}".format(dir_path))
+        assert_that(os.path.isdir(dir_path), f"Directory not found: {dir_path}")
 
     def test_incept_maps_package_name(self):
         """
@@ -96,9 +96,7 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
         content = self._get_file_content(dir_path)
-        substring = "Package distribution file for the {} library.".format(
-            self._PACKAGE_NAME
-        )
+        substring = f"Package distribution file for the {self._PACKAGE_NAME} library."
         assert_that(content, contains_string(substring))
 
     def test_incept_maps_author_name(self):
@@ -107,7 +105,7 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
         content = self._get_file_content(dir_path)
-        substring = "__author__ = '{}'".format(self._AUTHOR)
+        substring = f"__author__ = '{self._AUTHOR}'"
         assert_that(content, contains_string(substring))
 
     def test_incept_maps_author_email(self):
@@ -116,7 +114,7 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.cfg")
         content = self._get_file_content(dir_path)
-        substring = "author_email = {}".format(self._AUTHOR_EMAIL)
+        substring = f"author_email = {self._AUTHOR_EMAIL}"
         assert_that(content, contains_string(substring))
 
     def test_incept_maps_date(self):
@@ -125,7 +123,7 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
         content = self._get_file_content(dir_path)
-        substring = "Copyright (c) {}".format(self._DATE.year)
+        substring = f"Copyright (c) {self._DATE.year}"
         assert_that(content, contains_string(substring))
 
     def test_incept_leaves_exit_status_0_on_success(self):

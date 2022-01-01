@@ -92,8 +92,10 @@ def incept(package_name, author, author_email):
     try:
         _incept(package_name, author, author_email)
     except Exception:
-        m = "Unexpected exception: package_name={}, author={}, author_email={}"
-        msg = m.format(package_name, author, author_email)
+        msg = (
+            "Unexpected exception: "
+            f"package_name={package_name}, author={author}, author_email={author_email}"
+        )
         _logger().exception(msg)
         raise
 

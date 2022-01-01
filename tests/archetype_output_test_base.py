@@ -74,7 +74,7 @@ class ArchetypeOutputTestBase(object):
     def _validate_path_doesnt_exist(cls, path_):
         assert_that(
             not os.path.exists(path_),
-            "Directory/file should be absent: {}".format(path_),
+            f"Directory/file should be absent: {path_}",
         )
 
     @classmethod
@@ -150,5 +150,5 @@ class ArchetypeOutputTestBase(object):
         assert_that(
             not self._OVERWRITE_EXPECTED_FILE,
             "The following value should always be False: "
-            "self._OVERWRITE_EXPECTED_FILE={}".format(self._OVERWRITE_EXPECTED_FILE),
+            f"self._OVERWRITE_EXPECTED_FILE={self._OVERWRITE_EXPECTED_FILE}",
         )
