@@ -2,7 +2,7 @@
 some_package_name
 ~~~~~~~~~~~~~~~~
 
-Main entry point commend line script for the some_package_name project.
+Main entry point commend line script for the :py:mod:`some_package_name` project.
 
     This sample application logs a message to console at all logging levels.
 
