@@ -107,8 +107,8 @@ class ArchetypeOutputTestBase(object):
             assert_that(
                 actual_content,
                 is_(expected_content),
-                f'File contents do not match: '
-                f'expected_path={expected_path!r}, actual_path={actual_path!r}'
+                f"File contents do not match: "
+                f"expected_path={expected_path!r}, actual_path={actual_path!r}",
             )
 
     def _validate_archetype_dirs(self, root_dir, output_dirs):

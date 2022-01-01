@@ -65,9 +65,7 @@ class ArchetypeMetadata(
         try:
             validate(json_obj, cls.JSON_SCHEMA)
         except ValidationError as e:
-            to_raise = JsonSerializationError(
-                f"Invalid JSON format: {json_obj}"
-            )
+            to_raise = JsonSerializationError(f"Invalid JSON format: {json_obj}")
             raise to_raise from e
 
     @classmethod

@@ -33,26 +33,26 @@ class TemplateArchetype(ArchetypeBase):
     present in the directory, at the subpath specified by the descriptor.
 
     Variables available to the template are the fields of
-    :py:class:`ArchetypeParameters`.  Each field of :py:class:`Architype` parameters
+    :py:class:`ArchetypeParameters`.  Each field of :py:class:`Archetype` parameters
     is available as an unscoped variable.  For example, to reference the fields
-    :py:attr:`ArchitypeParameters.author`, you would simple use the variable name
+    :py:attr:`ArchetypeParameters.author`, you would simply use the variable name
     'author' directly using double curly braces like so: ``{{author}}``.
     """
 
     METADATA_FILE_NAME = "archetype-metadata.json"
     """
-    The name of the JSON file containing :py:class:`ArchitypeMetadata`. This file is
-    used to determine what the canonical name of the architype.
+    The name of the JSON file containing :py:class:`ArchetypeMetadata`. This file is
+    used to determine what the canonical name of the archetype.
     """
 
     DESCRIPTOR_FILE_NAME = "archetype-descriptor.json"
     """
-    The name of the JSON file containing :py:class:`ArchitypeDescriptor` data. This
+    The name of the JSON file containing :py:class:`ArchetypeDescriptor` data. This
     file contains all of the information for mapping template files to sub-paths
     within the projects created by ``inceptiontools``.
     """
 
-    def __init__(self, dir_path) -> None:
+    def __init__(self, dir_path: str) -> None:
         """
         Initializes a new :py:class:`Archetype` instance from an directory assumed to
         contain an :py:class:`ArchetypeMetadata` JSON file,
