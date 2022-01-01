@@ -153,7 +153,7 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
         (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
         (
             ArchetypeOutputTestBase._PACKAGE_NAME,
-            "{}.py".format(ArchetypeOutputTestBase._PACKAGE_NAME),
+            f"{ArchetypeOutputTestBase._PACKAGE_NAME}.py",
         ),
         ("tests", "__init__.py"),
         ("tests", "end_to_end", "__init__.py"),

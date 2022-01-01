@@ -66,7 +66,7 @@ class ArchetypeMetadata(
             validate(json_obj, cls.JSON_SCHEMA)
         except ValidationError as e:
             to_raise = JsonSerializationError(
-                "Invalid JSON format: {}".format(json_obj)
+                f"Invalid JSON format: {json_obj}"
             )
             raise to_raise from e
 
@@ -94,7 +94,7 @@ class ArchetypeMetadata(
             )
 
         raise RuntimeError(
-            "Expected an object of type 'dict' but received: {!r}".format(json_obj)
+            f"Expected an object of type 'dict' but received: {json_obj!r}"
         )
 
     def to_json(self) -> dict:

@@ -123,7 +123,7 @@ class ArchetypeDescriptor(
             return cls(file_descriptors, dir_descriptors)
 
         raise RuntimeError(
-            "Expected an object of type 'dict' but received: {!r}".format(json_obj)
+            f"Expected an object of type 'dict' but received: {json_obj!r}"
         )
 
     @classmethod
@@ -132,7 +132,7 @@ class ArchetypeDescriptor(
             validate(json_obj, cls.JSON_SCHEMA)
         except ValidationError as e:
             to_raise = JsonSerializationError(
-                "Invalid JSON format: {}".format(json_obj)
+                f"Invalid JSON format: {json_obj}"
             )
             raise to_raise from e
 

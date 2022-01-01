@@ -24,11 +24,11 @@ import click
 @click.argument('message')
 def log_test(message):
     fileConfig('log.cfg', disable_existing_loggers=False)
-    getLogger(__file__).debug('Logged with DEBUG: {}'.format(message))
-    getLogger(__file__).info('Logged with INFO: {}'.format(message))
-    getLogger(__file__).warning('Logged with WARNING: {}'.format(message))
-    getLogger(__file__).error('Logged with ERROR: {}'.format(message))
-    getLogger(__file__).critical('Logged with CRITICAL: {}'.format(message))
+    getLogger(__file__).debug(f'Logged with DEBUG: {message}')
+    getLogger(__file__).info(f'Logged with INFO: {message}')
+    getLogger(__file__).warning(f'Logged with WARNING: {message}')
+    getLogger(__file__).error(f'Logged with ERROR: {message}')
+    getLogger(__file__).critical(f'Logged with CRITICAL: {message}')
 
 
 @click.group()
