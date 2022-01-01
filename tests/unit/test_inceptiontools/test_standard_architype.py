@@ -185,19 +185,14 @@ class TestStandardArchetypeSimple(_StandardArchetypeTestBase):
         )
     )
 
-    _EXPECTED_DIRS = ("scripts", "docs")
+    _EXPECTED_DIRS = ()
     _EXPECTED_FILES = (
         ("LICENSE",),
         ("README.rst",),
         ("setup.cfg",),
         ("setup.py",),
-        ("log.cfg",),
         ("Makefile",),
         ("Pipfile",),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
-        (ArchetypeOutputTestBase._PACKAGE_NAME, "cli.py"),
+        (f"{ArchetypeOutputTestBase._PACKAGE_NAME}.py",),
         ("tests", "__init__.py"),
-        ("tests", "end_to_end", "__init__.py"),
-        ("tests", "integration", "__init__.py"),
-        ("tests", "unit", "__init__.py"),
     )
