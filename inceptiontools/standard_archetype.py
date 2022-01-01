@@ -33,7 +33,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     system.
     """
 
-    APPLICATION = ("inceptiontools-archetype-application-1.0",)
+    CLI = ("inceptiontools-archetype-cli-1.0",)
     """
     The :py:meth:`build` method of this :py:class:`Archetype` will create a
     directory/file tree with the following structure:
