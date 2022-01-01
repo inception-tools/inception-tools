@@ -1,5 +1,5 @@
 """
-main
+cli
 ~~~~
 
 Main entry point commend line script for the some_package_name project.

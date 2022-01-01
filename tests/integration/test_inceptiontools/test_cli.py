@@ -1,8 +1,8 @@
 """
-    test_main
+    test_cli
     ~~~~~~~~~
 
-    Unit test cases for the :py:mod:`inceptiontools.main` module.
+    Unit test cases for the :py:mod:`inceptiontools.cli` module.
 """
 
 __author__ = "Andrew van Herick"
@@ -14,7 +14,7 @@ from unittest import mock
 
 from click.testing import CliRunner
 
-from inceptiontools import main
+from inceptiontools import cli
 from tests.archetype_output_test_base import (
     _OutputDir,
     _OutputFile,
@@ -24,7 +24,7 @@ from tests.archetype_output_test_base import (
 
 class TestIncept(ArchetypeOutputTestBase):
     """
-    Unit test for the function :py:func:`inceptiontools.main.incept`.
+    Unit test for the function :py:func:`inceptiontools.cli.incept`.
     """
 
     ##############################
@@ -56,7 +56,7 @@ class TestIncept(ArchetypeOutputTestBase):
         ("Makefile",),
         ("Pipfile",),
         (_PACKAGE_NAME, "__init__.py"),
-        (_PACKAGE_NAME, "main.py"),
+        (_PACKAGE_NAME, "cli.py"),
         ("tests", "__init__.py"),
         ("tests", "end_to_end", "__init__.py"),
         ("tests", "integration", "__init__.py"),
@@ -82,14 +82,14 @@ class TestIncept(ArchetypeOutputTestBase):
 
     # Test cases
 
-    @mock.patch("inceptiontools.main.datetime")
+    @mock.patch("inceptiontools.cli.datetime")
     def test_incept_builds_standard_archetype(self, mock_datetime):
         """
-        Unit test case for :py:func:`inceptiontools.main.incept`.
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         mock_datetime.now.return_value = self._DATE
         CliRunner().invoke(
-            main.cli, ("incept", self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            cli.cli, ("incept", self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
         self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
         self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())

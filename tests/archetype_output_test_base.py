@@ -92,22 +92,24 @@ class ArchetypeOutputTestBase(object):
 
     def _validate_archetype_files(self, root_dir, output_files):
         for test_output in output_files:
-            actual_path = os.path.join(root_dir, test_output.subpath)
-            try:
-                assert_that(actual_path, exists())
-            except AssertionError:
-                raise
+            actual_path = os.path.abspath(os.path.join(root_dir, test_output.subpath))
+            assert_that(actual_path, exists())
             assert_that(actual_path, is_file())
 
             actual_content = self._get_file_content(actual_path)
 
-            expected_path = test_output.expected_content_path
+            expected_path = os.path.abspath(test_output.expected_content_path)
             if self._OVERWRITE_EXPECTED_FILE:
                 self._put_file_content(expected_path, actual_content)
             assert_that(expected_path, is_file())
             expected_content = self._get_file_content(expected_path)
 
-            assert_that(actual_content, is_(expected_content))
+            assert_that(
+                actual_content,
+                is_(expected_content),
+                f'File contents do not match: '
+                f'expected_path={expected_path!r}, actual_path={actual_path!r}'
+            )
 
     def _validate_archetype_dirs(self, root_dir, output_dirs):
         for test_output in output_dirs:

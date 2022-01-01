@@ -43,7 +43,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
         root_dir/
             my_package/
                 __init__.py
-                main.py
+                cli.py
             tests/
                 __init__.py
                 end-to-end/
