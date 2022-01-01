@@ -10,11 +10,13 @@ __copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Re
 __license__ = "Apache Software License 2.0"
 
 import logging
+import pathlib
 from datetime import datetime
 from logging.config import fileConfig
 
 import click
 
+from build.lib.inceptiontools.exception import LoggingConfigError
 from inceptiontools.archetype_parameters import ArchetypeParameters
 from inceptiontools.standard_archetype import StandardArchetype
 
@@ -24,7 +26,6 @@ def _logger():
 
 
 def _incept(package_name, author, author_email):
-    fileConfig("log.cfg", disable_existing_loggers=False)
     params = ArchetypeParameters(
         package_name=package_name,
         author=author,
@@ -41,7 +42,8 @@ def _incept(package_name, author, author_email):
 @click.argument("author_email")
 def incept(package_name, author, author_email):
     """
-    Builds a new project structure with the given package name.  Command line syntax:
+    Builds a new project structure with the given package name.  Command line
+    syntax:
 
         it incept <package-name> <author-name> <author-email>
 
@@ -101,20 +103,41 @@ def incept(package_name, author, author_email):
 
 
 @click.group()
-def cli():
+@click.option(
+    '-l',
+    '--logging-config',
+    default=None,
+    type=click.Path(exists=True, dir_okay=False)
+)
+def cli(logging_config):
     """
     Main command-line application for the inceptiontools package.  This application
     can be used to access various commands listed below.  For example to incept a new
     project called 'my_package', use the following command:
 
-        inceptiontools incept <package-name> <author-name> <author-email>
+        it incept <package-name> <author-name> <author-email>
 
     For additional help using any command, use the help for the command as follows
 
-        inceptiontools <command> --help
+        it <command> --help
     """
-    # Nothing to do.  This function provides a shell for grouping commands for
-    # the main command-line entry point.
+    logging_config = logging_config or 'log.cfg'
+    if pathlib.Path(logging_config).is_file():
+        try:
+            fileConfig(logging_config, disable_existing_loggers=False)
+        except Exception:
+            raise LoggingConfigError(
+                f"Could not parse the logging config file: {logging_config!r}"
+            )
+    else:
+        logging.basicConfig(level=logging.INFO)
+        _logger().warning(
+            f"Logging config file ({logging_config!r}) not found.  "
+            "All logs will be directed to a basic console logger."
+        )
 
 
 cli.add_command(incept)
+
+if __name__ == '__main__':
+    cli()
