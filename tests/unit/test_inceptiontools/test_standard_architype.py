@@ -120,7 +120,7 @@ class TestStandardArchetypeCli(_StandardArchetypeTestBase):
 
 class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
     """
-    Unit test for class :py:const:`StandardArchetype.LIBRARY`.
+    Unit test for class :py:const:`StandardArchetype.LIB`.
     """
 
     ##############################
@@ -129,7 +129,7 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ARCHETYPE = StandardArchetype.LIBRARY
+    _ARCHETYPE = StandardArchetype.LIB
 
     _TEST_RESOURCE_PATH = os.path.abspath(
         os.path.join(
@@ -137,7 +137,7 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
             os.pardir,
             "data",
             "test_standard_archetype",
-            "inceptiontools-archetype-library-1.0",
+            "inceptiontools-archetype-lib-1.0",
         )
     )
 

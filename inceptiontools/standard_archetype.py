@@ -63,7 +63,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     attribute of the params argument.
     """
 
-    LIBRARY = ("inceptiontools-archetype-library-1.0",)
+    LIB = ("inceptiontools-archetype-lib-1.0",)
     """
     The :py:meth:`build` method of this :py:class:`Archetype` will create a
     directory/file tree with the following structure:
