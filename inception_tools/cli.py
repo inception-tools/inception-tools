@@ -27,20 +27,28 @@ def _logger() -> logging.Logger:
 
 
 def _incept(
-    package_name: str, author: str, author_email: str, archetype_name: str
+    package_name: str,
+    project_root: str,
+    author: str,
+    author_email: str,
+    archetype_name: str,
 ) -> None:
+    archetype = StandardArchetype.from_string(archetype_name)
     params = ArchetypeParameters(
         package_name=package_name,
         author=author,
         author_email=author_email,
         date=datetime.now(),
     )
-    archetype = StandardArchetype.from_string(archetype_name)
-    archetype.build(root_dir=package_name, params=params)
+    root_dir = project_root or package_name
+    archetype.build(root_dir=root_dir, params=params)
 
 
 @click.command()
 @click.argument("package_name")
+@click.argument(
+    "project_root", type=click.Path(file_okay=False), default=None, required=False,
+)
 @click.option(
     "--author-name",
     type=str,
@@ -63,7 +71,11 @@ def _incept(
     type=click.Choice(StandardArchetype.canonical_names(), case_sensitive=False),
 )
 def incept(
-    package_name: str, author_name: str, author_email: str, archetype: str
+    package_name: str,
+    project_root: str,
+    author_name: str,
+    author_email: str,
+    archetype: str,
 ) -> None:
     """
     Builds a new project structure with the given package name.  Command line
@@ -107,13 +119,19 @@ def incept(
     PACKAGE_NAME: the name of the package to be created.  This should be the package
     name, as you would expect it to appear in code references ( e.g. 'my_package' and
     not 'my-package'
+
+    PROJECT_ROOT (optional - defaults to PACKAGE_NAME): the directory under which the
+    new project should be created. If the directory does not already exist, it
+    will be created automatically. Any preexisting files and/or subdirectories matching
+    those created by this command will be overwritten.
     """
     try:
-        _incept(package_name, author_name, author_email, archetype)
+        _incept(package_name, project_root, author_name, author_email, archetype)
     except Exception:
         msg = (
-            f"Unexpected exception: package_name={package_name}, "
-            f"author_name={author_name}, author_email={author_email}"
+            f"Unexpected exception: "
+            f"package_name={package_name!r}, project_root={project_root!r}, "
+            f"author_name={author_name!r}, author_email={author_email!r}"
         )
         _logger().exception(msg)
         raise
@@ -129,7 +147,7 @@ def cli(logging_config: str) -> None:
     can be used to access various commands listed below.  For example to incept a new
     project called 'my_package', use the following command:
 
-        it incept <package-name> <author-name> <author-email>
+        it incept my_package
 
     For additional help using any command, use the help for the command as follows
 

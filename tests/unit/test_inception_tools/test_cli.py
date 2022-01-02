@@ -34,8 +34,6 @@ class TestIncept(ArchetypeOutputTestBase):
     # See superclass declaration to understand the use of this attribute.
     _OVERWRITE_EXPECTED_FILE = False
 
-    _ROOT_DIR = ArchetypeOutputTestBase._PACKAGE_NAME
-
     _EXCEPTION = ValueError("Some test exception.")
 
     ##############################
@@ -60,6 +58,7 @@ class TestIncept(ArchetypeOutputTestBase):
             cli.incept,
             (
                 self._PACKAGE_NAME,
+                self._ROOT_DIR,
                 "--author-name",
                 self._AUTHOR,
                 "--author-email",
@@ -87,6 +86,7 @@ class TestIncept(ArchetypeOutputTestBase):
             cli.incept,
             (
                 self._PACKAGE_NAME,
+                self._ROOT_DIR,
                 "--author-name",
                 self._AUTHOR,
                 "--author-email",
@@ -101,15 +101,15 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         Unit test case for :py:func:`inception_tools.cli.incept`.
         """
-        dir_path = self._PACKAGE_NAME
+        dir_path = self._ROOT_DIR
         assert_that(os.path.isdir(dir_path), f"Directory not found: {dir_path}")
 
     def test_incept_maps_package_name(self):
         """
         Unit test case for :py:func:`inception_tools.cli.incept`.
         """
-        dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
-        content = self._get_file_content(dir_path)
+        file_path = os.path.join(self._ROOT_DIR, "setup.py")
+        content = self._get_file_content(file_path)
         substring = f"Package distribution file for the {self._PACKAGE_NAME} library."
         assert_that(content, contains_string(substring))
 
@@ -117,8 +117,8 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         Unit test case for :py:func:`inception_tools.cli.incept`.
         """
-        dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
-        content = self._get_file_content(dir_path)
+        file_path = os.path.join(self._ROOT_DIR, "setup.py")
+        content = self._get_file_content(file_path)
         substring = f"__author__ = '{self._AUTHOR}'"
         assert_that(content, contains_string(substring))
 
@@ -126,8 +126,8 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         Unit test case for :py:func:`inception_tools.cli.incept`.
         """
-        dir_path = os.path.join(self._PACKAGE_NAME, "setup.cfg")
-        content = self._get_file_content(dir_path)
+        file_path = os.path.join(self._ROOT_DIR, "setup.cfg")
+        content = self._get_file_content(file_path)
         substring = f"author_email = {self._AUTHOR_EMAIL}"
         assert_that(content, contains_string(substring))
 
@@ -135,8 +135,8 @@ class TestIncept(ArchetypeOutputTestBase):
         """
         Unit test case for :py:func:`inception_tools.cli.incept`.
         """
-        dir_path = os.path.join(self._PACKAGE_NAME, "setup.py")
-        content = self._get_file_content(dir_path)
+        file_path = os.path.join(self._ROOT_DIR, "setup.py")
+        content = self._get_file_content(file_path)
         substring = f"Copyright (c) {self._DATE.year}"
         assert_that(content, contains_string(substring))
 
@@ -157,6 +157,7 @@ class TestIncept(ArchetypeOutputTestBase):
             cli.incept,
             (
                 self._PACKAGE_NAME,
+                self._ROOT_DIR,
                 "--author-name",
                 self._AUTHOR,
                 "--author-email",
@@ -183,6 +184,7 @@ class TestIncept(ArchetypeOutputTestBase):
                 cli.incept,
                 (
                     self._PACKAGE_NAME,
+                    self._ROOT_DIR,
                     "--author-name",
                     self._AUTHOR,
                     "--author-email",
@@ -193,8 +195,9 @@ class TestIncept(ArchetypeOutputTestBase):
             actual = sio.getvalue()
 
         expected = (
-            "Unexpected exception: package_name=some_package_name, "
-            "author_name=some_author, author_email=some_author_email"
+            "Unexpected exception: "
+            "package_name='some_package_name', project_root='some_root_dir', "
+            "author_name='some_author', author_email='some_author_email'"
         )
 
         assert_that(actual, starts_with(expected))
