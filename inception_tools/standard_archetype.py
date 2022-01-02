@@ -6,7 +6,9 @@ Houses the declaration of :py:class:`TemplateArchetype` along with
 supporting classes, functions, and attributes.
 """
 
-from __future__ import annotations
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 from abc import ABCMeta
@@ -17,11 +19,7 @@ from inception_tools.archetype import Archetype
 from inception_tools.archetype_parameters import ArchetypeParameters
 from inception_tools.template_archetype import TemplateArchetype
 
-__author__ = "Andrew van Herick"
-__copyright__ = "Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved."
-__license__ = "Apache Software License 2.0"
-
-ARCHITYPE_DIR = os.path.abspath(os.path.join(__file__, os.pardir, "data", "archetypes"))
+ARCHETYPE_DIR = os.path.abspath(os.path.join(__file__, os.pardir, "data", "archetypes"))
 
 
 class _ABCEnumMeta(ABCMeta, EnumMeta):
@@ -121,7 +119,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
         # Referencing ArchetypeBase directly for the sake of supporting Python
         # 3.5, which does not seem to handle call to super() in the context of
         # multiple inheritance as gracefully as the later versions do.
-        dir_path = os.path.join(ARCHITYPE_DIR, archetype_resource_id)
+        dir_path = os.path.join(ARCHETYPE_DIR, archetype_resource_id)
         self._archetype_resource_id = archetype_resource_id
         self._delegate = TemplateArchetype(dir_path)
 
@@ -143,7 +141,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
         return self._delegate.build(root_dir, params)
 
     @classmethod
-    def from_string(cls, s: str) -> StandardArchetype:
+    def from_string(cls, s: str):
         return {sa.canonical_name: sa for sa in StandardArchetype}[s.lower()]
 
     @classmethod
