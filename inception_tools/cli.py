@@ -42,7 +42,7 @@ def _incept(
 @click.command()
 @click.argument("package_name")
 @click.argument("author")
-@click.argument("author_email")
+@click.option("--author-email", default="[insert-author-email]", type=str)
 @click.option(
     "--archetype",
     default=StandardArchetype.CLI.canonical_name,
@@ -53,7 +53,7 @@ def incept(package_name: str, author: str, author_email: str, archetype: str) ->
     Builds a new project structure with the given package name.  Command line
     syntax:
 
-        it incept <package-name> <author-name> <author-email>
+        it incept <package-name> <author-name>
 
     Invoking the command line above will _result in the creation of a directory with
     the following structure:
@@ -85,10 +85,10 @@ def incept(package_name: str, author: str, author_email: str, archetype: str) ->
                 setup.cfg
                 setup.py
 
-    where many of the files are parameterize with the package name, author name,
+    where many of the files are parameterized with the package name, author name,
     author email, etc.
 
-    PACKAGE_NAME: the name of the package to be incepted.  This should be the package
+    PACKAGE_NAME: the name of the package to be created.  This should be the package
     name, as you would expect it to appear in code references ( e.g. 'my_package' and
     not 'my-package'
 
@@ -97,7 +97,7 @@ def incept(package_name: str, author: str, author_email: str, archetype: str) ->
     files.
 
     AUTHOR_EMAIL: the email of the package author.  This is used in setup.py package
-    metadata and in the auto-generated boiler-plate text of README.rst file.
+    metadata and in the auto-generated boilerplate text of README.rst file.
     """
     try:
         _incept(package_name, author, author_email, archetype)

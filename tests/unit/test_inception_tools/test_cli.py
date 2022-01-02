@@ -57,7 +57,8 @@ class TestIncept(ArchetypeOutputTestBase):
 
         self._runner = CliRunner()
         self._result = self._runner.invoke(
-            cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            cli.incept,
+            (self._PACKAGE_NAME, self._AUTHOR, "--author-email", self._AUTHOR_EMAIL),
         )
 
     # Test cases
@@ -77,7 +78,8 @@ class TestIncept(ArchetypeOutputTestBase):
         mock__cli.side_effect = self._EXCEPTION
 
         result = self._runner.invoke(
-            cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            cli.incept,
+            (self._PACKAGE_NAME, self._AUTHOR, "--author-email", self._AUTHOR_EMAIL),
         )
 
         assert_that(result.stdout_bytes, is_(b""))
@@ -140,7 +142,8 @@ class TestIncept(ArchetypeOutputTestBase):
         mock__cli.side_effect = self._EXCEPTION
 
         result = self._runner.invoke(
-            cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+            cli.incept,
+            (self._PACKAGE_NAME, self._AUTHOR, "--author-email", self._AUTHOR_EMAIL),
         )
 
         assert_that(result.exit_code, is_(1))
@@ -159,7 +162,13 @@ class TestIncept(ArchetypeOutputTestBase):
             logger.addHandler(stream_handler)
             mock__logger.return_value = logger
             self._runner.invoke(
-                cli.incept, (self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
+                cli.incept,
+                (
+                    self._PACKAGE_NAME,
+                    self._AUTHOR,
+                    "--author-email",
+                    self._AUTHOR_EMAIL,
+                ),
             )
 
             actual = sio.getvalue()
