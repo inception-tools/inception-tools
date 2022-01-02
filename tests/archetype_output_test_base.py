@@ -1,5 +1,5 @@
 """
-    inceptiontools_test_base
+    inception_tools_test_base
     ~~~~~~~~~~~~~~~~~~
 
     Houses the declaration of :py:class:`ArchetypeOutputTestBase` along with

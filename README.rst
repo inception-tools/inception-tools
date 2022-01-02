@@ -35,7 +35,7 @@ new software projects (in particular, Python-based projects) using a set of
 standardized project archetypes.  It also provides for users to create new
 archetype and even install them using standardized packaging tools.
 
-The base ``inceptiontools`` package provides:
+The base ``inception_tools`` package provides:
 
 - Simple command-line invocation for creating shell Python projects,
   parameterized through a configuration file.
@@ -48,7 +48,7 @@ The base ``inceptiontools`` package provides:
           publishing a Python library
     - archetype
         - Creates a project shell geared specifically toward developing and
-          publishing a new ``inceptiontools`` archetype library.
+          publishing a new ``inception-tools`` archetype library.
 - Each standard archetype creates a shell project structure with files,
   directories, class and function stubs, completely set up and ready to
   publication to PyPI using a standardized set of Makefile targets.
@@ -58,7 +58,7 @@ The base ``inceptiontools`` package provides:
 
 Python Package Index:
 
-https://pypi.org/project/inceptiontools/
+https://pypi.org/project/inception-tools/
 
 GitHub Repository:
 
@@ -72,9 +72,9 @@ package index (PyPI) as follows:
 
 ::
 
-    pip install inceptiontools
+    pip install inception-tools
 
-Note that ``inceptiontools`` has dependencies on the following packages:
+Note that ``inception-tools`` has dependencies on the following packages:
 
 - ``click``
 - ``jinja2``
@@ -83,11 +83,11 @@ These should be automatically installed by ``pip`` using the command-line
 above.
 
 If you'd like to use the set of extended archetypes, you can also download and
-install the ``inceptiontools-archetypes`` package:
+install the ``inception-tools-archetypes`` package:
 
 ::
 
-    pip install inceptiontools-archetypes
+    pip install inception-tools-archetypes
 
 Usage
 =====
@@ -101,7 +101,7 @@ as follows\:
 
 This will create a new project (using the standard ``application``
 archetype) under the directory ``project_root`` using additional parameters
-stored in file ``inceptiontools.cfg``\:
+stored in file ``inception-tools.cfg``\:
 
 ::
 
@@ -128,24 +128,24 @@ stored in file ``inceptiontools.cfg``\:
 
 ``package_name`` (required)
     The package name that will used for your new project, e.g.
-    ``inceptiontools``. This will be used to create for the name of the
+    ``inception_tools``. This will be used to create for the name of the
     package, for the name of a stub entry point files, and in the names of
     test modules. It will also be used as the relative path for the
     ``project_root`` argument in the event that it is omitted (see below).
 
 ``[project_root]`` (optional) default: package_name
     The path to the directory under which your project should be installed,
-    e.g. ``inceptiontools``.
+    e.g. ``inception-tools``.
 
     Example `installing to a directory my_package in the current working
     directory`::
 
-        inceptiontools my_package
+        it my_package
 
     Example `installing to a directory called my_project in the user's home
     directory`::
 
-        inceptiontools my_package ~/my_project
+        it my_package ~/my_project
 
 The following options are also available:
 
@@ -153,23 +153,23 @@ The following options are also available:
     The name of the package author, e.g. 'Jane Doe'.
 
 ``--author_email`` (optional)
-    The email address of the author, e.g. 'jane.doe@inceptiontools.org'.
+    The email address of the author, e.g. 'jane.doe@inception-tools.org'.
 
 ``--org_name`` (optional)
     The name of the organization sponsoring development for the project, e.g.
-    'inceptiontools'.
+    'inception-tools'.
 
 License
 =======
 
-``inceptiontools`` is released under the Apache Software License - see the files
+``inception-tools`` is released under the Apache Software License - see the files
 ``LICENSE`` for further details.
 
 Bugs, Contribution, and Feedback
 ================================
 
 Contributions and feedback are welcome.  Contributions can be made by opening
-a pull request at the ``inceptiontools`` `repository`_ and tagging `@avanherick` for
+a pull request at the ``inception-tools`` `repository`_ and tagging `@avanherick` for
 review.  Please see the `Development` section of this document for code style
 and branching guidelines.
 
