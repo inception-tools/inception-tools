@@ -44,7 +44,6 @@ def _incept(
 @click.argument("author")
 @click.argument("author_email")
 @click.option(
-    "-a",
     "--archetype",
     default=StandardArchetype.CLI.canonical_name,
     type=click.Choice(StandardArchetype.canonical_names(), case_sensitive=False),

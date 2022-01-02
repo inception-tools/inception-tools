@@ -120,7 +120,7 @@ class TestIncept(ArchetypeOutputTestBase):
                 self._PACKAGE_NAME,
                 self._AUTHOR,
                 self._AUTHOR_EMAIL,
-                "-a",
+                "--archetype",
                 archetype.canonical_name,
             ),
         )
