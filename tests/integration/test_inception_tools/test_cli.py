@@ -36,7 +36,6 @@ class TestIncept(ArchetypeOutputTestBase):
     _OVERWRITE_EXPECTED_FILE = False
 
     _PACKAGE_NAME = ArchetypeOutputTestBase._PACKAGE_NAME
-    _ROOT_DIR = _PACKAGE_NAME
 
     _TEST_RESOURCE_PATH = os.path.abspath(
         os.path.join(__file__, os.pardir, "data", "test_cli", "test_incept")
@@ -118,9 +117,12 @@ class TestIncept(ArchetypeOutputTestBase):
             (
                 "incept",
                 self._PACKAGE_NAME,
+                self._ROOT_DIR,
+                "--author-name",
                 self._AUTHOR,
+                "--author-email",
                 self._AUTHOR_EMAIL,
-                "-a",
+                "--archetype",
                 archetype.canonical_name,
             ),
         )
@@ -166,7 +168,10 @@ class TestIncept(ArchetypeOutputTestBase):
                 self._LOGGING_CONFIG,
                 "incept",
                 self._PACKAGE_NAME,
+                self._ROOT_DIR,
+                "--author-name",
                 self._AUTHOR,
+                "--author-email",
                 self._AUTHOR_EMAIL,
             ),
         )

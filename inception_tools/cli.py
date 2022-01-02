@@ -27,34 +27,61 @@ def _logger() -> logging.Logger:
 
 
 def _incept(
-    package_name: str, author: str, author_email: str, archetype_name: str
+    package_name: str,
+    project_root: str,
+    author: str,
+    author_email: str,
+    archetype_name: str,
 ) -> None:
+    archetype = StandardArchetype.from_string(archetype_name)
     params = ArchetypeParameters(
         package_name=package_name,
         author=author,
         author_email=author_email,
         date=datetime.now(),
     )
-    archetype = StandardArchetype.from_string(archetype_name)
-    archetype.build(root_dir=package_name, params=params)
+    root_dir = project_root or package_name
+    archetype.build(root_dir=root_dir, params=params)
 
 
 @click.command()
 @click.argument("package_name")
-@click.argument("author")
-@click.argument("author_email")
+@click.argument(
+    "project_root", type=click.Path(file_okay=False), default=None, required=False,
+)
 @click.option(
-    "-a",
+    "--author-name",
+    type=str,
+    default="[insert-author-name]",
+    help="The name of the package author. Depending on the archetype selected, this "
+    "may be used in copyright notices, setup.py package metadata, and for "
+    "__author__ assignments in Python stub files.",
+)
+@click.option(
+    "--author-email",
+    type=str,
+    default="[insert-author-email]",
+    help="The email of the package author. Depending on the archetype selected, "
+    "this bay be used in setup.py package metadata and in the auto-generated "
+    "boilerplate text of README.rst file.",
+)
+@click.option(
     "--archetype",
     default=StandardArchetype.CLI.canonical_name,
     type=click.Choice(StandardArchetype.canonical_names(), case_sensitive=False),
 )
-def incept(package_name: str, author: str, author_email: str, archetype: str) -> None:
+def incept(
+    package_name: str,
+    project_root: str,
+    author_name: str,
+    author_email: str,
+    archetype: str,
+) -> None:
     """
     Builds a new project structure with the given package name.  Command line
     syntax:
 
-        it incept <package-name> <author-name> <author-email>
+        it incept <package-name>
 
     Invoking the command line above will _result in the creation of a directory with
     the following structure:
@@ -86,26 +113,25 @@ def incept(package_name: str, author: str, author_email: str, archetype: str) ->
                 setup.cfg
                 setup.py
 
-    where many of the files are parameterize with the package name, author name,
+    where many of the files are parameterized with the package name, author name,
     author email, etc.
 
-    PACKAGE_NAME: the name of the package to be incepted.  This should be the package
+    PACKAGE_NAME: the name of the package to be created.  This should be the package
     name, as you would expect it to appear in code references ( e.g. 'my_package' and
     not 'my-package'
 
-    AUTHOR: the name of the package author.  This string is used in copyright
-    notices, setup.py package metadata, and for __author__ assignments in Python stub
-    files.
-
-    AUTHOR_EMAIL: the email of the package author.  This is used in setup.py package
-    metadata and in the auto-generated boiler-plate text of README.rst file.
+    PROJECT_ROOT (optional - defaults to PACKAGE_NAME): the directory under which the
+    new project should be created. If the directory does not already exist, it
+    will be created automatically. Any preexisting files and/or subdirectories matching
+    those created by this command will be overwritten.
     """
     try:
-        _incept(package_name, author, author_email, archetype)
+        _incept(package_name, project_root, author_name, author_email, archetype)
     except Exception:
         msg = (
-            "Unexpected exception: "
-            f"package_name={package_name}, author={author}, author_email={author_email}"
+            f"Unexpected exception: "
+            f"package_name={package_name!r}, project_root={project_root!r}, "
+            f"author_name={author_name!r}, author_email={author_email!r}"
         )
         _logger().exception(msg)
         raise
@@ -121,7 +147,7 @@ def cli(logging_config: str) -> None:
     can be used to access various commands listed below.  For example to incept a new
     project called 'my_package', use the following command:
 
-        it incept <package-name> <author-name> <author-email>
+        it incept my_package
 
     For additional help using any command, use the help for the command as follows
 
