@@ -3,7 +3,7 @@ integration
 ~~~~~~~~~~~
 
 Houses all test cases and utilities supporting integration testing of the
-:py:mod:`inceptiontools` package. This package is not intended to be part of
+:py:mod:`inception_tools` package. This package is not intended to be part of
 the distribution.
 """
 

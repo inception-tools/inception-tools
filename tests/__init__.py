@@ -2,7 +2,7 @@
     tests
     ~~~~~
 
-    Houses all test cases, supporting the :py:mod:`inceptiontools` package.
+    Houses all test cases, supporting the :py:mod:`inception_tools` package.
     This package is not intended to be part of the distribution.
 """
 
