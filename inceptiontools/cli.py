@@ -104,10 +104,7 @@ def incept(package_name, author, author_email):
 
 @click.group()
 @click.option(
-    '-l',
-    '--logging-config',
-    default=None,
-    type=click.Path(exists=True, dir_okay=False)
+    "-l", "--logging-config", default=None, type=click.Path(exists=True, dir_okay=False)
 )
 def cli(logging_config):
     """
@@ -121,7 +118,7 @@ def cli(logging_config):
 
         it <command> --help
     """
-    logging_config = logging_config or 'log.cfg'
+    logging_config = logging_config or "log.cfg"
     if pathlib.Path(logging_config).is_file():
         try:
             fileConfig(logging_config, disable_existing_loggers=False)
@@ -139,5 +136,5 @@ def cli(logging_config):
 
 cli.add_command(incept)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cli()
