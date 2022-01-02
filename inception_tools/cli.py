@@ -44,7 +44,7 @@ def _incept(package_name, author, author_email, archetype_name):
     "-a",
     "--archetype",
     default=StandardArchetype.CLI.canonical_name,
-    type=click.Choice(StandardArchetype.canonical_names())
+    type=click.Choice(StandardArchetype.canonical_names(), case_sensitive=False)
 )
 def incept(package_name, author, author_email, archetype):
     """
