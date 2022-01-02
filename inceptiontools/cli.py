@@ -132,6 +132,7 @@ def cli(logging_config):
             f"Logging config file ({logging_config!r}) not found.  "
             "All logs will be directed to a basic console logger."
         )
+    _logger().debug("Successfully set up logging.")
 
 
 cli.add_command(incept)
