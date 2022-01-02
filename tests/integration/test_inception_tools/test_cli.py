@@ -118,6 +118,7 @@ class TestIncept(ArchetypeOutputTestBase):
             (
                 "incept",
                 self._PACKAGE_NAME,
+                "--author-name",
                 self._AUTHOR,
                 "--author-email",
                 self._AUTHOR_EMAIL,
@@ -167,6 +168,7 @@ class TestIncept(ArchetypeOutputTestBase):
                 self._LOGGING_CONFIG,
                 "incept",
                 self._PACKAGE_NAME,
+                "--author-name",
                 self._AUTHOR,
                 "--author-email",
                 self._AUTHOR_EMAIL,

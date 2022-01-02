@@ -58,7 +58,13 @@ class TestIncept(ArchetypeOutputTestBase):
         self._runner = CliRunner()
         self._result = self._runner.invoke(
             cli.incept,
-            (self._PACKAGE_NAME, self._AUTHOR, "--author-email", self._AUTHOR_EMAIL),
+            (
+                self._PACKAGE_NAME,
+                "--author-name",
+                self._AUTHOR,
+                "--author-email",
+                self._AUTHOR_EMAIL,
+            ),
         )
 
     # Test cases
@@ -79,7 +85,13 @@ class TestIncept(ArchetypeOutputTestBase):
 
         result = self._runner.invoke(
             cli.incept,
-            (self._PACKAGE_NAME, self._AUTHOR, "--author-email", self._AUTHOR_EMAIL),
+            (
+                self._PACKAGE_NAME,
+                "--author-name",
+                self._AUTHOR,
+                "--author-email",
+                self._AUTHOR_EMAIL,
+            ),
         )
 
         assert_that(result.stdout_bytes, is_(b""))
@@ -143,7 +155,13 @@ class TestIncept(ArchetypeOutputTestBase):
 
         result = self._runner.invoke(
             cli.incept,
-            (self._PACKAGE_NAME, self._AUTHOR, "--author-email", self._AUTHOR_EMAIL),
+            (
+                self._PACKAGE_NAME,
+                "--author-name",
+                self._AUTHOR,
+                "--author-email",
+                self._AUTHOR_EMAIL,
+            ),
         )
 
         assert_that(result.exit_code, is_(1))
@@ -165,6 +183,7 @@ class TestIncept(ArchetypeOutputTestBase):
                 cli.incept,
                 (
                     self._PACKAGE_NAME,
+                    "--author-name",
                     self._AUTHOR,
                     "--author-email",
                     self._AUTHOR_EMAIL,
@@ -175,7 +194,7 @@ class TestIncept(ArchetypeOutputTestBase):
 
         expected = (
             "Unexpected exception: package_name=some_package_name, "
-            "author=some_author, author_email=some_author_email\n"
+            "author_name=some_author, author_email=some_author_email"
         )
 
         assert_that(actual, starts_with(expected))

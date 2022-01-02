@@ -41,19 +41,35 @@ def _incept(
 
 @click.command()
 @click.argument("package_name")
-@click.argument("author")
-@click.option("--author-email", default="[insert-author-email]", type=str)
+@click.option(
+    "--author-name",
+    type=str,
+    default="[insert-author-name]",
+    help="The name of the package author. Depending on the archetype selected, this "
+    "may be used in copyright notices, setup.py package metadata, and for "
+    "__author__ assignments in Python stub files.",
+)
+@click.option(
+    "--author-email",
+    type=str,
+    default="[insert-author-email]",
+    help="The email of the package author. Depending on the archetype selected, "
+    "this bay be used in setup.py package metadata and in the auto-generated "
+    "boilerplate text of README.rst file.",
+)
 @click.option(
     "--archetype",
     default=StandardArchetype.CLI.canonical_name,
     type=click.Choice(StandardArchetype.canonical_names(), case_sensitive=False),
 )
-def incept(package_name: str, author: str, author_email: str, archetype: str) -> None:
+def incept(
+    package_name: str, author_name: str, author_email: str, archetype: str
+) -> None:
     """
     Builds a new project structure with the given package name.  Command line
     syntax:
 
-        it incept <package-name> <author-name>
+        it incept <package-name>
 
     Invoking the command line above will _result in the creation of a directory with
     the following structure:
@@ -91,20 +107,13 @@ def incept(package_name: str, author: str, author_email: str, archetype: str) ->
     PACKAGE_NAME: the name of the package to be created.  This should be the package
     name, as you would expect it to appear in code references ( e.g. 'my_package' and
     not 'my-package'
-
-    AUTHOR: the name of the package author.  This string is used in copyright
-    notices, setup.py package metadata, and for __author__ assignments in Python stub
-    files.
-
-    AUTHOR_EMAIL: the email of the package author.  This is used in setup.py package
-    metadata and in the auto-generated boilerplate text of README.rst file.
     """
     try:
-        _incept(package_name, author, author_email, archetype)
+        _incept(package_name, author_name, author_email, archetype)
     except Exception:
         msg = (
-            "Unexpected exception: "
-            f"package_name={package_name}, author={author}, author_email={author_email}"
+            f"Unexpected exception: package_name={package_name}, "
+            f"author_name={author_name}, author_email={author_email}"
         )
         _logger().exception(msg)
         raise
