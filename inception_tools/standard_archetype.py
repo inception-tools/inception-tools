@@ -18,7 +18,7 @@ from inception_tools.archetype_parameters import ArchetypeParameters
 from inception_tools.template_archetype import TemplateArchetype
 
 __author__ = "Andrew van Herick"
-__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__copyright__ = "Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved."
 __license__ = "Apache Software License 2.0"
 
 ARCHITYPE_DIR = os.path.abspath(os.path.join(__file__, os.pardir, "data", "archetypes"))
