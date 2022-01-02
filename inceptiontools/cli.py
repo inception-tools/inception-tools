@@ -16,8 +16,8 @@ from logging.config import fileConfig
 
 import click
 
-from build.lib.inceptiontools.exception import LoggingConfigError
 from inceptiontools.archetype_parameters import ArchetypeParameters
+from inceptiontools.exception import LoggingConfigError
 from inceptiontools.standard_archetype import StandardArchetype
 
 
