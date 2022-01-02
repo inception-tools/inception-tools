@@ -3,11 +3,8 @@ main
 ~~~~~
 
 Main entry point commend line script.  See :py:func:`cli` for details of how to
-invoke this script. """
-
-__author__ = "Andrew van Herick"
-__copyright__ = "Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved."
-__license__ = "Apache Software License 2.0"
+invoke this script.
+"""
 
 import logging
 import pathlib
@@ -20,12 +17,18 @@ from inception_tools.archetype_parameters import ArchetypeParameters
 from inception_tools.exception import LoggingConfigError
 from inception_tools.standard_archetype import StandardArchetype
 
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
-def _logger():
+
+def _logger() -> logging.Logger:
     return logging.getLogger(__file__)
 
 
-def _incept(package_name, author, author_email, archetype_name):
+def _incept(
+    package_name: str, author: str, author_email: str, archetype_name: str
+) -> None:
     params = ArchetypeParameters(
         package_name=package_name,
         author=author,
@@ -44,9 +47,9 @@ def _incept(package_name, author, author_email, archetype_name):
     "-a",
     "--archetype",
     default=StandardArchetype.CLI.canonical_name,
-    type=click.Choice(StandardArchetype.canonical_names(), case_sensitive=False)
+    type=click.Choice(StandardArchetype.canonical_names(), case_sensitive=False),
 )
-def incept(package_name, author, author_email, archetype):
+def incept(package_name: str, author: str, author_email: str, archetype: str) -> None:
     """
     Builds a new project structure with the given package name.  Command line
     syntax:
@@ -112,7 +115,7 @@ def incept(package_name, author, author_email, archetype):
 @click.option(
     "-l", "--logging-config", default=None, type=click.Path(exists=True, dir_okay=False)
 )
-def cli(logging_config):
+def cli(logging_config: str) -> None:
     """
     Main command-line application for the inception_tools package.  This application
     can be used to access various commands listed below.  For example to incept a new
