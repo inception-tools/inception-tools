@@ -51,6 +51,7 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	docs-clean \
 	docs-rst \
 	docs-rst-clean \
+	git-branches-clean \
 	init \
 	init-clean \
 	init-dev \
@@ -109,6 +110,9 @@ docs-rst: lib-sphinx
 
 docs-rst-clean:
 	rm -rf ./docs/_modules/*
+
+git-branches-clean:
+	git branch | xargs git branch -D
 
 init:
 	pipenv install -d
