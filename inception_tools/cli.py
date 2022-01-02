@@ -47,7 +47,10 @@ def _incept(
 @click.command()
 @click.argument("package_name")
 @click.argument(
-    "project_root", type=click.Path(file_okay=False), default=None, required=False,
+    "project_root",
+    type=click.Path(file_okay=False),
+    default=None,
+    required=False,
 )
 @click.option(
     "--author-name",
