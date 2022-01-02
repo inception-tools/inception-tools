@@ -122,7 +122,12 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
         # 3.5, which does not seem to handle call to super() in the context of
         # multiple inheritance as gracefully as the later versions do.
         dir_path = os.path.join(ARCHITYPE_DIR, archetype_resource_id)
+        self._archetype_resource_id = archetype_resource_id
         self._delegate = TemplateArchetype(dir_path)
+
+    @property
+    def archetype_resource_id(self):
+        return self._archetype_resource_id
 
     @property
     def canonical_name(self) -> str:

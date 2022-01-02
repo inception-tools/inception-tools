@@ -118,7 +118,7 @@ class TestStandardArchetypeCli(_StandardArchetypeTestBase):
     )
 
 
-class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
+class TestStandardArchetypeLib(_StandardArchetypeTestBase):
     """
     Unit test for class :py:const:`StandardArchetype.LIB`.
     """
