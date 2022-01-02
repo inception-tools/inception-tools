@@ -9,8 +9,8 @@
 ########################################
 # Build variables
 
-PROJECT_NAME=inceptiontools
-PACKAGE_NAME=inceptiontools
+PROJECT_NAME=inception-tools
+PACKAGE_NAME=inception_tools
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
@@ -106,7 +106,7 @@ docs-clean: docs-rst-clean
 	rm -rf ./docs/_build/*
 
 docs-rst: lib-sphinx
-	sphinx-apidoc -o ./docs/_modules ./inceptiontools
+	sphinx-apidoc -o ./docs/_modules ./inception_tools
 
 docs-rst-clean:
 	rm -rf ./docs/_modules/*
@@ -160,7 +160,7 @@ maintainer-clean: clean check-clean dist-clean docs-clean
 	rm -rf $(EGG_DIR)
 
 pretty: lib-black
-	black --exclude='.*/data/' inceptiontools tests
+	black --exclude='.*/data/' inception_tools tests
 
 uninstall:
 	pip uninstall -y $(PROJECT_NAME)
