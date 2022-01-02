@@ -2,8 +2,8 @@
 standard_archetype
 ~~~~~~~~~~~~~~~~~~
 
-Houses the declaration of :py:class:`TemplateArchetype` along with
-supporting classes, functions, and attributes.
+Houses the declaration of :py:class:`StandardArchetype` along with supporting
+classes, functions, and attributes.
 """
 
 __author__ = "Andrew van Herick"
