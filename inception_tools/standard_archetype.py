@@ -6,18 +6,20 @@ Houses the declaration of :py:class:`TemplateArchetype` along with
 supporting classes, functions, and attributes.
 """
 
-__author__ = "Andrew van Herick"
-__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
-__license__ = "Apache Software License 2.0"
+from __future__ import annotations
 
 import os
 from abc import ABCMeta
 from enum import Enum, EnumMeta
-from typing import Iterable
+from typing import Iterable, Tuple
 
 from inception_tools.archetype import Archetype
 from inception_tools.archetype_parameters import ArchetypeParameters
 from inception_tools.template_archetype import TemplateArchetype
+
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 ARCHITYPE_DIR = os.path.abspath(os.path.join(__file__, os.pardir, "data", "archetypes"))
 
@@ -122,6 +124,10 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
         dir_path = os.path.join(ARCHITYPE_DIR, archetype_resource_id)
         self._delegate = TemplateArchetype(dir_path)
 
+    @property
+    def canonical_name(self) -> str:
+        return self.name.lower()
+
     def file_paths(self, root_path: str, params: ArchetypeParameters) -> Iterable[str]:
         return self._delegate.file_paths(root_path, params)
 
@@ -130,3 +136,11 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
 
     def build(self, root_dir: str, params: ArchetypeParameters) -> None:
         return self._delegate.build(root_dir, params)
+
+    @classmethod
+    def from_string(cls, s: str) -> StandardArchetype:
+        return {sa.canonical_name: sa for sa in StandardArchetype}[s.lower()]
+
+    @classmethod
+    def canonical_names(cls) -> Tuple[str]:
+        return tuple(sa.canonical_name for sa in StandardArchetype)

@@ -6,7 +6,7 @@ Main entry point commend line script.  See :py:func:`cli` for details of how to
 invoke this script. """
 
 __author__ = "Andrew van Herick"
-__copyright__ = "Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved."
+__copyright__ = "Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved."
 __license__ = "Apache Software License 2.0"
 
 import logging
@@ -25,14 +25,14 @@ def _logger():
     return logging.getLogger(__file__)
 
 
-def _incept(package_name, author, author_email):
+def _incept(package_name, author, author_email, archetype_name):
     params = ArchetypeParameters(
         package_name=package_name,
         author=author,
         author_email=author_email,
         date=datetime.now(),
     )
-    archetype = StandardArchetype.CLI
+    archetype = StandardArchetype.from_string(archetype_name)
     archetype.build(root_dir=package_name, params=params)
 
 
@@ -40,7 +40,13 @@ def _incept(package_name, author, author_email):
 @click.argument("package_name")
 @click.argument("author")
 @click.argument("author_email")
-def incept(package_name, author, author_email):
+@click.option(
+    "-a",
+    "--archetype",
+    default=StandardArchetype.CLI.canonical_name,
+    type=click.Choice(StandardArchetype.canonical_names())
+)
+def incept(package_name, author, author_email, archetype):
     """
     Builds a new project structure with the given package name.  Command line
     syntax:
@@ -92,7 +98,7 @@ def incept(package_name, author, author_email):
     metadata and in the auto-generated boiler-plate text of README.rst file.
     """
     try:
-        _incept(package_name, author, author_email)
+        _incept(package_name, author, author_email, archetype)
     except Exception:
         msg = (
             "Unexpected exception: "
@@ -129,7 +135,7 @@ def cli(logging_config):
     else:
         logging.basicConfig(level=logging.INFO)
         _logger().warning(
-            f"Logging config file ({logging_config!r}) not found.  "
+            f"Logging config file not found: {logging_config!r}."
             "All logs will be directed to a basic console logger."
         )
     _logger().debug("Successfully set up logging.")
