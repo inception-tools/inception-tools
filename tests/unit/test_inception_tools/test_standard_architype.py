@@ -96,7 +96,7 @@ class TestStandardArchetypeCli(_StandardArchetypeTestBase):
             os.pardir,
             "data",
             "test_standard_archetype",
-            "inceptiontools-archetype-cli-1.0",
+            "inception-tools-archetype-cli-1.0",
         )
     )
 
@@ -137,7 +137,7 @@ class TestStandardArchetypeLibrary(_StandardArchetypeTestBase):
             os.pardir,
             "data",
             "test_standard_archetype",
-            "inceptiontools-archetype-lib-1.0",
+            "inception-tools-archetype-lib-1.0",
         )
     )
 
@@ -181,7 +181,7 @@ class TestStandardArchetypeSimple(_StandardArchetypeTestBase):
             os.pardir,
             "data",
             "test_standard_archetype",
-            "inceptiontools-archetype-simple-1.0",
+            "inception-tools-archetype-simple-1.0",
         )
     )
 

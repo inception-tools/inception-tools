@@ -33,7 +33,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     system.
     """
 
-    CLI = ("inceptiontools-archetype-cli-1.0",)
+    CLI = ("inception-tools-archetype-cli-1.0",)
     """
     The :py:meth:`build` method of this :py:class:`Archetype` will create a
     directory/file tree with the following structure:
@@ -63,7 +63,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     attribute of the params argument.
     """
 
-    LIB = ("inceptiontools-archetype-lib-1.0",)
+    LIB = ("inception-tools-archetype-lib-1.0",)
     """
     The :py:meth:`build` method of this :py:class:`Archetype` will create a
     directory/file tree with the following structure:
@@ -93,7 +93,7 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     attribute of the params argument.
     """
 
-    SIMPLE = ("inceptiontools-archetype-simple-1.0",)
+    SIMPLE = ("inception-tools-archetype-simple-1.0",)
     """
     The :py:meth:`build` method of this :py:class:`Archetype` will create a
     directory/file tree with the following structure:
