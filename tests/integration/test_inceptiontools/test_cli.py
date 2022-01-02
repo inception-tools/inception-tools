@@ -13,6 +13,7 @@ import os
 from unittest import mock
 
 from click.testing import CliRunner
+from hamcrest import assert_that, is_
 
 from inceptiontools import cli
 from tests.archetype_output_test_base import (
@@ -37,13 +38,10 @@ class TestIncept(ArchetypeOutputTestBase):
     _ROOT_DIR = _PACKAGE_NAME
 
     _TEST_RESOURCE_PATH = os.path.abspath(
-        os.path.join(
-            __file__,
-            os.pardir,
-            "data",
-            "test_main",
-        )
+        os.path.join(__file__, os.pardir, "data", "test_cli", "test_incept")
     )
+
+    _LOGGING_CONFIG = os.path.join(_TEST_RESOURCE_PATH, "test_cli_log.cfg")
 
     _EXPECTED_DIRS = ("scripts", "docs")
 
@@ -69,7 +67,9 @@ class TestIncept(ArchetypeOutputTestBase):
     @classmethod
     def _expected_files(cls):
         return tuple(
-            _OutputFile(os.path.join(*s), os.path.join(cls._TEST_RESOURCE_PATH, *s))
+            _OutputFile(
+                os.path.join(*s), os.path.join(cls._TEST_RESOURCE_PATH, "output", *s)
+            )
             for s in cls._EXPECTED_FILES
         )
 
@@ -88,8 +88,31 @@ class TestIncept(ArchetypeOutputTestBase):
         Unit test case for :py:func:`inceptiontools.cli.incept`.
         """
         mock_datetime.now.return_value = self._DATE
-        CliRunner().invoke(
+        result = CliRunner().invoke(
             cli.cli, ("incept", self._PACKAGE_NAME, self._AUTHOR, self._AUTHOR_EMAIL)
         )
+
+        assert_that(result.output.strip(), is_(""))
         self._validate_archetype_files(self._ROOT_DIR, self._expected_files())
         self._validate_archetype_dirs(self._ROOT_DIR, self._expected_dirs())
+
+    def test_incept_uses_custom_logging_config(self):
+        """
+        Unit test case for :py:func:`inceptiontools.cli.incept`.
+        """
+        result = CliRunner().invoke(
+            cli.cli,
+            (
+                "-l",
+                self._LOGGING_CONFIG,
+                "incept",
+                self._PACKAGE_NAME,
+                self._AUTHOR,
+                self._AUTHOR_EMAIL,
+            ),
+        )
+
+        assert_that(
+            result.output.strip(),
+            is_("test_cli_log DEBUG    Successfully set up logging."),
+        )
