@@ -2,7 +2,7 @@
 #
 # Makefile
 #
-# Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
+# Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved.
 #
 ###############################################################################
 
