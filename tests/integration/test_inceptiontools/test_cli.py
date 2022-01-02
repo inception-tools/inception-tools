@@ -41,7 +41,8 @@ class TestIncept(ArchetypeOutputTestBase):
             __file__,
             os.pardir,
             "data",
-            "test_main",
+            "test_cli",
+            "test_incept"
         )
     )
 
@@ -69,8 +70,10 @@ class TestIncept(ArchetypeOutputTestBase):
     @classmethod
     def _expected_files(cls):
         return tuple(
-            _OutputFile(os.path.join(*s), os.path.join(cls._TEST_RESOURCE_PATH, *s))
-            for s in cls._EXPECTED_FILES
+            _OutputFile(
+                os.path.join(*s),
+                os.path.join(cls._TEST_RESOURCE_PATH, "output", *s)
+            ) for s in cls._EXPECTED_FILES
         )
 
     @classmethod
