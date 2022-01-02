@@ -55,11 +55,11 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	init \
 	init-clean \
 	init-dev \
-	init-dev-35 \
-	init-dev-36 \
-	init-dev-37 \
-	init-dev-38 \
-	init-dev-39 \
+	init-dev-3.6 \
+	init-dev-3.7 \
+	init-dev-3.8 \
+	init-dev-3.9 \
+	init-dev-3.10 \
 	install \
 	lib-bump2version \
 	lib-flake8 \
@@ -123,20 +123,20 @@ init-clean:
 init-dev:
 	pipenv install --dev
 
-init-dev-35:
-	pipenv install --dev --skip-lock --python 3.5
-
-init-dev-36:
+init-dev-3.6:
 	pipenv install --dev --skip-lock --python 3.6
 
-init-dev-37:
+init-dev-3.7:
 	pipenv install --dev --skip-lock --python 3.7
 
-init-dev-38:
+init-dev-3.8:
 	pipenv install --dev --skip-lock --python 3.8
 
-init-dev-39:
+init-dev-3.9:
 	pipenv install --dev --skip-lock --python 3.9
+
+init-dev-3.10:
+	pipenv install --dev --skip-lock --python 3.10
 
 install:
 	python setup.py $(EGG_INFO) install
