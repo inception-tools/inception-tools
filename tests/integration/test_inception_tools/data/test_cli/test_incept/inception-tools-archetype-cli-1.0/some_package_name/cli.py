@@ -10,8 +10,7 @@ Command line syntax:
 """
 
 __author__ = 'some_author'
-__copyright__ = \
-    'Unpublished Copyright (c) 2000 some_author. All Rights Reserved.'
+__copyright__ = 'Unpublished Copyright (c) 2000 some_author. All Rights Reserved.'
 __license__ = 'Apache Software License 2.0'
 
 from logging import getLogger

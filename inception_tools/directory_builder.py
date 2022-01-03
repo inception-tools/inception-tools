@@ -27,7 +27,7 @@ class DirectoryBuilder(ArchetypeResourceBuilder, ABC):
     method called :py:class:`subpath`.
     """
 
-    def _path(self, root_dir: str, params: ArchetypeParameters):
+    def _path(self, root_dir: str, params: ArchetypeParameters) -> str:
         return os.path.join(root_dir, self.subpath(params))
 
     def path(self, root_dir: str, params: ArchetypeParameters) -> str:

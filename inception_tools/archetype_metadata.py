@@ -61,7 +61,7 @@ class ArchetypeMetadata(
     """
 
     @classmethod
-    def _validate_json(cls, json_obj: JSON_OBJ_TYPE):
+    def _validate_json(cls, json_obj: JSON_OBJ_TYPE) -> None:
         try:
             validate(json_obj, cls.JSON_SCHEMA)
         except ValidationError as e:
