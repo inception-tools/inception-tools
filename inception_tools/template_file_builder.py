@@ -31,7 +31,7 @@ class TemplateFileBuilder(FileBuilder):
     """
 
     @classmethod
-    def from_strings(cls, subpath, prototype) -> FileBuilder:
+    def from_strings(cls, subpath: str, prototype: str) -> FileBuilder:
         """
         Factory method that builds a new :py:class:`TemplateDirectoryBuilder`
         instance from :py:class:`jinja2.Template` source ``string``s, which will be

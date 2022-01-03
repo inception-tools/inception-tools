@@ -163,6 +163,9 @@ class ArchetypeDescriptor(
                 ]
             }
         """
+        # Suppressing protected member inspection because NamedTuple
+        # documentation has _asdict as part of its API
+        # noinspection PyProtectedMember
         return {
             _JsonKey.DIRECTORIES: [d._asdict() for d in self.directories],
             _JsonKey.FILES: [d._asdict() for d in self.files],

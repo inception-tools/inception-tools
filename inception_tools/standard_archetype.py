@@ -116,15 +116,12 @@ class StandardArchetype(Archetype, Enum, metaclass=_ABCEnumMeta):
     """
 
     def __init__(self, archetype_resource_id) -> None:
-        # Referencing ArchetypeBase directly for the sake of supporting Python
-        # 3.5, which does not seem to handle call to super() in the context of
-        # multiple inheritance as gracefully as the later versions do.
         dir_path = os.path.join(ARCHETYPE_DIR, archetype_resource_id)
         self._archetype_resource_id = archetype_resource_id
         self._delegate = TemplateArchetype(dir_path)
 
     @property
-    def archetype_resource_id(self):
+    def archetype_resource_id(self) -> str:
         return self._archetype_resource_id
 
     @property
