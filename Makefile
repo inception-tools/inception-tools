@@ -2,15 +2,15 @@
 #
 # Makefile
 #
-# Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.
+# Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved.
 #
 ###############################################################################
 
 ########################################
 # Build variables
 
-PROJECT_NAME=inceptiontools
-PACKAGE_NAME=inceptiontools
+PROJECT_NAME=inception-tools
+PACKAGE_NAME=inception_tools
 
 # See https://www.python.org/dev/peps/pep-0440/ for more information on pre-
 # and post-release tag formats.
@@ -51,18 +51,22 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	docs-clean \
 	docs-rst \
 	docs-rst-clean \
+	git-branches-clean \
 	init \
 	init-clean \
 	init-dev \
-	init-dev-35 \
-	init-dev-36 \
-	init-dev-37 \
+	init-dev-3.6 \
+	init-dev-3.7 \
+	init-dev-3.8 \
+	init-dev-3.9 \
+	init-dev-3.10 \
 	install \
 	lib-bump2version \
 	lib-flake8 \
 	lib-sphinx \
 	lib-twine \
 	maintainer-clean \
+	pretty \
 	uninstall
 
 all: check install
@@ -75,8 +79,10 @@ check: check-style check-tests
 check-clean:
 	rm -rf $(PYTEST_CACHE_DIR)
 
+# 88 characters is black's default line length
 check-style: lib-flake8
-	flake8 . --count --show-source --statistics
+	flake8 . --count --show-source --statistics  --max-line-length=88 \
+	--extend-ignore=E203
 
 check-tests:
 	python setup.py test
@@ -100,13 +106,16 @@ docs-clean: docs-rst-clean
 	rm -rf ./docs/_build/*
 
 docs-rst: lib-sphinx
-	sphinx-apidoc -o ./docs/_modules ./inceptiontools
+	sphinx-apidoc -o ./docs/_modules ./inception_tools
 
 docs-rst-clean:
 	rm -rf ./docs/_modules/*
 
+git-branches-clean:
+	git branch | xargs git branch -D
+
 init:
-	pipenv install
+	pipenv install -d
 
 init-clean:
 	pipenv uninstall --all
@@ -114,17 +123,26 @@ init-clean:
 init-dev:
 	pipenv install --dev
 
-init-dev-35:
-	pipenv install --dev --skip-lock --python 3.5
-
-init-dev-36:
+init-dev-3.6:
 	pipenv install --dev --skip-lock --python 3.6
 
-init-dev-37:
+init-dev-3.7:
 	pipenv install --dev --skip-lock --python 3.7
+
+init-dev-3.8:
+	pipenv install --dev --skip-lock --python 3.8
+
+init-dev-3.9:
+	pipenv install --dev --skip-lock --python 3.9
+
+init-dev-3.10:
+	pipenv install --dev --skip-lock --python 3.10
 
 install:
 	python setup.py $(EGG_INFO) install
+
+lib-black:
+	pip install --upgrade black
 
 lib-bump2version:
 	pip install --upgrade bump2version
@@ -140,6 +158,9 @@ lib-twine:
 
 maintainer-clean: clean check-clean dist-clean docs-clean
 	rm -rf $(EGG_DIR)
+
+pretty: lib-black
+	black --exclude='.*/data/' inception_tools tests
 
 uninstall:
 	pip uninstall -y $(PROJECT_NAME)

@@ -6,10 +6,9 @@ Houses the declaration of :py:class:`Matchers` along with supporting
 classes, functions, and attributes.
 """
 
-__author__ = 'Andrew van Herick'
-__copyright__ = \
-    'Unpublished Copyright (c) 2020 Andrew van Herick. All Rights Reserved.'
-__license__ = 'Apache Software License 2.0'
+__author__ = "Andrew van Herick"
+__copyright__ = "Unpublished Copyright (c) 2022 Andrew van Herick. All Rights Reserved."
+__license__ = "Apache Software License 2.0"
 
 import os
 
@@ -29,9 +28,11 @@ class PathExists(BaseMatcher):
         return self._should_exist == os.path.exists(item)
 
     def describe_to(self, description):
-        msg = 'A path that exists:' \
-            if self._should_exist \
-            else 'A path that does not exist:'
+        msg = (
+            "A path that exists:"
+            if self._should_exist
+            else "A path that does not exist:"
+        )
         description.append_description_of(msg)
 
 
@@ -56,9 +57,11 @@ class IsFile(BaseMatcher):
         return self._should_exist == os.path.isfile(item)
 
     def describe_to(self, description):
-        msg = 'A path that represents an existing file:' \
-            if self._should_exist \
-            else 'A path that does not represent an existing file:'
+        msg = (
+            "A path that represents an existing file:"
+            if self._should_exist
+            else "A path that does not represent an existing file:"
+        )
         description.append_description_of(msg)
 
 
@@ -84,9 +87,11 @@ class IsDir(BaseMatcher):
         return self._should_exist == os.path.isdir(item)
 
     def describe_to(self, description):
-        msg = 'A path that represents an existing directory:' \
-            if self._should_exist \
-            else 'A path that does not represent an existing directory:'
+        msg = (
+            "A path that represents an existing directory:"
+            if self._should_exist
+            else "A path that does not represent an existing directory:"
+        )
         description.append_description_of(msg)
 
 

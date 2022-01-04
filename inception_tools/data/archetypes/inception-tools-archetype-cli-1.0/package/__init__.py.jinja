@@ -1,0 +1,18 @@
+"""
+{{package_name}}
+{{'~' * package_name|length}}
+
+The :py:mod:`{{package_name}}` package contains the root-level distributable
+source code for the `{{package_name}}` project.
+"""
+
+__author__ = '{{author}}'
+__copyright__ = 'Unpublished Copyright (c) {{date.year}} {{author}}. All Rights Reserved.'
+__license__ = 'Apache Software License 2.0'
+
+from pkg_resources import DistributionNotFound, get_distribution
+
+try:
+    __version__ = get_distribution('{{package_name}}').version
+except DistributionNotFound:
+    __version__ = 'unknown'

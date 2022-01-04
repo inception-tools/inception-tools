@@ -14,39 +14,62 @@ inception-tools
 Under Construction
 ==================
 
-Hello and welcome to the Python Inception Tools project!
+Hello and welcome to the `inception-tools` project!
 
-This project is currently under construction.  Please be patient and check
-back periodically to see progress. In the meantime, you can see where the
-project is headed by checking out the documentation (also in progress) below.
+The goal of this project is to create, foster, and disseminate solid conventions for
+Python project structure through the propagation and reuse of project archetypes,
+developed and submitted by the community, which can be used as templates for
+automatically setting up new Python projects.
 
-The goal of this project is to create, foster, and disseminate solid
-conventions for Python project structure through the propagation and reuse
-of project archetypes, developed and submitted by the community, which can
-be used as templates for automatically setting up new Python projects.
+This project is currently under construction. This documentation describes current
+state of application functionality.  The application currently supports a set of
+standard archetypes
+
+- simple - a basic project shell
+- cli - for creating command-line interface projects
+- lib - for developing and publishing a Python libraries
+
+Support for user-defined archetypes is coming. Please check back periodically to
+see what's new.
+
+If you would like to see updates or additions to the standard archetypes, the templates
+are located in the `archetypes`_ directory and are made available to the CLI through
+the `StandardArchetype`_ class. Please submit a PR for review using the instructions in
+the `Bugs, Contribution, and Feedback`_  section, or reach out to the author's email
+listed at the bottom of this document.
+
+.. _`archetypes`: https://github.com/inception-tools/inception-tools/tree/develop/inception_tools/data/archetypes/
+.. _`StandardArchetype`: https://github.com/inception-tools/inception-tools/blob/develop/inception_tools/standard_archetype.py
 
 Documentation
 =============
 
-Incept a new Python project, ready to go, with a single command!
+Create a new Python project, ready to go, with a single command!
 
-A simple Python application designed to incept new Python project by creating
-a standardized project structure complete with shell directories and stub
-files, with package name, to start the project off.
+Inception-tools is a command-line application designed to create new software
+projects (in particular, Python-based projects) using a set of standardized project
+archetypes.
 
-Features:
+The base ``inception-tools`` package provides:
 
-- Simple command-line invocation for creating shell Python projects,
-  parameterized with project name, package names
-- Shell project includes all standard project files including\:
-    - setup.py (configured with package name and standard dependencies)
-    - Directories for unit, integration, and end-to-end tests
-    - Makefile with a smattering of useful targets.
-- Sample project files, complete with a sample endpoint.
+- Simple command-line invocation for creating "stubbed-out" Python projects,
+  parameterized through the command-line call.
+- A set of standard archetypes for common Python project types:
+    - simple
+        - Creates a basic project shell.
+    - cli
+        - Creates a project shell geared toward developing and publishing a
+          Python-based command-line application.
+    - lib
+        - Creates a project shell geared specifically toward developing and
+          publishing a Python library
+- Each standard archetype creates a shell project structure with files,
+  directories, class and function stubs, completely set up and ready for
+  publication to PyPI using a standardized set of Makefile targets.
 
 Python Package Index:
 
-https://pypi.org/project/inceptiontools/
+https://pypi.org/project/inception-tools/
 
 GitHub Repository:
 
@@ -60,9 +83,9 @@ package index (PyPI) as follows:
 
 ::
 
-    pip install inceptiontools
+    pip install inception-tools
 
-Note that ``inceptiontools`` has dependencies on the following packages:
+Note that ``inception-tools`` has dependencies on the following packages:
 
 - ``click``
 - ``jinja2``
@@ -73,86 +96,97 @@ above.
 Usage
 =====
 
-Once ``inceptiontools`` has been installed, you can create a new project shell as
-follows:
+Once Inception Tools has been installed, you can create a new project shell
+as follows\:
 
 ::
 
-    inceptiontools package_name author author email [project_root]
+    it incept package_name [project_root]
 
-This will create a shell project with the following structure:
+This will create a new project (using the standard ``application``
+archetype) under the directory ``project_root`` using additional parameters
+stored in file ``inception-tools.cfg``\:
 
 ::
 
-    <working-dir>/
-        project_root/
-            package_name/
+    <project_root>/
+        docs/
+        <package_name>/
+            __init__.py
+            cli.py
+        scripts/
+        tests/
+            __init__.py
+            end-to-end/
                 __init__.py
-                package_name.py
-            tests/
+            integration/
                 __init__.py
-                end-to-end/
-                    __init__.py
-                    test_package_name/
-                        __init__.py
-                integration/
-                    __init__.py
-                    test_package_name/
-                        __init__.py
-                unit/
-                    __init__.py
-                    test_package_name/
-                        __init__.py
-            LICENSE
-            Makefile
-            Pipfile
-            README.rst
-            setup.cfg
-            setup.py
+            unit/
+                __init__.py
+        LICENSE
+        Makefile
+        Pipfile
+        README.rst
+        setup.cfg
+        setup.py
 
 ``package_name`` (required)
-    The package name that will used for your new project, e.g. ``inceptiontools``.
-    This will be used to create for the name of the package, for the name of a
-    stub entry point files, and in the names of test modules.    It will also
-    be used as the relative path for the ``project_root`` argument in the
-    event that it is omitted (see below).
-
-``author`` (required)
-    The name of the package author, e.g. 'Jane Doe'.  This will be used to fill
-    in the ``__author__`` attribute in stub files, and in copyright
-    attributions in header file comments.
-
-``author_email`` (required)
-    The email address of the author, e.g. 'jane.doe@inceptiontools.org'.  This will
-    be used to fill in various locations in where a contact email is specified
-    in the new project files, e.g. the `author_email` property in
-    ``setup.cfg``.
+    The package name that will used for your new project, e.g.
+    ``inception_tools``. This will be used to create for the name of the
+    package, for the name of a stub entry point files, and in the names of
+    test modules. It will also be used as the relative path for the
+    ``project_root`` argument in the event that it is omitted (see below).
 
 ``[project_root]`` (optional) default: package_name
     The path to the directory under which your project should be installed,
-    e.g. ``inceptiontools``.
+    e.g. ``inception-tools``.
 
     Example `installing to a directory my_package in the current working
     directory`::
 
-        inceptiontools my_package my_author my_author_email
+        it incept my_package
 
     Example `installing to a directory called my_project in the user's home
     directory`::
 
-        inceptiontools my_package my_author my_author_email ~/my_project
+        it incept my_package ~/my_project
+
+The following options are also available:
+
+``--author-name`` (optional)
+    The name of the package author, e.g. 'Jane Doe'.  Defaults to '[author-name]'.
+
+``--author-email`` (optional)
+    The email address of the author, e.g. 'jane.doe@inception-tools.org'.
+
+``--org-name`` (optional)
+    The name of the organization sponsoring development for the project, e.g.
+    'inception-tools'.
+
+``--archetype`` (optional)
+    Determines the archetype used to create the stub project. Defaults to 'cli'. Must be
+    one of the following:
+
+    - simple
+        - Creates a basic project shell.
+    - cli
+        - Creates a project shell geared toward developing and publishing a
+          Python-based command-line application.
+    - lib
+        - Creates a project shell geared specifically toward developing and
+          publishing a Python library
 
 License
 =======
 
-``inceptiontools`` is released under the Apache Software License - see the files
+``inception-tools`` is released under the Apache Software License v2.0 - see the files
 ``LICENSE`` for further details.
 
 Bugs, Contribution, and Feedback
 ================================
 
 Contributions and feedback are welcome.  Contributions can be made by opening
-a pull request at the ``inceptiontools`` `repository`_ and tagging `@avanherick` for
+a pull request at the ``inception-tools`` `repository`_ and tagging `@avanherick` for
 review.  Please see the `Development` section of this document for code style
 and branching guidelines.
 
@@ -165,7 +199,7 @@ over and over again.
 
 If you come across this project and know of other project which accomplish
 similar goals, or of documented standards around Python project structure,
-which differ from those implemented here, we would welcome hearing about them.
+we would welcome hearing about them.
 
 Please submit feedback, bugs, feature requests, and code changes using GitHub
 at:
@@ -175,18 +209,20 @@ Development
 ===========
 
 Repository Management:
-    ``inceptiontools`` manages its repository using the `GitFlow`_ model.
+    Inception Tools manages its repository using the `GitFlow`_ model.
 
 .. _`GitFlow`: https://nvie.com/posts/a-successful-git-branching-model/
 
 Code style:
-    ``inceptiontools`` code should adhere to the `PEP 8`_ guidelines.
+    Inception Tools code should adhere to the `PEP 8`_ guidelines with the exception
+    of maximum line length, which instead uses `black`_'s default of 88.
 
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
+.. _`black`: https://github.com/psf/black
 
 Versioning:
-    ``inceptiontools`` versioning uses semantic versioning and adheres to the
-    guidelines specified `here`_.
+    Inception Tools uses semantic versioning and adheres to the guidelines
+    specified `here`_.
 
 .. _`here`: https://semver.org/
 
@@ -205,4 +241,4 @@ Changes
 
 :author: Andrew van Herick
 :email: avanherick@gmail.com
-:date: 2020-06-29
+:date: 2022-01-03

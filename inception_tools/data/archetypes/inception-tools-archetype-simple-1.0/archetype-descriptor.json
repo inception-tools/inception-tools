@@ -1,0 +1,37 @@
+{
+  "directories": [],
+  "files": [
+    {
+      "subpath": "LICENSE",
+      "prototype": "LICENSE.jinja"
+    },
+    {
+      "subpath": "Makefile",
+      "prototype": "Makefile.jinja"
+    },
+    {
+      "subpath": "Pipfile",
+      "prototype": "Pipfile.jinja"
+    },
+    {
+      "subpath": "README.rst",
+      "prototype": "README.rst.jinja"
+    },
+    {
+      "subpath": "setup.cfg",
+      "prototype": "setup.cfg.jinja"
+    },
+    {
+      "subpath": "setup.py",
+      "prototype": "setup.py.jinja"
+    },
+    {
+      "subpath": "{{package_name}}.py",
+      "prototype": "package.py.jinja"
+    },
+    {
+      "subpath": "tests/__init__.py",
+      "prototype": "tests/__init__.py.jinja"
+    }
+  ]
+}
