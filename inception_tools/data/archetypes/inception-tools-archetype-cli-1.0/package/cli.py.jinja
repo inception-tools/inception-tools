@@ -22,7 +22,6 @@ import click
 @click.command()
 @click.argument('message')
 def log_test(message):
-    fileConfig('log.cfg', disable_existing_loggers=False)
     getLogger(__file__).debug(f'Logged with DEBUG: {message}')
     getLogger(__file__).info(f'Logged with INFO: {message}')
     getLogger(__file__).warning(f'Logged with WARNING: {message}')
@@ -32,9 +31,11 @@ def log_test(message):
 
 @click.group()
 def cli():
-    # Nothing to do.  This function provides a shell for grouping commands for
-    # the main command-line entry point.
-    pass
+    # Set up logging identically for all commands
+    fileConfig('log.cfg', disable_existing_loggers=False)
 
 
 cli.add_command(log_test)
+
+if __name__ == "__main__":
+    cli()
