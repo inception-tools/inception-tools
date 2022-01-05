@@ -160,7 +160,7 @@ maintainer-clean: clean check-clean dist-clean docs-clean
 	rm -rf $(EGG_DIR)
 
 pretty: lib-black
-	black --exclude='.*/data/' inception_tools tests
+	black --exclude='.*/data/' inception_tools tests setup.py
 
 uninstall:
 	pip uninstall -y $(PROJECT_NAME)
