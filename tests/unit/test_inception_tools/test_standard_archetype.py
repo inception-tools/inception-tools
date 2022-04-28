@@ -112,7 +112,6 @@ class TestStandardArchetypeCli(_StandardArchetypeTestBase):
         (ArchetypeOutputTestBase._PACKAGE_NAME, "__init__.py"),
         (ArchetypeOutputTestBase._PACKAGE_NAME, "cli.py"),
         ("tests", "__init__.py"),
-        ("tests", "end_to_end", "__init__.py"),
         ("tests", "integration", "__init__.py"),
         ("tests", "unit", "__init__.py"),
     )
@@ -156,7 +155,6 @@ class TestStandardArchetypeLib(_StandardArchetypeTestBase):
             f"{ArchetypeOutputTestBase._PACKAGE_NAME}.py",
         ),
         ("tests", "__init__.py"),
-        ("tests", "end_to_end", "__init__.py"),
         ("tests", "integration", "__init__.py"),
         ("tests", "unit", "__init__.py"),
     )

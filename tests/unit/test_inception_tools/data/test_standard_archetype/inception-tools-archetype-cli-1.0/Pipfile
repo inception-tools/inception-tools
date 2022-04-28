@@ -9,6 +9,7 @@ pyhamcrest = "*"
 flake8 = "*"
 wheel = "*"
 twine = "*"
+black = "*"
 
 [packages]
 click = "*"

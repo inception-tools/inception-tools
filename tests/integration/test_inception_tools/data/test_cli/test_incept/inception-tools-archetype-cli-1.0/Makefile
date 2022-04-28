@@ -49,9 +49,11 @@ ARCHIVE_ZIP=$(PACKAGE_NAME)_project_source.zip
 	init-clean \
 	init-dev \
 	install \
+	lib-black \
 	lib-flake8 \
 	lib-twine \
 	maintainer-clean \
+	pretty \
 	uninstall
 
 all: check install
@@ -61,8 +63,9 @@ check: check-style check-tests
 check-clean:
 	rm -rf $(PYTEST_CACHE_DIR)
 
+# 88 characters is black's default line length
 check-style: lib-flake8
-	flake8 . --count --show-source --statistics
+	flake8 . --count --show-source --statistics  --max-line-length=88
 
 check-tests:
 	python setup.py test
@@ -91,6 +94,9 @@ init-dev:
 install:
 	python setup.py $(EGG_INFO) install
 
+lib-black:
+	pip install --upgrade black
+
 lib-flake8:
 	pip install --upgrade flake8
 
@@ -99,6 +105,9 @@ lib-twine:
 
 maintainer-clean: clean check-clean dist-clean
 	rm -rf $(EGG_DIR)
+
+pretty: lib-black
+	black --exclude='.*/data/' inception_tools tests
 
 uninstall:
 	pip uninstall -y $(PROJECT_NAME)
