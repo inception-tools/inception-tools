@@ -17,8 +17,6 @@ jobs:
         include:
           - os: ubuntu-22.04
             python-version: "3.7"
-          - os: macos-13
-            python-version: "3.7"
           - os: windows-2022
             python-version: "3.7"
           - os: ubuntu-latest

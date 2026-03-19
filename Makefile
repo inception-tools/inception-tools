@@ -85,7 +85,7 @@ check-style: lib-flake8
 	--extend-ignore=E203
 
 check-tests:
-	python setup.py test
+	pytest -v tests
 
 clean:
 	rm -f *.log
