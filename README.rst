@@ -258,9 +258,13 @@ Change scope and reviewability:
       is explicitly approved.
     - Inspect the current worktree before editing or committing so unrelated
       local changes are not accidentally modified or reverted.
+    - Do not modify, stage, or revert unrelated local changes you did not make
+      unless that work is explicitly part of the task.
     - Do not commit generated artifacts such as build outputs, packaged
       distributions, or documentation build products unless the task explicitly
       requires them.
+    - Keep documentation in sync when user-facing behavior, workflows, or
+      generated project structure changes.
 
 Code style:
     Inception Tools code should adhere to the `PEP 8`_ guidelines with the exception

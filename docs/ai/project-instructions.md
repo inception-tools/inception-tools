@@ -78,13 +78,6 @@ archetypes.
 - Avoid introducing new runtime dependencies without a clear need.
 - Prefer Make targets and existing project conventions over ad hoc commands.
 
-## Repository State Awareness
-
-- Inspect the current worktree before editing or committing so you understand
-  whether unrelated user changes are already present.
-- Do not modify, stage, or revert unrelated changes you did not make unless the
-  user explicitly asks.
-
 ## AI Implementation Preferences
 
 - Prefer composition over inheritance unless inheritance is already established

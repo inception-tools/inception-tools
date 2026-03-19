@@ -4,13 +4,13 @@ Briefly describe what changed and why.
 
 ## Related Issue
 
-Closes #<issue-number>
+Closes #<issue-number> or Refs #<issue-number>
 
 ## Validation
 
-- [ ] `pipenv run make check`
-- [ ] Additional targeted checks, if any:
-  - `<command>`
+- List the validation commands you ran, for example:
+  - `pipenv run make check`
+  - `<additional-command>`
 
 ## Risks / Notes
 
