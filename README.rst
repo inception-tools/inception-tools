@@ -210,8 +210,57 @@ Development
 
 Repository Management:
     Inception Tools manages its repository using the `GitFlow`_ model.
+    Pull requests are the default path for all changes.
 
 .. _`GitFlow`: https://nvie.com/posts/a-successful-git-branching-model/
+
+Environment and execution:
+    - Bootstrap the development environment with ``make init-dev`` or
+      ``make init-dev-3.8`` when needed.
+    - When not already operating inside the project virtual environment, run
+      repository commands through ``pipenv run``.
+    - Do not assume ``python`` or ``pip`` are available directly on ``PATH``.
+
+Issues, branches, and pull requests:
+    - Use GitHub Issues as the default ticket source unless a task explicitly
+      points to another tracker.
+    - When an issue exists, include its number in the branch name.
+    - Name branches using GitFlow-style prefixes:
+      ``feature/<issue-number>-<short-summary>``,
+      ``bugfix/<issue-number>-<short-summary>``, or
+      ``hotfix/<issue-number>-<short-summary>``.
+    - If no issue exists, use the same formats without the issue number.
+    - Keep branch summaries short, lowercase, and hyphenated.
+    - Write commit messages in the imperative mood and include the issue number
+      when practical.
+    - Pull requests should follow the repository PR template and include
+      ``Summary``, ``Related Issue``, ``Validation``, and ``Risks / Notes``.
+    - Summarize validation by naming the commands that were run instead of
+      pasting full console output unless the raw output is needed to explain a
+      blocker.
+    - Use ``Risks / Notes`` only for material reviewer context such as
+      validation not run, documentation or workflow impact, known limitations,
+      or follow-up work.
+
+Validation and handoff:
+    - Run ``make check`` before considering work complete when practical.
+    - Consider work ready for review or handoff only after all relevant local
+      tests pass.
+    - Treat ``make check`` as the default review gate when it is practical in
+      the current environment.
+    - If required validation cannot be run or does not pass, do not present the
+      work as complete; clearly report the failure or limitation.
+
+Change scope and reviewability:
+    - Keep changes focused and incremental.
+    - Avoid unrelated refactors or opportunistic modernization.
+    - Separate the requested change from optional cleanup unless expanded scope
+      is explicitly approved.
+    - Inspect the current worktree before editing or committing so unrelated
+      local changes are not accidentally modified or reverted.
+    - Do not commit generated artifacts such as build outputs, packaged
+      distributions, or documentation build products unless the task explicitly
+      requires them.
 
 Code style:
     Inception Tools code should adhere to the `PEP 8`_ guidelines with the exception
