@@ -25,8 +25,8 @@ archetypes.
 
 - Follow `README.rst` as the source of truth for repository-wide development
   workflow, including environment setup, issue usage, branch naming, pull
-  request structure, validation, handoff readiness, and generated artifact
-  policy.
+  request structure, validation, handoff readiness, generated artifact policy,
+  and documentation/comment/resource-management conventions.
 - Apply those workflow rules to AI-authored changes exactly as they apply to
   human-authored changes.
 - When repository workflow policy is unclear or missing from `README.rst`, ask
@@ -84,6 +84,23 @@ archetypes.
   whether unrelated user changes are already present.
 - Do not modify, stage, or revert unrelated changes you did not make unless the
   user explicitly asks.
+
+## AI Implementation Preferences
+
+- Prefer composition over inheritance unless inheritance is already established
+  in the surrounding code or clearly required by the design.
+- Prefer explicit dependency passing over hidden globals, singleton state, or
+  ambient module state.
+- Prefer small, focused functions and methods with a single clear
+  responsibility.
+- Prefer straightforward control flow and data flow over clever abstractions or
+  indirection.
+- Avoid introducing mutation when returning a new value or using an immutable
+  structure would be clearer.
+- Do not introduce new abstraction layers, helper classes, or framework-style
+  patterns unless they materially simplify the code.
+- Document non-obvious side effects, invariants, or failure modes when code
+  alone would not make them clear to a reviewer.
 
 ## Approval Boundaries
 

@@ -266,6 +266,53 @@ Code style:
     Inception Tools code should adhere to the `PEP 8`_ guidelines with the exception
     of maximum line length, which instead uses `black`_'s default of 88.
 
+Documentation and comments:
+    - Use triple-double-quoted docstrings for public modules, public classes,
+      and public functions or methods.
+    - Add docstrings to non-trivial internal functions when behavior, side
+      effects, invariants, or failure modes are not obvious from the code.
+    - A docstring should start with a short summary line and expand only when
+      additional context is needed for behavior, constraints, or side effects.
+    - Prefer comments that explain intent, assumptions, invariants, edge cases,
+      or why a piece of code exists.
+    - Do not add comments that merely restate what the code already makes
+      obvious.
+    - Use inline comments sparingly and only when they materially improve local
+      readability.
+
+Resource management and control flow:
+    - Prefer context managers whenever a resource supports them.
+    - When cleanup is required and no context manager is available, use
+      ``try``/``finally`` so cleanup runs on both success and failure paths.
+    - Do not rely on happy-path cleanup for files, temporary resources, or
+      other stateful objects that require explicit teardown.
+    - Catch the narrowest meaningful exception type instead of broad
+      ``except`` blocks unless broader handling is justified and documented.
+    - Prefer iterators or generators over creating unnecessary intermediate
+      copies when a full materialized collection is not required.
+
+Programming conventions:
+    - Prefer small, stateless functions when practical.
+    - Prefer functions whose outputs depend only on their inputs unless
+      mutation or side effects are required.
+    - Keep side-effecting code explicit and localized. Prefer separating core
+      transformation logic from filesystem access, process execution, logging,
+      and CLI interaction where practical.
+    - Prefer immutable values and data structures where practical.
+    - Avoid mutating inputs unless that behavior is required and clearly
+      documented.
+    - Prefer returning new values over modifying existing objects in place.
+    - Use stateful objects or mutating behavior only when they materially
+      improve clarity, correctness, or performance.
+    - Keep state ownership explicit so code remains easy to test and reason
+      about.
+    - Prefer composition over inheritance unless inheritance clearly simplifies
+      the design.
+    - Prefer explicit dependencies passed through arguments or constructors over
+      hidden globals or ambient module state.
+    - Keep functions and methods focused on one responsibility.
+    - Prefer clear, descriptive names over terse or clever names.
+
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
 .. _`black`: https://github.com/psf/black
 
