@@ -73,9 +73,12 @@ archetypes.
 - Keep branch summaries short, lowercase, and hyphenated.
 - Write commit messages in the imperative mood and include the issue number when
   practical.
-- Pull requests should include the linked issue, a short summary of the change,
-  validation performed, any validation not run, and any documentation or
-  workflow impact that reviewers should know about.
+- Pull requests should follow the repository PR template and include `Summary`,
+  `Related Issue`, `Validation`, and `Risks / Notes` sections.
+- Summarize validation by naming the commands that were run instead of pasting
+  full console output unless the raw output is needed to explain a blocker.
+- Use `Risks / Notes` only for material reviewer context such as validation not
+  run, documentation or workflow impact, known limitations, or follow-up work.
 
 ## Validation Expectations
 
