@@ -210,12 +210,112 @@ Development
 
 Repository Management:
     Inception Tools manages its repository using the `GitFlow`_ model.
+    Pull requests are the default path for all changes.
 
 .. _`GitFlow`: https://nvie.com/posts/a-successful-git-branching-model/
+
+Environment and execution:
+    - Bootstrap the development environment with ``make init-dev`` or
+      ``make init-dev-3.8`` when needed.
+    - When not already operating inside the project virtual environment, run
+      repository commands through ``pipenv run``.
+    - Do not assume ``python`` or ``pip`` are available directly on ``PATH``.
+
+Issues, branches, and pull requests:
+    - Use GitHub Issues as the default ticket source unless a task explicitly
+      points to another tracker.
+    - When an issue exists, include its number in the branch name.
+    - Name branches using GitFlow-style prefixes:
+      ``feature/<issue-number>-<short-summary>``,
+      ``bugfix/<issue-number>-<short-summary>``, or
+      ``hotfix/<issue-number>-<short-summary>``.
+    - If no issue exists, use the same formats without the issue number.
+    - Keep branch summaries short, lowercase, and hyphenated.
+    - Write commit messages in the imperative mood and include the issue number
+      when practical.
+    - Pull requests should follow the repository PR template and include
+      ``Summary``, ``Related Issue``, ``Validation``, and ``Risks / Notes``.
+    - Summarize validation by naming the commands that were run instead of
+      pasting full console output unless the raw output is needed to explain a
+      blocker.
+    - Use ``Risks / Notes`` only for material reviewer context such as
+      validation not run, documentation or workflow impact, known limitations,
+      or follow-up work.
+
+Validation and handoff:
+    - Run ``make check`` before considering work complete when practical.
+    - Consider work ready for review or handoff only after all relevant local
+      tests pass.
+    - Treat ``make check`` as the default review gate when it is practical in
+      the current environment.
+    - If required validation cannot be run or does not pass, do not present the
+      work as complete; clearly report the failure or limitation.
+
+Change scope and reviewability:
+    - Keep changes focused and incremental.
+    - Avoid unrelated refactors or opportunistic modernization.
+    - Separate the requested change from optional cleanup unless expanded scope
+      is explicitly approved.
+    - Inspect the current worktree before editing or committing so unrelated
+      local changes are not accidentally modified or reverted.
+    - Do not modify, stage, or revert unrelated local changes you did not make
+      unless that work is explicitly part of the task.
+    - Do not commit generated artifacts such as build outputs, packaged
+      distributions, or documentation build products unless the task explicitly
+      requires them.
+    - Keep documentation in sync when user-facing behavior, workflows, or
+      generated project structure changes.
 
 Code style:
     Inception Tools code should adhere to the `PEP 8`_ guidelines with the exception
     of maximum line length, which instead uses `black`_'s default of 88.
+
+Documentation and comments:
+    - Use triple-double-quoted docstrings for public modules, public classes,
+      and public functions or methods.
+    - Add docstrings to non-trivial internal functions when behavior, side
+      effects, invariants, or failure modes are not obvious from the code.
+    - A docstring should start with a short summary line and expand only when
+      additional context is needed for behavior, constraints, or side effects.
+    - Prefer comments that explain intent, assumptions, invariants, edge cases,
+      or why a piece of code exists.
+    - Do not add comments that merely restate what the code already makes
+      obvious.
+    - Use inline comments sparingly and only when they materially improve local
+      readability.
+
+Resource management and control flow:
+    - Prefer context managers whenever a resource supports them.
+    - When cleanup is required and no context manager is available, use
+      ``try``/``finally`` so cleanup runs on both success and failure paths.
+    - Do not rely on happy-path cleanup for files, temporary resources, or
+      other stateful objects that require explicit teardown.
+    - Catch the narrowest meaningful exception type instead of broad
+      ``except`` blocks unless broader handling is justified and documented.
+    - Prefer iterators or generators over creating unnecessary intermediate
+      copies when a full materialized collection is not required.
+
+Programming conventions:
+    - Prefer small, stateless functions when practical.
+    - Prefer functions whose outputs depend only on their inputs unless
+      mutation or side effects are required.
+    - Keep side-effecting code explicit and localized. Prefer separating core
+      transformation logic from filesystem access, process execution, logging,
+      and CLI interaction where practical.
+    - Prefer immutable values and data structures where practical.
+    - Avoid mutating inputs unless that behavior is required and clearly
+      documented.
+    - Prefer returning new values over modifying existing objects in place.
+    - Use stateful objects or mutating behavior only when they materially
+      improve clarity, correctness, or performance.
+    - Keep state ownership explicit so code remains easy to test and reason
+      about.
+    - Prefer composition over inheritance unless inheritance clearly simplifies
+      the design.
+    - Prefer explicit dependencies passed through arguments or constructors over
+      hidden globals or ambient module state.
+    - Keep functions and methods focused on one responsibility.
+    - Prefer clear, descriptive names over terse or clever names.
 
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
 .. _`black`: https://github.com/psf/black
